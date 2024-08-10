@@ -1,13 +1,14 @@
-import 'package:e_commerce_app/extensions/extension.dart';
-import 'package:e_commerce_app/widgets/appicons.dart';
-import 'package:e_commerce_app/widgets/appstrings.dart';
-import 'package:e_commerce_app/widgets/cart.container.dart';
-import 'package:e_commerce_app/widgets/colors.dart';
-import 'package:e_commerce_app/widgets/discount_container.dart';
-import 'package:e_commerce_app/widgets/latest_cart.dart';
-import 'package:e_commerce_app/widgets/options_container.dart';
-import 'package:e_commerce_app/widgets/page_header.dart';
-import 'package:e_commerce_app/widgets/textstyle.dart';
+import 'package:e_commerce_app/presentations/cart_category.dart';
+import 'package:e_commerce_app/utils/widgets/appicons.dart';
+import 'package:e_commerce_app/utils/widgets/appstrings.dart';
+import 'package:e_commerce_app/utils/widgets/cart.container.dart';
+import 'package:e_commerce_app/utils/widgets/colors.dart';
+import 'package:e_commerce_app/utils/widgets/discount_container.dart';
+import 'package:e_commerce_app/utils/widgets/extensions/extension.dart';
+import 'package:e_commerce_app/utils/widgets/latest_cart.dart';
+import 'package:e_commerce_app/utils/widgets/options_container.dart';
+import 'package:e_commerce_app/utils/widgets/page_header.dart';
+import 'package:e_commerce_app/utils/widgets/textstyle.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -35,7 +36,10 @@ class Home extends StatelessWidget {
               height: 20.h,
             ),
             const DiscountContaieer(
-                discountPercent: '30%', item: 'home\ndecoration products'),
+              discountPercent: '30%',
+              item: 'home decoration products',
+              imagepath: 'assets/images/home_page_picture.png',
+            ),
             SizedBox(
               height: 16.h,
             ),
@@ -49,7 +53,12 @@ class Home extends StatelessWidget {
                 Text(
                   AppString.seeAll,
                   style: AppText.seeAll,
-                )
+                ).onTap(() {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const CartCategory()));
+                })
               ],
             ),
             SizedBox(
