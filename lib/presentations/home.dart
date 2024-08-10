@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/presentations/all_product.dart';
 import 'package:e_commerce_app/presentations/cart_category.dart';
 import 'package:e_commerce_app/utils/widgets/appicons.dart';
 import 'package:e_commerce_app/utils/widgets/appstrings.dart';
@@ -90,7 +91,12 @@ class Home extends StatelessWidget {
                 Text(
                   AppString.seeAll,
                   style: AppText.seeAll,
-                )
+                ).onTap(() {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: ((context) => const ProductCatalog())));
+                })
               ],
             ),
             SizedBox(

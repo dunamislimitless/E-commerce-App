@@ -17,8 +17,8 @@ class AppString {
   static const review = 'reviews';
   static const lp = 'Latest Product';
   static const headie = 'Headphone Holder';
-  // static const empty = 'reviews';
-  // static const empty = 'reviews';
+  static const cap = 'Unisxe Straw hat';
+  static const flower = 'Design Orange Vase';
   static const plant = 'Plant';
   static const watch = 'Watch';
   static const bagg = 'Bag';
@@ -27,4 +27,8 @@ class AppString {
   static const gift = 'Gift';
   static const cosmetics = 'Cosmetics';
   static const hobby = 'Hobby';
+  static const leatherBag = 'Women Leather Bag';
+  static const deskClock = 'Retro Desk Clock';
+  static const swissWatch = 'Design Ceramic Cup';
+  static const sneakers = 'Nike Sneakers';
 }
