@@ -10,4 +10,9 @@ class AppColors {
   static const Color cartColor = Color(0xffCECECE);
   static const Color reviewColor = Color(0xff9A9998);
   static const Color productColor = Color(0xff979797);
+
+  static const Color product1 = Color(0xff23A4F7);
+
+  static const Color product2 = Color(0xff363431);
+  static const Color empty = Color(0xff23A4F7);
 }

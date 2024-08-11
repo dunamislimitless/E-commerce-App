@@ -22,7 +22,7 @@ class CartCategory extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(16.w),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [

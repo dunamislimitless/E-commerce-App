@@ -22,7 +22,7 @@ class ProductCatalog extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(16.w),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -30,7 +30,7 @@ class ProductCatalog extends StatelessWidget {
               height: 50.h,
             ),
             PageHeader(
-                title: AppString.pp,
+                title: AppString.popularProduct,
                 trailing: AppIcons.cartLoaded.onTap(() {}),
                 leading: AppIcons.arrowBack.onTap(() {
                   Navigator.pop(context);

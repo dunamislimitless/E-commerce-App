@@ -62,6 +62,12 @@
       "languageVersion": "3.1"
     },
     {
+      "name": "flutter_rating_bar",
+      "rootUri": "file:///Users/sambass/.pub-cache/hosted/pub.dev/flutter_rating_bar-4.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
       "name": "flutter_screenutil",
       "rootUri": "file:///Users/sambass/.pub-cache/hosted/pub.dev/flutter_screenutil-5.9.3",
       "packageUri": "lib/",
@@ -248,7 +254,7 @@
       "languageVersion": "3.3"
     }
   ],
-  "generated": "2024-08-10T12:51:29.454540Z",
+  "generated": "2024-08-10T22:33:05.724144Z",
   "generator": "pub",
   "generatorVersion": "3.3.3"
 }

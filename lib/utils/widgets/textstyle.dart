@@ -27,6 +27,11 @@ class AppText {
     fontWeight: FontWeight.w500,
     fontFamily: 'Inter',
   );
+  static TextStyle regular400 = TextStyle(
+      fontSize: 14.sp,
+      fontWeight: FontWeight.w400,
+      fontFamily: 'Inter',
+      color: AppColors.reviewColor);
   static TextStyle reviewText = TextStyle(
       fontSize: 12.sp,
       fontWeight: FontWeight.w400,
@@ -55,4 +60,9 @@ class AppText {
       fontWeight: FontWeight.w500,
       fontFamily: 'Inter',
       color: AppColors.discountColor);
+  static TextStyle productName = TextStyle(
+    fontSize: 20.sp,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'Inter',
+  );
 }
