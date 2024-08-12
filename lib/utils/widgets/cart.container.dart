@@ -23,12 +23,12 @@ class CartItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(5.0),
+      padding:  EdgeInsets.all(5.0.w),
       child: Container(
         height: 268.h,
         width: 180.w,
         decoration: BoxDecoration(
-            color: Colors.white, borderRadius: BorderRadius.circular(6.sp)),
+            color: Colors.white, borderRadius: BorderRadius.circular(6.r)),
         child: Padding(
           padding: EdgeInsets.all(8.0.w),
           child: Column(

@@ -20,13 +20,13 @@ class LatestCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(5.0),
+      padding:  EdgeInsets.all(5.0.w),
       child: Container(
         height: 98.h,
         width: 386.w,
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(6.sp),
+          borderRadius: BorderRadius.circular(6.r),
         ),
         child: Padding(
           padding: EdgeInsets.all(8.0.w),
@@ -49,7 +49,7 @@ class LatestCart extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 8),
+                          padding:  EdgeInsets.only(left: 8.w),
                           child: Text(
                             reviews,
                             style: AppText.reviewText,
