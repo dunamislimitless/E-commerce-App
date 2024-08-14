@@ -14,11 +14,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Cart extends StatelessWidget {
-  const Cart({super.key});
+ Cart({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final products = getProduct();
+
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       body: Padding(
@@ -54,9 +54,43 @@ class Cart extends StatelessWidget {
                   mainAxisSpacing: 8.h,
                   childAspectRatio: 1,
                 ),
-                itemCount: products.length,
+                itemCount: getProduct.length,
                 itemBuilder: (context, index) {
-                  return products[index];
+                  final each = getProduct[index];
+                  return Container(
+                    height: 120.h,
+                    width: 118.w,
+                    decoration: BoxDecoration(
+                        color: AppColors.cardColor,
+                        borderRadius: BorderRadius.circular(10.sp)),
+                    child: Padding(
+                      padding:
+                      EdgeInsets.only(top: 20.h, bottom: 20.w, left: 24.w, right: 24.w),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            height: 44.h,
+                            width: 44.w,
+                            decoration: BoxDecoration(
+                                color: AppColors.backgroundColor,
+                                borderRadius: BorderRadius.circular(10.sp)),
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 6.h, vertical: 6.w),
+                              child: each.icon,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 22.h,
+                          ),
+                          Text(
+                            each.name,
+                            style: AppText.seeAll,
+                          )
+                        ],
+                      ),
+                    ),
+                  );
                 },
               ),
             ),
@@ -66,8 +100,7 @@ class Cart extends StatelessWidget {
     );
   }
 
-  List<ProductContainer> getProduct() {
-    return [
+final  List<ProductContainer> getProduct =   [
       ProductContainer(icon: AppIcons.bag, name: AppString.bagg),
       ProductContainer(icon: AppIcons.wristwatch, name: AppString.watch),
       ProductContainer(icon: AppIcons.jewelry, name: AppString.jewelry),
@@ -81,5 +114,5 @@ class Cart extends StatelessWidget {
       ProductContainer(icon: AppIcons.cosmetic, name: AppString.cosmetics),
       ProductContainer(icon: AppIcons.cosmetic, name: AppString.cosmetics),
     ];
-  }
+
 }
