@@ -55,8 +55,19 @@ class AppText {
       fontWeight: FontWeight.w500,
       fontFamily: 'Inter',
       color: Colors.white);
+  static TextStyle cartText = TextStyle(
+    fontSize: 18.sp,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'Inter',
+  );
   static TextStyle amountText = TextStyle(
       fontSize: 18.sp,
+      fontWeight: FontWeight.w500,
+      fontFamily: 'Inter',
+      color: AppColors.discountColor);
+
+  static TextStyle cartAmount = TextStyle(
+      fontSize: 24.sp,
       fontWeight: FontWeight.w500,
       fontFamily: 'Inter',
       color: AppColors.discountColor);
