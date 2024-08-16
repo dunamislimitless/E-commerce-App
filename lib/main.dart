@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/presentations/bottom_button.dart';
 import 'package:e_commerce_app/presentations/cart.dart';
 import 'package:e_commerce_app/presentations/cart_category.dart';
 import 'package:e_commerce_app/presentations/home.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: const Cart()),
+          home: const BottomNavScreen()),
     );
   }
 }
