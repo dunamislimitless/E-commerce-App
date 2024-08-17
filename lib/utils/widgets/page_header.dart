@@ -1,4 +1,4 @@
-import 'extensions/extension.dart';
+import '../extensions/extension.dart';
 import 'appicons.dart';
 import 'textstyle.dart';
 import 'package:flutter/material.dart';

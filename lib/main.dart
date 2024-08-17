@@ -1,8 +1,9 @@
-import 'package:e_commerce_app/presentations/bottom_button.dart';
-import 'package:e_commerce_app/presentations/cart.dart';
-import 'package:e_commerce_app/presentations/cart_category.dart';
-import 'package:e_commerce_app/presentations/home.dart';
-import 'package:e_commerce_app/presentations/product_detail.dart';
+import 'package:e_commerce_app/utils/widgets/bottom_button.dart';
+import 'package:e_commerce_app/app/features/cart/view/cart.dart';
+import 'package:e_commerce_app/app/features/cart/view/cart_category.dart';
+import 'package:e_commerce_app/app/features/dashboard/views/home.dart';
+import 'package:e_commerce_app/app/features/product/view/product_detail.dart';
+import 'package:e_commerce_app/utils/widgets/colors.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,7 +15,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -23,7 +23,8 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            colorScheme:
+                ColorScheme.fromSeed(seedColor: AppColors.discountColor),
             useMaterial3: true,
           ),
           home: const BottomNavScreen()),
