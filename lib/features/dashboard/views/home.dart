@@ -1,15 +1,15 @@
-import 'package:e_commerce_app/app/features/product/view/all_product.dart';
-import 'package:e_commerce_app/app/features/cart/view/cart_category.dart';
-import 'package:e_commerce_app/utils/widgets/appicons.dart';
-import 'package:e_commerce_app/utils/widgets/appstrings.dart';
-import 'package:e_commerce_app/app/features/product/models/product_cart_model.dart';
-import 'package:e_commerce_app/utils/widgets/colors.dart';
-import 'package:e_commerce_app/utils/widgets/discount_container.dart';
-import 'package:e_commerce_app/utils/extensions/extension.dart';
-import 'package:e_commerce_app/utils/widgets/latest_cart.dart';
-import 'package:e_commerce_app/app/features/dashboard/models/options_model.dart';
-import 'package:e_commerce_app/utils/widgets/page_header.dart';
-import 'package:e_commerce_app/utils/widgets/textstyle.dart';
+import 'package:e_commerce_app/app/utils/appstrings.dart';
+import 'package:e_commerce_app/features/product/view/all_product.dart';
+import 'package:e_commerce_app/features/cart/view/cart_category.dart';
+import 'package:e_commerce_app/app/utils/appicons.dart';
+import 'package:e_commerce_app/features/product/models/product_cart_model.dart';
+import 'package:e_commerce_app/app/utils/colors.dart';
+import 'package:e_commerce_app/features/dashboard/widget/discount_container.dart';
+import 'package:e_commerce_app/app/extensions/extension.dart';
+import 'package:e_commerce_app/app/widgets/latest_cart.dart';
+import 'package:e_commerce_app/features/dashboard/models/options_model.dart';
+import 'package:e_commerce_app/features/dashboard/widget/page_header.dart';
+import 'package:e_commerce_app/app/utils/textstyle.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';

@@ -1,5 +1,5 @@
-import 'appicons.dart';
-import 'textstyle.dart';
+import '../utils/appicons.dart';
+import '../utils/textstyle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -20,7 +20,7 @@ class LatestCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.all(5.0.w),
+      padding: EdgeInsets.all(5.0.w),
       child: Container(
         height: 98.h,
         width: 386.w,
@@ -49,7 +49,7 @@ class LatestCart extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding:  EdgeInsets.only(left: 8.w),
+                          padding: EdgeInsets.only(left: 8.w),
                           child: Text(
                             reviews,
                             style: AppText.reviewText,

@@ -1,6 +1,6 @@
-import '../extensions/extension.dart';
-import 'appicons.dart';
-import 'textstyle.dart';
+import '../../../app/extensions/extension.dart';
+import '../../../app/utils/appicons.dart';
+import '../../../app/utils/textstyle.dart';
 import 'package:flutter/material.dart';
 
 class PageHeader extends StatelessWidget {

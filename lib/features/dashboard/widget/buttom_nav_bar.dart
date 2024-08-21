@@ -1,5 +1,5 @@
-import 'package:e_commerce_app/utils/widgets/appicons.dart';
-import 'package:e_commerce_app/utils/widgets/colors.dart';
+import 'package:e_commerce_app/app/utils/appicons.dart';
+import 'package:e_commerce_app/app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

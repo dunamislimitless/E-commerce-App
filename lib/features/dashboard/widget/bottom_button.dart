@@ -1,9 +1,9 @@
-import 'package:e_commerce_app/utils/widgets/buttom_nav_bar.dart';
+import 'package:e_commerce_app/features/dashboard/widget/buttom_nav_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:e_commerce_app/app/features/dashboard/views/home.dart';
-import 'package:e_commerce_app/app/features/cart/view/cart.dart';
-import 'package:e_commerce_app/app/features/cart/view/cart_category.dart';
-import 'package:e_commerce_app/app/features/product/view/product_detail.dart';
+import 'package:e_commerce_app/features/dashboard/views/home.dart';
+import 'package:e_commerce_app/features/cart/view/cart.dart';
+import 'package:e_commerce_app/features/cart/view/cart_category.dart';
+import 'package:e_commerce_app/features/product/view/product_detail.dart';
 
 class BottomNavScreen extends StatefulWidget {
   const BottomNavScreen({super.key});

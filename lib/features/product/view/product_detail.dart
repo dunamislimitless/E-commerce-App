@@ -1,12 +1,12 @@
-import 'package:e_commerce_app/utils/widgets/appicons.dart';
-import 'package:e_commerce_app/utils/widgets/appstrings.dart';
-import 'package:e_commerce_app/utils/widgets/colors.dart';
-import 'package:e_commerce_app/utils/widgets/custom_button.dart';
-import 'package:e_commerce_app/utils/extensions/extension.dart';
-import 'package:e_commerce_app/utils/widgets/page_header.dart';
-import 'package:e_commerce_app/utils/widgets/rating_bar.dart';
-import 'package:e_commerce_app/utils/widgets/textstyle.dart';
-import 'package:e_commerce_app/utils/widgets/user_colour_specification.dart';
+import 'package:e_commerce_app/app/utils/appicons.dart';
+import 'package:e_commerce_app/app/utils/appstrings.dart';
+import 'package:e_commerce_app/app/utils/colors.dart';
+import 'package:e_commerce_app/app/widgets/custom_button.dart';
+import 'package:e_commerce_app/app/extensions/extension.dart';
+import 'package:e_commerce_app/features/dashboard/widget/page_header.dart';
+import 'package:e_commerce_app/app/widgets/rating_bar.dart';
+import 'package:e_commerce_app/app/utils/textstyle.dart';
+import 'package:e_commerce_app/app/widgets/user_colour_specification.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
