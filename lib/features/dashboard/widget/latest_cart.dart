@@ -1,5 +1,5 @@
-import '../utils/appicons.dart';
-import '../utils/textstyle.dart';
+import '../../../app/utils/appicons.dart';
+import '../../../app/utils/textstyle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

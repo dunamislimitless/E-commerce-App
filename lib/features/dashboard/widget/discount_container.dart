@@ -2,7 +2,7 @@ import 'package:e_commerce_app/app/utils/appstrings.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../../app/utils/colors.dart';
-import '../../../app/widgets/custom_button.dart';
+import 'custom_button.dart';
 import '../../../app/utils/textstyle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

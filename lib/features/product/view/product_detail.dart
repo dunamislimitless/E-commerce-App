@@ -1,12 +1,14 @@
+import 'package:e_commerce_app/app/utils/app_ipngs.dart';
 import 'package:e_commerce_app/app/utils/appicons.dart';
 import 'package:e_commerce_app/app/utils/appstrings.dart';
 import 'package:e_commerce_app/app/utils/colors.dart';
-import 'package:e_commerce_app/app/widgets/custom_button.dart';
+import 'package:e_commerce_app/features/dashboard/views/home.dart';
+import 'package:e_commerce_app/features/dashboard/widget/custom_button.dart';
 import 'package:e_commerce_app/app/extensions/extension.dart';
 import 'package:e_commerce_app/features/dashboard/widget/page_header.dart';
-import 'package:e_commerce_app/app/widgets/rating_bar.dart';
+import 'package:e_commerce_app/features/product/widget/rating_bar.dart';
 import 'package:e_commerce_app/app/utils/textstyle.dart';
-import 'package:e_commerce_app/app/widgets/user_colour_specification.dart';
+import 'package:e_commerce_app/features/product/widget/user_colour_specification.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,12 +33,14 @@ class ProductDetail extends StatelessWidget {
                   title: AppString.popularDetail,
                   trailing: AppIcons.favorite.onTap(() {}),
                   leading: AppIcons.arrowBack.onTap(() {
-                    Navigator.pop(context);
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => const Home()),
+                    );
                   })),
               SizedBox(
                 height: 30.h,
               ),
-              Image.asset('assets/images/wristwatch.png'),
+              Image.asset(AppImage.wristWatch),
               SizedBox(
                 height: 55.h,
               ),

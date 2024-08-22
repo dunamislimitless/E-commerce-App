@@ -18,16 +18,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(414, 896),
-      child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            colorScheme:
-                ColorScheme.fromSeed(seedColor: AppColors.discountColor),
-            useMaterial3: true,
-          ),
-          home: const BottomNavScreen()),
-    );
+        designSize: const Size(414, 896),
+        builder: (context, child) {
+          return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'Flutter Demo',
+              theme: ThemeData(
+                colorScheme:
+                    ColorScheme.fromSeed(seedColor: AppColors.discountColor),
+                useMaterial3: true,
+              ),
+              home: const BottomNavScreen());
+        });
   }
 }

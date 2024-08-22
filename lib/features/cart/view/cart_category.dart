@@ -1,10 +1,11 @@
+import 'package:e_commerce_app/app/utils/app_ipngs.dart';
 import 'package:e_commerce_app/app/utils/appicons.dart';
 import 'package:e_commerce_app/app/utils/appstrings.dart';
 import 'package:e_commerce_app/features/product/models/product_cart_model.dart';
 import 'package:e_commerce_app/app/utils/colors.dart';
 import 'package:e_commerce_app/features/dashboard/widget/discount_container.dart';
 import 'package:e_commerce_app/app/extensions/extension.dart';
-import 'package:e_commerce_app/app/widgets/latest_cart.dart';
+import 'package:e_commerce_app/features/dashboard/widget/latest_cart.dart';
 import 'package:e_commerce_app/features/dashboard/models/options_model.dart';
 import 'package:e_commerce_app/features/dashboard/widget/page_header.dart';
 import 'package:e_commerce_app/features/cart/models/product_container_model.dart';
@@ -38,10 +39,9 @@ class CartCategory extends StatelessWidget {
               height: 20.h,
             ),
             const DiscountContaieer(
-              discountPercent: '15%',
-              item: 'women shoes',
-              imagepath: 'assets/images/shoe.png',
-            ),
+                discountPercent: '15%',
+                item: 'women shoes',
+                imagepath: AppImage.shoes),
             SizedBox(
               height: 14.h,
             ),

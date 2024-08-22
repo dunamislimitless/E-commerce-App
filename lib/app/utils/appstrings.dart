@@ -36,6 +36,7 @@ class AppString {
   static const color = 'Color';
   static const about = 'About';
   static const add2cart = 'ADD  TO CART';
+  static const remove = 'Remove';
 
   static const productDescription =
       'Maecenas cursus magna vitae convallis congue. Vestibulum dignissim augue odio, congue rutrum magna gravida ac. Sed rhoncus eu arcu a tempus.';

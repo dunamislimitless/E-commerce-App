@@ -1,4 +1,4 @@
-import 'package:e_commerce_app/utils/widgets/textStyle.dart';
+import 'package:e_commerce_app/app/utils/textstyle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
