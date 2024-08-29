@@ -6,7 +6,10 @@ import 'package:e_commerce_app/features/product/view/product_detail.dart';
 import 'package:e_commerce_app/app/utils/colors.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'features/cart/cart_bloc/cart_bloc.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,15 +23,21 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
         designSize: const Size(414, 896),
         builder: (context, child) {
-          return MaterialApp(
-              debugShowCheckedModeBanner: false,
-              title: 'Flutter Demo',
-              theme: ThemeData(
-                colorScheme:
-                    ColorScheme.fromSeed(seedColor: AppColors.discountColor),
-                useMaterial3: true,
-              ),
-              home: const BottomNavScreen());
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider<CartBloc>(
+              create: (context) => CartBloc(),)
+            ],
+            child: MaterialApp(
+                debugShowCheckedModeBanner: false,
+                title: 'Flutter Demo',
+                theme: ThemeData(
+                  colorScheme:
+                      ColorScheme.fromSeed(seedColor: AppColors.discountColor),
+                  useMaterial3: true,
+                ),
+                home: const BottomNavScreen()),
+          );
         });
   }
 }

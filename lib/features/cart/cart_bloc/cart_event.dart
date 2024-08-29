@@ -1,16 +1,16 @@
 abstract class CombinedEvent {}
 
 class IncrementEvent extends CombinedEvent {
-  final int index;
-  IncrementEvent(this.index);
+  final String id;
+  IncrementEvent(this.id);
 }
 
 class DecrementEvent extends CombinedEvent {
-  final int index;
-  DecrementEvent(this.index);
+  final String id;
+  DecrementEvent(this.id);
 }
 
 class RemoveCartItemEvent extends CombinedEvent {
-  final int index;
-  RemoveCartItemEvent(this.index);
+  final String id;
+  RemoveCartItemEvent(this.id);
 }
