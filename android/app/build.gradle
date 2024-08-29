@@ -21,8 +21,12 @@ def flutterVersionName = localProperties.getProperty('flutter.versionName')
 if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
+dependencies {
+  implementation 'com.android.support:multidex:1.0.1'
+}
 
 android {
+    
     namespace "com.mychassis.e_commerce_app"
     compileSdk flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
@@ -49,6 +53,7 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -63,5 +68,3 @@ android {
 flutter {
     source '../..'
 }
-
-dependencies {}

@@ -1,12 +1,29 @@
-com.mychassis.e_commerce_app-jetified-window-java-1.0.0-beta04-0 /Users/sambass/.gradle/caches/transforms-3/19ff66f031cb422764b0da25d9d6bdb4/transformed/jetified-window-java-1.0.0-beta04/res
-com.mychassis.e_commerce_app-jetified-annotation-experimental-1.1.0-1 /Users/sambass/.gradle/caches/transforms-3/55b58230e55ac19e11de59e32a6117b3/transformed/jetified-annotation-experimental-1.1.0/res
-com.mychassis.e_commerce_app-core-1.6.0-2 /Users/sambass/.gradle/caches/transforms-3/bbbbd632898af927049fa4f571ee9e7e/transformed/core-1.6.0/res
-com.mychassis.e_commerce_app-jetified-window-1.0.0-beta04-3 /Users/sambass/.gradle/caches/transforms-3/d97cf3ffa6f05f8e8de8b41da1cca67f/transformed/jetified-window-1.0.0-beta04/res
-com.mychassis.e_commerce_app-debug-4 /Users/sambass/dev/Kodecamp 1st task/task1_kodecamp4/bloc practise/E-commerce app/e_commerce_app/android/app/src/debug/res
-com.mychassis.e_commerce_app-main-5 /Users/sambass/dev/Kodecamp 1st task/task1_kodecamp4/bloc practise/E-commerce app/e_commerce_app/android/app/src/main/res
-com.mychassis.e_commerce_app-pngs-6 /Users/sambass/dev/Kodecamp 1st task/task1_kodecamp4/bloc practise/E-commerce app/e_commerce_app/build/app/generated/res/pngs/debug
-com.mychassis.e_commerce_app-resValues-7 /Users/sambass/dev/Kodecamp 1st task/task1_kodecamp4/bloc practise/E-commerce app/e_commerce_app/build/app/generated/res/resValues/debug
-com.mychassis.e_commerce_app-rs-8 /Users/sambass/dev/Kodecamp 1st task/task1_kodecamp4/bloc practise/E-commerce app/e_commerce_app/build/app/generated/res/rs/debug
-com.mychassis.e_commerce_app-mergeDebugResources-9 /Users/sambass/dev/Kodecamp 1st task/task1_kodecamp4/bloc practise/E-commerce app/e_commerce_app/build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir
-com.mychassis.e_commerce_app-mergeDebugResources-10 /Users/sambass/dev/Kodecamp 1st task/task1_kodecamp4/bloc practise/E-commerce app/e_commerce_app/build/app/intermediates/incremental/debug/mergeDebugResources/stripped.dir
-com.mychassis.e_commerce_app-merged_res-11 /Users/sambass/dev/Kodecamp 1st task/task1_kodecamp4/bloc practise/E-commerce app/e_commerce_app/build/app/intermediates/merged_res/debug
+com.mychassis.e_commerce_app-jetified-activity-1.8.1-0 /Users/sambass/.gradle/caches/transforms-3/0dc0e273ca0b4398c31d68909a91daeb/transformed/jetified-activity-1.8.1/res
+com.mychassis.e_commerce_app-jetified-lifecycle-viewmodel-savedstate-2.7.0-1 /Users/sambass/.gradle/caches/transforms-3/0faafd7e191e8415b253c4ee5683307f/transformed/jetified-lifecycle-viewmodel-savedstate-2.7.0/res
+com.mychassis.e_commerce_app-jetified-annotation-experimental-1.4.0-2 /Users/sambass/.gradle/caches/transforms-3/1249a588d1566a2bb1054b235b7bcfa0/transformed/jetified-annotation-experimental-1.4.0/res
+com.mychassis.e_commerce_app-jetified-tracing-1.2.0-3 /Users/sambass/.gradle/caches/transforms-3/1601ac268d6afbebcd8c08dc745a8266/transformed/jetified-tracing-1.2.0/res
+com.mychassis.e_commerce_app-jetified-core-1.0.0-4 /Users/sambass/.gradle/caches/transforms-3/164cfb379f44adaf4f68cfb0005ff7ec/transformed/jetified-core-1.0.0/res
+com.mychassis.e_commerce_app-jetified-window-1.2.0-5 /Users/sambass/.gradle/caches/transforms-3/19cb45ba22ac74ea99d14b01d43a6a8d/transformed/jetified-window-1.2.0/res
+com.mychassis.e_commerce_app-jetified-window-java-1.2.0-6 /Users/sambass/.gradle/caches/transforms-3/1ff41b59b75b01abed2791d84c583410/transformed/jetified-window-java-1.2.0/res
+com.mychassis.e_commerce_app-jetified-lifecycle-process-2.7.0-7 /Users/sambass/.gradle/caches/transforms-3/39587ec9c01d32acef0a0ee8bef2a378/transformed/jetified-lifecycle-process-2.7.0/res
+com.mychassis.e_commerce_app-jetified-core-ktx-1.13.1-8 /Users/sambass/.gradle/caches/transforms-3/4493a828f55d60604d9ccf80f4eb02a7/transformed/jetified-core-ktx-1.13.1/res
+com.mychassis.e_commerce_app-jetified-lifecycle-livedata-core-ktx-2.7.0-9 /Users/sambass/.gradle/caches/transforms-3/562ba898947534cdc98d1cb32a8c6c00/transformed/jetified-lifecycle-livedata-core-ktx-2.7.0/res
+com.mychassis.e_commerce_app-lifecycle-livedata-core-2.7.0-10 /Users/sambass/.gradle/caches/transforms-3/644e8c8ddb7f5c7c2f027e9f059f7e90/transformed/lifecycle-livedata-core-2.7.0/res
+com.mychassis.e_commerce_app-core-1.13.1-11 /Users/sambass/.gradle/caches/transforms-3/67a2055b0671aa3010f0bc50e19049d7/transformed/core-1.13.1/res
+com.mychassis.e_commerce_app-core-runtime-2.2.0-12 /Users/sambass/.gradle/caches/transforms-3/6cf5e322c2e8d9eeafc9ee059d2ec16e/transformed/core-runtime-2.2.0/res
+com.mychassis.e_commerce_app-jetified-profileinstaller-1.3.1-13 /Users/sambass/.gradle/caches/transforms-3/6e2ca6c16f7f6f879ae3f52acc6ec5c7/transformed/jetified-profileinstaller-1.3.1/res
+com.mychassis.e_commerce_app-jetified-savedstate-1.2.1-14 /Users/sambass/.gradle/caches/transforms-3/6ff5670a7859083f58d298a4a568ac5a/transformed/jetified-savedstate-1.2.1/res
+com.mychassis.e_commerce_app-lifecycle-runtime-2.7.0-15 /Users/sambass/.gradle/caches/transforms-3/b9089bd3ad753c87b0d3602d28f86925/transformed/lifecycle-runtime-2.7.0/res
+com.mychassis.e_commerce_app-fragment-1.7.1-16 /Users/sambass/.gradle/caches/transforms-3/bbcd8efb3404bc28ca2249a78527063b/transformed/fragment-1.7.1/res
+com.mychassis.e_commerce_app-lifecycle-viewmodel-2.7.0-17 /Users/sambass/.gradle/caches/transforms-3/d7b09cae3c446ea5b2d26bd1d55fcf5a/transformed/lifecycle-viewmodel-2.7.0/res
+com.mychassis.e_commerce_app-lifecycle-livedata-2.7.0-18 /Users/sambass/.gradle/caches/transforms-3/e8873d4d042455a645c5eabac7ecd5bd/transformed/lifecycle-livedata-2.7.0/res
+com.mychassis.e_commerce_app-jetified-startup-runtime-1.1.1-19 /Users/sambass/.gradle/caches/transforms-3/f0951692d43473324b13a82f407282ec/transformed/jetified-startup-runtime-1.1.1/res
+com.mychassis.e_commerce_app-debug-20 /Users/sambass/dev/Kodecamp 1st task/task1_kodecamp4/bloc practise/E-commerce app/e_commerce_app/android/app/src/debug/res
+com.mychassis.e_commerce_app-main-21 /Users/sambass/dev/Kodecamp 1st task/task1_kodecamp4/bloc practise/E-commerce app/e_commerce_app/android/app/src/main/res
+com.mychassis.e_commerce_app-pngs-22 /Users/sambass/dev/Kodecamp 1st task/task1_kodecamp4/bloc practise/E-commerce app/e_commerce_app/build/app/generated/res/pngs/debug
+com.mychassis.e_commerce_app-resValues-23 /Users/sambass/dev/Kodecamp 1st task/task1_kodecamp4/bloc practise/E-commerce app/e_commerce_app/build/app/generated/res/resValues/debug
+com.mychassis.e_commerce_app-rs-24 /Users/sambass/dev/Kodecamp 1st task/task1_kodecamp4/bloc practise/E-commerce app/e_commerce_app/build/app/generated/res/rs/debug
+com.mychassis.e_commerce_app-mergeDebugResources-25 /Users/sambass/dev/Kodecamp 1st task/task1_kodecamp4/bloc practise/E-commerce app/e_commerce_app/build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir
+com.mychassis.e_commerce_app-mergeDebugResources-26 /Users/sambass/dev/Kodecamp 1st task/task1_kodecamp4/bloc practise/E-commerce app/e_commerce_app/build/app/intermediates/incremental/debug/mergeDebugResources/stripped.dir
+com.mychassis.e_commerce_app-merged_res-27 /Users/sambass/dev/Kodecamp 1st task/task1_kodecamp4/bloc practise/E-commerce app/e_commerce_app/build/app/intermediates/merged_res/debug
+com.mychassis.e_commerce_app-packaged_res-28 /Users/sambass/dev/Kodecamp 1st task/task1_kodecamp4/bloc practise/E-commerce app/e_commerce_app/build/path_provider_android/intermediates/packaged_res/debug

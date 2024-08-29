@@ -1,16 +1,16 @@
 {
     "logs": [
         {
-            "outputFile": "com.mychassis.e_commerce_app-mergeDebugResources-9:/values-sv/values-sv.xml",
+            "outputFile": "com.mychassis.e_commerce_app-mergeDebugResources-25:/values-sv/values-sv.xml",
             "map": [
                 {
-                    "source": "/Users/sambass/.gradle/caches/transforms-3/bbbbd632898af927049fa4f571ee9e7e/transformed/core-1.6.0/res/values-sv/values-sv.xml",
+                    "source": "/Users/sambass/.gradle/caches/transforms-3/67a2055b0671aa3010f0bc50e19049d7/transformed/core-1.13.1/res/values-sv/values-sv.xml",
                     "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
+                        "startLines": "2,3,4,5,6,7,8,9",
+                        "startColumns": "4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,150,252,350,449,557,662,783",
+                        "endColumns": "94,101,97,98,107,104,120,100",
+                        "endOffsets": "145,247,345,444,552,657,778,879"
                     }
                 }
             ]
