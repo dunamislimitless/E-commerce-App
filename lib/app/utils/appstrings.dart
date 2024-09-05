@@ -37,6 +37,8 @@ class AppString {
   static const about = 'About';
   static const add2cart = 'ADD  TO CART';
   static const remove = 'Remove';
+  static const message = 'Product Added to cart';
+  static const emptyList = 'Your List is empty';
 
   static const productDescription =
       'Maecenas cursus magna vitae convallis congue. Vestibulum dignissim augue odio, congue rutrum magna gravida ac. Sed rhoncus eu arcu a tempus.';

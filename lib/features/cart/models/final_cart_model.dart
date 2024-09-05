@@ -1,40 +1,37 @@
-import 'package:equatable/equatable.dart';
-
-class FinalCart extends Equatable{
-  FinalCart({
-    required this.imagePath,
-    required this.itemDescripton,
-    required this.reviews,
-    required this.amount,
-    required this.itemCount,
-    required this.id,
-  });
+class FinalCart {
+  FinalCart(
+      {required this.imagePath,
+      required this.itemDescripton,
+      required this.reviews,
+      required this.amount,
+      required this.itemCount,
+      required this.id});
 
   final String reviews;
   final String itemDescripton;
   final String imagePath;
   final String amount;
-  final String id;
+
   final int itemCount;
+
+  final String id;
 
   FinalCart copyWith({
     String? reviews,
     String? itemDescripton,
     String? imagePath,
     String? amount,
-   int? initialValue,
+    int? initialValue,
   }) {
     return FinalCart(
-      id: id,
-      reviews: reviews ?? this.reviews,
-      itemDescripton: itemDescripton ?? this.itemDescripton,
-      imagePath: imagePath ?? this.imagePath,
-      amount: amount ?? this.amount,
-      itemCount: initialValue ?? this.itemCount,
-    );
+        id: id,
+        reviews: reviews ?? this.reviews,
+        itemDescripton: itemDescripton ?? this.itemDescripton,
+        imagePath: imagePath ?? this.imagePath,
+        amount: amount ?? this.amount,
+        itemCount: initialValue ?? itemCount);
   }
 
   @override
-
   List<Object?> get props => [id];
 }

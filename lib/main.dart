@@ -2,6 +2,7 @@ import 'package:e_commerce_app/features/dashboard/widget/bottom_button.dart';
 import 'package:e_commerce_app/features/cart/view/cart.dart';
 import 'package:e_commerce_app/features/cart/view/cart_category.dart';
 import 'package:e_commerce_app/features/dashboard/views/home.dart';
+import 'package:e_commerce_app/features/product/bloc/product_bloc_bloc.dart';
 import 'package:e_commerce_app/features/product/view/product_detail.dart';
 import 'package:e_commerce_app/app/utils/colors.dart';
 
@@ -26,7 +27,10 @@ class MyApp extends StatelessWidget {
           return MultiBlocProvider(
             providers: [
               BlocProvider<CartBloc>(
-              create: (context) => CartBloc(),)
+                create: (context) => CartBloc(),
+              ),
+              BlocProvider<ProductBlocBloc>(
+                  create: (context) => ProductBlocBloc()),
             ],
             child: MaterialApp(
                 debugShowCheckedModeBanner: false,

@@ -1,23 +1,23 @@
-com.mychassis.e_commerce_app-jetified-activity-1.8.1-0 /Users/sambass/.gradle/caches/transforms-3/0dc0e273ca0b4398c31d68909a91daeb/transformed/jetified-activity-1.8.1/res
-com.mychassis.e_commerce_app-jetified-lifecycle-viewmodel-savedstate-2.7.0-1 /Users/sambass/.gradle/caches/transforms-3/0faafd7e191e8415b253c4ee5683307f/transformed/jetified-lifecycle-viewmodel-savedstate-2.7.0/res
-com.mychassis.e_commerce_app-jetified-annotation-experimental-1.4.0-2 /Users/sambass/.gradle/caches/transforms-3/1249a588d1566a2bb1054b235b7bcfa0/transformed/jetified-annotation-experimental-1.4.0/res
-com.mychassis.e_commerce_app-jetified-tracing-1.2.0-3 /Users/sambass/.gradle/caches/transforms-3/1601ac268d6afbebcd8c08dc745a8266/transformed/jetified-tracing-1.2.0/res
-com.mychassis.e_commerce_app-jetified-core-1.0.0-4 /Users/sambass/.gradle/caches/transforms-3/164cfb379f44adaf4f68cfb0005ff7ec/transformed/jetified-core-1.0.0/res
-com.mychassis.e_commerce_app-jetified-window-1.2.0-5 /Users/sambass/.gradle/caches/transforms-3/19cb45ba22ac74ea99d14b01d43a6a8d/transformed/jetified-window-1.2.0/res
-com.mychassis.e_commerce_app-jetified-window-java-1.2.0-6 /Users/sambass/.gradle/caches/transforms-3/1ff41b59b75b01abed2791d84c583410/transformed/jetified-window-java-1.2.0/res
-com.mychassis.e_commerce_app-jetified-lifecycle-process-2.7.0-7 /Users/sambass/.gradle/caches/transforms-3/39587ec9c01d32acef0a0ee8bef2a378/transformed/jetified-lifecycle-process-2.7.0/res
-com.mychassis.e_commerce_app-jetified-core-ktx-1.13.1-8 /Users/sambass/.gradle/caches/transforms-3/4493a828f55d60604d9ccf80f4eb02a7/transformed/jetified-core-ktx-1.13.1/res
-com.mychassis.e_commerce_app-jetified-lifecycle-livedata-core-ktx-2.7.0-9 /Users/sambass/.gradle/caches/transforms-3/562ba898947534cdc98d1cb32a8c6c00/transformed/jetified-lifecycle-livedata-core-ktx-2.7.0/res
-com.mychassis.e_commerce_app-lifecycle-livedata-core-2.7.0-10 /Users/sambass/.gradle/caches/transforms-3/644e8c8ddb7f5c7c2f027e9f059f7e90/transformed/lifecycle-livedata-core-2.7.0/res
-com.mychassis.e_commerce_app-core-1.13.1-11 /Users/sambass/.gradle/caches/transforms-3/67a2055b0671aa3010f0bc50e19049d7/transformed/core-1.13.1/res
-com.mychassis.e_commerce_app-core-runtime-2.2.0-12 /Users/sambass/.gradle/caches/transforms-3/6cf5e322c2e8d9eeafc9ee059d2ec16e/transformed/core-runtime-2.2.0/res
-com.mychassis.e_commerce_app-jetified-profileinstaller-1.3.1-13 /Users/sambass/.gradle/caches/transforms-3/6e2ca6c16f7f6f879ae3f52acc6ec5c7/transformed/jetified-profileinstaller-1.3.1/res
-com.mychassis.e_commerce_app-jetified-savedstate-1.2.1-14 /Users/sambass/.gradle/caches/transforms-3/6ff5670a7859083f58d298a4a568ac5a/transformed/jetified-savedstate-1.2.1/res
-com.mychassis.e_commerce_app-lifecycle-runtime-2.7.0-15 /Users/sambass/.gradle/caches/transforms-3/b9089bd3ad753c87b0d3602d28f86925/transformed/lifecycle-runtime-2.7.0/res
-com.mychassis.e_commerce_app-fragment-1.7.1-16 /Users/sambass/.gradle/caches/transforms-3/bbcd8efb3404bc28ca2249a78527063b/transformed/fragment-1.7.1/res
-com.mychassis.e_commerce_app-lifecycle-viewmodel-2.7.0-17 /Users/sambass/.gradle/caches/transforms-3/d7b09cae3c446ea5b2d26bd1d55fcf5a/transformed/lifecycle-viewmodel-2.7.0/res
-com.mychassis.e_commerce_app-lifecycle-livedata-2.7.0-18 /Users/sambass/.gradle/caches/transforms-3/e8873d4d042455a645c5eabac7ecd5bd/transformed/lifecycle-livedata-2.7.0/res
-com.mychassis.e_commerce_app-jetified-startup-runtime-1.1.1-19 /Users/sambass/.gradle/caches/transforms-3/f0951692d43473324b13a82f407282ec/transformed/jetified-startup-runtime-1.1.1/res
+com.mychassis.e_commerce_app-jetified-lifecycle-viewmodel-savedstate-2.7.0-0 /Users/sambass/.gradle/caches/transforms-3/0ffbdfcadb71e0a9d41ca802b28f6974/transformed/jetified-lifecycle-viewmodel-savedstate-2.7.0/res
+com.mychassis.e_commerce_app-lifecycle-livedata-core-2.7.0-1 /Users/sambass/.gradle/caches/transforms-3/1561fead4024f9b9cdee719f01bdb430/transformed/lifecycle-livedata-core-2.7.0/res
+com.mychassis.e_commerce_app-jetified-core-1.0.0-2 /Users/sambass/.gradle/caches/transforms-3/1c5f6db43d131463afca7e0462ec6152/transformed/jetified-core-1.0.0/res
+com.mychassis.e_commerce_app-core-runtime-2.2.0-3 /Users/sambass/.gradle/caches/transforms-3/2874df0f81244a83e147dc16d9c51e26/transformed/core-runtime-2.2.0/res
+com.mychassis.e_commerce_app-jetified-window-java-1.2.0-4 /Users/sambass/.gradle/caches/transforms-3/3ef162224f371787e5c8dc68312129f9/transformed/jetified-window-java-1.2.0/res
+com.mychassis.e_commerce_app-core-1.13.1-5 /Users/sambass/.gradle/caches/transforms-3/54a4cfbaad86b9ab2273ca8263e4a153/transformed/core-1.13.1/res
+com.mychassis.e_commerce_app-jetified-lifecycle-livedata-core-ktx-2.7.0-6 /Users/sambass/.gradle/caches/transforms-3/6da0e15fe277d03192fadf049fb88f55/transformed/jetified-lifecycle-livedata-core-ktx-2.7.0/res
+com.mychassis.e_commerce_app-jetified-profileinstaller-1.3.1-7 /Users/sambass/.gradle/caches/transforms-3/6ea3fe485a2777491d24973851e37227/transformed/jetified-profileinstaller-1.3.1/res
+com.mychassis.e_commerce_app-jetified-startup-runtime-1.1.1-8 /Users/sambass/.gradle/caches/transforms-3/72d73aa9f2b0d4a60d769cc82fe58f41/transformed/jetified-startup-runtime-1.1.1/res
+com.mychassis.e_commerce_app-lifecycle-viewmodel-2.7.0-9 /Users/sambass/.gradle/caches/transforms-3/7b93728c23c58fb4966a93fd781d42c6/transformed/lifecycle-viewmodel-2.7.0/res
+com.mychassis.e_commerce_app-lifecycle-runtime-2.7.0-10 /Users/sambass/.gradle/caches/transforms-3/8968819bfcadfd25d9ed1488e55fb43d/transformed/lifecycle-runtime-2.7.0/res
+com.mychassis.e_commerce_app-fragment-1.7.1-11 /Users/sambass/.gradle/caches/transforms-3/902e93687bfec424d7d681c16d78dd10/transformed/fragment-1.7.1/res
+com.mychassis.e_commerce_app-jetified-activity-1.8.1-12 /Users/sambass/.gradle/caches/transforms-3/a1a7f2ab517b2b49983b681fd36819b8/transformed/jetified-activity-1.8.1/res
+com.mychassis.e_commerce_app-jetified-core-ktx-1.13.1-13 /Users/sambass/.gradle/caches/transforms-3/a374ebd3eb9aca2cfd2e4d2ed2f0ed1b/transformed/jetified-core-ktx-1.13.1/res
+com.mychassis.e_commerce_app-jetified-window-1.2.0-14 /Users/sambass/.gradle/caches/transforms-3/ac5ea9a8b6fd31385d98c2d53414b07d/transformed/jetified-window-1.2.0/res
+com.mychassis.e_commerce_app-jetified-tracing-1.2.0-15 /Users/sambass/.gradle/caches/transforms-3/b6393f1bc40143c1a43b027ef1bf8c49/transformed/jetified-tracing-1.2.0/res
+com.mychassis.e_commerce_app-jetified-annotation-experimental-1.4.0-16 /Users/sambass/.gradle/caches/transforms-3/bbfbfcd66d57b964cd3d944ae6910e1b/transformed/jetified-annotation-experimental-1.4.0/res
+com.mychassis.e_commerce_app-lifecycle-livedata-2.7.0-17 /Users/sambass/.gradle/caches/transforms-3/c8104be4ee8049739ee8a5cef3e0da67/transformed/lifecycle-livedata-2.7.0/res
+com.mychassis.e_commerce_app-jetified-savedstate-1.2.1-18 /Users/sambass/.gradle/caches/transforms-3/e31bf8eb61c587fe74f52284c4da4d09/transformed/jetified-savedstate-1.2.1/res
+com.mychassis.e_commerce_app-jetified-lifecycle-process-2.7.0-19 /Users/sambass/.gradle/caches/transforms-3/f278e58515e8cfd3d9ddee03ef955ede/transformed/jetified-lifecycle-process-2.7.0/res
 com.mychassis.e_commerce_app-debug-20 /Users/sambass/dev/Kodecamp 1st task/task1_kodecamp4/bloc practise/E-commerce app/e_commerce_app/android/app/src/debug/res
 com.mychassis.e_commerce_app-main-21 /Users/sambass/dev/Kodecamp 1st task/task1_kodecamp4/bloc practise/E-commerce app/e_commerce_app/android/app/src/main/res
 com.mychassis.e_commerce_app-pngs-22 /Users/sambass/dev/Kodecamp 1st task/task1_kodecamp4/bloc practise/E-commerce app/e_commerce_app/build/app/generated/res/pngs/debug

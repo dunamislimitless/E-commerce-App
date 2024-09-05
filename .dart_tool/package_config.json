@@ -620,10 +620,10 @@
       "languageVersion": "3.3"
     }
   ],
-  "generated": "2024-08-30T19:12:53.670090Z",
+  "generated": "2024-09-05T16:15:03.097631Z",
   "generator": "pub",
-  "generatorVersion": "3.5.1",
+  "generatorVersion": "3.5.2",
   "flutterRoot": "file:///Users/sambass/Developer/flutter",
-  "flutterVersion": "3.24.1",
+  "flutterVersion": "3.24.2",
   "pubCache": "file:///Users/sambass/.pub-cache"
 }

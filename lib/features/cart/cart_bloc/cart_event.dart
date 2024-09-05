@@ -14,3 +14,4 @@ class RemoveCartItemEvent extends CombinedEvent {
   final String id;
   RemoveCartItemEvent(this.id);
 }
+

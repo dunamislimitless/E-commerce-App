@@ -6,27 +6,25 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../app/utils/app_ipngs.dart';
 
 class CartBloc extends Bloc<CombinedEvent, CartState> {
-  CartBloc()
-      : super(CartStateInit()) {
+  CartBloc() : super(CartStateInit()) {
     on<IncrementEvent>((event, emit) {
-
-
       final index = items.indexWhere((e) => e.id == event.id);
 
       if (index != -1) {
-        items[index] = items[index].copyWith(initialValue: items[index].itemCount + 1);
+        items[index] =
+            items[index].copyWith(initialValue: items[index].itemCount + 1);
       }
       emit(CartStateUpdate());
     });
 
     on<DecrementEvent>((event, emit) {
-
       final index = items.indexWhere((e) => e.id == event.id);
 
       if (index != -1) {
-        items[index] = items[index].copyWith(initialValue: items[index].itemCount - 1);
+        items[index] =
+            items[index].copyWith(initialValue: items[index].itemCount - 1);
 
-        if( items[index].itemCount<1){
+        if (items[index].itemCount < 1) {
           add(RemoveCartItemEvent(event.id));
         }
       }
@@ -34,7 +32,6 @@ class CartBloc extends Bloc<CombinedEvent, CartState> {
     });
 
     on<RemoveCartItemEvent>((event, emit) {
-
       final index = items.indexWhere((e) => e.id == event.id);
 
       if (index != -1) {
@@ -44,7 +41,7 @@ class CartBloc extends Bloc<CombinedEvent, CartState> {
     });
   }
 
-  final List<FinalCart> items=[
+  final List<FinalCart> items = [
     FinalCart(
       id: "id1",
       imagePath: AppImage.headset,
