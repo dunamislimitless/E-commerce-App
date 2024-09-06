@@ -108,7 +108,41 @@ class Cart extends StatelessWidget {
                     itemBuilder: (context, index) {
                       // final each = context.read<CartBloc>().items[index];
 
-                      return Padding(
+             return     Dismissible(
+                    key: UniqueKey(),
+                    direction: DismissDirection.endToStart,
+                    onDismissed: (direction) {
+                    final deleteProduct =  BlocProvider.of<ProductBlocBloc>(context);
+
+                          deleteProduct.add(RemoveFromCart(state.cartItems[index]));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                            content:
+                                Text("${state.cartItems[index].itemDescripton} removed")),
+                      );
+                    },
+                    background: Container(
+                      color: AppColors.backgroundColor,
+                      alignment: Alignment.centerRight,
+                      padding: EdgeInsets.symmetric(horizontal: 20.w),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const Icon(Icons.delete_outline_outlined,
+                              color: AppColors.favoriteColor),
+                          SizedBox(
+                            height: 15.h,
+                          ),
+                          const Text(
+                            AppString.remove,
+                            style:
+                                TextStyle(color: AppColors.favoriteColor),
+                          )
+                        ],
+                      ),
+                    ),
+                    child: Padding(
                           padding: EdgeInsets.only(bottom: 8.h),
                           child: Container(
                               height: 119.h,
@@ -220,7 +254,7 @@ class Cart extends StatelessWidget {
                                       child: Image.asset(
                                           state.cartItems[index].imagePath)),
                                 ),
-                              ])));
+                              ]))));
                     });
               }
             })),

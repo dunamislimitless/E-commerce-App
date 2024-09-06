@@ -1,4 +1,4 @@
-#Thu Sep 05 17:25:11 WAT 2024
+#Fri Sep 06 15:59:53 WAT 2024
 base.0=/Users/sambass/dev/Kodecamp 1st task/task1_kodecamp4/bloc practise/E-commerce app/e_commerce_app/build/app/intermediates/dex/debug/mergeExtDexDebug/classes.dex
 base.1=/Users/sambass/dev/Kodecamp 1st task/task1_kodecamp4/bloc practise/E-commerce app/e_commerce_app/build/app/intermediates/dex/debug/mergeLibDexDebug/0/classes.dex
 base.2=/Users/sambass/dev/Kodecamp 1st task/task1_kodecamp4/bloc practise/E-commerce app/e_commerce_app/build/app/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
