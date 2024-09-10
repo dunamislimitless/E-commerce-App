@@ -14,7 +14,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductDetail extends StatelessWidget {
-  const ProductDetail({super.key});
+  const ProductDetail(
+      {super.key,
+      required this.amount,
+      required this.imagePath,
+      required this.descrition,
+      required this.productName});
+  final String amount;
+  final String imagePath;
+  final String descrition;
+  final String productName;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +49,8 @@ class ProductDetail extends StatelessWidget {
               SizedBox(
                 height: 30.h,
               ),
-              Image.asset(AppImage.wristWatch),
+              Image.asset(imagePath ?? AppImage.wristWatch),
+              //AppImage.wristWatch,
               SizedBox(
                 height: 55.h,
               ),
@@ -53,7 +63,7 @@ class ProductDetail extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        AppString.smartWatch,
+                        productName ?? AppString.smartWatch,
                         style: AppText.productName,
                       ),
                       SizedBox(
@@ -91,7 +101,7 @@ class ProductDetail extends StatelessWidget {
                     children: [
                       SizedBox(height: 10.h),
                       Text(
-                        '\$345.00',
+                        amount ?? '\$345.00',
                         style: AppText.amountText,
                       ),
                     ],
@@ -102,7 +112,7 @@ class ProductDetail extends StatelessWidget {
                 height: 14.h,
               ),
               Text(
-                AppString.productDescription,
+                descrition ?? AppString.productDescription,
                 style: AppText.reviewText,
               ),
               SizedBox(

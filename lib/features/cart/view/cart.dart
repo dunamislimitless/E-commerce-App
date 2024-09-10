@@ -22,7 +22,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Cart extends StatelessWidget {
-  Cart({super.key});
+  const Cart({super.key});
   // List<FinalCart> product = [
   //   FinalCart(
   //     id: "id1",
@@ -90,19 +90,20 @@ class Cart extends StatelessWidget {
                 title: AppString.cart,
                 trailing: AppIcons.cartLoaded.onTap(() {}),
                 leading: AppIcons.arrowBack.onTap(() {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const Home()));
+                  Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => const Home()));
                 })),
             SizedBox(
               height: 30.h,
             ),
-            Expanded(child: BlocBuilder<CartBloc, CartState>(
-                builder: (context, state) {
-              if (  context.read<CartBloc>().items.isEmpty) {
+            Expanded(child:
+                BlocBuilder<CartBloc, CartState>(builder: (context, state) {
+              if (context.read<CartBloc>().items.isEmpty) {
                 return const Center(child: Text('Your cart is empty.'));
               }
               return ListView.builder(
                 itemCount: context.read<CartBloc>().items.length,
+                padding: EdgeInsets.zero,
                 itemBuilder: (context, index) {
                   final each = context.read<CartBloc>().items[index];
                   return Dismissible(
@@ -113,8 +114,7 @@ class Cart extends StatelessWidget {
                           .add(RemoveCartItemEvent(each.id));
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                            content:
-                                Text("${each.itemDescripton} removed")),
+                            content: Text("${each.itemDescripton} removed")),
                       );
                     },
                     background: Container(
@@ -132,8 +132,7 @@ class Cart extends StatelessWidget {
                           ),
                           const Text(
                             AppString.remove,
-                            style:
-                                TextStyle(color: AppColors.favoriteColor),
+                            style: TextStyle(color: AppColors.favoriteColor),
                           )
                         ],
                       ),
@@ -152,8 +151,7 @@ class Cart extends StatelessWidget {
                               padding: EdgeInsets.all(12.0.w),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
                                     each.itemDescripton,
@@ -209,14 +207,13 @@ class Cart extends StatelessWidget {
                                     size: 18.r,
                                   )),
                                 ).onTap(() {
-
-                                  context.read<CartBloc>()
+                                  context
+                                      .read<CartBloc>()
                                       .add(IncrementEvent(each.id));
                                 }),
                                 BlocBuilder<CartBloc, CartState>(
                                   builder: (context, state) {
-                                    return Text(each.itemCount
-                                        .toString());
+                                    return Text(each.itemCount.toString());
                                   },
                                 ),
                                 Container(
@@ -226,8 +223,7 @@ class Cart extends StatelessWidget {
                                         color: Colors.white,
                                         shape: BoxShape.circle,
                                         border: Border.all(
-                                            color: Colors.black,
-                                            width: 0.5)),
+                                            color: Colors.black, width: 0.5)),
                                     child: Center(
                                         child: Icon(
                                       Icons.remove,
@@ -273,8 +269,7 @@ class Cart extends StatelessWidget {
                     SizedBox(
                       height: 8.h,
                     ),
-                    CustomRow(
-                        options: 'Disccount (%20)', object: '\$117.80'),
+                    CustomRow(options: 'Disccount (%20)', object: '\$117.80'),
                     SizedBox(
                       height: 8.h,
                     ),

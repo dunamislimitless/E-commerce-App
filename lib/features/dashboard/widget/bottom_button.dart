@@ -1,9 +1,8 @@
-import 'package:e_commerce_app/features/dashboard/widget/buttom_nav_bar.dart';
-import 'package:flutter/material.dart';
-import 'package:e_commerce_app/features/dashboard/views/home.dart';
 import 'package:e_commerce_app/features/cart/view/cart.dart';
-import 'package:e_commerce_app/features/cart/view/cart_category.dart';
+import 'package:e_commerce_app/features/dashboard/views/home.dart';
+import 'package:e_commerce_app/features/dashboard/widget/buttom_nav_bar.dart';
 import 'package:e_commerce_app/features/product/view/product_detail.dart';
+import 'package:flutter/material.dart';
 
 class BottomNavScreen extends StatefulWidget {
   const BottomNavScreen({super.key});
@@ -15,13 +14,6 @@ class BottomNavScreen extends StatefulWidget {
 class _BottomNavScreenState extends State<BottomNavScreen> {
   int _currentIndex = 0;
 
-  final List<Widget> _pages = [
-    const Home(),
-    const ProductDetail(),
-    Cart(),
-    Container(),
-  ];
-
   void _onItemTapped(int index) {
     setState(() {
       _currentIndex = index;
@@ -31,7 +23,21 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[_currentIndex],
+      body: [
+        Home(
+          moveToCart: () {
+            _onItemTapped(2);
+          },
+        ),
+        const ProductDetail(
+          amount: '',
+          imagePath: '',
+          descrition: '',
+          productName: '',
+        ),
+        const Cart(),
+        Container(),
+      ][_currentIndex],
       bottomNavigationBar: FlatBottomNavBar(
         currentIndex: _currentIndex,
         onTap: _onItemTapped,

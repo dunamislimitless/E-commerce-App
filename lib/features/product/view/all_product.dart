@@ -1,6 +1,9 @@
 import 'package:e_commerce_app/app/utils/app_ipngs.dart';
 import 'package:e_commerce_app/app/utils/appicons.dart';
 import 'package:e_commerce_app/app/utils/appstrings.dart';
+import 'package:e_commerce_app/features/cart/cart_bloc/cart_bloc.dart';
+import 'package:e_commerce_app/features/cart/cart_bloc/cart_event.dart';
+import 'package:e_commerce_app/features/cart/models/final_cart_model.dart';
 import 'package:e_commerce_app/features/product/models/product_cart_model.dart';
 import 'package:e_commerce_app/app/utils/colors.dart';
 import 'package:e_commerce_app/features/dashboard/widget/discount_container.dart';
@@ -11,12 +14,14 @@ import 'package:e_commerce_app/features/dashboard/widget/page_header.dart';
 import 'package:e_commerce_app/features/cart/models/product_container_model.dart';
 import 'package:e_commerce_app/app/utils/textstyle.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductCatalog extends StatelessWidget {
-  ProductCatalog({super.key});
+  ProductCatalog({super.key, this.moveToCart});
 
+  final VoidCallback? moveToCart;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,9 +51,9 @@ class ProductCatalog extends StatelessWidget {
                   mainAxisSpacing: 8.h,
                   childAspectRatio: 0.7,
                 ),
-                itemCount: products.length,
+                itemCount: cart.length,
                 itemBuilder: (context, index) {
-                  final each = products[index];
+                  final each = cart[index];
                   return Container(
                     height: 268.h,
                     width: 180.w,
@@ -102,7 +107,10 @@ class ProductCatalog extends StatelessWidget {
                         ],
                       ),
                     ),
-                  );
+                  ).onTap(() {
+                    context.read<CartBloc>().add(AddItemEvent(item: each));
+                    if (moveToCart != null) moveToCart!();
+                  });
                 },
               ),
             ),
@@ -112,7 +120,7 @@ class ProductCatalog extends StatelessWidget {
     );
   }
 
-  List<CartItem> products = [
+  final products = [
     const CartItem(
         imagePath: AppImage.bag,
         itemDescripton: AppString.bag,
@@ -155,3 +163,70 @@ class ProductCatalog extends StatelessWidget {
         amount: '\$78.90'),
   ];
 }
+
+final cart = [
+  FinalCart(
+    id: "id1",
+    imagePath: AppImage.headset,
+    itemDescripton: 'Wireless Headphone',
+    reviews: "(379)",
+    amount: '\$65',
+    itemCount: 2,
+  ),
+  FinalCart(
+    id: "id2",
+    imagePath: AppImage.sneakers,
+    itemDescripton: 'Bluetooth Speaker',
+    reviews: "(249)",
+    amount: '\$40',
+    itemCount: 1,
+  ),
+  FinalCart(
+    id: "id3",
+    imagePath: AppImage.flower,
+    itemDescripton: 'Smart Watch',
+    reviews: "(589)",
+    amount: '\$120',
+    itemCount: 4,
+  ),
+  FinalCart(
+    id: "id4",
+    imagePath: AppImage.bag,
+    itemDescripton: AppString.bag,
+    reviews: "(719)",
+    amount: '\$120',
+    itemCount: 4,
+  ),
+  FinalCart(
+    id: "id5",
+    imagePath: AppImage.brownBag,
+    itemDescripton: AppString.leatherBag,
+    reviews: "(899)",
+    amount: '\$170',
+    itemCount: 3,
+  ),
+  FinalCart(
+    id: "id6",
+    imagePath: AppImage.desk,
+    itemDescripton: 'Smart Watch',
+    reviews: "(589)",
+    amount: '\$120',
+    itemCount: 2,
+  ),
+  FinalCart(
+    id: "id7",
+    imagePath: AppImage.desk,
+    itemDescripton: AppString.deskClock,
+    reviews: "(4489)",
+    amount: '\$120',
+    itemCount: 3,
+  ),
+  FinalCart(
+    id: "id8",
+    imagePath: AppImage.watch,
+    itemDescripton: AppString.swissWatch,
+    reviews: "(589)",
+    amount: '\$120',
+    itemCount: 2,
+  ),
+];

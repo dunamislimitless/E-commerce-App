@@ -66,6 +66,12 @@ class AppText {
       fontFamily: 'Inter',
       color: AppColors.discountColor);
 
+  static TextStyle view = TextStyle(
+      fontSize: 14.sp,
+      fontWeight: FontWeight.w500,
+      fontFamily: 'Inter',
+      color: AppColors.discountColor);
+
   static TextStyle cartAmount = TextStyle(
       fontSize: 24.sp,
       fontWeight: FontWeight.w500,
