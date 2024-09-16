@@ -30,8 +30,8 @@ class CustomButton extends StatelessWidget {
         onPressed: onPressed,
         style: ButtonStyle(
             backgroundColor:
-                MaterialStateProperty.all(color ?? AppColors.lightButton),
-            padding: MaterialStateProperty.all(
+                WidgetStateProperty.all(color ?? AppColors.lightButton),
+            padding: WidgetStateProperty.all(
                 EdgeInsets.only(left: 8.w, right: 8.w))),
         child: child ??
             Text(

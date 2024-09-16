@@ -1,6 +1,7 @@
 import 'package:e_commerce_app/app/utils/app_ipngs.dart';
 import 'package:e_commerce_app/app/utils/appicons.dart';
 import 'package:e_commerce_app/app/utils/appstrings.dart';
+import 'package:e_commerce_app/features/cart/models/final_cart_model.dart';
 import 'package:e_commerce_app/features/product/models/product_cart_model.dart';
 import 'package:e_commerce_app/app/utils/colors.dart';
 import 'package:e_commerce_app/features/dashboard/widget/discount_container.dart';
@@ -47,17 +48,18 @@ class CartCategory extends StatelessWidget {
             ),
             Expanded(
               child: GridView.builder(
+                padding: EdgeInsets.zero,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                   crossAxisSpacing: 8.w,
                   mainAxisSpacing: 8.h,
-                  childAspectRatio: 1,
+                  childAspectRatio: 0.97,
                 ),
                 itemCount: product.length,
                 itemBuilder: (context, index) {
                   final each = product[index];
                   return Container(
-                    height: 120.h,
+                    // height: 120.h,
                     width: 118.w,
                     decoration: BoxDecoration(
                         color: AppColors.cardColor,
