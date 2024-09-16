@@ -4,7 +4,7 @@
             "outputFile": "com.mychassis.e_commerce_app-mergeDebugResources-25:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "/Users/sambass/dev/Kodecamp 1st task/task1_kodecamp4/bloc practise/E-commerce app/e_commerce_app/android/app/src/main/res/values-night/styles.xml",
+                    "source": "/Users/samuelogundoju/Development/Apps/E-commerce-App/android/app/src/main/res/values-night/styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

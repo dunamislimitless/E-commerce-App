@@ -53,13 +53,13 @@ class CartCategory extends StatelessWidget {
                   crossAxisCount: 3,
                   crossAxisSpacing: 8.w,
                   mainAxisSpacing: 8.h,
-                  childAspectRatio: 1,
+                  childAspectRatio: 0.97,
                 ),
                 itemCount: product.length,
                 itemBuilder: (context, index) {
                   final each = product[index];
                   return Container(
-                    height: 120.h,
+                    // height: 120.h,
                     width: 118.w,
                     decoration: BoxDecoration(
                         color: AppColors.cardColor,

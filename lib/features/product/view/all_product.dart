@@ -4,6 +4,7 @@ import 'package:e_commerce_app/app/utils/appstrings.dart';
 import 'package:e_commerce_app/features/cart/cart_bloc/cart_bloc.dart';
 import 'package:e_commerce_app/features/cart/cart_bloc/cart_event.dart';
 import 'package:e_commerce_app/features/cart/models/final_cart_model.dart';
+import 'package:e_commerce_app/features/cart/view/cart.dart';
 import 'package:e_commerce_app/features/product/models/product_cart_model.dart';
 import 'package:e_commerce_app/app/utils/colors.dart';
 import 'package:e_commerce_app/features/dashboard/widget/discount_container.dart';
@@ -13,6 +14,7 @@ import 'package:e_commerce_app/features/dashboard/models/options_model.dart';
 import 'package:e_commerce_app/features/dashboard/widget/page_header.dart';
 import 'package:e_commerce_app/features/cart/models/product_container_model.dart';
 import 'package:e_commerce_app/app/utils/textstyle.dart';
+import 'package:e_commerce_app/features/product/view/product_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -36,7 +38,7 @@ class ProductCatalog extends StatelessWidget {
             ),
             PageHeader(
                 title: AppString.popularProduct,
-                trailing: AppIcons.cartLoaded.onTap(() {}),
+                trailing: AppIcons.cartLoaded.onTap(() {Navigator.push(context, MaterialPageRoute(builder: (context)=> Cart()));}),
                 leading: AppIcons.arrowBack.onTap(() {
                   Navigator.pop(context);
                 })),
@@ -49,8 +51,11 @@ class ProductCatalog extends StatelessWidget {
                   crossAxisCount: 2,
                   crossAxisSpacing: 8.w,
                   mainAxisSpacing: 8.h,
+                
                   childAspectRatio: 0.7,
                 ),
+                padding: EdgeInsets.zero,
+                shrinkWrap: true,
                 itemCount: cart.length,
                 itemBuilder: (context, index) {
                   final each = cart[index];
@@ -97,13 +102,31 @@ class ProductCatalog extends StatelessWidget {
                               ],
                             ),
                           ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Text(
-                              each.amount,
-                              style: AppText.amountText,
-                            ),
-                          )
+                           Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            each.amount,
+                                            style: AppText.amountText,
+                                          ),
+                                          Text(AppString.view,
+                                                  style: AppText.view)
+                                              .onTap(() {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) => ProductDetail(
+                                                        amount:
+                                                            each.amount,
+                                                        imagePath: each
+                                                            .imagePath,
+                                                        descrition: each
+                                                            .itemDescripton,
+                                                        productName: each
+                                                            .itemDescripton, eachProduct: each,)));
+                                          })
+                                        ]),
                         ],
                       ),
                     ),
@@ -120,48 +143,48 @@ class ProductCatalog extends StatelessWidget {
     );
   }
 
-  final products = [
-    const CartItem(
-        imagePath: AppImage.bag,
-        itemDescripton: AppString.bag,
-        reviews: '(715 ${AppString.review})',
-        amount: '\$135.00'),
-    const CartItem(
-        imagePath: AppImage.headset,
-        itemDescripton: AppString.bag,
-        reviews: '(379 ${AppString.review})',
-        amount: '\$65.00'),
-    const CartItem(
-        imagePath: AppImage.cap,
-        itemDescripton: AppString.cap,
-        reviews: '(36 ${AppString.review})',
-        amount: '\$271.00'),
-    const CartItem(
-        imagePath: AppImage.flower,
-        itemDescripton: AppString.flower,
-        reviews: '(2184 ${AppString.review})',
-        amount: '\$248.00'),
-    const CartItem(
-        imagePath: AppImage.brownBag,
-        itemDescripton: AppString.leatherBag,
-        reviews: '(328 ${AppString.review})',
-        amount: '\$374.00'),
-    const CartItem(
-        imagePath: AppImage.desk,
-        itemDescripton: AppString.deskClock,
-        reviews: '(3721 ${AppString.review})',
-        amount: '\$125..00'),
-    const CartItem(
-        imagePath: AppImage.watch,
-        itemDescripton: AppString.swissWatch,
-        reviews: '(715 ${AppString.review})',
-        amount: '\$27.50'),
-    const CartItem(
-        imagePath: AppImage.sneakers,
-        itemDescripton: AppString.sneakers,
-        reviews: '(379 ${AppString.review})',
-        amount: '\$78.90'),
-  ];
+  // final products = [
+  //   const CartItem(
+  //       imagePath: AppImage.bag,
+  //       itemDescripton: AppString.bag,
+  //       reviews: '(715 ${AppString.review})',
+  //       amount: '\$135.00'),
+  //   const CartItem(
+  //       imagePath: AppImage.headset,
+  //       itemDescripton: AppString.bag,
+  //       reviews: '(379 ${AppString.review})',
+  //       amount: '\$65.00'),
+  //   const CartItem(
+  //       imagePath: AppImage.cap,
+  //       itemDescripton: AppString.cap,
+  //       reviews: '(36 ${AppString.review})',
+  //       amount: '\$271.00'),
+  //   const CartItem(
+  //       imagePath: AppImage.flower,
+  //       itemDescripton: AppString.flower,
+  //       reviews: '(2184 ${AppString.review})',
+  //       amount: '\$248.00'),
+  //   const CartItem(
+  //       imagePath: AppImage.brownBag,
+  //       itemDescripton: AppString.leatherBag,
+  //       reviews: '(328 ${AppString.review})',
+  //       amount: '\$374.00'),
+  //   const CartItem(
+  //       imagePath: AppImage.desk,
+  //       itemDescripton: AppString.deskClock,
+  //       reviews: '(3721 ${AppString.review})',
+  //       amount: '\$125..00'),
+  //   const CartItem(
+  //       imagePath: AppImage.watch,
+  //       itemDescripton: AppString.swissWatch,
+  //       reviews: '(715 ${AppString.review})',
+  //       amount: '\$27.50'),
+  //   const CartItem(
+  //       imagePath: AppImage.sneakers,
+  //       itemDescripton: AppString.sneakers,
+  //       reviews: '(379 ${AppString.review})',
+  //       amount: '\$78.90'),
+  // ];
 }
 
 final cart = [

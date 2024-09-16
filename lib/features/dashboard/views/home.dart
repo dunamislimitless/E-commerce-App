@@ -22,9 +22,10 @@ import '../../cart/cart_bloc/cart_event.dart';
 import '../../cart/models/final_cart_model.dart';
 
 class Home extends StatelessWidget {
-  const Home({super.key, this.moveToCart});
+  const Home({super.key, this.moveToCart, this.moveToProduct});
 
   final VoidCallback? moveToCart;
+  final VoidCallback? moveToProduct;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class Home extends StatelessWidget {
           BlocProvider<DashboardBlocBloc>(create: (_) => DashboardBlocBloc())
         ],
         child: Scaffold(
-          backgroundColor: AppColors.backgroundColor,
+          backgroundColor: AppColors.background,
           body: Padding(
             padding: EdgeInsets.all(16.w),
             child: Column(
@@ -87,7 +88,7 @@ class Home extends StatelessWidget {
                           children: [
                             Expanded(
                               child: Container(
-                                color: Colors.white,
+                                
                                 height: 34.h,
                                 child: ListView.builder(
                                   itemCount: options.length,
@@ -257,7 +258,7 @@ class Home extends StatelessWidget {
                                                         descrition: eachProduct
                                                             .itemDescripton,
                                                         productName: eachProduct
-                                                            .itemDescripton)));
+                                                            .itemDescripton, eachProduct: eachProduct,)));
                                           })
                                         ]),
                                   ],

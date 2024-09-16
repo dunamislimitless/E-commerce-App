@@ -21,7 +21,7 @@ class RemoveCartItemEvent extends CartEvent {
 }
 
 class AddItemEvent extends CartEvent {
-  final FinalCart item;
-
+   final FinalCart item;
+   
   AddItemEvent({required this.item});
 }
