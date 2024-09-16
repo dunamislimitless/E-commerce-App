@@ -619,8 +619,9 @@
       "packageUri": "lib/",
       "languageVersion": "3.3"
     }
-  ],
-  "generated": "2024-09-12T13:53:06.640960Z",
+  
+
+  "generated": "2024-09-12T13:39:11.790141Z",
   "generator": "pub",
   "generatorVersion": "3.5.2",
   "flutterRoot": "file:///Users/samuelogundoju/Dev/flutter",
