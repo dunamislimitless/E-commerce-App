@@ -20,7 +20,7 @@ class DiscountContaieer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 160.h,
+      //height: 160.h,
       width: 386.w,
       decoration: BoxDecoration(
           color: AppColors.discountColor,

@@ -53,6 +53,21 @@ class CartBloc extends Bloc<CartEvent, CartState> {
    final List<FinalCart> items=[
   ];
 
+  num calculateSubtotal() {
+  return items.fold(0, (total, current) => total + (current.amount * current.itemCount));
+}
+
+num calculateDiscount(num percentage) {
+  num subtotal = calculateSubtotal();
+  return subtotal * (percentage / 100);
+}
+
+num calculateTotal(num discountPercentage) {
+  num subtotal = calculateSubtotal();
+  num discount = calculateDiscount(discountPercentage);
+  return subtotal - discount;
+}
+
   }
 
  

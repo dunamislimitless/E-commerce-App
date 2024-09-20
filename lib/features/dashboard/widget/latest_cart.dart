@@ -22,7 +22,7 @@ class LatestCart extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(5.0.w),
       child: Container(
-        height: 98.h,
+        //height: 98.h,
         width: 386.w,
         decoration: BoxDecoration(
           color: Colors.white,

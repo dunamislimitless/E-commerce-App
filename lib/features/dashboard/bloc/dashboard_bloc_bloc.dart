@@ -15,7 +15,13 @@ class DashboardBlocBloc extends Bloc<DashboardBlocEvent, DashboardBlocState> {
 class ButtonBloc extends Bloc<ButtonEvent, ButtonState> {
   ButtonBloc() : super(ButtonInitialState()) {
     on<SelectButtonEvent>((event, emit) {
-      emit(ButtonSelectedState(selectedIndex: event.index));
+       if (state.selectedIndex == event.index) {
+        
+        emit(ButtonInitialState());
+      } else {
+        
+        emit(ButtonSelectedState(selectedIndex: event.index));
+      }
     });
   }
 }

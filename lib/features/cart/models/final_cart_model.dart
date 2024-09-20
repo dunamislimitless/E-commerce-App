@@ -13,7 +13,7 @@ class FinalCart extends Equatable{
   final String reviews;
   final String itemDescripton;
   final String imagePath;
-  final String amount;
+  final int amount;
   final String id;
   final int itemCount;
 
@@ -21,7 +21,7 @@ class FinalCart extends Equatable{
     String? reviews,
     String? itemDescripton,
     String? imagePath,
-    String? amount,
+    int? amount,
    int? initialValue,
   }) {
     return FinalCart(
