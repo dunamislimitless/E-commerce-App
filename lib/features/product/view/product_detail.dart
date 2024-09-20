@@ -1,4 +1,3 @@
-import 'package:e_commerce_app/app/utils/app_ipngs.dart';
 import 'package:e_commerce_app/app/utils/appicons.dart';
 import 'package:e_commerce_app/app/utils/appstrings.dart';
 import 'package:e_commerce_app/app/utils/colors.dart';
@@ -28,7 +27,7 @@ class ProductDetail extends StatelessWidget {
     this.moveToCart,
   });
 
-  final String amount;
+  final num amount;
   final String imagePath;
   final String descrition;
   final FinalCart eachProduct;
@@ -65,12 +64,12 @@ class ProductDetail extends StatelessWidget {
                 height: 30.h,
               ),
               
-              // Display the image or fallback text based on whether imagePath is empty
+              
               isProductSelected
                   ? Image.asset(imagePath)
                   : Text(
                       "Choose a product to view",
-                      style: AppText.productName, // Or any other suitable style
+                      style: AppText.productName, 
                     ),
               
               if (isProductSelected) ...[
@@ -124,7 +123,7 @@ class ProductDetail extends StatelessWidget {
                       children: [
                         SizedBox(height: 10.h),
                         Text(
-                          amount.isNotEmpty ? amount : '\$345.00',
+                          productName.isNotEmpty ? '\$${amount}' : '',
                           style: AppText.amountText,
                         ),
                       ],
@@ -152,7 +151,7 @@ class ProductDetail extends StatelessWidget {
                   color: AppColors.discountColor,
                 ),
               ] else ...[
-                // Display inactive message or any other UI to indicate the page is inactive
+                
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 30.h),
                   child: Text(

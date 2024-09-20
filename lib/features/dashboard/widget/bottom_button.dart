@@ -58,12 +58,12 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
           moveToCart: () {
             _onItemTapped(2);
           },
-          amount: '',
+          amount: 0,
           imagePath: '',
           descrition: '',
           productName: '',
           eachProduct: FinalCart(
-            amount: '',
+            amount: 0,
             imagePath: '',
             itemDescripton: '',
             reviews: '',

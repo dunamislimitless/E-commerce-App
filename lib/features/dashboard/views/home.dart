@@ -184,9 +184,9 @@ class Home extends StatelessWidget {
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
-                            crossAxisSpacing: 8.w,
-                            mainAxisSpacing: 8.h,
-                            childAspectRatio: 0.70,
+                             crossAxisSpacing: 8.w,
+                             mainAxisSpacing: 8.h,
+                            // childAspectRatio: 0.70,
                           ),
                           itemCount: 4,
                           itemBuilder: (context, index) {
@@ -241,7 +241,7 @@ class Home extends StatelessWidget {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            eachProduct.amount,
+                                           '\$${eachProduct.amount}',
                                             style: AppText.amountText,
                                           ),
                                           Text(AppString.view,
@@ -316,7 +316,7 @@ final cart = [
     imagePath: AppImage.headset,
     itemDescripton: 'Wireless Headphone',
     reviews: "(379)",
-    amount: '\$65',
+    amount: 65,
     itemCount: 2,
   ),
   FinalCart(
@@ -324,7 +324,7 @@ final cart = [
     imagePath: AppImage.sneakers,
     itemDescripton: 'Bluetooth Speaker',
     reviews: "(249)",
-    amount: '\$40',
+    amount: 40,
     itemCount: 1,
   ),
   FinalCart(
@@ -332,7 +332,7 @@ final cart = [
     imagePath: AppImage.flower,
     itemDescripton: 'Smart Watch',
     reviews: "(589)",
-    amount: '\$120',
+    amount: 120,
     itemCount: 4,
   ),
   FinalCart(
@@ -340,7 +340,7 @@ final cart = [
     imagePath: AppImage.flower,
     itemDescripton: 'Smart Watch',
     reviews: "(589)",
-    amount: '\$120',
+    amount: 120,
     itemCount: 4,
   ),
 ];

@@ -107,7 +107,7 @@ class ProductCatalog extends StatelessWidget {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            each.amount,
+                                            '\$${each.amount}',
                                             style: AppText.amountText,
                                           ),
                                           Text(AppString.view,
@@ -193,7 +193,7 @@ final cart = [
     imagePath: AppImage.headset,
     itemDescripton: 'Wireless Headphone',
     reviews: "(379)",
-    amount: '\$65',
+    amount: 65,
     itemCount: 2,
   ),
   FinalCart(
@@ -201,7 +201,7 @@ final cart = [
     imagePath: AppImage.sneakers,
     itemDescripton: 'Bluetooth Speaker',
     reviews: "(249)",
-    amount: '\$40',
+    amount: 40,
     itemCount: 1,
   ),
   FinalCart(
@@ -209,7 +209,7 @@ final cart = [
     imagePath: AppImage.flower,
     itemDescripton: 'Smart Watch',
     reviews: "(589)",
-    amount: '\$120',
+    amount: 120,
     itemCount: 4,
   ),
   FinalCart(
@@ -217,7 +217,7 @@ final cart = [
     imagePath: AppImage.bag,
     itemDescripton: AppString.bag,
     reviews: "(719)",
-    amount: '\$120',
+    amount: 120,
     itemCount: 4,
   ),
   FinalCart(
@@ -225,7 +225,7 @@ final cart = [
     imagePath: AppImage.brownBag,
     itemDescripton: AppString.leatherBag,
     reviews: "(899)",
-    amount: '\$170',
+    amount: 170,
     itemCount: 3,
   ),
   FinalCart(
@@ -233,7 +233,7 @@ final cart = [
     imagePath: AppImage.desk,
     itemDescripton: 'Smart Watch',
     reviews: "(589)",
-    amount: '\$120',
+    amount: 120,
     itemCount: 2,
   ),
   FinalCart(
@@ -241,7 +241,7 @@ final cart = [
     imagePath: AppImage.desk,
     itemDescripton: AppString.deskClock,
     reviews: "(4489)",
-    amount: '\$120',
+    amount: 120,
     itemCount: 3,
   ),
   FinalCart(
@@ -249,7 +249,7 @@ final cart = [
     imagePath: AppImage.watch,
     itemDescripton: AppString.swissWatch,
     reviews: "(589)",
-    amount: '\$120',
+    amount: 120,
     itemCount: 2,
   ),
 ];
