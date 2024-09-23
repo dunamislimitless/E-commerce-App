@@ -5,11 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a9bc6ba9-2acc-4e86-9e37-c9aecba37ae7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/lib/features/dashboard/views/home_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/features/dashboard/views/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/dashboard/views/home.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/features/dashboard/widget/bottom_button.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/dashboard/widget/bottom_button.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/features/dashboard/widget/buttom_nav_bar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/dashboard/widget/buttom_nav_bar.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/product/view/all_product.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/product/view/all_product.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +30,13 @@
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dart File" />
+      </list>
+    </option>
   </component>
   <component name="FormatOnSaveOptions">
     <option name="myRunOnSave" value="true" />
@@ -101,6 +107,7 @@
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
+    "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "fix/nav-fix",
     "io.flutter.reload.alreadyRun": "true",
     "kotlin-language-version-configured": "true",
