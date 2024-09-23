@@ -20,6 +20,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../cart/cart_bloc/cart_event.dart';
 import '../../cart/models/final_cart_model.dart';
+import '../../cart/view/cart.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key, this.moveToCart, this.moveToProduct});
@@ -54,310 +55,340 @@ class _DashboardScreenState extends State<DashboardScreen>
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                padding: EdgeInsets.symmetric(vertical: 15.h),
+                padding: EdgeInsets.symmetric(vertical: 10.h),
                 decoration: const BoxDecoration(color: AppColors.cardColor),
-                child: TabBar(
-                  onTap: (a) => setState(() {}),
-                  indicator: const BoxDecoration(),
-                  tabs: [
-                    SvgPicture.asset(
-                      AppIcons.home,
-                      color: _tabController.index == 0
-                          ? AppColors.discountColor
-                          : null,
-                    ),
-                    SvgPicture.asset(
-                      AppIcons.favorite,
-                      color: _tabController.index == 1
-                          ? AppColors.discountColor
-                          : null,
-                    ),
-                    SvgPicture.asset(
-                      AppIcons.cart,
-                      color: _tabController.index == 2
-                          ? AppColors.discountColor
-                          : null,
-                    ),
-                    SvgPicture.asset(
-                      AppIcons.profile,
-                      color: _tabController.index == 3
-                          ? AppColors.discountColor
-                          : null,
-                    ),
-                  ],
-                  controller: _tabController,
+                child: SafeArea(
+                  child: TabBar(
+                    dividerColor: Colors.transparent,
+                    onTap: (a) => setState(() {}),
+                    indicator: const BoxDecoration(),
+                    tabs: [
+                      SvgPicture.asset(
+                        AppIcons.home,
+                        color: _tabController.index == 0
+                            ? AppColors.discountColor
+                            : null,
+                      ),
+                      SvgPicture.asset(
+                        AppIcons.favorite,
+                        color: _tabController.index == 1
+                            ? AppColors.discountColor
+                            : null,
+                      ),
+                      SvgPicture.asset(
+                        AppIcons.cart,
+                        color: _tabController.index == 2
+                            ? AppColors.discountColor
+                            : null,
+                      ),
+                      SvgPicture.asset(
+                        AppIcons.profile,
+                        color: _tabController.index == 3
+                            ? AppColors.discountColor
+                            : null,
+                      ),
+                    ],
+                    controller: _tabController,
+                  ),
                 ),
               ),
             ],
           ),
-          body: Padding(
-            padding: EdgeInsets.all(16.w),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 50.h,
+          body: TabBarView(
+            controller: _tabController,
+            children: [
+              HomeScreen(widget: widget),
+              ProductDetail(
+                moveToCart: () {
+                  // _onItemTapped(2);
+                },
+                amount: 0,
+                imagePath: '',
+                descrition: '',
+                productName: '',
+                eachProduct: FinalCart(
+                  amount: 0,
+                  imagePath: '',
+                  itemDescripton: '',
+                  reviews: '',
+                  itemCount: 0,
+                  id: '',
                 ),
-                PageHeader(
-                    title: AppString.home,
-                    trailing: AppIcons.search.onTap(() {}),
-                    leading: AppIcons.menu.onTap(() {})),
-                SizedBox(
-                  height: 20.h,
-                ),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        const DiscountContaieer(
-                          discountPercent: '30%',
-                          item: 'home decoration products',
-                          imagepath: AppImage.flowerVase,
-                        ),
-                        SizedBox(
-                          height: 16.h,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              AppString.category,
-                              style: AppText.titleText,
-                            ),
-                            Text(
-                              AppString.seeAll,
-                              style: AppText.seeAll,
-                            ).onTap(() {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => CartCategory()));
-                            })
-                          ],
-                        ),
-                        SizedBox(
-                          height: 20.h,
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Container(
-                                height: 34.h,
-                                child: ListView.builder(
-                                  itemCount: options.length,
-                                  scrollDirection: Axis.horizontal,
-                                  itemBuilder: ((context, index) {
-                                    final each = options[index];
+              ),
+              Cart(),
+              Container()
+            ],
+          ),
+        ));
+  }
+}
 
-                                    return BlocConsumer<ButtonBloc,
-                                        ButtonState>(
-                                      listener: (context, state) {
-                                        // TODO: implement listener
-                                      },
-                                      builder: (context, state) {
-                                        final isSelected =
-                                            state.selectedIndex == index;
-                                        return IntrinsicWidth(
-                                          child: IntrinsicHeight(
-                                            child: Padding(
-                                              padding: EdgeInsets.symmetric(
-                                                  horizontal: 8.w),
-                                              child: Container(
-                                                decoration: BoxDecoration(
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({
+    super.key,
+    required this.widget,
+  });
+
+  final DashboardScreen widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(16.w),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 50.h,
+          ),
+          PageHeader(
+              title: AppString.home,
+              trailing: AppIcons.search.onTap(() {}),
+              leading: AppIcons.menu.onTap(() {})),
+          SizedBox(
+            height: 20.h,
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  const DiscountContaieer(
+                    discountPercent: '30%',
+                    item: 'home decoration products',
+                    imagepath: AppImage.flowerVase,
+                  ),
+                  SizedBox(
+                    height: 16.h,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        AppString.category,
+                        style: AppText.titleText,
+                      ),
+                      Text(
+                        AppString.seeAll,
+                        style: AppText.seeAll,
+                      ).onTap(() {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CartCategory()));
+                      })
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20.h,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          height: 34.h,
+                          child: ListView.builder(
+                            itemCount: options.length,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: ((context, index) {
+                              final each = options[index];
+
+                              return BlocConsumer<ButtonBloc, ButtonState>(
+                                listener: (context, state) {
+                                  // TODO: implement listener
+                                },
+                                builder: (context, state) {
+                                  final isSelected =
+                                      state.selectedIndex == index;
+                                  return IntrinsicWidth(
+                                    child: IntrinsicHeight(
+                                      child: Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 8.w),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: isSelected
+                                                ? AppColors.discountColor
+                                                : AppColors.backgroundColor,
+                                            borderRadius:
+                                                BorderRadius.circular(6.sp),
+                                          ),
+                                          child: Padding(
+                                            padding: EdgeInsets.only(
+                                                left: 12.w,
+                                                right: 12.w,
+                                                top: 6.h,
+                                                bottom: 6.h),
+                                            child: Text(
+                                              each.data,
+                                              style: TextStyle(
+                                                  fontSize: 12.sp,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily: 'Inter',
                                                   color: isSelected
-                                                      ? AppColors.discountColor
-                                                      : AppColors
-                                                          .backgroundColor,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          6.sp),
-                                                ),
-                                                child: Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 12.w,
-                                                      right: 12.w,
-                                                      top: 6.h,
-                                                      bottom: 6.h),
-                                                  child: Text(
-                                                    each.data,
-                                                    style: TextStyle(
-                                                        fontSize: 12.sp,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily: 'Inter',
-                                                        color: isSelected
-                                                            ? Colors.white
-                                                            : Colors.black),
-                                                  ),
-                                                ),
-                                              ).onTap(() {
-                                                context.read<ButtonBloc>().add(
-                                                    SelectButtonEvent(index));
-                                              }),
+                                                      ? Colors.white
+                                                      : Colors.black),
                                             ),
                                           ),
-                                        );
-                                      },
-                                    );
-                                  }),
+                                        ).onTap(() {
+                                          context
+                                              .read<ButtonBloc>()
+                                              .add(SelectButtonEvent(index));
+                                        }),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              );
+                            }),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 30.h,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        AppString.popularProduct,
+                        style: AppText.titleText,
+                      ),
+                      Text(
+                        AppString.seeAll,
+                        style: AppText.seeAll,
+                      ).onTap(() {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: ((context) => ProductCatalog())));
+                      })
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  GridView.builder(
+                    shrinkWrap: true,
+                    padding: EdgeInsets.zero,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 8.w,
+                      mainAxisSpacing: 8.h,
+                      // childAspectRatio: 0.70,
+                    ),
+                    itemCount: 4,
+                    itemBuilder: (context, index) {
+                      final eachProduct = cart[index];
+                      return Container(
+                        height: 268.h,
+                        width: 180.w,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(6.r)),
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0.w),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(bottom: 12.h),
+                                child: Align(
+                                  alignment: Alignment.topRight,
+                                  child: AppIcons.favoriteGray,
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 30.h,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              AppString.popularProduct,
-                              style: AppText.titleText,
-                            ),
-                            Text(
-                              AppString.seeAll,
-                              style: AppText.seeAll,
-                            ).onTap(() {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: ((context) =>
-                                          ProductCatalog())));
-                            })
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10.h,
-                        ),
-                        GridView.builder(
-                          shrinkWrap: true,
-                          padding: EdgeInsets.zero,
-                          physics: const NeverScrollableScrollPhysics(),
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 8.w,
-                            mainAxisSpacing: 8.h,
-                            // childAspectRatio: 0.70,
-                          ),
-                          itemCount: 4,
-                          itemBuilder: (context, index) {
-                            final eachProduct = cart[index];
-                            return Container(
-                              height: 268.h,
-                              width: 180.w,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(6.r)),
-                              child: Padding(
-                                padding: EdgeInsets.all(8.0.w),
-                                child: Column(
+                              Padding(
+                                padding: EdgeInsets.only(bottom: 12.h),
+                                child: Image.asset(eachProduct.imagePath),
+                              ),
+                              Text(
+                                eachProduct.itemDescripton,
+                                style: AppText.itemText,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(bottom: 2.0.h),
+                                child: Row(
                                   mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
+                                    AppIcons.star,
                                     Padding(
-                                      padding: EdgeInsets.only(bottom: 12.h),
-                                      child: Align(
-                                        alignment: Alignment.topRight,
-                                        child: AppIcons.favoriteGray,
+                                      padding: EdgeInsets.only(left: 8.0.w),
+                                      child: Text(
+                                        eachProduct.reviews,
+                                        style: AppText.reviewText,
                                       ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(bottom: 12.h),
-                                      child: Image.asset(eachProduct.imagePath),
-                                    ),
-                                    Text(
-                                      eachProduct.itemDescripton,
-                                      style: AppText.itemText,
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(bottom: 2.0.h),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          AppIcons.star,
-                                          Padding(
-                                            padding:
-                                                EdgeInsets.only(left: 8.0.w),
-                                            child: Text(
-                                              eachProduct.reviews,
-                                              style: AppText.reviewText,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            '\$${eachProduct.amount}',
-                                            style: AppText.amountText,
-                                          ),
-                                          Text(AppString.view,
-                                                  style: AppText.view)
-                                              .onTap(() {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        ProductDetail(
-                                                          amount: eachProduct
-                                                              .amount,
-                                                          imagePath: eachProduct
-                                                              .imagePath,
-                                                          descrition: eachProduct
-                                                              .itemDescripton,
-                                                          productName: eachProduct
-                                                              .itemDescripton,
-                                                          eachProduct:
-                                                              eachProduct,
-                                                        )));
-                                          })
-                                        ]),
+                                    )
                                   ],
                                 ),
                               ),
-                            ).onTap(() {
-                              context
-                                  .read<CartBloc>()
-                                  .add(AddItemEvent(item: eachProduct));
-                              if (widget.moveToCart != null)
-                                widget.moveToCart!();
-                            });
-                          },
+                              Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      '\$${eachProduct.amount}',
+                                      style: AppText.amountText,
+                                    ),
+                                    Text(AppString.view, style: AppText.view)
+                                        .onTap(() {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ProductDetail(
+                                                    amount: eachProduct.amount,
+                                                    imagePath:
+                                                        eachProduct.imagePath,
+                                                    descrition: eachProduct
+                                                        .itemDescripton,
+                                                    productName: eachProduct
+                                                        .itemDescripton,
+                                                    eachProduct: eachProduct,
+                                                  )));
+                                    })
+                                  ]),
+                            ],
+                          ),
                         ),
-                        SizedBox(height: 20.h),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              AppString.lp,
-                              style: AppText.titleText,
-                            ),
-                            Text(
-                              AppString.seeAll,
-                              style: AppText.seeAll,
-                            )
-                          ],
-                        ),
-                        SizedBox(height: 10.h),
-                        const LatestCart(
-                            imagePath: AppImage.headie,
-                            itemDescription: 'Headphone Holder',
-                            reviews: '(1446)',
-                            amount: '\$34.90'),
-                      ],
-                    ),
+                      ).onTap(() {
+                        context
+                            .read<CartBloc>()
+                            .add(AddItemEvent(item: eachProduct));
+                        if (widget.moveToCart != null) widget.moveToCart!();
+                      });
+                    },
                   ),
-                )
-              ],
+                  SizedBox(height: 20.h),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        AppString.lp,
+                        style: AppText.titleText,
+                      ),
+                      Text(
+                        AppString.seeAll,
+                        style: AppText.seeAll,
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 10.h),
+                  const LatestCart(
+                      imagePath: AppImage.headie,
+                      itemDescription: 'Headphone Holder',
+                      reviews: '(1446)',
+                      amount: '\$34.90'),
+                ],
+              ),
             ),
-          ),
-        ));
+          )
+        ],
+      ),
+    );
   }
 }
 
