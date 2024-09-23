@@ -21,14 +21,12 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
     });
   }
 
-
   final List<GlobalKey<NavigatorState>> _navigatorKeys = [
     GlobalKey<NavigatorState>(),
     GlobalKey<NavigatorState>(),
     GlobalKey<NavigatorState>(),
     GlobalKey<NavigatorState>(),
   ];
-
 
   Widget _buildOffstageNavigator(int index) {
     return Offstage(
@@ -44,11 +42,10 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
     );
   }
 
-
   Widget _buildPageForIndex(int index) {
     switch (index) {
       case 0:
-        return Home(
+        return DashboardScreen(
           moveToCart: () {
             _onItemTapped(2);
           },
@@ -74,9 +71,9 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
       case 2:
         return const Cart();
       case 3:
-        return Container(); 
+        return Container();
       default:
-        return Home();
+        return DashboardScreen();
     }
   }
 

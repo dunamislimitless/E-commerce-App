@@ -1,20 +1,21 @@
+import 'package:e_commerce_app/app/extensions/extension.dart';
 import 'package:e_commerce_app/app/utils/appicons.dart';
 import 'package:e_commerce_app/app/utils/appstrings.dart';
 import 'package:e_commerce_app/app/utils/colors.dart';
+import 'package:e_commerce_app/app/utils/textstyle.dart';
 import 'package:e_commerce_app/features/cart/cart_bloc/cart_bloc.dart';
 import 'package:e_commerce_app/features/cart/cart_bloc/cart_event.dart';
 import 'package:e_commerce_app/features/cart/models/final_cart_model.dart';
 import 'package:e_commerce_app/features/cart/view/cart.dart';
 import 'package:e_commerce_app/features/dashboard/views/home.dart';
 import 'package:e_commerce_app/features/dashboard/widget/custom_button.dart';
-import 'package:e_commerce_app/app/extensions/extension.dart';
 import 'package:e_commerce_app/features/dashboard/widget/page_header.dart';
 import 'package:e_commerce_app/features/product/widget/rating_bar.dart';
-import 'package:e_commerce_app/app/utils/textstyle.dart';
 import 'package:e_commerce_app/features/product/widget/user_colour_specification.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ProductDetail extends StatelessWidget {
   const ProductDetail({
@@ -51,27 +52,27 @@ class ProductDetail extends StatelessWidget {
               ),
               PageHeader(
                 title: AppString.popularDetail,
-                trailing: AppIcons.favorite.onTap(() {Navigator.of(context).push(
+                trailing: SvgPicture.asset(AppIcons.favorite).onTap(() {
+                  Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => const Cart()),
-                  );}) ,
+                  );
+                }),
                 leading: AppIcons.arrowBack.onTap(() {
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const Home()),
+                    MaterialPageRoute(
+                        builder: (context) => const DashboardScreen()),
                   );
                 }),
               ),
               SizedBox(
                 height: 30.h,
               ),
-              
-              
               isProductSelected
                   ? Image.asset(imagePath)
                   : Text(
                       "Choose a product to view",
-                      style: AppText.productName, 
+                      style: AppText.productName,
                     ),
-              
               if (isProductSelected) ...[
                 SizedBox(
                   height: 55.h,
@@ -85,7 +86,9 @@ class ProductDetail extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
-                          productName.isNotEmpty ? productName : AppString.smartWatch,
+                          productName.isNotEmpty
+                              ? productName
+                              : AppString.smartWatch,
                           style: AppText.productName,
                         ),
                         SizedBox(
@@ -134,7 +137,9 @@ class ProductDetail extends StatelessWidget {
                   height: 14.h,
                 ),
                 Text(
-                  descrition.isNotEmpty ? descrition : AppString.productDescription,
+                  descrition.isNotEmpty
+                      ? descrition
+                      : AppString.productDescription,
                   style: AppText.reviewText,
                 ),
                 SizedBox(
@@ -142,7 +147,9 @@ class ProductDetail extends StatelessWidget {
                 ),
                 CustomButton(
                   onPressed: () {
-                    context.read<CartBloc>().add(AddItemEvent(item: eachProduct));
+                    context
+                        .read<CartBloc>()
+                        .add(AddItemEvent(item: eachProduct));
 
                     if (moveToCart != null) moveToCart!();
                   },
@@ -151,7 +158,6 @@ class ProductDetail extends StatelessWidget {
                   color: AppColors.discountColor,
                 ),
               ] else ...[
-                
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 30.h),
                   child: Text(

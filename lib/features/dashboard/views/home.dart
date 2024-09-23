@@ -8,7 +8,6 @@ import 'package:e_commerce_app/features/cart/cart_bloc/cart_bloc.dart';
 import 'package:e_commerce_app/features/cart/view/cart_category.dart';
 import 'package:e_commerce_app/features/dashboard/bloc/dashboard_bloc_bloc.dart';
 import 'package:e_commerce_app/features/dashboard/models/options_model.dart';
-import 'package:e_commerce_app/features/dashboard/widget/custom_button.dart';
 import 'package:e_commerce_app/features/dashboard/widget/discount_container.dart';
 import 'package:e_commerce_app/features/dashboard/widget/latest_cart.dart';
 import 'package:e_commerce_app/features/dashboard/widget/page_header.dart';
@@ -17,15 +16,30 @@ import 'package:e_commerce_app/features/product/view/product_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../cart/cart_bloc/cart_event.dart';
 import '../../cart/models/final_cart_model.dart';
 
-class Home extends StatelessWidget {
-  const Home({super.key, this.moveToCart, this.moveToProduct});
+class DashboardScreen extends StatefulWidget {
+  const DashboardScreen({super.key, this.moveToCart, this.moveToProduct});
 
   final VoidCallback? moveToCart;
   final VoidCallback? moveToProduct;
+
+  @override
+  State<DashboardScreen> createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends State<DashboardScreen>
+    with SingleTickerProviderStateMixin {
+  late final TabController _tabController;
+
+  @override
+  void initState() {
+    _tabController = TabController(length: 4, vsync: this);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +50,46 @@ class Home extends StatelessWidget {
         ],
         child: Scaffold(
           backgroundColor: AppColors.background,
+          bottomNavigationBar: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 15.h),
+                decoration: const BoxDecoration(color: AppColors.cardColor),
+                child: TabBar(
+                  onTap: (a) => setState(() {}),
+                  indicator: const BoxDecoration(),
+                  tabs: [
+                    SvgPicture.asset(
+                      AppIcons.home,
+                      color: _tabController.index == 0
+                          ? AppColors.discountColor
+                          : null,
+                    ),
+                    SvgPicture.asset(
+                      AppIcons.favorite,
+                      color: _tabController.index == 1
+                          ? AppColors.discountColor
+                          : null,
+                    ),
+                    SvgPicture.asset(
+                      AppIcons.cart,
+                      color: _tabController.index == 2
+                          ? AppColors.discountColor
+                          : null,
+                    ),
+                    SvgPicture.asset(
+                      AppIcons.profile,
+                      color: _tabController.index == 3
+                          ? AppColors.discountColor
+                          : null,
+                    ),
+                  ],
+                  controller: _tabController,
+                ),
+              ),
+            ],
+          ),
           body: Padding(
             padding: EdgeInsets.all(16.w),
             child: Column(
@@ -88,7 +142,6 @@ class Home extends StatelessWidget {
                           children: [
                             Expanded(
                               child: Container(
-                                
                                 height: 34.h,
                                 child: ListView.builder(
                                   itemCount: options.length,
@@ -184,8 +237,8 @@ class Home extends StatelessWidget {
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
-                             crossAxisSpacing: 8.w,
-                             mainAxisSpacing: 8.h,
+                            crossAxisSpacing: 8.w,
+                            mainAxisSpacing: 8.h,
                             // childAspectRatio: 0.70,
                           ),
                           itemCount: 4,
@@ -241,7 +294,7 @@ class Home extends StatelessWidget {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                           '\$${eachProduct.amount}',
+                                            '\$${eachProduct.amount}',
                                             style: AppText.amountText,
                                           ),
                                           Text(AppString.view,
@@ -250,15 +303,19 @@ class Home extends StatelessWidget {
                                             Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
-                                                    builder: (context) => ProductDetail(
-                                                        amount:
-                                                            eachProduct.amount,
-                                                        imagePath: eachProduct
-                                                            .imagePath,
-                                                        descrition: eachProduct
-                                                            .itemDescripton,
-                                                        productName: eachProduct
-                                                            .itemDescripton, eachProduct: eachProduct,)));
+                                                    builder: (context) =>
+                                                        ProductDetail(
+                                                          amount: eachProduct
+                                                              .amount,
+                                                          imagePath: eachProduct
+                                                              .imagePath,
+                                                          descrition: eachProduct
+                                                              .itemDescripton,
+                                                          productName: eachProduct
+                                                              .itemDescripton,
+                                                          eachProduct:
+                                                              eachProduct,
+                                                        )));
                                           })
                                         ]),
                                   ],
@@ -268,7 +325,8 @@ class Home extends StatelessWidget {
                               context
                                   .read<CartBloc>()
                                   .add(AddItemEvent(item: eachProduct));
-                              if (moveToCart != null) moveToCart!();
+                              if (widget.moveToCart != null)
+                                widget.moveToCart!();
                             });
                           },
                         ),

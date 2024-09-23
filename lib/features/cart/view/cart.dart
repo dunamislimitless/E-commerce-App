@@ -1,22 +1,15 @@
-import 'package:e_commerce_app/app/utils/app_ipngs.dart';
+import 'package:e_commerce_app/app/extensions/extension.dart';
 import 'package:e_commerce_app/app/utils/appicons.dart';
 import 'package:e_commerce_app/app/utils/appstrings.dart';
-
 import 'package:e_commerce_app/app/utils/colors.dart';
+import 'package:e_commerce_app/app/utils/textstyle.dart';
 import 'package:e_commerce_app/features/cart/cart_bloc/cart_bloc.dart';
 import 'package:e_commerce_app/features/cart/cart_bloc/cart_event.dart';
 import 'package:e_commerce_app/features/cart/cart_bloc/cart_state.dart';
+import 'package:e_commerce_app/features/cart/widget/custom_row.dart';
 import 'package:e_commerce_app/features/dashboard/views/home.dart';
 import 'package:e_commerce_app/features/dashboard/widget/custom_button.dart';
-import 'package:e_commerce_app/features/cart/widget/custom_row.dart';
-
-import 'package:e_commerce_app/app/extensions/extension.dart';
-
-import 'package:e_commerce_app/features/cart/models/final_cart_model.dart';
-
 import 'package:e_commerce_app/features/dashboard/widget/page_header.dart';
-
-import 'package:e_commerce_app/app/utils/textstyle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -41,7 +34,8 @@ class Cart extends StatelessWidget {
               trailing: AppIcons.cartLoaded.onTap(() {}),
               leading: AppIcons.arrowBack.onTap(() {
                 Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const Home()),
+                  MaterialPageRoute(
+                      builder: (context) => const DashboardScreen()),
                 );
               }),
             ),
@@ -182,8 +176,7 @@ class Cart extends StatelessWidget {
                                         ),
                                       ),
                                     ).onTap(() {
-                                      cartBloc
-                                          .add(IncrementEvent(each.id));
+                                      cartBloc.add(IncrementEvent(each.id));
                                     }),
                                     BlocBuilder<CartBloc, CartState>(
                                       builder: (context, state) {
@@ -208,8 +201,7 @@ class Cart extends StatelessWidget {
                                         ),
                                       ),
                                     ).onTap(() {
-                                      cartBloc
-                                          .add(DecrementEvent(each.id));
+                                      cartBloc.add(DecrementEvent(each.id));
                                     })
                                   ],
                                 ),
@@ -234,8 +226,9 @@ class Cart extends StatelessWidget {
             ),
             SizedBox(
               height: 30.h,
-            ),Container(
-             // height: 192.h,
+            ),
+            Container(
+              // height: 192.h,
               width: 386.w,
               color: Colors.white,
               child: Padding(
@@ -246,11 +239,8 @@ class Cart extends StatelessWidget {
                       builder: (context, state) {
                         final cartBloc = context.read<CartBloc>();
 
-                         
-
-
                         num subtotal = cartBloc.calculateSubtotal();
-                        num discount = cartBloc.calculateDiscount(10); // 
+                        num discount = cartBloc.calculateDiscount(10); //
                         num total = cartBloc.calculateTotal(10);
                         int selectedItems = cartBloc.items.length;
 
@@ -292,7 +282,8 @@ class Cart extends StatelessWidget {
                   ],
                 ),
               ),
-            ),            SizedBox(
+            ),
+            SizedBox(
               height: 30.h,
             ),
             CustomButton(
