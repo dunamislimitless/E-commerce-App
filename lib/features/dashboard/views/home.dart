@@ -3,6 +3,7 @@ import 'package:e_commerce_app/app/utils/app_ipngs.dart';
 import 'package:e_commerce_app/app/utils/appicons.dart';
 import 'package:e_commerce_app/app/utils/appstrings.dart';
 import 'package:e_commerce_app/app/utils/colors.dart';
+import 'package:e_commerce_app/app/utils/enums/product_enum.dart';
 import 'package:e_commerce_app/app/utils/textstyle.dart';
 import 'package:e_commerce_app/features/cart/cart_bloc/cart_bloc.dart';
 import 'package:e_commerce_app/features/cart/view/cart_category.dart';
@@ -186,13 +187,13 @@ class Home extends StatelessWidget {
                             crossAxisCount: 2,
                              crossAxisSpacing: 8.w,
                              mainAxisSpacing: 8.h,
-                            // childAspectRatio: 0.70,
+                             childAspectRatio: 0.75,
                           ),
                           itemCount: 4,
                           itemBuilder: (context, index) {
                             final eachProduct = cart[index];
                             return Container(
-                              height: 268.h,
+                             // height: 268.h,
                               width: 180.w,
                               decoration: BoxDecoration(
                                   color: Colors.white,
@@ -304,11 +305,11 @@ class Home extends StatelessWidget {
 }
 
 final options = [
-  OptionsContainer(data: AppString.all),
-  OptionsContainer(data: AppString.elctronic),
-  OptionsContainer(data: AppString.fashion),
-  OptionsContainer(data: AppString.shoes),
-  OptionsContainer(data: AppString.furniture),
+  OptionsContainer(data: AppString.all, onpressed: () { }),
+  OptionsContainer(data: AppString.elctronic, onpressed: () {  }),
+  OptionsContainer(data: AppString.fashion, onpressed: () {  }),
+  OptionsContainer(data: AppString.shoes, onpressed: () {  }),
+  OptionsContainer(data: AppString.furniture, onpressed: () {  }),
 ];
 final cart = [
   FinalCart(
@@ -318,6 +319,7 @@ final cart = [
     reviews: "(379)",
     amount: 65,
     itemCount: 2,
+    categories: Categories.electronic,
   ),
   FinalCart(
     id: "id2",
@@ -326,21 +328,67 @@ final cart = [
     reviews: "(249)",
     amount: 40,
     itemCount: 1,
+    categories: Categories.electronic
   ),
   FinalCart(
     id: "id3",
     imagePath: AppImage.flower,
-    itemDescripton: 'Smart Watch',
+    itemDescripton: 'Flower',
     reviews: "(589)",
     amount: 120,
     itemCount: 4,
   ),
   FinalCart(
     id: "id4",
-    imagePath: AppImage.flower,
-    itemDescripton: 'Smart Watch',
+    imagePath: AppImage.shoes,
+    itemDescripton: 'Men Shoe',
+    categories: Categories.shoes,
     reviews: "(589)",
     amount: 120,
     itemCount: 4,
   ),
+   FinalCart(
+    id: "id4",
+    imagePath: AppImage.bag,
+    itemDescripton: AppString.bag,
+    reviews: "(719)",
+    amount: 120,
+    itemCount: 4,
+    categories: Categories.fashion
+  ),
+  FinalCart(
+    id: "id5",
+    imagePath: AppImage.brownBag,
+    itemDescripton: AppString.leatherBag,
+    reviews: "(899)",
+    amount: 170,
+    itemCount: 3,
+    categories: Categories.fashion
+  ),
+  FinalCart(
+    id: "id6",
+    imagePath: AppImage.desk,
+    itemDescripton: 'Smart Watch',
+    reviews: "(589)",
+    amount: 120,
+    itemCount: 2,
+    categories: Categories.furniture,
+  ),
+  FinalCart(
+    id: "id7",
+    imagePath: AppImage.desk,
+    itemDescripton: AppString.deskClock,
+    reviews: "(4489)",
+    amount: 120,
+    itemCount: 3,
+    categories: Categories.furniture
+  ),
+  FinalCart(
+    id: "id8",
+    imagePath: AppImage.watch,
+    itemDescripton: AppString.swissWatch,
+    reviews: "(589)",
+    amount: 120,
+    itemCount: 2,
+    categories: Categories.electronic  ),
 ];

@@ -1,4 +1,6 @@
 import 'package:bloc/bloc.dart';
+import 'package:e_commerce_app/app/utils/enums/product_enum.dart';
+import 'package:e_commerce_app/features/cart/models/final_cart_model.dart';
 import 'package:meta/meta.dart';
 
 part 'dashboard_bloc_event.dart';
@@ -23,5 +25,8 @@ class ButtonBloc extends Bloc<ButtonEvent, ButtonState> {
         emit(ButtonSelectedState(selectedIndex: event.index));
       }
     });
+
   }
+
+ 
 }
