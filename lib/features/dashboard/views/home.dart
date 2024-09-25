@@ -3,12 +3,13 @@ import 'package:e_commerce_app/app/utils/app_ipngs.dart';
 import 'package:e_commerce_app/app/utils/appicons.dart';
 import 'package:e_commerce_app/app/utils/appstrings.dart';
 import 'package:e_commerce_app/app/utils/colors.dart';
+import 'package:e_commerce_app/app/utils/enums/product_enum.dart';
 import 'package:e_commerce_app/app/utils/textstyle.dart';
 import 'package:e_commerce_app/features/cart/cart_bloc/cart_bloc.dart';
 import 'package:e_commerce_app/features/cart/view/cart_category.dart';
 import 'package:e_commerce_app/features/dashboard/bloc/dashboard_bloc_bloc.dart';
 import 'package:e_commerce_app/features/dashboard/models/options_model.dart';
-import 'package:e_commerce_app/features/dashboard/widget/custom_button.dart';
+
 import 'package:e_commerce_app/features/dashboard/widget/discount_container.dart';
 import 'package:e_commerce_app/features/dashboard/widget/latest_cart.dart';
 import 'package:e_commerce_app/features/dashboard/widget/page_header.dart';
@@ -27,8 +28,32 @@ class Home extends StatelessWidget {
   final VoidCallback? moveToCart;
   final VoidCallback? moveToProduct;
 
+ List<FinalCart> filterProductsByCategory(Categories category) {
+  
+    if (category == Categories.all) {
+      return cart;
+    } else {return cart.where((product) => product.categories == category).toList(); 
+  }
+   
+  }
+  
+
   @override
   Widget build(BuildContext context) {
+    final options = [
+  OptionsContainer(data: AppString.all, onpressed: () { 
+ context.read<ButtonBloc>().add(UpdateCategoryEvent(Categories.all));
+    
+  }),
+  OptionsContainer(data: AppString.elctronic, onpressed: () {  context.read<ButtonBloc>().add(UpdateCategoryEvent(Categories.electronic));
+    }),
+  OptionsContainer(data: AppString.fashion, onpressed: () {  context.read<ButtonBloc>().add(UpdateCategoryEvent(Categories.fashion));
+    }),
+  OptionsContainer(data: AppString.shoes, onpressed: () { context.read<ButtonBloc>().add(UpdateCategoryEvent(Categories.shoes));
+     }),
+  OptionsContainer(data: AppString.furniture, onpressed: () {  context.read<ButtonBloc>().add(UpdateCategoryEvent(Categories.furniture));
+    }),
+];
     return MultiBlocProvider(
         providers: [
           BlocProvider<ButtonBloc>(create: (_) => ButtonBloc()),
@@ -104,6 +129,8 @@ class Home extends StatelessWidget {
                                       builder: (context, state) {
                                         final isSelected =
                                             state.selectedIndex == index;
+ 
+  
                                         return IntrinsicWidth(
                                           child: IntrinsicHeight(
                                             child: Padding(
@@ -186,13 +213,20 @@ class Home extends StatelessWidget {
                             crossAxisCount: 2,
                              crossAxisSpacing: 8.w,
                              mainAxisSpacing: 8.h,
-                            // childAspectRatio: 0.70,
+                             childAspectRatio: 0.75,
                           ),
-                          itemCount: 4,
+                          itemCount: 2,//filterProductsByCategory(
+                            //     context.read<ButtonBloc>().selectedCategory)
+                            // .length,
                           itemBuilder: (context, index) {
-                            final eachProduct = cart[index];
+                            final filteredLength = filterProductsByCategory(context.read<ButtonBloc>().selectedCategory).length;
+
+
+                          
+                        final     eachProduct =  filterProductsByCategory(
+                              context.read<ButtonBloc>().selectedCategory)[index];
                             return Container(
-                              height: 268.h,
+                             // height: 268.h,
                               width: 180.w,
                               decoration: BoxDecoration(
                                   color: Colors.white,
@@ -301,15 +335,10 @@ class Home extends StatelessWidget {
           ),
         ));
   }
+ 
 }
 
-final options = [
-  OptionsContainer(data: AppString.all),
-  OptionsContainer(data: AppString.elctronic),
-  OptionsContainer(data: AppString.fashion),
-  OptionsContainer(data: AppString.shoes),
-  OptionsContainer(data: AppString.furniture),
-];
+
 final cart = [
   FinalCart(
     id: "id1",
@@ -318,6 +347,7 @@ final cart = [
     reviews: "(379)",
     amount: 65,
     itemCount: 2,
+    categories: Categories.electronic,
   ),
   FinalCart(
     id: "id2",
@@ -326,21 +356,67 @@ final cart = [
     reviews: "(249)",
     amount: 40,
     itemCount: 1,
+    categories: Categories.electronic
   ),
   FinalCart(
     id: "id3",
     imagePath: AppImage.flower,
-    itemDescripton: 'Smart Watch',
+    itemDescripton: 'Flower',
     reviews: "(589)",
     amount: 120,
     itemCount: 4,
   ),
   FinalCart(
     id: "id4",
-    imagePath: AppImage.flower,
-    itemDescripton: 'Smart Watch',
+    imagePath: AppImage.shoes,
+    itemDescripton: 'Men Shoe',
+    categories: Categories.shoes,
     reviews: "(589)",
     amount: 120,
     itemCount: 4,
   ),
+   FinalCart(
+    id: "id4",
+    imagePath: AppImage.bag,
+    itemDescripton: AppString.bag,
+    reviews: "(719)",
+    amount: 120,
+    itemCount: 4,
+    categories: Categories.fashion
+  ),
+  FinalCart(
+    id: "id5",
+    imagePath: AppImage.brownBag,
+    itemDescripton: AppString.leatherBag,
+    reviews: "(899)",
+    amount: 170,
+    itemCount: 3,
+    categories: Categories.fashion
+  ),
+  FinalCart(
+    id: "id6",
+    imagePath: AppImage.desk,
+    itemDescripton: 'Smart Watch',
+    reviews: "(589)",
+    amount: 120,
+    itemCount: 2,
+    categories: Categories.furniture,
+  ),
+  FinalCart(
+    id: "id7",
+    imagePath: AppImage.desk,
+    itemDescripton: AppString.deskClock,
+    reviews: "(4489)",
+    amount: 120,
+    itemCount: 3,
+    categories: Categories.furniture
+  ),
+  FinalCart(
+    id: "id8",
+    imagePath: AppImage.watch,
+    itemDescripton: AppString.swissWatch,
+    reviews: "(589)",
+    amount: 120,
+    itemCount: 2,
+    categories: Categories.electronic  ),
 ];
