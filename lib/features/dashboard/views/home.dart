@@ -9,7 +9,7 @@ import 'package:e_commerce_app/features/cart/cart_bloc/cart_bloc.dart';
 import 'package:e_commerce_app/features/cart/view/cart_category.dart';
 import 'package:e_commerce_app/features/dashboard/bloc/dashboard_bloc_bloc.dart';
 import 'package:e_commerce_app/features/dashboard/models/options_model.dart';
-import 'package:e_commerce_app/features/dashboard/widget/custom_button.dart';
+
 import 'package:e_commerce_app/features/dashboard/widget/discount_container.dart';
 import 'package:e_commerce_app/features/dashboard/widget/latest_cart.dart';
 import 'package:e_commerce_app/features/dashboard/widget/page_header.dart';
@@ -28,8 +28,32 @@ class Home extends StatelessWidget {
   final VoidCallback? moveToCart;
   final VoidCallback? moveToProduct;
 
+ List<FinalCart> filterProductsByCategory(Categories category) {
+  
+    if (category == Categories.all) {
+      return cart;
+    } else {return cart.where((product) => product.categories == category).toList(); 
+  }
+   
+  }
+  
+
   @override
   Widget build(BuildContext context) {
+    final options = [
+  OptionsContainer(data: AppString.all, onpressed: () { 
+ context.read<ButtonBloc>().add(UpdateCategoryEvent(Categories.all));
+    
+  }),
+  OptionsContainer(data: AppString.elctronic, onpressed: () {  context.read<ButtonBloc>().add(UpdateCategoryEvent(Categories.electronic));
+    }),
+  OptionsContainer(data: AppString.fashion, onpressed: () {  context.read<ButtonBloc>().add(UpdateCategoryEvent(Categories.fashion));
+    }),
+  OptionsContainer(data: AppString.shoes, onpressed: () { context.read<ButtonBloc>().add(UpdateCategoryEvent(Categories.shoes));
+     }),
+  OptionsContainer(data: AppString.furniture, onpressed: () {  context.read<ButtonBloc>().add(UpdateCategoryEvent(Categories.furniture));
+    }),
+];
     return MultiBlocProvider(
         providers: [
           BlocProvider<ButtonBloc>(create: (_) => ButtonBloc()),
@@ -105,6 +129,8 @@ class Home extends StatelessWidget {
                                       builder: (context, state) {
                                         final isSelected =
                                             state.selectedIndex == index;
+ 
+  
                                         return IntrinsicWidth(
                                           child: IntrinsicHeight(
                                             child: Padding(
@@ -189,9 +215,16 @@ class Home extends StatelessWidget {
                              mainAxisSpacing: 8.h,
                              childAspectRatio: 0.75,
                           ),
-                          itemCount: 4,
+                          itemCount: 2,//filterProductsByCategory(
+                            //     context.read<ButtonBloc>().selectedCategory)
+                            // .length,
                           itemBuilder: (context, index) {
-                            final eachProduct = cart[index];
+                            final filteredLength = filterProductsByCategory(context.read<ButtonBloc>().selectedCategory).length;
+
+
+                          
+                        final     eachProduct =  filterProductsByCategory(
+                              context.read<ButtonBloc>().selectedCategory)[index];
                             return Container(
                              // height: 268.h,
                               width: 180.w,
@@ -302,15 +335,10 @@ class Home extends StatelessWidget {
           ),
         ));
   }
+ 
 }
 
-final options = [
-  OptionsContainer(data: AppString.all, onpressed: () { }),
-  OptionsContainer(data: AppString.elctronic, onpressed: () {  }),
-  OptionsContainer(data: AppString.fashion, onpressed: () {  }),
-  OptionsContainer(data: AppString.shoes, onpressed: () {  }),
-  OptionsContainer(data: AppString.furniture, onpressed: () {  }),
-];
+
 final cart = [
   FinalCart(
     id: "id1",
