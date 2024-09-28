@@ -6,9 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="a9bc6ba9-2acc-4e86-9e37-c9aecba37ae7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/app/utils/enums/product_enum.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/app/utils/enums/product_enum.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/features/dashboard/bloc/dashboard_bloc_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/dashboard/bloc/dashboard_bloc_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/features/dashboard/bloc/dashboard_bloc_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/dashboard/bloc/dashboard_bloc_state.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/features/dashboard/views/home_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/dashboard/views/home_screen.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

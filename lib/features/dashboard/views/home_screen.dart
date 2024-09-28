@@ -46,8 +46,6 @@ class _HomeScreenState extends State<HomeScreen> {
         buildWhen: (prev, next) {
           if (prev.selectedIndex != next.selectedIndex) {
             if (next.selectedIndex != null) {
-              print("KKK ${next.selectedIndex}");
-              print("KKK ${Categories.values.length}");
               cartList = cart
                   .where((e) =>
                       e.categories ==
@@ -112,53 +110,60 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         Row(
                           children: [
-                            IntrinsicWidth(
-                              child: IntrinsicHeight(
-                                child: Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 8.w),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: state.selectedIndex == 0
-                                          ? AppColors.discountColor
-                                          : AppColors.backgroundColor,
-                                      borderRadius: BorderRadius.circular(6.sp),
-                                    ),
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                          left: 12.w,
-                                          right: 12.w,
-                                          top: 6.h,
-                                          bottom: 6.h),
-                                      child: Text(
-                                        AppString.all,
-                                        style: TextStyle(
-                                            fontSize: 12.sp,
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: 'Inter',
-                                            color: state.selectedIndex == 0
-                                                ? Colors.white
-                                                : Colors.black),
-                                      ),
-                                    ),
-                                  ).onTap(() {
-                                    context
-                                        .read<ButtonBloc>()
-                                        .add(SelectButtonEvent(0));
-                                  }),
-                                ),
-                              ),
-                            ),
                             Expanded(
                               child: SizedBox(
                                 height: 34.h,
                                 child: ListView.builder(
-                                  itemCount: Categories.values.length,
+                                  itemCount: Categories.values.length + 1,
                                   scrollDirection: Axis.horizontal,
                                   itemBuilder: ((context, index) {
-                                    final each = Categories.values[index];
-                                    final i = index + 1;
-                                    final isSelected = state.selectedIndex == i;
+                                    if (index == 0) {
+                                      return IntrinsicWidth(
+                                        child: IntrinsicHeight(
+                                          child: Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 8.w),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                color: state.selectedIndex == 0
+                                                    ? AppColors.discountColor
+                                                    : AppColors.backgroundColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(6.sp),
+                                              ),
+                                              child: Padding(
+                                                padding: EdgeInsets.only(
+                                                    left: 12.w,
+                                                    right: 12.w,
+                                                    top: 6.h,
+                                                    bottom: 6.h),
+                                                child: Text(
+                                                  AppString.all,
+                                                  style: TextStyle(
+                                                      fontSize: 12.sp,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontFamily: 'Inter',
+                                                      color:
+                                                          state.selectedIndex ==
+                                                                  0
+                                                              ? Colors.white
+                                                              : Colors.black),
+                                                ),
+                                              ),
+                                            ).onTap(() {
+                                              context
+                                                  .read<ButtonBloc>()
+                                                  .add(SelectButtonEvent(0));
+                                            }),
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                    final each = Categories.values[index - 1];
+
+                                    final isSelected =
+                                        state.selectedIndex == index;
                                     return IntrinsicWidth(
                                       child: IntrinsicHeight(
                                         child: Padding(
@@ -192,7 +197,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ).onTap(() {
                                             context
                                                 .read<ButtonBloc>()
-                                                .add(SelectButtonEvent(i));
+                                                .add(SelectButtonEvent(index));
                                           }),
                                         ),
                                       ),
@@ -210,7 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              '${state.selectedIndex == null || state.selectedIndex == 0 ? AppString.popular : Categories.values[state.selectedIndex == (Categories.values.length) ? Categories.values.length - 1 : state.selectedIndex!].name} ${AppString.products}',
+                              '${state.selectedIndex == null || state.selectedIndex == 0 ? AppString.popular : Categories.values[(state.selectedIndex ?? 0) - 1].name} ${AppString.products}',
                               style: AppText.titleText,
                             ),
                             Text(
