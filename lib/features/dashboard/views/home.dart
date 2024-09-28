@@ -32,7 +32,8 @@ class Home extends StatelessWidget {
   
     if (category == Categories.all) {
       return cart;
-    } else {return cart.where((product) => product.categories == category).toList(); 
+    } else {
+      return cart.where((product) => product.categories == category).toList(); 
   }
    
   }
@@ -215,9 +216,7 @@ class Home extends StatelessWidget {
                              mainAxisSpacing: 8.h,
                              childAspectRatio: 0.75,
                           ),
-                          itemCount: 2,//filterProductsByCategory(
-                            //     context.read<ButtonBloc>().selectedCategory)
-                            // .length,
+                          itemCount: 6,
                           itemBuilder: (context, index) {
                             final filteredLength = filterProductsByCategory(context.read<ButtonBloc>().selectedCategory).length;
 
