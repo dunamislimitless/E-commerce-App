@@ -248,7 +248,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             mainAxisSpacing: 8.h,
                             childAspectRatio: 0.70,
                           ),
-                          itemCount: cartList.length,
+                          itemCount: cartList.length > 5 ? 6 : cartList.length,
                           itemBuilder: (context, index) {
                             final eachProduct = cart[index];
                             return Container(
