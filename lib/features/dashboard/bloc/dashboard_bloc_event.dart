@@ -10,3 +10,8 @@ class SelectButtonEvent extends ButtonEvent {
 
   SelectButtonEvent(this.index);
 }
+class UpdateCategoryEvent extends ButtonEvent {
+  final Categories selectedCategory;
+  
+  UpdateCategoryEvent(this.selectedCategory);
+}

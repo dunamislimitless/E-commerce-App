@@ -293,11 +293,11 @@ class HomeScreen extends StatelessWidget {
 }
 
 final options = [
-  OptionsContainer(data: AppString.all),
-  OptionsContainer(data: AppString.elctronic),
-  OptionsContainer(data: AppString.fashion),
-  OptionsContainer(data: AppString.shoes),
-  OptionsContainer(data: AppString.furniture),
+  OptionsContainer(data: AppString.all, onpressed: () {}),
+  OptionsContainer(data: AppString.elctronic, onpressed: () {}),
+  OptionsContainer(data: AppString.fashion, onpressed: () {}),
+  OptionsContainer(data: AppString.shoes, onpressed: () {}),
+  OptionsContainer(data: AppString.furniture, onpressed: () {}),
 ];
 final cart = [
   FinalCart(

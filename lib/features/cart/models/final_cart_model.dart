@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/app/utils/enums/product_enum.dart';
 import 'package:equatable/equatable.dart';
 
 class FinalCart extends Equatable{
@@ -8,6 +9,8 @@ class FinalCart extends Equatable{
     required this.amount,
     required this.itemCount,
     required this.id,
+    this.categories
+    
   });
 
   final String reviews;
@@ -15,14 +18,15 @@ class FinalCart extends Equatable{
   final String imagePath;
   final int amount;
   final String id;
-  final int itemCount;
+   final Categories? categories;
+  final int itemCount ;
 
   FinalCart copyWith({
     String? reviews,
     String? itemDescripton,
     String? imagePath,
     int? amount,
-   int? initialValue,
+   int? itemCount,
   }) {
     return FinalCart(
       id: id,
@@ -30,7 +34,7 @@ class FinalCart extends Equatable{
       itemDescripton: itemDescripton ?? this.itemDescripton,
       imagePath: imagePath ?? this.imagePath,
       amount: amount ?? this.amount,
-      itemCount: initialValue ?? this.itemCount,
+      itemCount: itemCount ?? this.itemCount,
     );
   }
 
