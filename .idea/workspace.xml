@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a9bc6ba9-2acc-4e86-9e37-c9aecba37ae7" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/features/dashboard/views/home_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/dashboard/views/home_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/product/view/all_product.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/product/view/all_product.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

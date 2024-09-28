@@ -32,7 +32,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List cartList = <FinalCart>[];
+  List<FinalCart> cartList = [];
 
   @override
   void initState() {
@@ -226,7 +226,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   context,
                                   MaterialPageRoute(
                                       builder: ((context) =>
-                                          ProductCatalog())));
+                                          ProductCatalog(list: cartList))));
 
                               if (value != null) {
                                 widget.navCallback!(value);
