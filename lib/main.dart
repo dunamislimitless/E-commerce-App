@@ -1,10 +1,5 @@
-import 'package:e_commerce_app/features/dashboard/widget/bottom_button.dart';
-import 'package:e_commerce_app/features/cart/view/cart.dart';
-import 'package:e_commerce_app/features/cart/view/cart_category.dart';
-import 'package:e_commerce_app/features/dashboard/views/home.dart';
-import 'package:e_commerce_app/features/product/view/product_detail.dart';
 import 'package:e_commerce_app/app/utils/colors.dart';
-
+import 'package:e_commerce_app/features/dashboard/views/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,7 +21,8 @@ class MyApp extends StatelessWidget {
           return MultiBlocProvider(
             providers: [
               BlocProvider<CartBloc>(
-              create: (context) => CartBloc(),)
+                create: (context) => CartBloc(),
+              )
             ],
             child: MaterialApp(
                 debugShowCheckedModeBanner: false,
@@ -36,7 +32,7 @@ class MyApp extends StatelessWidget {
                       ColorScheme.fromSeed(seedColor: AppColors.discountColor),
                   useMaterial3: true,
                 ),
-                home: const BottomNavScreen()),
+                home: const DashboardScreen()),
           );
         });
   }

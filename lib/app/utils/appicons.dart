@@ -7,25 +7,21 @@ class AppIcons {
   static final cartLoaded = SvgPicture.asset(
     'assets/icons/cart_with_item.svg',
   );
-  static final cart = SvgPicture.asset(
-    'assets/icons/cart.svg',
-  );
+  static const cart = 'assets/icons/cart.svg';
+
   static final danger = SvgPicture.asset(
     'assets/icons/danger.svg',
   );
-  static final favorite = SvgPicture.asset('assets/icons/favourite.svg');
-  static final home = SvgPicture.asset(
-    'assets/icons/home.svg',
-  );
+  static const favorite = 'assets/icons/favourite.svg';
+  static const home = 'assets/icons/home.svg';
   static final naira = SvgPicture.asset(
     'assets',
   );
   static final menu = SvgPicture.asset(
     'assets/icons/menu.svg',
   );
-  static final profile = SvgPicture.asset(
-    'assets/icons/profile.svg',
-  );
+  static const profile = 'assets/icons/profile.svg';
+
   static final search = SvgPicture.asset('assets/icons/searchh.svg');
 
   static final success = SvgPicture.asset('assets/icons/tick-square.svg');
