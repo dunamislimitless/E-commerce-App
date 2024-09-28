@@ -3,12 +3,12 @@ import 'package:e_commerce_app/app/utils/app_ipngs.dart';
 import 'package:e_commerce_app/app/utils/appicons.dart';
 import 'package:e_commerce_app/app/utils/appstrings.dart';
 import 'package:e_commerce_app/app/utils/colors.dart';
+import 'package:e_commerce_app/app/utils/enums/product_enum.dart';
 import 'package:e_commerce_app/app/utils/textstyle.dart';
 import 'package:e_commerce_app/features/cart/cart_bloc/cart_bloc.dart';
 import 'package:e_commerce_app/features/cart/cart_bloc/cart_event.dart';
 import 'package:e_commerce_app/features/cart/models/final_cart_model.dart';
 import 'package:e_commerce_app/features/cart/view/cart_category.dart';
-import 'package:e_commerce_app/features/dashboard/models/options_model.dart';
 import 'package:e_commerce_app/features/dashboard/views/home.dart';
 import 'package:e_commerce_app/features/dashboard/widget/discount_container.dart';
 import 'package:e_commerce_app/features/dashboard/widget/latest_cart.dart';
@@ -21,15 +21,45 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../bloc/dashboard_bloc_bloc.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, required this.widget, this.navCallback});
 
   final DashboardScreen widget;
   final Function(int? toScreen)? navCallback;
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  List cartList = <FinalCart>[];
+
+  @override
+  void initState() {
+    super.initState();
+    cartList = cart;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocConsumer<ButtonBloc, ButtonState>(
+        buildWhen: (prev, next) {
+          if (prev.selectedIndex != next.selectedIndex) {
+            if (next.selectedIndex != null) {
+              print("KKK ${next.selectedIndex}");
+              print("KKK ${Categories.values.length}");
+              cartList = cart
+                  .where((e) =>
+                      e.categories ==
+                      Categories.values[
+                          next.selectedIndex == (Categories.values.length)
+                              ? Categories.values.length - 1
+                              : next.selectedIndex!])
+                  .toList();
+            }
+          }
+          return true;
+        },
         listener: (_, state) {},
         builder: (_, state) {
           return Padding(
@@ -82,16 +112,53 @@ class HomeScreen extends StatelessWidget {
                         ),
                         Row(
                           children: [
+                            IntrinsicWidth(
+                              child: IntrinsicHeight(
+                                child: Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 8.w),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: state.selectedIndex == 0
+                                          ? AppColors.discountColor
+                                          : AppColors.backgroundColor,
+                                      borderRadius: BorderRadius.circular(6.sp),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsets.only(
+                                          left: 12.w,
+                                          right: 12.w,
+                                          top: 6.h,
+                                          bottom: 6.h),
+                                      child: Text(
+                                        AppString.all,
+                                        style: TextStyle(
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.w500,
+                                            fontFamily: 'Inter',
+                                            color: state.selectedIndex == 0
+                                                ? Colors.white
+                                                : Colors.black),
+                                      ),
+                                    ),
+                                  ).onTap(() {
+                                    context
+                                        .read<ButtonBloc>()
+                                        .add(SelectButtonEvent(0));
+                                  }),
+                                ),
+                              ),
+                            ),
                             Expanded(
-                              child: Container(
+                              child: SizedBox(
                                 height: 34.h,
                                 child: ListView.builder(
-                                  itemCount: options.length,
+                                  itemCount: Categories.values.length,
                                   scrollDirection: Axis.horizontal,
                                   itemBuilder: ((context, index) {
-                                    final each = options[index];
-                                    final isSelected =
-                                        state.selectedIndex == index;
+                                    final each = Categories.values[index];
+                                    final i = index + 1;
+                                    final isSelected = state.selectedIndex == i;
                                     return IntrinsicWidth(
                                       child: IntrinsicHeight(
                                         child: Padding(
@@ -112,7 +179,7 @@ class HomeScreen extends StatelessWidget {
                                                   top: 6.h,
                                                   bottom: 6.h),
                                               child: Text(
-                                                each.data,
+                                                each.name,
                                                 style: TextStyle(
                                                     fontSize: 12.sp,
                                                     fontWeight: FontWeight.w500,
@@ -125,7 +192,7 @@ class HomeScreen extends StatelessWidget {
                                           ).onTap(() {
                                             context
                                                 .read<ButtonBloc>()
-                                                .add(SelectButtonEvent(index));
+                                                .add(SelectButtonEvent(i));
                                           }),
                                         ),
                                       ),
@@ -143,7 +210,7 @@ class HomeScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              '${state.selectedIndex == null || state.selectedIndex == 0 ? AppString.popular : options[state.selectedIndex ?? 0].data} ${AppString.products}',
+                              '${state.selectedIndex == null || state.selectedIndex == 0 ? AppString.popular : Categories.values[state.selectedIndex == (Categories.values.length) ? Categories.values.length - 1 : state.selectedIndex!].name} ${AppString.products}',
                               style: AppText.titleText,
                             ),
                             Text(
@@ -157,7 +224,7 @@ class HomeScreen extends StatelessWidget {
                                           ProductCatalog())));
 
                               if (value != null) {
-                                navCallback!(value);
+                                widget.navCallback!(value);
                               }
                             })
                           ],
@@ -176,7 +243,7 @@ class HomeScreen extends StatelessWidget {
                             mainAxisSpacing: 8.h,
                             childAspectRatio: 0.70,
                           ),
-                          itemCount: 4,
+                          itemCount: cartList.length,
                           itemBuilder: (context, index) {
                             final eachProduct = cart[index];
                             return Container(
@@ -260,8 +327,8 @@ class HomeScreen extends StatelessWidget {
                               context
                                   .read<CartBloc>()
                                   .add(AddItemEvent(item: eachProduct));
-                              if (widget.moveToCart != null)
-                                widget.moveToCart!();
+                              if (widget.widget.moveToCart != null)
+                                widget.widget.moveToCart!();
                             });
                           },
                         ),
@@ -296,13 +363,13 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-final options = [
-  OptionsContainer(data: AppString.all, onpressed: () {}),
-  OptionsContainer(data: AppString.elctronic, onpressed: () {}),
-  OptionsContainer(data: AppString.fashion, onpressed: () {}),
-  OptionsContainer(data: AppString.shoes, onpressed: () {}),
-  OptionsContainer(data: AppString.furniture, onpressed: () {}),
-];
+// final options = [
+//   OptionsContainer(data: AppString.all, onpressed: () {}),
+//   OptionsContainer(data: AppString.elctronic, onpressed: () {}),
+//   OptionsContainer(data: AppString.fashion, onpressed: () {}),
+//   OptionsContainer(data: AppString.shoes, onpressed: () {}),
+//   OptionsContainer(data: AppString.furniture, onpressed: () {}),
+// ];
 final cart = [
   FinalCart(
     id: "id1",
@@ -311,6 +378,7 @@ final cart = [
     reviews: "(379)",
     amount: 65,
     itemCount: 2,
+    categories: Categories.electronic,
   ),
   FinalCart(
     id: "id2",
@@ -319,6 +387,7 @@ final cart = [
     reviews: "(249)",
     amount: 40,
     itemCount: 1,
+    categories: Categories.electronic,
   ),
   FinalCart(
     id: "id3",
@@ -327,6 +396,7 @@ final cart = [
     reviews: "(589)",
     amount: 120,
     itemCount: 4,
+    categories: Categories.electronic,
   ),
   FinalCart(
     id: "id4",
@@ -335,5 +405,276 @@ final cart = [
     reviews: "(589)",
     amount: 120,
     itemCount: 4,
+    categories: Categories.electronic,
+  ),
+  FinalCart(
+    id: "id5",
+    imagePath: AppImage.flower,
+    itemDescripton: 'Laptop',
+    reviews: "(980)",
+    amount: 850,
+    itemCount: 1,
+    categories: Categories.electronic,
+  ),
+  FinalCart(
+    id: "id6",
+    imagePath: AppImage.sneakers,
+    itemDescripton: 'Tablet',
+    reviews: "(530)",
+    amount: 250,
+    itemCount: 3,
+    categories: Categories.fashion,
+  ),
+  FinalCart(
+    id: "id7",
+    imagePath: AppImage.headset,
+    itemDescripton: 'Digital Camera',
+    reviews: "(412)",
+    amount: 400,
+    itemCount: 1,
+    categories: Categories.electronic,
+  ),
+  FinalCart(
+    id: "id8",
+    imagePath: AppImage.headset,
+    itemDescripton: 'Smartphone',
+    reviews: "(870)",
+    amount: 999,
+    itemCount: 1,
+    categories: Categories.electronic,
+  ),
+  FinalCart(
+    id: "id9",
+    imagePath: AppImage.watch,
+    itemDescripton: 'Fitness Tracker',
+    reviews: "(150)",
+    amount: 90,
+    itemCount: 2,
+    categories: Categories.electronic,
+  ),
+  FinalCart(
+    id: "id10",
+    imagePath: AppImage.headie,
+    itemDescripton: 'Winter Jacket',
+    reviews: "(320)",
+    amount: 150,
+    itemCount: 1,
+    categories: Categories.electronic,
+  ),
+  FinalCart(
+    id: "id11",
+    imagePath: AppImage.sneakers,
+    itemDescripton: 'Running Shoes',
+    reviews: "(200)",
+    amount: 75,
+    itemCount: 2,
+    categories: Categories.electronic,
+  ),
+  FinalCart(
+    id: "id12",
+    imagePath: AppImage.headset,
+    itemDescripton: 'Backpack',
+    reviews: "(215)",
+    amount: 55,
+    itemCount: 1,
+    categories: Categories.furniture,
+  ),
+  FinalCart(
+    id: "id13",
+    imagePath: AppImage.headie,
+    itemDescripton: 'Sunglasses',
+    reviews: "(135)",
+    amount: 80,
+    itemCount: 1,
+    categories: Categories.furniture,
+  ),
+  FinalCart(
+    id: "id14",
+    imagePath: AppImage.flower,
+    itemDescripton: 'Mountain Bike',
+    reviews: "(450)",
+    amount: 500,
+    itemCount: 1,
+    categories: Categories.furniture,
+  ),
+  FinalCart(
+    id: "id15",
+    imagePath: AppImage.watch,
+    itemDescripton: 'Mechanical Keyboard',
+    reviews: "(325)",
+    amount: 90,
+    itemCount: 2,
+    categories: Categories.furniture,
+  ),
+  FinalCart(
+    id: "id16",
+    imagePath: AppImage.flower,
+    itemDescripton: 'Gaming Mouse',
+    reviews: "(190)",
+    amount: 60,
+    itemCount: 2,
+    categories: Categories.furniture,
+  ),
+  FinalCart(
+    id: "id17",
+    imagePath: AppImage.desk,
+    itemDescripton: 'Microwave Oven',
+    reviews: "(600)",
+    amount: 120,
+    itemCount: 1,
+    categories: Categories.furniture,
+  ),
+  FinalCart(
+    id: "id18",
+    imagePath: AppImage.desk,
+    itemDescripton: 'Vacuum Cleaner',
+    reviews: "(210)",
+    amount: 200,
+    itemCount: 1,
+    categories: Categories.furniture,
+  ),
+  FinalCart(
+    id: "id19",
+    imagePath: AppImage.desk,
+    itemDescripton: 'Office Chair',
+    reviews: "(360)",
+    amount: 250,
+    itemCount: 1,
+    categories: Categories.shoes,
+  ),
+  FinalCart(
+    id: "id20",
+    imagePath: AppImage.desk,
+    itemDescripton: 'Standing Desk',
+    reviews: "(420)",
+    amount: 300,
+    itemCount: 1,
+    categories: Categories.shoes,
+  ),
+  FinalCart(
+    id: "id21",
+    imagePath: AppImage.desk,
+    itemDescripton: '4K TV',
+    reviews: "(750)",
+    amount: 1200,
+    itemCount: 1,
+    categories: Categories.shoes,
+  ),
+  FinalCart(
+    id: "id22",
+    imagePath: AppImage.cap,
+    itemDescripton: 'Coffee Maker',
+    reviews: "(170)",
+    amount: 100,
+    itemCount: 1,
+    categories: Categories.shoes,
+  ),
+  FinalCart(
+    id: "id23",
+    imagePath: AppImage.headie,
+    itemDescripton: 'Blender',
+    reviews: "(310)",
+    amount: 80,
+    itemCount: 1,
+    categories: Categories.shoes,
+  ),
+  FinalCart(
+    id: "id24",
+    imagePath: AppImage.headset,
+    itemDescripton: 'Treadmill',
+    reviews: "(420)",
+    amount: 850,
+    itemCount: 1,
+    categories: Categories.shoes,
+  ),
+  FinalCart(
+    id: "id25",
+    imagePath: AppImage.flowerVase,
+    itemDescripton: 'Electric Guitar',
+    reviews: "(130)",
+    amount: 600,
+    itemCount: 1,
+    categories: Categories.shoes,
+  ),
+  FinalCart(
+    id: "id26",
+    imagePath: AppImage.flowerVase,
+    itemDescripton: 'Drum Set',
+    reviews: "(180)",
+    amount: 750,
+    itemCount: 1,
+    categories: Categories.shoes,
+  ),
+  FinalCart(
+    id: "id27",
+    imagePath: AppImage.sneakers,
+    itemDescripton: 'Dumbbell Set',
+    reviews: "(290)",
+    amount: 200,
+    itemCount: 1,
+    categories: Categories.shoes,
+  ),
+  FinalCart(
+    id: "id28",
+    imagePath: AppImage.sneakers,
+    itemDescripton: 'Home Projector',
+    reviews: "(230)",
+    amount: 500,
+    itemCount: 1,
+    categories: Categories.shoes,
+  ),
+  FinalCart(
+    id: "id29",
+    imagePath: AppImage.flowerVase,
+    itemDescripton: 'Gaming Monitor',
+    reviews: "(510)",
+    amount: 450,
+    itemCount: 1,
+    categories: Categories.shoes,
+  ),
+  FinalCart(
+    id: "id30",
+    imagePath: AppImage.flowerVase,
+    itemDescripton: 'Audio Mixer',
+    reviews: "(95)",
+    amount: 300,
+    itemCount: 1,
+    categories: Categories.shoes,
+  ),
+  FinalCart(
+    id: "id31",
+    imagePath: AppImage.flower,
+    itemDescripton: 'Home Speaker',
+    reviews: "(260)",
+    amount: 220,
+    itemCount: 1,
+    categories: Categories.shoes,
+  ),
+  FinalCart(
+    id: "id32",
+    imagePath: AppImage.watch,
+    itemDescripton: 'Wi-Fi Router',
+    reviews: "(370)",
+    amount: 150,
+    itemCount: 1,
+    categories: Categories.shoes,
+  ),
+  FinalCart(
+    id: "id33",
+    imagePath: AppImage.brownBag,
+    itemDescripton: 'VR Headset',
+    reviews: "(420)",
+    amount: 450,
+    itemCount: 1,
+    categories: Categories.shoes,
+  ),
+  FinalCart(
+    id: "id34",
+    imagePath: AppImage.sneakers,
+    itemDescripton: 'Smart Fridge',
+    reviews: "(590)",
+    amount: 1800,
+    itemCount: 1,
+    categories: Categories.shoes,
   ),
 ];

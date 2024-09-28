@@ -1,7 +1,7 @@
 enum Categories {
-all ,
-electronic,
-fashion,
-shoes,
-furniture
+// all ,
+  electronic,
+  fashion,
+  shoes,
+  furniture
 }
