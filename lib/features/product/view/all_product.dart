@@ -31,7 +31,7 @@ class ProductCatalog extends StatelessWidget {
               height: 50.h,
             ),
             PageHeader(
-                title: AppString.popularProduct,
+                title: AppString.products,
                 trailing: AppIcons.cartLoaded.onTap(() {
                   Navigator.pop(context, 2);
                 }),
