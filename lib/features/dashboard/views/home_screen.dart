@@ -184,7 +184,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   top: 6.h,
                                                   bottom: 6.h),
                                               child: Text(
-                                                each.name,
+                                                each.name.capitalizeFirstLetter(),
                                                 style: TextStyle(
                                                     fontSize: 12.sp,
                                                     fontWeight: FontWeight.w500,
@@ -215,7 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              '${state.selectedIndex == null || state.selectedIndex == 0 ? AppString.popular : Categories.values[(state.selectedIndex ?? 0) - 1].name} ${AppString.products}',
+                              '${state.selectedIndex == null || state.selectedIndex == 0 ? AppString.popular : Categories.values[(state.selectedIndex ?? 0) - 1].name.capitalizeFirstLetter()} ${AppString.products}',
                               style: AppText.titleText,
                             ),
                             Text(
