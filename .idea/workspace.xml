@@ -7,14 +7,6 @@
     <list default="true" id="a9bc6ba9-2acc-4e86-9e37-c9aecba37ae7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/features/dashboard/views/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/dashboard/views/home.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/features/dashboard/views/home_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/dashboard/views/home_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/features/dashboard/widget/page_header.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/dashboard/widget/page_header.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/features/product/bloc/product_bloc_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/product/bloc/product_bloc_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/features/product/bloc/product_bloc_event.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/product/bloc/product_bloc_event.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/features/product/bloc/product_bloc_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/product/bloc/product_bloc_state.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/features/product/view/all_product.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/product/view/all_product.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/features/product/view/product_detail.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/product/view/product_detail.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,6 +105,7 @@
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
+    "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "fix/nav-fix",
     "io.flutter.reload.alreadyRun": "true",
     "kotlin-language-version-configured": "true",

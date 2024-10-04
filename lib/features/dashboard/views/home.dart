@@ -92,23 +92,11 @@ class _DashboardScreenState extends State<DashboardScreen>
                 },
               ),
               ProductDetail(
-                  // moveToCart: () {
-                  //   // _onItemTapped(2);
-                  // },
-                  // amount: 0,
-                  // imagePath: '',
-                  // descrition: '',
-                  // productName: '',
-                  // eachProduct: FinalCart(
-                  //   amount: 0,
-                  //   imagePath: '',
-                  //   itemDescripton: '',
-                  //   reviews: '',
-                  //   itemCount: 0,
-                  //   id: '',
-                  // ),
-                  ),
-              Cart(),
+                moveToCart: () {
+                  _tabController.animateTo(2);
+                },
+              ),
+              const Cart(),
               Container()
             ],
           ),
