@@ -37,7 +37,7 @@ class _DashboardScreenState extends State<DashboardScreen>
     return MultiBlocProvider(
         providers: [
           BlocProvider<ButtonBloc>(create: (_) => ButtonBloc()),
-          BlocProvider<DashboardBlocBloc>(create: (_) => DashboardBlocBloc())
+          // BlocProvider<DashboardBlocBloc>(create: (_) => DashboardBlocBloc())
         ],
         child: Scaffold(
           backgroundColor: AppColors.background,

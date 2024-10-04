@@ -40,27 +40,31 @@ class _HomeScreenState extends State<HomeScreen> {
     cartList = cart;
   }
 
+  int tab = 0;
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ButtonBloc, ButtonState>(
         buildWhen: (prev, next) {
-        final buttonBloc = context.read<ButtonBloc>();
-          if (prev. != next.selectedIndex) {
-            if (next.selectedIndex != null) {
-              cartLnist = cart
-                  .where((e) =>
-                      e.categories ==
-                      Categories.values[
-                          next.selectedIndex == (Categories.values.length)
-                              ? Categories.values.length - 1
-                              : next.selectedIndex!])
-                  .toList();
-            }
-          }
+          // if (prev. != next.selectedIndex) {
+          //   if (next.selectedIndex != null) {
+          //     cartLnist = cart
+          //         .where((e) =>
+          //             e.categories ==
+          //             Categories.values[
+          //                 next.selectedIndex == (Categories.values.length)
+          //                     ? Categories.values.length - 1
+          //                     : next.selectedIndex!])
+          //         .toList();
+          //   }
+          // }
           return true;
         },
         listener: (_, state) {},
         builder: (_, state) {
+          if (state is ButtonSelectedState) {
+            tab = state.index;
+          }
           return Padding(
             padding: EdgeInsets.all(16.w),
             child: Column(
@@ -126,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 horizontal: 8.w),
                                             child: Container(
                                               decoration: BoxDecoration(
-                                                color: index == 0
+                                                color: tab == 0
                                                     ? AppColors.discountColor
                                                     : AppColors.backgroundColor,
                                                 borderRadius:
@@ -145,11 +149,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       fontWeight:
                                                           FontWeight.w500,
                                                       fontFamily: 'Inter',
-                                                      color:
-                                                          index ==
-                                                                  0
-                                                              ? Colors.white
-                                                              : Colors.black),
+                                                      color: tab == 0
+                                                          ? Colors.white
+                                                          : Colors.black),
                                                 ),
                                               ),
                                             ).onTap(() {
@@ -163,8 +165,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     }
                                     final each = Categories.values[index - 1];
 
-                                    final isSelected = 
-                                      buttonBloc.selectedIndex == index;
+                                    final isSelected = tab == index;
                                     return IntrinsicWidth(
                                       child: IntrinsicHeight(
                                         child: Padding(
@@ -185,7 +186,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   top: 6.h,
                                                   bottom: 6.h),
                                               child: Text(
-                                                each.name.capitalizeFirstLetter(),
+                                                each.name
+                                                    .capitalizeFirstLetter(),
                                                 style: TextStyle(
                                                     fontSize: 12.sp,
                                                     fontWeight: FontWeight.w500,
@@ -216,7 +218,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              '${state.selectedIndex == null || state.selectedIndex == 0 ? AppString.popular : Categories.values[(state.selectedIndex ?? 0) - 1].name.capitalizeFirstLetter()} ${AppString.products}',
+                              '${tab == 0 ? AppString.popular : Categories.values[tab - 1].name.capitalizeFirstLetter()} ${AppString.products}',
                               style: AppText.titleText,
                             ),
                             Text(
