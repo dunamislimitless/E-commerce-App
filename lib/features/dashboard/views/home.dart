@@ -7,7 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../cart/models/final_cart_model.dart';
 import '../../cart/view/cart.dart';
 import 'home_screen.dart';
 
@@ -37,7 +36,7 @@ class _DashboardScreenState extends State<DashboardScreen>
     return MultiBlocProvider(
         providers: [
           BlocProvider<ButtonBloc>(create: (_) => ButtonBloc()),
-          BlocProvider<DashboardBlocBloc>(create: (_) => DashboardBlocBloc())
+          // BlocProvider<DashboardBlocBloc>(create: (_) => DashboardBlocBloc())
         ],
         child: Scaffold(
           backgroundColor: AppColors.background,
@@ -94,22 +93,10 @@ class _DashboardScreenState extends State<DashboardScreen>
               ),
               ProductDetail(
                 moveToCart: () {
-                  // _onItemTapped(2);
+                  _tabController.animateTo(2);
                 },
-                amount: 0,
-                imagePath: '',
-                descrition: '',
-                productName: '',
-                eachProduct: FinalCart(
-                  amount: 0,
-                  imagePath: '',
-                  itemDescripton: '',
-                  reviews: '',
-                  itemCount: 0,
-                  id: '',
-                ),
               ),
-              Cart(),
+              const Cart(),
               Container()
             ],
           ),

@@ -1,5 +1,4 @@
 import 'package:e_commerce_app/app/extensions/extension.dart';
-import 'package:e_commerce_app/app/utils/app_ipngs.dart';
 import 'package:e_commerce_app/app/utils/appicons.dart';
 import 'package:e_commerce_app/app/utils/appstrings.dart';
 import 'package:e_commerce_app/app/utils/colors.dart';
@@ -8,15 +7,17 @@ import 'package:e_commerce_app/features/cart/cart_bloc/cart_bloc.dart';
 import 'package:e_commerce_app/features/cart/cart_bloc/cart_event.dart';
 import 'package:e_commerce_app/features/cart/models/final_cart_model.dart';
 import 'package:e_commerce_app/features/dashboard/widget/page_header.dart';
-import 'package:e_commerce_app/features/product/view/product_detail.dart';
+import 'package:e_commerce_app/features/product/bloc/product_bloc_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProductCatalog extends StatelessWidget {
-  ProductCatalog({super.key, this.moveToCart});
+  ProductCatalog({super.key, this.moveToCart, this.list = const []});
 
   final VoidCallback? moveToCart;
+
+  final List<FinalCart> list;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class ProductCatalog extends StatelessWidget {
               height: 50.h,
             ),
             PageHeader(
-                title: AppString.popularProduct,
+                title: AppString.products,
                 trailing: AppIcons.cartLoaded.onTap(() {
                   Navigator.pop(context, 2);
                 }),
@@ -51,9 +52,9 @@ class ProductCatalog extends StatelessWidget {
                 ),
                 padding: EdgeInsets.zero,
                 shrinkWrap: true,
-                itemCount: cart.length,
+                itemCount: list.length,
                 itemBuilder: (context, index) {
-                  final each = cart[index];
+                  final each = list[index];
                   return Container(
                     height: 268.h,
                     width: 180.w,
@@ -106,17 +107,22 @@ class ProductCatalog extends StatelessWidget {
                                 ),
                                 Text(AppString.view, style: AppText.view)
                                     .onTap(() {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => ProductDetail(
-                                                amount: each.amount,
-                                                imagePath: each.imagePath,
-                                                descrition: each.itemDescripton,
-                                                productName:
-                                                    each.itemDescripton,
-                                                eachProduct: each,
-                                              )));
+                                  context
+                                      .read<ProductBlocBloc>()
+                                      .add(SelectProductEvent(product: each));
+
+                                  Navigator.pop(context, 1);
+                                  // Navigator.push(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //         builder: (context) => ProductDetail(
+                                  //               amount: each.amount,
+                                  //               imagePath: each.imagePath,
+                                  //               descrition: each.itemDescripton,
+                                  //               productName:
+                                  //                   each.itemDescripton,
+                                  //               eachProduct: each,
+                                  //             )));
                                 })
                               ]),
                         ],
@@ -179,69 +185,69 @@ class ProductCatalog extends StatelessWidget {
 // ];
 }
 
-final cart = [
-  FinalCart(
-    id: "id1",
-    imagePath: AppImage.headset,
-    itemDescripton: 'Wireless Headphone',
-    reviews: "(379)",
-    amount: 65,
-    itemCount: 2,
-  ),
-  FinalCart(
-    id: "id2",
-    imagePath: AppImage.sneakers,
-    itemDescripton: 'Bluetooth Speaker',
-    reviews: "(249)",
-    amount: 40,
-    itemCount: 1,
-  ),
-  FinalCart(
-    id: "id3",
-    imagePath: AppImage.flower,
-    itemDescripton: 'Smart Watch',
-    reviews: "(589)",
-    amount: 120,
-    itemCount: 4,
-  ),
-  FinalCart(
-    id: "id4",
-    imagePath: AppImage.bag,
-    itemDescripton: AppString.bag,
-    reviews: "(719)",
-    amount: 120,
-    itemCount: 4,
-  ),
-  FinalCart(
-    id: "id5",
-    imagePath: AppImage.brownBag,
-    itemDescripton: AppString.leatherBag,
-    reviews: "(899)",
-    amount: 170,
-    itemCount: 3,
-  ),
-  FinalCart(
-    id: "id6",
-    imagePath: AppImage.desk,
-    itemDescripton: 'Smart Watch',
-    reviews: "(589)",
-    amount: 120,
-    itemCount: 2,
-  ),
-  FinalCart(
-    id: "id7",
-    imagePath: AppImage.desk,
-    itemDescripton: AppString.deskClock,
-    reviews: "(4489)",
-    amount: 120,
-    itemCount: 3,
-  ),
-  FinalCart(
-    id: "id8",
-    imagePath: AppImage.watch,
-    itemDescripton: AppString.swissWatch,
-    reviews: "(589)",
-    amount: 120,
-    itemCount: 2,
-  ),
-];
+// final cart = [
+//   FinalCart(
+//     id: "id1",
+//     imagePath: AppImage.headset,
+//     itemDescripton: 'Wireless Headphone',
+//     reviews: "(379)",
+//     amount: 65,
+//     itemCount: 2,
+//   ),
+//   FinalCart(
+//     id: "id2",
+//     imagePath: AppImage.sneakers,
+//     itemDescripton: 'Bluetooth Speaker',
+//     reviews: "(249)",
+//     amount: 40,
+//     itemCount: 1,
+//   ),
+//   FinalCart(
+//     id: "id3",
+//     imagePath: AppImage.flower,
+//     itemDescripton: 'Smart Watch',
+//     reviews: "(589)",
+//     amount: 120,
+//     itemCount: 4,
+//   ),
+//   FinalCart(
+//     id: "id4",
+//     imagePath: AppImage.bag,
+//     itemDescripton: AppString.bag,
+//     reviews: "(719)",
+//     amount: 120,
+//     itemCount: 4,
+//   ),
+//   FinalCart(
+//     id: "id5",
+//     imagePath: AppImage.brownBag,
+//     itemDescripton: AppString.leatherBag,
+//     reviews: "(899)",
+//     amount: 170,
+//     itemCount: 3,
+//   ),
+//   FinalCart(
+//     id: "id6",
+//     imagePath: AppImage.desk,
+//     itemDescripton: 'Smart Watch',
+//     reviews: "(589)",
+//     amount: 120,
+//     itemCount: 2,
+//   ),
+//   FinalCart(
+//     id: "id7",
+//     imagePath: AppImage.desk,
+//     itemDescripton: AppString.deskClock,
+//     reviews: "(4489)",
+//     amount: 120,
+//     itemCount: 3,
+//   ),
+//   FinalCart(
+//     id: "id8",
+//     imagePath: AppImage.watch,
+//     itemDescripton: AppString.swissWatch,
+//     reviews: "(589)",
+//     amount: 120,
+//     itemCount: 2,
+//   ),
+// ];

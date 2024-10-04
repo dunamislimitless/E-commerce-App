@@ -11,7 +11,8 @@ class AppString {
   static const fashion = 'Fashion';
   static const shoes = 'Shoes';
   static const furniture = 'Furniture';
-  static const popularProduct = 'Popular Product';
+  static const products = 'Products';
+  static const popular = 'Popular';
   static const bag = 'Leather Women Bag';
   static const headphones = 'Wireless Headphone';
   static const review = 'reviews';
@@ -36,10 +37,11 @@ class AppString {
   static const color = 'Color';
   static const about = 'About';
   static const add2cart = 'ADD  TO CART';
-    static const c2Pay = 'CLICK TO PAY';
+  static const c2Pay = 'CLICK TO PAY';
   static const remove = 'Remove';
   static const view = 'View';
-   static const emptycart = 'Your Cart is empty,\n\nKindly choose a product you want to ay for';
+  static const emptycart =
+      'Your Cart is empty,\n\nKindly choose a product you want to ay for';
 
   static const productDescription =
       'Maecenas cursus magna vitae convallis congue. Vestibulum dignissim augue odio, congue rutrum magna gravida ac. Sed rhoncus eu arcu a tempus.';
