@@ -44,9 +44,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return BlocConsumer<ButtonBloc, ButtonState>(
         buildWhen: (prev, next) {
-          if (prev.selectedIndex != next.selectedIndex) {
+        final buttonBloc = context.read<ButtonBloc>();
+          if (prev. != next.selectedIndex) {
             if (next.selectedIndex != null) {
-              cartList = cart
+              cartLnist = cart
                   .where((e) =>
                       e.categories ==
                       Categories.values[
@@ -125,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 horizontal: 8.w),
                                             child: Container(
                                               decoration: BoxDecoration(
-                                                color: state.selectedIndex == 0
+                                                color: index == 0
                                                     ? AppColors.discountColor
                                                     : AppColors.backgroundColor,
                                                 borderRadius:
@@ -145,7 +146,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           FontWeight.w500,
                                                       fontFamily: 'Inter',
                                                       color:
-                                                          state.selectedIndex ==
+                                                          index ==
                                                                   0
                                                               ? Colors.white
                                                               : Colors.black),
@@ -162,8 +163,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                     }
                                     final each = Categories.values[index - 1];
 
-                                    final isSelected =
-                                        state.selectedIndex == index;
+                                    final isSelected = 
+                                      buttonBloc.selectedIndex == index;
                                     return IntrinsicWidth(
                                       child: IntrinsicHeight(
                                         child: Padding(

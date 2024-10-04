@@ -14,30 +14,29 @@ class DashboardBlocBloc extends Bloc<DashboardBlocEvent, DashboardBlocState> {
 }
 
 class ButtonBloc extends Bloc<ButtonEvent, ButtonState> {
+ int? selectedIndex;
+
+  Categories? selectedCategory;
+
+  
+
+  
   ButtonBloc() : super(ButtonInitialState()) {
     on<SelectButtonEvent>((event, emit) {
-      if (state.selectedIndex == event.index) {
-        emit(ButtonInitialState());
-      } else {
-        emit(ButtonSelectedState(selectedIndex: event.index));
+      if(selectedIndex == event.index){
+        selectedCategory == event.
+ emit(ButtonSelectedState());
       }
+
+
+
+    
+
+   
+      
+        
     });
   }
 
-// Categories get selectedCategory {
-//   switch (state.selectedIndex) {
-//     case 0:
-//       return Categories.all;
-//     case 1:
-//       return Categories.electronic;
-//     case 2:
-//       return Categories.fashion;
-//     case 3:
-//       return Categories.shoes;
-//     case 4:
-//       return Categories.furniture;
-//     default:
-//       return Categories.all;
-//   }
-// }
+
 }
