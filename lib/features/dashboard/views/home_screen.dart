@@ -46,18 +46,15 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return BlocConsumer<ButtonBloc, ButtonState>(
         buildWhen: (prev, next) {
-          // if (prev. != next.selectedIndex) {
-          //   if (next.selectedIndex != null) {
-          //     cartLnist = cart
-          //         .where((e) =>
-          //             e.categories ==
-          //             Categories.values[
-          //                 next.selectedIndex == (Categories.values.length)
-          //                     ? Categories.values.length - 1
-          //                     : next.selectedIndex!])
-          //         .toList();
-          //   }
-          // }
+          if (next is ButtonSelectedState) {
+            cartList = cart
+                .where((e) =>
+                    e.categories ==
+                    Categories.values[next.index == (Categories.values.length)
+                        ? Categories.values.length - 1
+                        : next.index])
+                .toList();
+          }
           return true;
         },
         listener: (_, state) {},
