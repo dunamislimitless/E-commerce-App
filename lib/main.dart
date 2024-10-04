@@ -1,5 +1,6 @@
 import 'package:e_commerce_app/app/utils/colors.dart';
 import 'package:e_commerce_app/features/dashboard/views/home.dart';
+import 'package:e_commerce_app/features/product/bloc/product_bloc_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,6 +23,9 @@ class MyApp extends StatelessWidget {
             providers: [
               BlocProvider<CartBloc>(
                 create: (context) => CartBloc(),
+              ),
+              BlocProvider<ProductBlocBloc>(
+                create: (context) => ProductBlocBloc(),
               )
             ],
             child: MaterialApp(

@@ -7,7 +7,7 @@ import 'package:e_commerce_app/features/cart/cart_bloc/cart_bloc.dart';
 import 'package:e_commerce_app/features/cart/cart_bloc/cart_event.dart';
 import 'package:e_commerce_app/features/cart/models/final_cart_model.dart';
 import 'package:e_commerce_app/features/dashboard/widget/page_header.dart';
-import 'package:e_commerce_app/features/product/view/product_detail.dart';
+import 'package:e_commerce_app/features/product/bloc/product_bloc_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,6 +16,7 @@ class ProductCatalog extends StatelessWidget {
   ProductCatalog({super.key, this.moveToCart, this.list = const []});
 
   final VoidCallback? moveToCart;
+
   final List<FinalCart> list;
 
   @override
@@ -106,17 +107,22 @@ class ProductCatalog extends StatelessWidget {
                                 ),
                                 Text(AppString.view, style: AppText.view)
                                     .onTap(() {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => ProductDetail(
-                                                amount: each.amount,
-                                                imagePath: each.imagePath,
-                                                descrition: each.itemDescripton,
-                                                productName:
-                                                    each.itemDescripton,
-                                                eachProduct: each,
-                                              )));
+                                  context
+                                      .read<ProductBlocBloc>()
+                                      .add(SelectProductEvent(product: each));
+
+                                  Navigator.pop(context, 1);
+                                  // Navigator.push(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //         builder: (context) => ProductDetail(
+                                  //               amount: each.amount,
+                                  //               imagePath: each.imagePath,
+                                  //               descrition: each.itemDescripton,
+                                  //               productName:
+                                  //                   each.itemDescripton,
+                                  //               eachProduct: each,
+                                  //             )));
                                 })
                               ]),
                         ],

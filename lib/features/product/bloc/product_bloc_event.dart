@@ -1,4 +1,9 @@
 part of 'product_bloc_bloc.dart';
 
-@immutable
-sealed class ProductBlocEvent {}
+abstract class ProductBlocEvent {}
+
+class SelectProductEvent extends ProductBlocEvent {
+  final FinalCart product;
+
+  SelectProductEvent({required this.product});
+}

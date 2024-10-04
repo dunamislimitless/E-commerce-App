@@ -13,8 +13,8 @@ import 'package:e_commerce_app/features/dashboard/views/home.dart';
 import 'package:e_commerce_app/features/dashboard/widget/discount_container.dart';
 import 'package:e_commerce_app/features/dashboard/widget/latest_cart.dart';
 import 'package:e_commerce_app/features/dashboard/widget/page_header.dart';
+import 'package:e_commerce_app/features/product/bloc/product_bloc_bloc.dart';
 import 'package:e_commerce_app/features/product/view/all_product.dart';
-import 'package:e_commerce_app/features/product/view/product_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -228,7 +228,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       builder: ((context) =>
                                           ProductCatalog(list: cartList))));
 
-                              if (value != null) {
+                              if (value != null && value is int) {
                                 widget.navCallback!(value);
                               }
                             })
@@ -307,22 +307,26 @@ class _HomeScreenState extends State<HomeScreen> {
                                           Text(AppString.view,
                                                   style: AppText.view)
                                               .onTap(() {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        ProductDetail(
-                                                          amount: eachProduct
-                                                              .amount,
-                                                          imagePath: eachProduct
-                                                              .imagePath,
-                                                          descrition: eachProduct
-                                                              .itemDescripton,
-                                                          productName: eachProduct
-                                                              .itemDescripton,
-                                                          eachProduct:
-                                                              eachProduct,
-                                                        )));
+                                            context.read<ProductBlocBloc>().add(
+                                                SelectProductEvent(
+                                                    product: eachProduct));
+                                            widget.navCallback!(1);
+                                            // Navigator.push(
+                                            //     context,
+                                            //     MaterialPageRoute(
+                                            //         builder: (context) =>
+                                            //             ProductDetail(
+                                            //               amount: eachProduct
+                                            //                   .amount,
+                                            //               imagePath: eachProduct
+                                            //                   .imagePath,
+                                            //               descrition: eachProduct
+                                            //                   .itemDescripton,
+                                            //               productName: eachProduct
+                                            //                   .itemDescripton,
+                                            //               eachProduct:
+                                            //                   eachProduct,
+                                            //             )));
                                           })
                                         ]),
                                   ],
