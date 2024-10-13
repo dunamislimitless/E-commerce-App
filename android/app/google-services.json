@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1058784565867",
+    "project_id": "buy-a-product",
+    "storage_bucket": "buy-a-product.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1058784565867:android:4570309c65f92a4bfaaf2e",
+        "android_client_info": {
+          "package_name": "com.mychassis.e_commerce_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDF5wUyLCdFQgGm2Etl67zB9SMhnh_iNgQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
