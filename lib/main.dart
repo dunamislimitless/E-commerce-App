@@ -9,10 +9,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'features/cart/cart_bloc/cart_bloc.dart';
 
 void main() async{
+  
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp();
-  
+
   runApp(const MyApp());
 }
 
