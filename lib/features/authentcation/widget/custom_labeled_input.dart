@@ -8,16 +8,17 @@ class CustomLabeledInput extends StatelessWidget {
   final IconData prefixIcon;
   final bool obscureText;
   final TextEditingController controller;
-  TextInputType? keyboardType;
-
-  CustomLabeledInput({
+ final TextInputType? keyboardType;
+ final String? Function (String?)? validate;
+ 
+ const CustomLabeledInput({
     super.key,
     required this.label,
     required this.title,
     this.keyboardType,
     required this.prefixIcon,
     this.obscureText = false,
-    required this.controller,
+    required this.controller,  this.validate,
   });
 
   @override
@@ -50,6 +51,7 @@ class CustomLabeledInput extends StatelessWidget {
             ),
             obscureText: obscureText,
             keyboardType: keyboardType,
+            validator: validate,
           ),
         ),
         SizedBox(height: 24.0.h),

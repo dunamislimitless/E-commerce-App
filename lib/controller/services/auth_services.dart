@@ -18,7 +18,7 @@ return userCredential.user;
 return null;
 }
 
-Future<User?> signInWithEmailAndPassword(String email, String password, String name)async {
+Future<User?> signInWithEmailAndPassword(String email, String password)async {
 
   try{
  final userCredential= await auth.signInWithEmailAndPassword(email: email, password: password);

@@ -8,55 +8,38 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState>  with NavigationMixin{
   final auth = AuthService();
- 
-final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-
-final TextEditingController firstNameController = TextEditingController();
-  final TextEditingController lastNameControler = TextEditingController();
-  
-final TextEditingController genderController = TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
-  
-  
-  
 
   AuthBloc() : super(AuthInitialState()) {
 
-     on<SignInEvent>(_onSignInEvent);
+    on<SignInEvent>(_onSignInEvent);
     on<SignUpEvent>(_onSignUpEvent);
     
   }
 
 
-  void _onSignInEvent(SignInEvent event, Emitter<AuthState> emit) {
+  void _onSignInEvent(SignInEvent event, Emitter<AuthState> emit)async {
    
-   
-    final email = emailController.text;
-    final password = passwordController.text;
-
+   final user = await auth.signInWithEmailAndPassword(event.email, event.password);
     
-    if (email.isNotEmpty && password.isNotEmpty) {
+    if (user != null) {
       emit(AuthSuccessState());  } else {
 
       emit(AuthErrorState("Please enter email and password!"));
     }
-}
+  }
 
  void _onSignUpEvent(SignUpEvent event, Emitter<AuthState> emit) async {
    
    
-    final email = emailController.text;
-    final password = passwordController.text;
 
     
-    if (email.isNotEmpty && password.isNotEmpty) {
+   
 
-    final user = await  auth.createUserWithEmailAndPassword(email, password );
+    final user = await  auth.createUserWithEmailAndPassword(event.email, event.password );
     if(user !=null){
       debugPrint('User Created Successfully');
      
-    }
+    
 
       emit(AuthSuccessState());  } else {
 
@@ -64,9 +47,4 @@ final TextEditingController genderController = TextEditingController();
     }
 }
 
-
-Future<void> close() {
-    emailController.dispose();
-    passwordController.dispose();
-    return super.close();
-  }}
+}

@@ -12,8 +12,32 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class Signin extends StatelessWidget {
+class Signin extends StatefulWidget {
   Signin({super.key});
+
+
+
+  
+  
+  
+
+  @override
+  State<Signin> createState() => _SigninState();
+}
+
+
+class _SigninState extends State<Signin> {
+
+ 
+final TextEditingController emailController = TextEditingController();
+final TextEditingController passwordController = TextEditingController();
+@override
+void dispose(){
+  emailController.dispose();
+  passwordController.dispose();
+  super.dispose();
+
+}
 
   @override
   Widget build(BuildContext context) {
@@ -41,13 +65,13 @@ class Signin extends StatelessWidget {
                       ),
                       SizedBox(height: 100.0.h),
                       CustomFormField(
-                        controller: authBloc.emailController,
+                        controller: emailController,
                         label: 'Email',
                         title: 'Email',
                         prefixIcon: Icons.person_rounded,
                       ),
                       CustomFormField(
-                        controller: authBloc.passwordController,
+                        controller: passwordController,
                         label: 'Password',
                         title: 'Password',
                         prefixIcon: Icons.lock,
@@ -63,7 +87,7 @@ class Signin extends StatelessWidget {
                         buttontext: 'Sign In',
                         onPressed: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context)=> DashboardScreen() ));
-                       authBloc.add(SignInEvent());
+                       authBloc.add(SignInEvent(email: emailController.text, password: passwordController.text));
                         },
                         color: AppColors.discountColor,
                         textColor: AppColors.cardColor,
@@ -75,7 +99,7 @@ class Signin extends StatelessWidget {
                         buttontext: 'Register',
                         onPressed: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context)=> CreateAccountScreen() ));
-                       authBloc.add(SignInEvent());
+                       
                         },
                         color: AppColors.lightButton,
                         textColor: AppColors.cardColor,
