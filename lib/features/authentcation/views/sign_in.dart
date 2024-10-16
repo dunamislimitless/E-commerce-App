@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:e_commerce_app/app/utils/colors.dart';
 import 'package:e_commerce_app/features/authentcation/bloc/auth_bloc.dart';
 import 'package:e_commerce_app/features/authentcation/bloc/auth_event.dart';
+import 'package:e_commerce_app/features/authentcation/views/register.dart';
 import 'package:e_commerce_app/features/authentcation/widget/custom_form_field.dart';
 import 'package:e_commerce_app/features/dashboard/views/home.dart';
 import 'package:e_commerce_app/features/dashboard/widget/custom_button.dart';
@@ -73,7 +74,7 @@ class Signin extends StatelessWidget {
                       CustomButton(
                         buttontext: 'Register',
                         onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> DashboardScreen() ));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=> CreateAccountScreen() ));
                        authBloc.add(SignInEvent());
                         },
                         color: AppColors.lightButton,
