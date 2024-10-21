@@ -1,5 +1,5 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomLabeledInput extends StatelessWidget {
@@ -8,18 +8,20 @@ class CustomLabeledInput extends StatelessWidget {
   final IconData prefixIcon;
   final bool obscureText;
   final TextEditingController controller;
- final TextInputType? keyboardType;
- final String? Function (String?)? validate;
- 
- const CustomLabeledInput({
-    super.key,
-    required this.label,
-    required this.title,
-    this.keyboardType,
-    required this.prefixIcon,
-    this.obscureText = false,
-    required this.controller,  this.validate,
-  });
+  final TextInputType? keyboardType;
+  final String? Function(String?)? validate;
+  final List<TextInputFormatter>? inputFormatters;
+
+  const CustomLabeledInput(
+      {super.key,
+      required this.label,
+      required this.title,
+      this.keyboardType,
+      required this.prefixIcon,
+      this.obscureText = false,
+      required this.controller,
+      this.validate,
+      this.inputFormatters});
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +45,7 @@ class CustomLabeledInput extends StatelessWidget {
             ),
           ),
           child: TextFormField(
+            inputFormatters: inputFormatters,
             controller: controller,
             decoration: InputDecoration(
               labelText: label,
