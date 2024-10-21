@@ -26,6 +26,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with NavigationMixin {
   }
 
   void _onSignUpEvent(SignUpEvent event, Emitter<AuthState> emit) async {
+    emit(AuthLoadingState());
     final model = UserModel(
         firstName: event.firstName,
         lastName: event.lastName,
