@@ -1,6 +1,17 @@
 class AppString {
+  static const createAccount = 'Create an Account';
   static const number = "Phone Number";
   static const home = 'Home';
+  static const male = 'Male';
+  static const female = "Female";
+  static const firstName = 'First Name';
+  static const lastName = 'Last Name';
+  static const email = "Email";
+  static const register = 'Register';
+  static const signIn = 'Sign In';
+  static const password = "Password";
+  static const gender = 'Gender';
+  static const invalid = 'Invalid';
   static const category = 'Category';
   static const popularDetail = 'Product Detail';
   static const cart = 'Cart';

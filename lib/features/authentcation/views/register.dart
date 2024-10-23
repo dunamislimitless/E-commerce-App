@@ -34,7 +34,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>  with validat
   final TextEditingController phoneController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
-   bool obscure = false;
+   bool obscure = true;
 
   @override
   void dispose() {
@@ -61,18 +61,18 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>  with validat
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 69.0.h), // Add spacing at the top
-                Text('Create an Account', style: AppText.cartText),
-                SizedBox(height: 48.0.h),
+                SizedBox(height: 60.0.h), 
+                Text(AppString.createAccount, style: AppText.cartText),
+                SizedBox(height: 38.0.h),
 
                 Row(
                   children: [
                     Expanded(
                       child: CustomLabeledInput(
                         validate: (x) =>
-                            (x?.length ?? 0) > 2 ? null : 'Invalid First Name',
-                        label: 'First Name',
-                        title: 'First Name',
+                            (x?.length ?? 0) > 2 ? null : '${AppString.invalid} ${AppString.firstName}',
+                        label: AppString.firstName,
+                        title: AppString.firstName,
                         prefixIcon: Icons.person,
                         controller: firstName,
                         keyboardType: TextInputType.name,
@@ -84,9 +84,9 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>  with validat
                     Expanded(
                       child: CustomLabeledInput(
                         validate: (x) =>
-                            (x?.length ?? 0) > 2 ? null : 'Invalid Last Name',
-                        label: 'Last Name',
-                        title: 'Last Name',
+                           (x?.length ?? 0) > 2 ? null :'${AppString.invalid} ${AppString.lastName}',
+                        label: AppString.lastName,
+                        title: AppString.lastName,
                         prefixIcon: Icons.person,
                         controller: lastName,
                         keyboardType: TextInputType.name,
@@ -94,8 +94,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>  with validat
                     ),
                   ],
                 ),
-                const Text(
-                  'Gender',
+                 const Text(
+                  AppString.gender,
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.black),
                 ),
@@ -113,9 +113,9 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>  with validat
                     child: DropdownButtonFormField<String>(
                       value: gender.text.isEmpty ? null : gender.text,
                       items: const [
-                        DropdownMenuItem(value: 'male', child: Text('Male')),
+                        DropdownMenuItem(value: AppString.male, child: Text(AppString.male)),
                         DropdownMenuItem(
-                            value: 'female', child: Text('Female')),
+                            value: AppString.female, child: Text(AppString.female)),
                       ],
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -123,7 +123,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>  with validat
                       ),
                       onChanged: (String? value) {
                         if (value != null) {
-                          // Update the genderController text when a selection is made
+                         
                           gender.text = value;
                         }
                       },
@@ -133,8 +133,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>  with validat
                 SizedBox(height: 24.0.h),
 
                 CustomLabeledInput(
-                  label: 'Email Address',
-                  title: 'Email',
+                  label: AppString.email,
+                  title: AppString.email,
                   prefixIcon: Icons.email,
                   controller: emailController,
                   keyboardType: TextInputType.emailAddress,
@@ -142,8 +142,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>  with validat
                  
                 ),
                 CustomLabeledInput(
-                  label: 'Password',
-                  title: 'Password',
+                  label: AppString.password,
+                  title: AppString.password,
                   prefixIcon: Icons.security,
                   controller: passwordController,
                   keyboardType: TextInputType.text,
@@ -154,22 +154,23 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>  with validat
                     
                 ),
 
-                 Text(
+                 const Text(
           AppString.number,
-          style: const TextStyle(
+          style:  TextStyle(
             fontWeight: FontWeight.bold,
             color: Colors.black,
           ),
         ),
         SizedBox(height: 8.0.h),
-             IntlPhoneField(
+           IntlPhoneField(
      inputFormatters: [
                     FilteringTextInputFormatter.digitsOnly,
                   ],
-            decoration:      InputDecoration(
+            decoration:       InputDecoration(
               labelText: AppString.number,
             
-              border: InputBorder.none,
+              border: OutlineInputBorder(borderSide: BorderSide(color: Colors.black,
+              width: 2.0.r)),
             ),
                   controller: phoneController,
                 
@@ -188,7 +189,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>  with validat
                 //   keyboardType: TextInputType.number,
                 // ),
 ,
-                SizedBox(height: 50.0.h),
+                SizedBox(height: 20.0.h),
 
                 BlocConsumer<AuthBloc, AuthState>(
                   listener: (context, state) {
@@ -205,7 +206,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>  with validat
                     }
 
                     return CustomButton(
-                      buttontext: 'Register',
+                      buttontext: AppString.register,
                       onPressed: () {
                         if (_formKey.currentState?.validate() ?? false) {
                           authBloc.add(SignUpEvent(
@@ -225,7 +226,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>  with validat
 
                 SizedBox(height: 16.0.h),
                 CustomButton(
-                  buttontext: 'Sign In',
+                  buttontext: AppString.signIn,
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => Signin()));
