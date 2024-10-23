@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:e_commerce_app/app/utils/appstrings.dart';
 import 'package:e_commerce_app/app/utils/colors.dart';
 import 'package:e_commerce_app/features/authentcation/bloc/auth_bloc.dart';
 import 'package:e_commerce_app/features/authentcation/bloc/auth_event.dart';
@@ -57,7 +58,7 @@ void dispose(){
                         height: 70.0.h,
                       ),
                       Text(
-                        'Sign In',
+                       AppString.signIn,
                         style: TextStyle(
                           fontSize: 24.0.sp,
                           fontWeight: FontWeight.bold,
@@ -66,14 +67,14 @@ void dispose(){
                       SizedBox(height: 100.0.h),
                       CustomFormField(
                         controller: emailController,
-                        label: 'Email',
-                        title: 'Email',
+                        label: AppString.email,
+                        title: AppString.email,
                         prefixIcon: Icons.person_rounded,
                       ),
                       CustomFormField(
                         controller: passwordController,
-                        label: 'Password',
-                        title: 'Password',
+                        label: AppString.password,
+                        title: AppString.password,
                         prefixIcon: Icons.lock,
                         obscureText: true,
                       ),
@@ -84,7 +85,7 @@ void dispose(){
                       
                       
                       CustomButton(
-                        buttontext: 'Sign In',
+                        buttontext: AppString.signIn,
                         onPressed: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context)=> DashboardScreen() ));
                        authBloc.add(SignInEvent(email: emailController.text, password: passwordController.text));
@@ -96,7 +97,7 @@ void dispose(){
 
                       SizedBox(height: 8.0.h),
                       CustomButton(
-                        buttontext: 'Register',
+                        buttontext: AppString.register,
                         onPressed: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context)=> CreateAccountScreen() ));
                        
