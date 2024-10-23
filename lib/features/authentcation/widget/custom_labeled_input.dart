@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/app/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,11 +12,13 @@ class CustomLabeledInput extends StatelessWidget {
   final TextInputType? keyboardType;
   final String? Function(String?)? validate;
   final List<TextInputFormatter>? inputFormatters;
+  final Widget? suffix;
 
   const CustomLabeledInput(
       {super.key,
       required this.label,
       required this.title,
+       this.suffix,
       this.keyboardType,
       required this.prefixIcon,
       this.obscureText = false,
@@ -50,6 +53,7 @@ class CustomLabeledInput extends StatelessWidget {
             decoration: InputDecoration(
               labelText: label,
               prefixIcon: Icon(prefixIcon, color: Colors.black),
+           suffixIcon:   suffix == null ? null : suffix, 
               border: InputBorder.none,
             ),
             obscureText: obscureText,

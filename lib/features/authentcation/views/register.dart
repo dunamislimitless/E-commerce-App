@@ -1,4 +1,7 @@
+import 'package:e_commerce_app/app/extensions/extension.dart';
+import 'package:e_commerce_app/app/utils/appstrings.dart';
 import 'package:e_commerce_app/app/utils/colors.dart';
+import 'package:e_commerce_app/app/utils/mixin/validators.dart';
 import 'package:e_commerce_app/app/utils/textstyle.dart';
 import 'package:e_commerce_app/features/authentcation/bloc/auth_bloc.dart';
 import 'package:e_commerce_app/features/authentcation/bloc/auth_state.dart';
@@ -9,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 
 import '../bloc/auth_event.dart';
 
@@ -19,7 +23,7 @@ class CreateAccountScreen extends StatefulWidget {
   State<CreateAccountScreen> createState() => _CreateAccountScreenState();
 }
 
-class _CreateAccountScreenState extends State<CreateAccountScreen> {
+class _CreateAccountScreenState extends State<CreateAccountScreen>  with validators{
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -28,13 +32,14 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
 
   final TextEditingController gender = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
+   bool obscure = false;
 
   @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
-
     firstName.dispose();
     lastName.dispose();
     gender.dispose();
@@ -133,6 +138,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   prefixIcon: Icons.email,
                   controller: emailController,
                   keyboardType: TextInputType.emailAddress,
+                  validate: (value) => validateEmail(value),
+                 
                 ),
                 CustomLabeledInput(
                   label: 'Password',
@@ -140,20 +147,47 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   prefixIcon: Icons.security,
                   controller: passwordController,
                   keyboardType: TextInputType.text,
-                ),
-                CustomLabeledInput(
-                  inputFormatters: [
-                    FilteringTextInputFormatter.digitsOnly,
-                  ],
-                  validate: (x) =>
-                      (x?.length ?? 0) > 10 ? null : 'Invalid Phone number',
-                  label: 'Phone Number',
-                  title: 'Phone Number',
-                  prefixIcon: Icons.numbers,
-                  controller: phoneController,
-                  keyboardType: TextInputType.number,
+                   obscureText: obscure,
+                   suffix: Icon(obscure? Icons.visibility_off: Icons.visibility, color: AppColors.lightButton,).onTap((){setState(() {
+        obscure = !obscure;  // 
+      });})
+                    
                 ),
 
+                 Text(
+          AppString.number,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+        SizedBox(height: 8.0.h),
+             IntlPhoneField(
+     inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                  ],
+            decoration:      InputDecoration(
+              labelText: AppString.number,
+            
+              border: InputBorder.none,
+            ),
+                  controller: phoneController,
+                
+                  keyboardType: TextInputType.number,
+                )
+                // CustomLabeledInput(
+                //   inputFormatters: [
+                //     FilteringTextInputFormatter.digitsOnly,
+                //   ],
+                //   validate: (x) =>
+                //       (x?.length ?? 0) > 10 ? null : 'Invalid Phone number',
+                //   label: 'Phone Number',
+                //   title: 'Phone Number',
+                //   prefixIcon: Icons.numbers,
+                //   controller: phoneController,
+                //   keyboardType: TextInputType.number,
+                // ),
+,
                 SizedBox(height: 50.0.h),
 
                 BlocConsumer<AuthBloc, AuthState>(

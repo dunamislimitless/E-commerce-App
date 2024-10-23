@@ -1,4 +1,5 @@
 class AppString {
+  static const number = "Phone Number";
   static const home = 'Home';
   static const category = 'Category';
   static const popularDetail = 'Product Detail';
