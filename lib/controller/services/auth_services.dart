@@ -29,23 +29,21 @@ class AuthService {
     }
   }
 
-  Future<User?> signInWithEmailAndPassword(
+  Future<({User? user, String? error})> signInWithEmailAndPassword(
       String email, String password) async {
     try {
       final userCredential = await auth.signInWithEmailAndPassword(
           email: email, password: password);
-      return userCredential.user;
-    } catch (e) {
-      debugPrint("Unable to log in");
+      return (user: userCredential.user, error: null);
+    } on FirebaseAuthException catch (e) {
+      return (user: null, error: e.message.toString());
     }
-    return null;
   }
 
   Future<User?> _createProfile({required UserModel model}) async {
     try {
       await firestore.collection("Users").doc(model.userId).set(model.toJson());
     } on FirebaseException catch (e) {
-      // Caught an exception from Firebase.
       rethrow;
     } catch (e) {
       rethrow;

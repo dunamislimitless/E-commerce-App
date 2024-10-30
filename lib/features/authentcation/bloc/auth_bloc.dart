@@ -15,13 +15,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with NavigationMixin {
   }
 
   void _onSignInEvent(SignInEvent event, Emitter<AuthState> emit) async {
-    final user =
+    emit(AuthLoadingState());
+
+    final call =
         await auth.signInWithEmailAndPassword(event.email, event.password);
 
-    if (user != null) {
+    if (call != null) {
       emit(AuthSuccessState());
     } else {
-      emit(AuthErrorState("Please enter email and password!"));
+      emit((AuthErrorState(call.error ?? "Unknown Error")));
     }
   }
 

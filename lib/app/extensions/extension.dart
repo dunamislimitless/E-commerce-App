@@ -6,17 +6,20 @@ extension WidgetHelper on Widget {
         child: this,
       );
 }
- extension StringHelper on String {
 
+extension StringHelper on String {
   String capitalizeFirstLetter() {
     if (this.isEmpty) {
       return this;
     }
     return this[0].toUpperCase() + substring(1);
   }
+
   bool isValidEmail() => RegExp(
           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
       .hasMatch(this);
 
+  bool isValidatePassword() => RegExp(
+        r'^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#\$&*~])(?=.{8,})',
+      ).hasMatch(this);
 }
- 

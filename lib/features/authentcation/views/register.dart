@@ -23,7 +23,8 @@ class CreateAccountScreen extends StatefulWidget {
   State<CreateAccountScreen> createState() => _CreateAccountScreenState();
 }
 
-class _CreateAccountScreenState extends State<CreateAccountScreen>  with validators{
+class _CreateAccountScreenState extends State<CreateAccountScreen>
+    with Validators {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -34,7 +35,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>  with validat
   final TextEditingController phoneController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
-   bool obscure = true;
+  bool obscure = true;
 
   @override
   void dispose() {
@@ -61,16 +62,16 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>  with validat
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 60.0.h), 
+                SizedBox(height: 60.0.h),
                 Text(AppString.createAccount, style: AppText.cartText),
                 SizedBox(height: 38.0.h),
-
                 Row(
                   children: [
                     Expanded(
                       child: CustomLabeledInput(
-                        validate: (x) =>
-                            (x?.length ?? 0) > 2 ? null : '${AppString.invalid} ${AppString.firstName}',
+                        validate: (x) => (x?.length ?? 0) > 2
+                            ? null
+                            : '${AppString.invalid} ${AppString.firstName}',
                         label: AppString.firstName,
                         title: AppString.firstName,
                         prefixIcon: Icons.person,
@@ -83,8 +84,9 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>  with validat
                     ),
                     Expanded(
                       child: CustomLabeledInput(
-                        validate: (x) =>
-                           (x?.length ?? 0) > 2 ? null :'${AppString.invalid} ${AppString.lastName}',
+                        validate: (x) => (x?.length ?? 0) > 2
+                            ? null
+                            : '${AppString.invalid} ${AppString.lastName}',
                         label: AppString.lastName,
                         title: AppString.lastName,
                         prefixIcon: Icons.person,
@@ -94,7 +96,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>  with validat
                     ),
                   ],
                 ),
-                 const Text(
+                const Text(
                   AppString.gender,
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.black),
@@ -113,9 +115,11 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>  with validat
                     child: DropdownButtonFormField<String>(
                       value: gender.text.isEmpty ? null : gender.text,
                       items: const [
-                        DropdownMenuItem(value: AppString.male, child: Text(AppString.male)),
                         DropdownMenuItem(
-                            value: AppString.female, child: Text(AppString.female)),
+                            value: AppString.male, child: Text(AppString.male)),
+                        DropdownMenuItem(
+                            value: AppString.female,
+                            child: Text(AppString.female)),
                       ],
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -123,7 +127,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>  with validat
                       ),
                       onChanged: (String? value) {
                         if (value != null) {
-                         
                           gender.text = value;
                         }
                       },
@@ -131,7 +134,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>  with validat
                   ),
                 ),
                 SizedBox(height: 24.0.h),
-
                 CustomLabeledInput(
                   label: AppString.email,
                   title: AppString.email,
@@ -139,41 +141,42 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>  with validat
                   controller: emailController,
                   keyboardType: TextInputType.emailAddress,
                   validate: (value) => validateEmail(value),
-                 
                 ),
                 CustomLabeledInput(
-                  label: AppString.password,
-                  title: AppString.password,
-                  prefixIcon: Icons.security,
-                  controller: passwordController,
-                  keyboardType: TextInputType.text,
-                   obscureText: obscure,
-                   suffix: Icon(obscure? Icons.visibility_off: Icons.visibility, color: AppColors.lightButton,).onTap((){setState(() {
-        obscure = !obscure;  // 
-      });})
-                    
+                    label: AppString.password,
+                    title: AppString.password,
+                    prefixIcon: Icons.security,
+                    controller: passwordController,
+                    keyboardType: TextInputType.text,
+                    validate: (value) => validatePassword(value),
+                    obscureText: obscure,
+                    suffix: Icon(
+                      obscure ? Icons.visibility_off : Icons.visibility,
+                      color: AppColors.lightButton,
+                    ).onTap(() {
+                      setState(() {
+                        obscure = !obscure; //
+                      });
+                    })),
+                const Text(
+                  AppString.number,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
                 ),
-
-                 const Text(
-          AppString.number,
-          style:  TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
-        ),
-        SizedBox(height: 8.0.h),
-           IntlPhoneField(
-     inputFormatters: [
+                SizedBox(height: 8.0.h),
+                IntlPhoneField(
+                  inputFormatters: [
                     FilteringTextInputFormatter.digitsOnly,
                   ],
-            decoration:       InputDecoration(
-              labelText: AppString.number,
-            
-              border: OutlineInputBorder(borderSide: BorderSide(color: Colors.black,
-              width: 2.0.r)),
-            ),
+                  decoration: InputDecoration(
+                    labelText: AppString.number,
+                    border: OutlineInputBorder(
+                        borderSide:
+                            BorderSide(color: Colors.black, width: 2.0.r)),
+                  ),
                   controller: phoneController,
-                
                   keyboardType: TextInputType.number,
                 )
                 // CustomLabeledInput(
@@ -188,9 +191,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>  with validat
                 //   controller: phoneController,
                 //   keyboardType: TextInputType.number,
                 // ),
-,
+                ,
                 SizedBox(height: 20.0.h),
-
                 BlocConsumer<AuthBloc, AuthState>(
                   listener: (context, state) {
                     if (state is AuthSuccessState) {
@@ -223,7 +225,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>  with validat
                     );
                   },
                 ),
-
                 SizedBox(height: 16.0.h),
                 CustomButton(
                   buttontext: AppString.signIn,
