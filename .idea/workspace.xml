@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="a9bc6ba9-2acc-4e86-9e37-c9aecba37ae7" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/features/dashboard/views/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/dashboard/views/home.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Podfile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/authentcation/bloc/auth_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/authentcation/bloc/auth_bloc.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +113,7 @@
     "last_opened_file_path": "/Users/samuelogundoju/Development/Apps/E-commerce-App",
     "rearrange.code.on.save": "true",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "AndroidSdkUpdater",
+    "settings.editor.selected.configurable": "actions.on.save",
     "show.migrate.to.gradle.popup": "false"
   }
 }]]></component>

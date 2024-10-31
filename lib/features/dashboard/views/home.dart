@@ -1,6 +1,7 @@
 import 'package:e_commerce_app/app/utils/appicons.dart';
 import 'package:e_commerce_app/app/utils/colors.dart';
 import 'package:e_commerce_app/features/dashboard/bloc/dashboard_bloc_bloc.dart';
+import 'package:e_commerce_app/features/dashboard/views/profile.dart';
 import 'package:e_commerce_app/features/product/view/product_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -97,7 +98,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                 },
               ),
               const Cart(),
-              Container()
+              ProfileScreen()
             ],
           ),
         ));
