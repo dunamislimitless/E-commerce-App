@@ -12,6 +12,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with NavigationMixin {
   AuthBloc() : super(AuthInitialState()) {
     on<SignInEvent>(_onSignInEvent);
     on<SignUpEvent>(_onSignUpEvent);
+    on<SignOutEvent>(logOut);
   }
 
   void _onSignInEvent(SignInEvent event, Emitter<AuthState> emit) async {
@@ -20,7 +21,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with NavigationMixin {
     final call =
         await auth.signInWithEmailAndPassword(event.email, event.password);
 
-    if (call != null) {
+    if (call.user != null) {
       emit(AuthSuccessState());
     } else {
       emit((AuthErrorState(call.error ?? "Unknown Error")));
@@ -46,6 +47,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with NavigationMixin {
     } else {
       emit(AuthErrorState(call.error ??
           "Unable to register Account, enter email and password!"));
+    }
+  }
+
+  void logOut(SignOutEvent event, Emitter<AuthState> emit) async {
+    emit(AuthLoadingState());
+
+    try {
+      await auth.signOut();
+      emit(AuthSuccessState());
+
+      debugPrint('LOGOUT SUCCESSFULY');
+    } catch (e) {
+      emit(AuthErrorState(e.toString() ?? "Unknown Error"));
     }
   }
 }

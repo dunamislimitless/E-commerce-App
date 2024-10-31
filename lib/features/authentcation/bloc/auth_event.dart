@@ -23,3 +23,5 @@ class SignUpEvent extends AuthEvent {
       required this.gender,
       required this.phoneNumber});
 }
+
+class SignOutEvent extends AuthEvent {}

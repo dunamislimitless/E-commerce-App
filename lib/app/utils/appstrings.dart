@@ -4,6 +4,7 @@ class AppString {
   static const home = 'Home';
   static const male = 'Male';
   static const female = "Female";
+  static const signOut = "Sign Out";
   static const firstName = 'First Name';
   static const lastName = 'Last Name';
   static const email = "Email";
