@@ -14,6 +14,7 @@ import 'package:e_commerce_app/features/dashboard/widget/discount_container.dart
 import 'package:e_commerce_app/features/dashboard/widget/latest_cart.dart';
 import 'package:e_commerce_app/features/dashboard/widget/page_header.dart';
 import 'package:e_commerce_app/features/product/bloc/product_bloc_bloc.dart';
+import 'package:e_commerce_app/features/product/view/add_product.dart';
 import 'package:e_commerce_app/features/product/view/all_product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -350,9 +351,14 @@ class _HomeScreenState extends State<HomeScreen> {
                               style: AppText.titleText,
                             ),
                             Text(
-                              AppString.seeAll,
+                              AppString.addProduct,
                               style: AppText.seeAll,
-                            )
+                            ).onTap(() {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => AddProduct()));
+                            })
                           ],
                         ),
                         SizedBox(height: 10.h),

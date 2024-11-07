@@ -10,8 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'features/cart/cart_bloc/cart_bloc.dart';
 
-void main() async{
-  
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp();
@@ -34,20 +33,20 @@ class MyApp extends StatelessWidget {
               ),
               BlocProvider<ProductBlocBloc>(
                 create: (context) => ProductBlocBloc(),
-              ) , BlocProvider<AuthBloc>(
+              ),
+              BlocProvider<AuthBloc>(
                 create: (context) => AuthBloc(),
               ),
             ],
-
             child: MaterialApp(
                 debugShowCheckedModeBanner: false,
-                title: 'Flutter Demo',
+                title: 'E-commerce App',
                 theme: ThemeData(
                   colorScheme:
                       ColorScheme.fromSeed(seedColor: AppColors.discountColor),
                   useMaterial3: true,
                 ),
-                home:  Signin()),
+                home: Signin()),
           );
         });
   }

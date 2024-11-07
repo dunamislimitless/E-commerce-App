@@ -8,7 +8,6 @@ import 'package:e_commerce_app/features/authentcation/bloc/auth_bloc.dart';
 import 'package:e_commerce_app/features/authentcation/bloc/auth_event.dart';
 import 'package:e_commerce_app/features/authentcation/bloc/auth_state.dart';
 import 'package:e_commerce_app/features/authentcation/views/register.dart';
-import 'package:e_commerce_app/features/authentcation/widget/custom_form_field.dart';
 import 'package:e_commerce_app/features/authentcation/widget/custom_labeled_input.dart';
 import 'package:e_commerce_app/features/dashboard/views/home.dart';
 import 'package:e_commerce_app/features/dashboard/widget/custom_button.dart';
