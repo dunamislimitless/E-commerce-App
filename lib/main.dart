@@ -3,6 +3,8 @@ import 'package:e_commerce_app/features/authentcation/bloc/auth_bloc.dart';
 import 'package:e_commerce_app/features/authentcation/views/sign_in.dart';
 import 'package:e_commerce_app/features/dashboard/views/home.dart';
 import 'package:e_commerce_app/features/product/bloc/product_bloc_bloc.dart';
+import 'package:e_commerce_app/features/product/controller/services/product_services.dart';
+import 'package:e_commerce_app/features/product/models/product_model.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,28 +28,32 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
         designSize: const Size(414, 896),
         builder: (context, child) {
-          return MultiBlocProvider(
-            providers: [
-              BlocProvider<CartBloc>(
-                create: (context) => CartBloc(),
-              ),
-              BlocProvider<ProductBlocBloc>(
-                create: (context) => ProductBlocBloc(),
-              ),
-              BlocProvider<AuthBloc>(
-                create: (context) => AuthBloc(),
-              ),
-            ],
-            child: MaterialApp(
-                debugShowCheckedModeBanner: false,
-                title: 'E-commerce App',
-                theme: ThemeData(
-                  colorScheme:
-                      ColorScheme.fromSeed(seedColor: AppColors.discountColor),
-                  useMaterial3: true,
-                ),
-                home: Signin()),
-          );
+          return RepositoryProvider(
+              create: (context) => ProductServices(),
+              child: MultiBlocProvider(
+                  providers: [
+                    BlocProvider<CartBloc>(
+                      create: (context) => CartBloc(),
+                    ),
+                    BlocProvider<ProductBlocBloc>(
+                      create: (context) => ProductBlocBloc(
+                          productService:
+                              RepositoryProvider.of<ProductServices>(context)),
+                    ),
+                    BlocProvider<AuthBloc>(
+                      create: (context) => AuthBloc(),
+                    ),
+                  ],
+                  child: MaterialApp(
+                    debugShowCheckedModeBanner: false,
+                    title: 'E-commerce App',
+                    theme: ThemeData(
+                      colorScheme: ColorScheme.fromSeed(
+                          seedColor: AppColors.discountColor),
+                      useMaterial3: true,
+                    ),
+                    home: Signin(),
+                  )));
         });
   }
 }

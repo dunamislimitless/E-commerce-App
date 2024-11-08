@@ -7,7 +7,10 @@ import 'package:e_commerce_app/app/utils/colors.dart';
 import 'package:e_commerce_app/app/utils/textstyle.dart';
 import 'package:e_commerce_app/features/authentcation/widget/custom_labeled_input.dart';
 import 'package:e_commerce_app/features/dashboard/widget/custom_button.dart';
+import 'package:e_commerce_app/features/product/bloc/product_bloc_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
@@ -39,6 +42,10 @@ class _AddProductState extends State<AddProduct> {
     super.dispose();
   }
 
+  Future<void> createProduct() async {}
+
+  void postData(context) {}
+
   Future imgFromGallery() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
@@ -63,42 +70,12 @@ class _AddProductState extends State<AddProduct> {
     });
   }
 
-  Future uploadProductDetails() async {
-    if (image == null) return;
-    final fileName = basename(image!.path);
-    final destination = 'files/$fileName';
-
-    try {
-      final ref = firebase_storage.FirebaseStorage.instance
-          .ref(destination)
-          .child('file/');
-      await ref.putFile(image!);
-
-      final imageUrl = await ref.getDownloadURL();
-      num? productPrice;
-      try {
-        productPrice = int.parse(priceController.text);
-      } catch (e) {
-        print('Invalid price input. Please enter a valid number.');
-        return;
-      }
-
-      await _firestore.collection('images').add({
-        'product_name': productNameController.text,
-        'product_description': productDescriptionController.text,
-        'imageUrl': imageUrl,
-        'product_price': productPrice,
-        'uploadDate': FieldValue.serverTimestamp(),
-      });
-
-      print("product added SUCCESSFULLY!!!!   656565");
-    } catch (e) {
-      print('ERROR  OCCURED');
-    }
-  }
+  Future uploadProductDetails() async {}
 
   @override
   Widget build(BuildContext context) {
+    final productBloc = context.read<ProductBlocBloc>();
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -127,6 +104,9 @@ class _AddProductState extends State<AddProduct> {
                 prefixIcon: Icons.money,
                 keyboardType: TextInputType.number,
                 controller: priceController,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                validate: (x) =>
+                    (x?.length ?? 0) > 10 ? null : 'Invalid Phone number',
               ),
               CustomButton(
                 onPressed: () {},
@@ -181,12 +161,48 @@ class _AddProductState extends State<AddProduct> {
               SizedBox(
                 height: 20.h,
               ),
-              CustomButton(
-                onPressed: uploadProductDetails,
-                height: 52,
-                textColor: AppColors.discountColor,
-                buttontext: 'Update Product',
-              )
+              BlocConsumer<ProductBlocBloc, ProductBlocState>(
+                  listener: (context, state) {
+                if (state is ProductSuccessState) {
+                } else if (state is ProductErrorState) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(state.error)),
+                  );
+                }
+              }, builder: (context, state) {
+                if (state is ProductLoading) {
+                  return Center(child: CircularProgressIndicator());
+                }
+
+                return CustomButton(
+                  onPressed: () async {
+                    if (image == null) return;
+                    final fileName = basename(image!.path);
+                    final destination = 'files/$fileName';
+
+                    try {
+                      final ref = firebase_storage.FirebaseStorage.instance
+                          .ref(destination)
+                          .child('file/');
+                      await ref.putFile(image!);
+
+                      final imageUrl = await ref.getDownloadURL();
+
+                      productBloc.add(AddProductEvent(
+                        name: productNameController.text,
+                        description: productDescriptionController.text,
+                        image: imageUrl,
+                        price: int.parse(priceController.text),
+                      ));
+                    } catch (e) {
+                      print('ERROR  OCCURED');
+                    }
+                  },
+                  height: 52,
+                  textColor: AppColors.discountColor,
+                  buttontext: 'Update Product',
+                );
+              })
             ]),
           ),
         ),

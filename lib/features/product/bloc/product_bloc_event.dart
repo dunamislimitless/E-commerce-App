@@ -8,10 +8,17 @@ class SelectProductEvent extends ProductBlocEvent {
   SelectProductEvent({required this.product});
 }
 
-class AddProductImageEvent extends ProductBlocEvent {
-  final File? image;
+class AddProductEvent extends ProductBlocEvent {
+  final num price;
+  final String name;
+  final String description;
+  final String image;
 
-  AddProductImageEvent({required this.image});
+  AddProductEvent(
+      {required this.name,
+      required this.description,
+      required this.image,
+      required this.price});
 }
 
 class UploadImageEvent extends ProductBlocEvent {

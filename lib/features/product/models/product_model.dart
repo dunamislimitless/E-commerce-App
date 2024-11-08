@@ -1,5 +1,7 @@
-class Product {
-  Product({
+import 'package:equatable/equatable.dart';
+
+class ProductModel extends Equatable {
+  ProductModel({
     required this.productName,
     required this.productDescription,
     required this.productPrice,
@@ -11,8 +13,8 @@ class Product {
   final num productPrice;
   final String productImage;
 
-  factory Product.fromJson(Map<String, dynamic> json) {
-    return Product(
+  factory ProductModel.fromJson(Map<String, dynamic> json) {
+    return ProductModel(
       productName: json["product_name"] ?? "",
       productDescription: json["product_description"] ?? "",
       productPrice: json["product_price"] ?? 0,
@@ -26,4 +28,12 @@ class Product {
         "product_price": productPrice,
         "product_image": productImage,
       };
+
+  @override
+  List<Object?> get props => [
+        productName,
+        productDescription,
+        productPrice,
+        productImage,
+      ];
 }
