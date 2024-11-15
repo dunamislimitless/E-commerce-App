@@ -1,5 +1,6 @@
 import 'package:e_commerce_app/app/utils/mixin/navigation_mixin.dart';
 import 'package:e_commerce_app/controller/services/auth_services.dart';
+import 'package:e_commerce_app/controller/services/user_services.dart';
 import 'package:e_commerce_app/features/authentcation/bloc/auth_event.dart';
 import 'package:e_commerce_app/features/authentcation/bloc/auth_state.dart';
 import 'package:e_commerce_app/features/authentcation/model/user_model.dart';
@@ -8,11 +9,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> with NavigationMixin {
   final auth = AuthService();
+  final userDb = UserServices();
 
   AuthBloc() : super(AuthInitialState()) {
     on<SignInEvent>(_onSignInEvent);
     on<SignUpEvent>(_onSignUpEvent);
     on<SignOutEvent>(logOut);
+    on<AddUserEvent>(addUser);
   }
 
   void _onSignInEvent(SignInEvent event, Emitter<AuthState> emit) async {
@@ -47,6 +50,23 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with NavigationMixin {
     } else {
       emit(AuthErrorState(call.error ??
           "Unable to register Account, enter email and password!"));
+    }
+  }
+
+  void addUser(AddUserEvent event, Emitter<AuthState> emit) async {
+    await Future.delayed(Duration(seconds: 1));
+    emit(AuthLoadingState());
+    try {
+      await userDb.create(
+          firstName: event.firstName,
+          lastName: event.lastName,
+          occupation: event.occupation,
+          gender: event.gender,
+          phoneNumber: event.phoneNumber,
+          email: event.email);
+      emit(AuthSuccessState());
+    } catch (e) {
+      emit(AuthErrorState(e.toString()));
     }
   }
 

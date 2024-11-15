@@ -25,3 +25,18 @@ class SignUpEvent extends AuthEvent {
 }
 
 class SignOutEvent extends AuthEvent {}
+
+class AddUserEvent extends AuthEvent {
+  final String firstName;
+  final String lastName;
+  final String email;
+  final String gender;
+  final String phoneNumber;
+  final String occupation;
+  AddUserEvent(this.phoneNumber,
+      {required this.firstName,
+      required this.lastName,
+      required this.gender,
+      required this.occupation,
+      required this.email});
+}

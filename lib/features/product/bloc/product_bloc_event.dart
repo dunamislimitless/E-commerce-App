@@ -14,11 +14,12 @@ class AddProductEvent extends ProductBlocEvent {
   final String description;
   final String image;
 
-  AddProductEvent(
-      {required this.name,
-      required this.description,
-      required this.image,
-      required this.price});
+  AddProductEvent({
+    required this.name,
+    required this.description,
+    required this.image,
+    required this.price,
+  });
 }
 
 class UploadImageEvent extends ProductBlocEvent {

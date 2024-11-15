@@ -9,6 +9,7 @@ class AppString {
   static const lastName = 'Last Name';
   static const email = "Email";
   static const register = 'Register';
+  static const occupation = 'Occupation';
   static const signIn = 'Sign In';
   static const password = "Password";
   static const gender = 'Gender';

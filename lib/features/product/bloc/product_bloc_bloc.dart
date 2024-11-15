@@ -36,6 +36,7 @@ class ProductBlocBloc extends Bloc<ProductBlocEvent, ProductBlocState> {
           name: event.name,
           price: event.price,
           description: event.description,
+          timeCreated: '',
           image: event.image);
       emit(ProductAdded());
     } catch (e) {

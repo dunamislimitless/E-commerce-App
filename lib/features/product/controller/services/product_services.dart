@@ -7,13 +7,15 @@ class ProductServices {
       {required String name,
       required num price,
       required String description,
-      required String image}) async {
+      required String image,
+      required String timeCreated}) async {
     try {
       await _fireCloud.add({
         "product_description": description,
         "product_image": image,
         "product_name": name,
-        "product_price": price
+        "product_price": price,
+        "time_created": FieldValue.serverTimestamp(),
       });
     } on FirebaseException catch (e) {
       if (kDebugMode) {
