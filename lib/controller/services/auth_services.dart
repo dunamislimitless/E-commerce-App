@@ -17,7 +17,7 @@ class AuthService {
           email: email, password: password);
       await auth.currentUser?.reload();
       final updatedUser = model.copyWith(userId: auth.currentUser?.uid);
-      _createProfile(model: updatedUser);
+      await _createProfile(model: updatedUser);
 
       return (user: updatedUser, error: null);
     } on FirebaseAuthException catch (e) {

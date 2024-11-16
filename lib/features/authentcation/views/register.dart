@@ -212,7 +212,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>
                   },
                   builder: (context, state) {
                     if (state is AuthLoadingState) {
-                      return Center(child: CircularProgressIndicator());
+                      return const Center(child: CircularProgressIndicator());
                     }
 
                     return CustomButton(
@@ -227,12 +227,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>
                             firstName: firstName.text,
                             gender: gender.text,
                           ));
-                          authBloc.add(AddUserEvent(phoneController.text,
-                              firstName: firstName.text,
-                              lastName: lastName.text,
-                              gender: gender.text,
-                              occupation: occupation.text,
-                              email: emailController.text));
                         }
                       },
                       height: 50.h,
