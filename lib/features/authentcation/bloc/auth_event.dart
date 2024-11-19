@@ -1,3 +1,5 @@
+import 'package:e_commerce_app/features/authentcation/model/user_model.dart';
+
 abstract class AuthEvent {}
 
 class SignInEvent extends AuthEvent {
@@ -22,6 +24,11 @@ class SignUpEvent extends AuthEvent {
       required this.firstName,
       required this.gender,
       required this.phoneNumber});
+}
+
+class UserProfileEvent extends AuthEvent {
+  // final List<UserModel> userModel;
+  // final String userId;
 }
 
 class SignOutEvent extends AuthEvent {}

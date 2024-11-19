@@ -17,76 +17,99 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<AuthBloc>().add(UserProfileEvent());
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
             title: Center(child: Text('Profile')),
             automaticallyImplyLeading: false),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(16.0.w),
-            child: Column(
-              children: [
-                SizedBox(height: 20.h),
-                CircleAvatar(
-                  radius: 60.r,
-                  backgroundImage: AssetImage(AppImage.flower),
-                ),
-                SizedBox(height: 20.h),
-                Text('Samuel O.', style: AppText.amountText),
-                SizedBox(height: 10.h),
-                Text(
-                  'ogundojusamuel@gmail.com',
-                  style: TextStyle(fontSize: 16.sp, color: Colors.grey[600]),
-                ),
-                SizedBox(height: 20.h),
-                Divider(color: AppColors.lightButton, thickness: 1),
-                _buildProfileDetailRow(Icons.phone, 'Phone', '+2347069332491'),
-                _buildProfileDetailRow(Icons.location_on, 'Address',
-                    '35, Glover Road Ikoyi Lagos'),
-                _buildProfileDetailRow(Icons.cake, 'Birthday', 'January 1,'),
-                _buildProfileDetailRow(
-                    Icons.work, 'Occupation', 'Software Engineer'),
-                SizedBox(height: 30.h),
-                // Align(
-                //   alignment: Alignment.bottomRight,
-                //   child: Text(AppString.signOut,
-                //           style: TextStyle(color: Colors.red))
-                //       .onTap(
-                //     () {
-                //       final authBloc = context.read<AuthBloc>();
+        body: BlocBuilder<AuthBloc, AuthState>(
+          builder: (context, state) {
+            if (state is AuthLoadingState) {
+              return Center(child: CircularProgressIndicator());
+            } else if (state is UserProfileLoadedState) {
+              final user = state.userModel;
+              return SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.all(16.0.w),
+                  child: Column(
+                    children: [
+                      SizedBox(height: 20.h),
+                      CircleAvatar(
+                        radius: 60.r,
+                        backgroundImage: AssetImage(AppImage.flower),
+                      ),
+                      SizedBox(height: 20.h),
+                      Text('${user.firstName} ${user.lastName}',
+                          style: AppText.amountText),
+                      SizedBox(height: 10.h),
+                      Text(
+                        "${user.gender}",
+                        style:
+                            TextStyle(fontSize: 16.sp, color: Colors.grey[600]),
+                      ),
+                      SizedBox(height: 20.h),
+                      Divider(color: AppColors.lightButton, thickness: 1),
+                      _buildProfileDetailRow(
+                          Icons.phone, 'Phone', '${user.phoneNumber}'),
+                      _buildProfileDetailRow(Icons.location_on, 'Address',
+                          '35, Glover Road Ikoyi Lagos'),
+                      _buildProfileDetailRow(
+                          Icons.cake, 'Gender', '${user.gender}'),
+                      _buildProfileDetailRow(
+                          Icons.work, 'Occupation', '${user.occupation}'),
+                      SizedBox(height: 30.h),
+                      // Align(
+                      //   alignment: Alignment.bottomRight,
+                      //   child: Text(AppString.signOut,
+                      //           style: TextStyle(color: Colors.red))
+                      //       .onTap(
+                      //     () {
+                      //       final authBloc = context.read<AuthBloc>();
 
-                //       authBloc.add(SignOutEvent());
-                //     },
-                //   ),
-                // ),
-                BlocConsumer<AuthBloc, AuthState>(listener: (context, state) {
-                  if (state is AuthSuccessState) {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Signin()));
-                  } else if (state is AuthErrorState) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(state.message)),
-                    );
-                  }
-                }, builder: (context, state) {
-                  if (state is AuthLoadingState) {
-                    return Center(child: CircularProgressIndicator());
-                  }
-                  return CustomButton(
-                    onPressed: () {
-                      final authBloc = context.read<AuthBloc>();
+                      //       authBloc.add(SignOutEvent());
+                      //     },
+                      //   ),
+                      // ),
+                      BlocConsumer<AuthBloc, AuthState>(
+                          listener: (context, state) {
+                        if (state is AuthSuccessState) {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Signin()));
+                        } else if (state is AuthErrorState) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text(state.message)),
+                          );
+                        }
+                      }, builder: (context, state) {
+                        if (state is AuthLoadingState) {
+                          return Center(child: CircularProgressIndicator());
+                        }
+                        return CustomButton(
+                          onPressed: () {
+                            final authBloc = context.read<AuthBloc>();
 
-                      authBloc.add(SignOutEvent());
-                    },
-                    buttontext: AppString.signOut,
-                    height: 52.h,
-                    color: AppColors.favoriteColor,
-                  );
-                })
-              ],
-            ),
-          ),
+                            authBloc.add(SignOutEvent());
+                          },
+                          buttontext: AppString.signOut,
+                          height: 52.h,
+                          color: AppColors.favoriteColor,
+                        );
+                      })
+                    ],
+                  ),
+                ),
+              );
+            } else if (state is AuthErrorState) {
+              return Center(child: Text(state.message));
+            } else {
+              return const Center(
+                  child: Text("No user profile data available."));
+            }
+          },
         ),
       ),
     );
