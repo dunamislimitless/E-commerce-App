@@ -9,17 +9,9 @@ class SelectProductEvent extends ProductBlocEvent {
 }
 
 class AddProductEvent extends ProductBlocEvent {
-  final num price;
-  final String name;
-  final String description;
-  final String image;
+  final FinalCart product;
 
-  AddProductEvent({
-    required this.name,
-    required this.description,
-    required this.image,
-    required this.price,
-  });
+  AddProductEvent({required this.product});
 }
 
 class UploadImageEvent extends ProductBlocEvent {

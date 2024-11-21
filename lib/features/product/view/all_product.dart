@@ -79,7 +79,7 @@ class ProductCatalog extends StatelessWidget {
                             child: Image.asset(each.imagePath),
                           ),
                           Text(
-                            each.itemDescripton,
+                            each.itemDescription,
                             style: AppText.itemText,
                           ),
                           Padding(

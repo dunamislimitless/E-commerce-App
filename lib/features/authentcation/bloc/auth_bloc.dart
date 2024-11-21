@@ -64,7 +64,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with NavigationMixin {
 
     if (userProfile != null) {
       debugPrint('NORMAL NORMAL ${userProfile}');
-      emit(UserProfileLoadedState(userModel: userProfile));
+      emit(UserProfileLoadedState (userModel: userProfile));
     } else {
       emit(AuthErrorState("Failed to fetch user profile."));
     }

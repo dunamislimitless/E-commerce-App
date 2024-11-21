@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:e_commerce_app/features/cart/models/final_cart_model.dart';
 import 'package:e_commerce_app/features/dashboard/models/product_model.dart';
-import 'package:e_commerce_app/features/product/controller/services/product_services.dart';
+import 'package:e_commerce_app/controller/services/product_services.dart';
 import 'package:meta/meta.dart';
 
 import 'package:image_picker/image_picker.dart';
@@ -32,12 +32,7 @@ class ProductBlocBloc extends Bloc<ProductBlocEvent, ProductBlocState> {
   void addProduct(AddProductEvent event, Emitter<ProductBlocState> emit) async {
     await Future.delayed(Duration(seconds: 1));
     try {
-      await productService.create(
-          name: event.name,
-          price: event.price,
-          description: event.description,
-          timeCreated: '',
-          image: event.image);
+      await productService.create(product: event.product);
       emit(ProductAdded());
     } catch (e) {
       emit(ProductErrorState(error: e.toString()));

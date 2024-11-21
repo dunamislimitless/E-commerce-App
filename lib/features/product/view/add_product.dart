@@ -1,11 +1,16 @@
 import 'dart:io';
 
+import 'package:e_commerce_app/app/utils/enums/product_enum.dart';
+import 'package:e_commerce_app/features/cart/cart_bloc/cart_event.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_app/app/utils/app_ipngs.dart';
 import 'package:e_commerce_app/app/utils/appstrings.dart';
 import 'package:e_commerce_app/app/utils/colors.dart';
 import 'package:e_commerce_app/app/utils/textstyle.dart';
 import 'package:e_commerce_app/features/authentcation/widget/custom_labeled_input.dart';
+import 'package:e_commerce_app/features/cart/models/final_cart_model.dart';
 import 'package:e_commerce_app/features/dashboard/widget/custom_button.dart';
 import 'package:e_commerce_app/features/product/bloc/product_bloc_bloc.dart';
 import 'package:flutter/material.dart';
@@ -26,19 +31,26 @@ class AddProduct extends StatefulWidget {
 class _AddProductState extends State<AddProduct> {
   firebase_storage.FirebaseStorage storage =
       firebase_storage.FirebaseStorage.instance;
+  Categories? selectedCategories;
   File? image;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final ImagePicker picker = ImagePicker();
   final productNameController = TextEditingController();
 
   final productDescriptionController = TextEditingController();
-
+  final categoriesController = TextEditingController();
+  final countController = TextEditingController();
+  final reviewController = TextEditingController();
   final priceController = TextEditingController();
+  final ratingController = TextEditingController();
 
   void dispose() {
     priceController.dispose();
     productDescriptionController.dispose();
     productNameController.dispose();
+    countController.dispose();
+    reviewController.dispose();
+    ratingController.dispose();
+    categoriesController.dispose();
     super.dispose();
   }
 
@@ -105,8 +117,64 @@ class _AddProductState extends State<AddProduct> {
                 keyboardType: TextInputType.number,
                 controller: priceController,
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                validate: (x) =>
-                    (x?.length ?? 0) > 10 ? null : 'Invalid Phone number',
+              ),
+              // CustomLabeledInput(
+              //   title: 'Price',
+              //   label: 'Enter Product Price',
+              //   prefixIcon: Icons.money,
+              //   keyboardType: TextInputType.number,
+              //   controller: priceController,
+              //   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              // ),
+              CustomLabeledInput(
+                title: "Review",
+                label: 'Enter Product review',
+                prefixIcon: Icons.money,
+                keyboardType: TextInputType.number,
+                controller: reviewController,
+              ),
+              Center(
+                child: DropdownButton<Categories>(
+                  value: selectedCategories,
+                  items: Categories.values.map((Categories categories) {
+                    return DropdownMenuItem<Categories>(
+                      value: categories,
+                      child:
+                          Text(categories.name.toUpperCase()), // Display name
+                    );
+                  }).toList(),
+                  onChanged: (Categories? newValue) {
+                    setState(() {
+                      selectedCategories = newValue!;
+                      categoriesController.text = newValue.name;
+                    });
+                  },
+                ),
+              ),
+              CustomLabeledInput(
+                title: "Enter how many Product you want",
+                label: '0',
+                prefixIcon: Icons.money,
+                keyboardType: TextInputType.number,
+                controller: countController,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              ),
+              RatingBar.builder(
+                initialRating: 3,
+                minRating: 1,
+                direction: Axis.horizontal,
+                allowHalfRating: true,
+                itemSize: 20,
+                itemCount: 5,
+                itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+                itemBuilder: (context, _) => const Icon(
+                  Icons.star,
+                  color: Colors.amber,
+                ),
+                onRatingUpdate: (rating) {
+                  print("Na Ratimg Be This $rating");
+                  ratingController.text = "$rating";
+                },
               ),
               CustomButton(
                 onPressed: () {},
@@ -176,26 +244,30 @@ class _AddProductState extends State<AddProduct> {
 
                 return CustomButton(
                   onPressed: () async {
-                    if (image == null) return;
-                    final fileName = basename(image!.path);
-                    final destination = 'files/$fileName';
+                    // if (image == null) return;
+                    // final fileName = basename(image!.path);
+                    // final destination = 'files/$fileName';
 
                     try {
-                      final ref = firebase_storage.FirebaseStorage.instance
-                          .ref(destination)
-                          .child('file/');
-                      await ref.putFile(image!);
+                      // final ref = firebase_storage.FirebaseStorage.instance
+                      //     .ref(destination)
+                      //     .child('file/');
+                      // await ref.putFile(image!);
 
-                      final imageUrl = await ref.getDownloadURL();
+                      // final imageUrl = await ref.getDownloadURL();
 
                       productBloc.add(AddProductEvent(
-                        name: productNameController.text,
-                        description: productDescriptionController.text,
-                        image: imageUrl,
-                        price: int.parse(priceController.text),
-                      ));
+                          product: FinalCart(
+                        amount: num.parse(priceController.text),
+                        id: "",
+                        imagePath: "imageUrl",
+                        itemCount: num.parse(countController.text),
+                        itemDescription: productDescriptionController.text,
+                        reviews: ratingController.text,
+                      )));
+                      debugPrint('DONezDDDDD');
                     } catch (e) {
-                      print('ERROR  OCCURED');
+                      debugPrint('ERROR  OCCURED');
                     }
                   },
                   height: 52,
