@@ -31,6 +31,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>
   final TextEditingController firstName = TextEditingController();
   final TextEditingController lastName = TextEditingController();
 
+  final occupation = TextEditingController();
   final TextEditingController gender = TextEditingController();
   final TextEditingController phoneController = TextEditingController();
 
@@ -143,11 +144,18 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>
                   validate: (value) => validateEmail(value),
                 ),
                 CustomLabeledInput(
+                  label: AppString.occupation,
+                  title: AppString.occupation,
+                  prefixIcon: Icons.work,
+                  controller: occupation,
+                  keyboardType: TextInputType.text,
+                ),
+                CustomLabeledInput(
                     label: AppString.password,
                     title: AppString.password,
                     prefixIcon: Icons.security,
                     controller: passwordController,
-                    keyboardType: TextInputType.text,
+                    keyboardType: TextInputType.visiblePassword,
                     validate: (value) => validatePassword(value),
                     obscureText: obscure,
                     suffix: Icon(
@@ -204,7 +212,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>
                   },
                   builder: (context, state) {
                     if (state is AuthLoadingState) {
-                      return Center(child: CircularProgressIndicator());
+                      return const Center(child: CircularProgressIndicator());
                     }
 
                     return CustomButton(

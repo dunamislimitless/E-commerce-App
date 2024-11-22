@@ -14,6 +14,7 @@ import 'package:e_commerce_app/features/dashboard/widget/discount_container.dart
 import 'package:e_commerce_app/features/dashboard/widget/latest_cart.dart';
 import 'package:e_commerce_app/features/dashboard/widget/page_header.dart';
 import 'package:e_commerce_app/features/product/bloc/product_bloc_bloc.dart';
+import 'package:e_commerce_app/features/product/view/add_product.dart';
 import 'package:e_commerce_app/features/product/view/all_product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -275,7 +276,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       child: Image.asset(eachProduct.imagePath),
                                     ),
                                     Text(
-                                      eachProduct.itemDescripton,
+                                      eachProduct.itemDescription,
                                       style: AppText.itemText,
                                     ),
                                     Padding(
@@ -321,9 +322,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                             //               imagePath: eachProduct
                                             //                   .imagePath,
                                             //               descrition: eachProduct
-                                            //                   .itemDescripton,
+                                            //                   .itemDescription,
                                             //               productName: eachProduct
-                                            //                   .itemDescripton,
+                                            //                   .itemDescription,
                                             //               eachProduct:
                                             //                   eachProduct,
                                             //             )));
@@ -350,9 +351,14 @@ class _HomeScreenState extends State<HomeScreen> {
                               style: AppText.titleText,
                             ),
                             Text(
-                              AppString.seeAll,
+                              AppString.addProduct,
                               style: AppText.seeAll,
-                            )
+                            ).onTap(() {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => AddProduct()));
+                            })
                           ],
                         ),
                         SizedBox(height: 10.h),
@@ -383,7 +389,7 @@ final cart = [
   FinalCart(
     id: "id1",
     imagePath: AppImage.headset,
-    itemDescripton: 'Wireless Headphone',
+    itemDescription: 'Wireless Headphone',
     reviews: "(379)",
     amount: 65,
     itemCount: 2,
@@ -392,7 +398,7 @@ final cart = [
   FinalCart(
     id: "id2",
     imagePath: AppImage.sneakers,
-    itemDescripton: 'Bluetooth Speaker',
+    itemDescription: 'Bluetooth Speaker',
     reviews: "(249)",
     amount: 40,
     itemCount: 1,
@@ -401,7 +407,7 @@ final cart = [
   FinalCart(
     id: "id3",
     imagePath: AppImage.flower,
-    itemDescripton: 'Smart Watch',
+    itemDescription: 'Smart Watch',
     reviews: "(589)",
     amount: 120,
     itemCount: 4,
@@ -410,7 +416,7 @@ final cart = [
   FinalCart(
     id: "id4",
     imagePath: AppImage.flower,
-    itemDescripton: 'Smart Watch',
+    itemDescription: 'Smart Watch',
     reviews: "(589)",
     amount: 120,
     itemCount: 4,
@@ -419,7 +425,7 @@ final cart = [
   FinalCart(
     id: "id5",
     imagePath: AppImage.flower,
-    itemDescripton: 'Laptop',
+    itemDescription: 'Laptop',
     reviews: "(980)",
     amount: 850,
     itemCount: 1,
@@ -428,7 +434,7 @@ final cart = [
   FinalCart(
     id: "id6",
     imagePath: AppImage.sneakers,
-    itemDescripton: 'Tablet',
+    itemDescription: 'Tablet',
     reviews: "(530)",
     amount: 250,
     itemCount: 3,
@@ -437,7 +443,7 @@ final cart = [
   FinalCart(
     id: "id7",
     imagePath: AppImage.headset,
-    itemDescripton: 'Digital Camera',
+    itemDescription: 'Digital Camera',
     reviews: "(412)",
     amount: 400,
     itemCount: 1,
@@ -446,7 +452,7 @@ final cart = [
   FinalCart(
     id: "id8",
     imagePath: AppImage.headset,
-    itemDescripton: 'Smartphone',
+    itemDescription: 'Smartphone',
     reviews: "(870)",
     amount: 999,
     itemCount: 1,
@@ -455,7 +461,7 @@ final cart = [
   FinalCart(
     id: "id9",
     imagePath: AppImage.watch,
-    itemDescripton: 'Fitness Tracker',
+    itemDescription: 'Fitness Tracker',
     reviews: "(150)",
     amount: 90,
     itemCount: 2,
@@ -464,7 +470,7 @@ final cart = [
   FinalCart(
     id: "id10",
     imagePath: AppImage.headie,
-    itemDescripton: 'Winter Jacket',
+    itemDescription: 'Winter Jacket',
     reviews: "(320)",
     amount: 150,
     itemCount: 1,
@@ -473,7 +479,7 @@ final cart = [
   FinalCart(
     id: "id11",
     imagePath: AppImage.sneakers,
-    itemDescripton: 'Running Shoes',
+    itemDescription: 'Running Shoes',
     reviews: "(200)",
     amount: 75,
     itemCount: 2,
@@ -482,7 +488,7 @@ final cart = [
   FinalCart(
     id: "id12",
     imagePath: AppImage.headset,
-    itemDescripton: 'Backpack',
+    itemDescription: 'Backpack',
     reviews: "(215)",
     amount: 55,
     itemCount: 1,
@@ -491,7 +497,7 @@ final cart = [
   FinalCart(
     id: "id13",
     imagePath: AppImage.headie,
-    itemDescripton: 'Sunglasses',
+    itemDescription: 'Sunglasses',
     reviews: "(135)",
     amount: 80,
     itemCount: 1,
@@ -500,7 +506,7 @@ final cart = [
   FinalCart(
     id: "id14",
     imagePath: AppImage.flower,
-    itemDescripton: 'Mountain Bike',
+    itemDescription: 'Mountain Bike',
     reviews: "(450)",
     amount: 500,
     itemCount: 1,
@@ -509,7 +515,7 @@ final cart = [
   FinalCart(
     id: "id15",
     imagePath: AppImage.watch,
-    itemDescripton: 'Mechanical Keyboard',
+    itemDescription: 'Mechanical Keyboard',
     reviews: "(325)",
     amount: 90,
     itemCount: 2,
@@ -518,7 +524,7 @@ final cart = [
   FinalCart(
     id: "id16",
     imagePath: AppImage.flower,
-    itemDescripton: 'Gaming Mouse',
+    itemDescription: 'Gaming Mouse',
     reviews: "(190)",
     amount: 60,
     itemCount: 2,
@@ -527,7 +533,7 @@ final cart = [
   FinalCart(
     id: "id17",
     imagePath: AppImage.desk,
-    itemDescripton: 'Microwave Oven',
+    itemDescription: 'Microwave Oven',
     reviews: "(600)",
     amount: 120,
     itemCount: 1,
@@ -536,7 +542,7 @@ final cart = [
   FinalCart(
     id: "id18",
     imagePath: AppImage.desk,
-    itemDescripton: 'Vacuum Cleaner',
+    itemDescription: 'Vacuum Cleaner',
     reviews: "(210)",
     amount: 200,
     itemCount: 1,
@@ -545,7 +551,7 @@ final cart = [
   FinalCart(
     id: "id19",
     imagePath: AppImage.desk,
-    itemDescripton: 'Office Chair',
+    itemDescription: 'Office Chair',
     reviews: "(360)",
     amount: 250,
     itemCount: 1,
@@ -554,7 +560,7 @@ final cart = [
   FinalCart(
     id: "id20",
     imagePath: AppImage.desk,
-    itemDescripton: 'Standing Desk',
+    itemDescription: 'Standing Desk',
     reviews: "(420)",
     amount: 300,
     itemCount: 1,
@@ -563,7 +569,7 @@ final cart = [
   FinalCart(
     id: "id21",
     imagePath: AppImage.desk,
-    itemDescripton: '4K TV',
+    itemDescription: '4K TV',
     reviews: "(750)",
     amount: 1200,
     itemCount: 1,
@@ -572,7 +578,7 @@ final cart = [
   FinalCart(
     id: "id22",
     imagePath: AppImage.cap,
-    itemDescripton: 'Coffee Maker',
+    itemDescription: 'Coffee Maker',
     reviews: "(170)",
     amount: 100,
     itemCount: 1,
@@ -581,7 +587,7 @@ final cart = [
   FinalCart(
     id: "id23",
     imagePath: AppImage.headie,
-    itemDescripton: 'Blender',
+    itemDescription: 'Blender',
     reviews: "(310)",
     amount: 80,
     itemCount: 1,
@@ -590,7 +596,7 @@ final cart = [
   FinalCart(
     id: "id24",
     imagePath: AppImage.headset,
-    itemDescripton: 'Treadmill',
+    itemDescription: 'Treadmill',
     reviews: "(420)",
     amount: 850,
     itemCount: 1,
@@ -599,7 +605,7 @@ final cart = [
   FinalCart(
     id: "id25",
     imagePath: AppImage.flowerVase,
-    itemDescripton: 'Electric Guitar',
+    itemDescription: 'Electric Guitar',
     reviews: "(130)",
     amount: 600,
     itemCount: 1,
@@ -608,7 +614,7 @@ final cart = [
   FinalCart(
     id: "id26",
     imagePath: AppImage.flowerVase,
-    itemDescripton: 'Drum Set',
+    itemDescription: 'Drum Set',
     reviews: "(180)",
     amount: 750,
     itemCount: 1,
@@ -617,7 +623,7 @@ final cart = [
   FinalCart(
     id: "id27",
     imagePath: AppImage.sneakers,
-    itemDescripton: 'Dumbbell Set',
+    itemDescription: 'Dumbbell Set',
     reviews: "(290)",
     amount: 200,
     itemCount: 1,
@@ -626,7 +632,7 @@ final cart = [
   FinalCart(
     id: "id28",
     imagePath: AppImage.sneakers,
-    itemDescripton: 'Home Projector',
+    itemDescription: 'Home Projector',
     reviews: "(230)",
     amount: 500,
     itemCount: 1,
@@ -635,7 +641,7 @@ final cart = [
   FinalCart(
     id: "id29",
     imagePath: AppImage.flowerVase,
-    itemDescripton: 'Gaming Monitor',
+    itemDescription: 'Gaming Monitor',
     reviews: "(510)",
     amount: 450,
     itemCount: 1,
@@ -644,7 +650,7 @@ final cart = [
   FinalCart(
     id: "id30",
     imagePath: AppImage.flowerVase,
-    itemDescripton: 'Audio Mixer',
+    itemDescription: 'Audio Mixer',
     reviews: "(95)",
     amount: 300,
     itemCount: 1,
@@ -653,7 +659,7 @@ final cart = [
   FinalCart(
     id: "id31",
     imagePath: AppImage.flower,
-    itemDescripton: 'Home Speaker',
+    itemDescription: 'Home Speaker',
     reviews: "(260)",
     amount: 220,
     itemCount: 1,
@@ -662,7 +668,7 @@ final cart = [
   FinalCart(
     id: "id32",
     imagePath: AppImage.watch,
-    itemDescripton: 'Wi-Fi Router',
+    itemDescription: 'Wi-Fi Router',
     reviews: "(370)",
     amount: 150,
     itemCount: 1,
@@ -671,7 +677,7 @@ final cart = [
   FinalCart(
     id: "id33",
     imagePath: AppImage.brownBag,
-    itemDescripton: 'VR Headset',
+    itemDescription: 'VR Headset',
     reviews: "(420)",
     amount: 450,
     itemCount: 1,
@@ -680,7 +686,7 @@ final cart = [
   FinalCart(
     id: "id34",
     imagePath: AppImage.sneakers,
-    itemDescripton: 'Smart Fridge',
+    itemDescription: 'Smart Fridge',
     reviews: "(590)",
     amount: 1800,
     itemCount: 1,

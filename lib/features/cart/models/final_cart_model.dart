@@ -1,44 +1,76 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_app/app/utils/enums/product_enum.dart';
 import 'package:equatable/equatable.dart';
 
-class FinalCart extends Equatable{
-  FinalCart({
-    required this.imagePath,
-    required this.itemDescripton,
-    required this.reviews,
-    required this.amount,
-    required this.itemCount,
-    required this.id,
-    this.categories
-    
-  });
+class FinalCart extends Equatable {
+  FinalCart(
+      {required this.amount,
+      required this.id,
+      required this.imagePath,
+      required this.itemCount,
+      required this.itemDescription,
+      required this.reviews,
+      this.timeCreated,
+      this.category,
+      this.categories});
 
-  final String reviews;
-  final String itemDescripton;
-  final String imagePath;
-  final int amount;
+  final num amount;
   final String id;
-   final Categories? categories;
-  final int itemCount ;
+  final String imagePath;
+  final num itemCount;
+  final String itemDescription;
+  final String reviews;
+  final DateTime? timeCreated;
+  Categories? categories;
+  String? category;
 
   FinalCart copyWith({
-    String? reviews,
-    String? itemDescripton,
+    num? amount,
+    String? id,
     String? imagePath,
-    int? amount,
-   int? itemCount,
+    String? itemDescription,
+    String? reviews,
+    num? itemCount,
+    DateTime? timeCreated,
+    Categories? categories,
+    String? category,
   }) {
     return FinalCart(
-      id: id,
-      reviews: reviews ?? this.reviews,
-      itemDescripton: itemDescripton ?? this.itemDescripton,
-      imagePath: imagePath ?? this.imagePath,
       amount: amount ?? this.amount,
+      id: id ?? this.id,
+      category: category ?? this.category,
+      imagePath: imagePath ?? this.imagePath,
       itemCount: itemCount ?? this.itemCount,
+      itemDescription: itemDescription ?? this.itemDescription,
+      reviews: reviews ?? this.reviews,
+      timeCreated: timeCreated ?? this.timeCreated,
     );
   }
 
-  @override
+  factory FinalCart.fromJson(Map<String, dynamic> json) {
+    return FinalCart(
+      amount: json["amount"] ?? 0,
+      id: json["id"] ?? "",
+      category: json["categories"] ?? "",
+      imagePath: json["image_path"] ?? "",
+      itemCount: json["item_count"] ?? 0,
+      itemDescription: json["item_description"] ?? "",
+      reviews: json["reviews"] ?? "",
+      timeCreated: (json['time_created'] as Timestamp).toDate(),
+    );
+  }
 
+  Map<String, dynamic> toJson() => {
+        "amount": amount,
+        "id": id,
+        "image_path": imagePath,
+        "item_count": itemCount,
+        "categories": category,
+        "item_description": itemDescription,
+        "reviews": reviews,
+        "time_created": timeCreated?.toIso8601String(),
+      };
+
+  @override
   List<Object?> get props => [id];
 }

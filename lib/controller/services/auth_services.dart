@@ -7,6 +7,7 @@ import '../../features/authentcation/model/user_model.dart';
 class AuthService {
   final auth = FirebaseAuth.instance;
   final firestore = FirebaseFirestore.instance;
+  String? get userId => auth.currentUser?.uid;
 
   Future<({UserModel? user, String? error})> createUserWithEmailAndPassword(
       {required String email,
@@ -17,7 +18,7 @@ class AuthService {
           email: email, password: password);
       await auth.currentUser?.reload();
       final updatedUser = model.copyWith(userId: auth.currentUser?.uid);
-      _createProfile(model: updatedUser);
+      await _createProfile(model: updatedUser);
 
       return (user: updatedUser, error: null);
     } on FirebaseAuthException catch (e) {
@@ -57,5 +58,67 @@ class AuthService {
     } catch (e) {
       debugPrint("Sign out not successful");
     }
+  }
+
+  Future<UserModel?> getUserProfile(final String userId) async {
+    try {
+      final doc = await firestore.collection("Users").doc(userId).get();
+      if (doc.exists) {
+        return UserModel.fromJson(doc.data()!);
+      }
+    } on FirebaseException catch (e) {
+      debugPrint("Failed to fetch user profile: ${e.message}");
+    }
+    return null;
+  }
+
+  // Future<UserModel?> getCurrentUserProfile() async {
+  //   final currentUser = auth.currentUser;
+  //   final userId = currentUser?.uid;
+  //   if (userId != null) {
+  //     debugPrint("Fetching profile for userId: $userId");
+  //     try {
+  //       final doc = await firestore.collection("Users").doc(userId).get();
+  //       if (doc.exists) {
+  //         return UserModel.fromJson(doc.data()!);
+  //       }
+  //     } on FirebaseException catch (e) {
+  //       debugPrint("Failed to fetch user profile: ${e.message}");
+  //     }
+  //   }
+  //   return null;
+  // }
+  // //   final userProfile = await getUserProfile(userId);
+  // //   debugPrint("Fetched user profile: $userProfile");
+  // //   return userProfile;
+  // // } else {
+  // //   debugPrint("No user is currently signed in.");
+  // //   return null;
+  Future<UserModel?> getCurrentUserProfile() async {
+    final currentUser = auth.currentUser;
+    final userId = currentUser?.uid;
+
+    if (userId != null) {
+      debugPrint("Fetching profile for userId: $userId");
+
+      try {
+        final doc = await firestore.collection("Users").doc(userId).get();
+
+        if (doc.exists) {
+          debugPrint("Fetched user profile data: ${doc.data()}");
+          return UserModel.fromJson(doc.data()!);
+        } else {
+          debugPrint("No profile found for userId: $userId");
+        }
+      } on FirebaseException catch (e) {
+        debugPrint("Failed to fetch user profile: ${e.message}");
+      } catch (e) {
+        debugPrint("Unexpected error: $e");
+      }
+    } else {
+      debugPrint("No authenticated user found.");
+    }
+
+    return null;
   }
 }

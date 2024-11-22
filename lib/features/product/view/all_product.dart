@@ -21,6 +21,7 @@ class ProductCatalog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final fetchProduct = context.read<ProductBlocBloc>();
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       body: Padding(
@@ -42,99 +43,113 @@ class ProductCatalog extends StatelessWidget {
             SizedBox(
               height: 30.h,
             ),
-            Expanded(
-              child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 8.w,
-                  mainAxisSpacing: 8.h,
-                  childAspectRatio: 0.7,
-                ),
-                padding: EdgeInsets.zero,
-                shrinkWrap: true,
-                itemCount: list.length,
-                itemBuilder: (context, index) {
-                  final each = list[index];
-                  return Container(
-                    height: 268.h,
-                    width: 180.w,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(6.r)),
-                    child: Padding(
-                      padding: EdgeInsets.all(8.0.w),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(bottom: 12.h),
-                            child: Align(
-                              alignment: Alignment.topRight,
-                              child: AppIcons.favoriteGray,
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(bottom: 12.h),
-                            child: Image.asset(each.imagePath),
-                          ),
-                          Text(
-                            each.itemDescripton,
-                            style: AppText.itemText,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(bottom: 2.0.h),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                AppIcons.star,
-                                Padding(
-                                  padding: EdgeInsets.only(left: 8.0.w),
-                                  child: Text(
-                                    each.reviews,
-                                    style: AppText.reviewText,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  '\$${each.amount}',
-                                  style: AppText.amountText,
-                                ),
-                                Text(AppString.view, style: AppText.view)
-                                    .onTap(() {
-                                  context
-                                      .read<ProductBlocBloc>()
-                                      .add(SelectProductEvent(product: each));
+            BlocBuilder<ProductBlocBloc, ProductBlocState>(
+                builder: (context, state) {
+              fetchProduct.add(FetchProductEvent());
+              if (state is ProductLoading) {
+                return Center(child: CircularProgressIndicator());
+              } else if (state is ProductLoaded) {
+                final lister = state.product;
 
-                                  Navigator.pop(context, 1);
-                                  // Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //         builder: (context) => ProductDetail(
-                                  //               amount: each.amount,
-                                  //               imagePath: each.imagePath,
-                                  //               descrition: each.itemDescripton,
-                                  //               productName:
-                                  //                   each.itemDescripton,
-                                  //               eachProduct: each,
-                                  //             )));
-                                })
-                              ]),
-                        ],
-                      ),
+                return Expanded(
+                  child: GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 8.w,
+                      mainAxisSpacing: 8.h,
+                      childAspectRatio: 0.7,
                     ),
-                  ).onTap(() {
-                    context.read<CartBloc>().add(AddItemEvent(item: each));
-                    if (moveToCart != null) moveToCart!();
-                  });
-                },
-              ),
-            ),
+                    padding: EdgeInsets.zero,
+                    shrinkWrap: true,
+                    itemCount: lister!.length, //list.length,
+                    itemBuilder: (context, index) {
+                      final each = lister[index];
+                      return Container(
+                        height: 268.h,
+                        width: 180.w,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(6.r)),
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0.w),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(bottom: 12.h),
+                                child: Align(
+                                  alignment: Alignment.topRight,
+                                  child: AppIcons.favoriteGray,
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(bottom: 12.h),
+                                child: Image.asset(each.imagePath),
+                              ),
+                              Text(
+                                each.itemDescription,
+                                style: AppText.itemText,
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(bottom: 2.0.h),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    AppIcons.star,
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 8.0.w),
+                                      child: Text(
+                                        each.reviews,
+                                        style: AppText.reviewText,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      '\$${each.amount}',
+                                      style: AppText.amountText,
+                                    ),
+                                    Text(AppString.view, style: AppText.view)
+                                        .onTap(() {
+                                      fetchProduct.add(
+                                          SelectProductEvent(product: each));
+
+                                      Navigator.pop(context, 1);
+                                      // Navigator.push(
+                                      //     context,
+                                      //     MaterialPageRoute(
+                                      //         builder: (context) => ProductDetail(
+                                      //               amount: each.amount,
+                                      //               imagePath: each.imagePath,
+                                      //               descrition: each.itemDescripton,
+                                      //               productName:
+                                      //                   each.itemDescripton,
+                                      //               eachProduct: each,
+                                      //             )));
+                                    })
+                                  ]),
+                            ],
+                          ),
+                        ),
+                      ).onTap(() {
+                        context.read<CartBloc>().add(AddItemEvent(item: each));
+                        if (moveToCart != null) moveToCart!();
+                      });
+                    },
+                  ),
+                );
+              } else if (state is ProductErrorState) {
+                return Center(child: Text('Error!'));
+              } else {
+                return Center(child: Text("No products available."));
+              }
+            }),
           ],
         ),
       ),

@@ -1,4 +1,5 @@
 class AppString {
+  static const rating = "Product Rating";
   static const createAccount = 'Create an Account';
   static const number = "Phone Number";
   static const home = 'Home';
@@ -9,6 +10,7 @@ class AppString {
   static const lastName = 'Last Name';
   static const email = "Email";
   static const register = 'Register';
+  static const occupation = 'Occupation';
   static const signIn = 'Sign In';
   static const password = "Password";
   static const gender = 'Gender';
@@ -20,6 +22,7 @@ class AppString {
   static const getNow = 'GET NOW';
   static const seeAll = 'See All';
   static const all = 'All';
+  static const addProduct = 'Add Product';
   static const elctronic = 'Electronic';
   static const fashion = 'Fashion';
   static const shoes = 'Shoes';
@@ -49,6 +52,7 @@ class AppString {
   static const unisex = 'Unisex';
   static const color = 'Color';
   static const about = 'About';
+  static const addImage = 'Add Image';
   static const add2cart = 'ADD  TO CART';
   static const c2Pay = 'CLICK TO PAY';
   static const remove = 'Remove';

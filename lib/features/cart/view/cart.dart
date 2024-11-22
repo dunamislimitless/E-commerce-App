@@ -75,7 +75,7 @@ class Cart extends StatelessWidget {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
-                                  "${each.itemDescripton} removed from cart"),
+                                  "${each.itemDescription} removed from cart"),
                             ),
                           );
                         },
@@ -121,7 +121,7 @@ class Cart extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        each.itemDescripton,
+                                        each.itemDescription,
                                         style: AppText.itemText,
                                       ),
                                       Padding(

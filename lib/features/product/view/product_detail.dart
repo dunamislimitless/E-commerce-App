@@ -81,7 +81,7 @@ class ProductDetail extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            product.itemDescripton,
+                            product.itemDescription,
                             style: AppText.productName,
                           ),
                           SizedBox(
@@ -130,7 +130,7 @@ class ProductDetail extends StatelessWidget {
                     height: 14.h,
                   ),
                   Text(
-                    product.itemDescripton,
+                    product.itemDescription,
                     style: AppText.reviewText,
                   ),
                   SizedBox(
