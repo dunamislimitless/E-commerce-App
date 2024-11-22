@@ -54,10 +54,6 @@ class _AddProductState extends State<AddProduct> {
     super.dispose();
   }
 
-  Future<void> createProduct() async {}
-
-  void postData(context) {}
-
   Future imgFromGallery() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
@@ -82,8 +78,6 @@ class _AddProductState extends State<AddProduct> {
     });
   }
 
-  Future uploadProductDetails() async {}
-
   @override
   Widget build(BuildContext context) {
     final productBloc = context.read<ProductBlocBloc>();
@@ -96,8 +90,9 @@ class _AddProductState extends State<AddProduct> {
         body: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.all(16.0.w),
-            child: Column(children: [
-              SizedBox(height: 20.h),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              SizedBox(height: 10.h),
               CustomLabeledInput(
                 title: 'Product Name',
                 label: 'Enter Product Name',
@@ -133,31 +128,59 @@ class _AddProductState extends State<AddProduct> {
                 keyboardType: TextInputType.number,
                 controller: reviewController,
               ),
-              Center(
-                child: DropdownButton<Categories>(
-                  value: selectedCategories,
-                  items: Categories.values.map((Categories categories) {
-                    return DropdownMenuItem<Categories>(
-                      value: categories,
-                      child:
-                          Text(categories.name.toUpperCase()), // Display name
-                    );
-                  }).toList(),
-                  onChanged: (Categories? newValue) {
-                    setState(() {
-                      selectedCategories = newValue!;
-                      categoriesController.text = newValue.name;
-                    });
-                  },
+              const Text(
+                AppString.category,
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+              ),
+              SizedBox(height: 6.0.h),
+
+              Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.0.r),
+                  border: Border.all(
+                    color: Colors.black,
+                    width: 1.0.r,
+                  ),
+                ),
+                child: Padding(
+                  padding: EdgeInsets.only(left: 12.0.h),
+                  child: DropdownButton<Categories>(
+                    value: selectedCategories,
+                    underline: SizedBox.shrink(),
+                    isExpanded: true,
+                    items: Categories.values.map((Categories categories) {
+                      return DropdownMenuItem<Categories>(
+                        value: categories,
+                        child: Text(categories.name.toUpperCase()),
+                      );
+                    }).toList(),
+                    onChanged: (Categories? newValue) {
+                      setState(() {
+                        selectedCategories = newValue!;
+                        categoriesController.text = newValue.name;
+                      });
+                    },
+                  ),
                 ),
               ),
+              SizedBox(height: 24.0.h),
               CustomLabeledInput(
-                title: "Enter how many Product you want",
-                label: '0',
+                title: "Enter how many Product do you want",
+                label: '',
                 prefixIcon: Icons.money,
                 keyboardType: TextInputType.number,
                 controller: countController,
                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+              ),
+              const Text(
+                AppString.rating,
+                style:
+                    TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+              ),
+              SizedBox(
+                height: 10,
               ),
               RatingBar.builder(
                 initialRating: 3,
@@ -172,28 +195,29 @@ class _AddProductState extends State<AddProduct> {
                   color: Colors.amber,
                 ),
                 onRatingUpdate: (rating) {
-                  print("Na Ratimg Be This $rating");
+                  debugPrint("Na Ratimg Be This $rating");
                   ratingController.text = "$rating";
                 },
               ),
-              CustomButton(
-                onPressed: () {},
-                height: 52,
-                textColor: AppColors.lightButton,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.add,
-                      color: AppColors.discountColor,
-                    ),
-                    SizedBox(
-                      width: 16.w,
-                    ),
-                    Text(AppString.addImage)
-                  ],
-                ),
-              ),
+              // CustomButton(
+              //   onPressed: () {},
+              //   height: 52,
+              //   textColor: AppColors.lightButton,
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.center,
+              //     children: [
+              //       Icon(
+              //         Icons.add,
+              //         color: AppColors.discountColor,
+              //       ),
+              //       SizedBox(
+              //         width: 16.w,
+              //       ),
+              //       Text(AppString.addImage)
+              //     ],
+              //   ),
+              // ),
+
               Center(
                 child: GestureDetector(
                   onTap: () {
@@ -244,6 +268,20 @@ class _AddProductState extends State<AddProduct> {
 
                 return CustomButton(
                   onPressed: () async {
+                    final ratingValue = double.tryParse(
+                            ratingController.text) ??
+                        0.0; // Retrieve the rating value from the controller
+                    debugPrint('User Rating: $ratingValue');
+
+                    if (ratingValue == 0.0) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                            content: Text(
+                                "Please provide a rating for the product")),
+                      );
+                      return;
+                    }
+
                     // if (image == null) return;
                     // final fileName = basename(image!.path);
                     // final destination = 'files/$fileName';
@@ -258,21 +296,23 @@ class _AddProductState extends State<AddProduct> {
 
                       productBloc.add(AddProductEvent(
                           product: FinalCart(
-                        amount: num.parse(priceController.text),
-                        id: "",
-                        imagePath: "imageUrl",
-                        itemCount: num.parse(countController.text),
-                        itemDescription: productDescriptionController.text,
-                        reviews: ratingController.text,
-                      )));
+                              amount: num.parse(priceController.text),
+                              id: "id1",
+                              imagePath: "mhtf tytf ",
+                              itemCount: num.parse(countController.text),
+                              itemDescription:
+                                  productDescriptionController.text,
+                              reviews: ratingValue.toString(),
+                              category: selectedCategories.toString())));
                       debugPrint('DONezDDDDD');
+                      debugPrint('CATEGORY FiAM  ${categoriesController.text}');
                     } catch (e) {
                       debugPrint('ERROR  OCCURED');
                     }
                   },
                   height: 52,
-                  textColor: AppColors.discountColor,
                   buttontext: 'Update Product',
+                  color: AppColors.discountColor,
                 );
               })
             ]),

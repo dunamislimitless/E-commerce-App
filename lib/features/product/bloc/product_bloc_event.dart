@@ -19,3 +19,5 @@ class UploadImageEvent extends ProductBlocEvent {
 
   UploadImageEvent({required this.image});
 }
+
+class FetchProductEvent extends ProductBlocEvent {}

@@ -12,7 +12,7 @@ class ProductServices {
         "image_path": product.imagePath,
         "item_count": product.itemCount,
         "item_description": product.itemDescription,
-        "categories": product.categories,
+        "categories": product.category,
         "reviews": product.reviews,
         "time_created": FieldValue.serverTimestamp(),
       });
@@ -25,23 +25,22 @@ class ProductServices {
     }
   }
 
-  Future<FinalCart?> getData(String userId) async {
+  Future<List<FinalCart>?> getproductData() async {
     try {
-      final doc = await FirebaseFirestore.instance
-          .collection("Users")
-          .doc(userId)
-          .get();
-      debugPrint("Fetching profile for userId: $userId");
-      if (doc.exists) {
-        debugPrint("Fetched user profile data: ${doc.data()}");
+      final querySnapshot =
+          await FirebaseFirestore.instance.collection("product").get();
+      if (querySnapshot.docs.isNotEmpty) {
+        debugPrint("Fetched product data: ${querySnapshot}");
+        debugPrint(
+            "Fetched product data: ${querySnapshot.docs.length} documents");
 
-        final profile = FinalCart.fromJson(doc.data()!);
-        debugPrint("Fetched user profile data: ${doc.data()}");
+        final productList = querySnapshot.docs
+            .map((doc) => FinalCart.fromJson(doc.data()))
+            .toList();
 
-        debugPrint('Fetched profile: $profile');
-        return profile;
+        debugPrint('Fetched product: $productList');
+        return productList;
       } else {
-        debugPrint("No profile found for userId: $userId");
         return null;
       }
     } on FirebaseException catch (e) {

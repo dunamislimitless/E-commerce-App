@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:e_commerce_app/features/cart/models/final_cart_model.dart';
 import 'package:e_commerce_app/features/dashboard/models/product_model.dart';
 import 'package:e_commerce_app/controller/services/product_services.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:meta/meta.dart';
 
 import 'package:image_picker/image_picker.dart';
@@ -20,6 +21,7 @@ class ProductBlocBloc extends Bloc<ProductBlocEvent, ProductBlocState> {
     on<SelectProductEvent>(_selectItem);
 
     on<AddProductEvent>(addProduct);
+    on<FetchProductEvent>(getProduct);
   }
 
   FinalCart? product;
@@ -30,6 +32,7 @@ class ProductBlocBloc extends Bloc<ProductBlocEvent, ProductBlocState> {
   }
 
   void addProduct(AddProductEvent event, Emitter<ProductBlocState> emit) async {
+    emit(ProductLoading());
     await Future.delayed(Duration(seconds: 1));
     try {
       await productService.create(product: event.product);
@@ -38,8 +41,19 @@ class ProductBlocBloc extends Bloc<ProductBlocEvent, ProductBlocState> {
       emit(ProductErrorState(error: e.toString()));
     }
   }
+
+  void getProduct(
+      FetchProductEvent event, Emitter<ProductBlocState> emit) async {
+    emit(ProductLoading());
+    try {
+      final fetchedproduct = await productService.getproductData();
+      emit(ProductLoaded(product: fetchedproduct));
+      emit(ProductSuccessState());
+    } on FirebaseException catch (e) {
+      emit(ProductErrorState(error: "${e.message} with Statuscode ${e.code}"));
+    }
+  }
 }
- 
 // firebase_storage.FirebaseStorage storage =
 //     firebase_storage.FirebaseStorage.instance;
 

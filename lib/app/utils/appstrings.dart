@@ -1,4 +1,5 @@
 class AppString {
+  static const rating = "Product Rating";
   static const createAccount = 'Create an Account';
   static const number = "Phone Number";
   static const home = 'Home';
