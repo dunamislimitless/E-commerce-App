@@ -29,7 +29,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with NavigationMixin {
 
     if (call.user != null) {
       emit(AuthSuccessState());
-      emit(AuthErrorState("${auth.userId}"));
+     // emit(AuthErrorState("${auth.userId}"));
     } else {
       emit((AuthErrorState(call.error ?? "Unknown Error")));
     }
