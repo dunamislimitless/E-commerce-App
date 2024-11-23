@@ -45,6 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final addAllProduct = context.read<ProductBlocBloc>();
     return BlocConsumer<ButtonBloc, ButtonState>(
         buildWhen: (prev, next) {
           if (next is ButtonSelectedState) {
@@ -74,7 +75,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 PageHeader(
                     title: AppString.home,
                     trailing: AppIcons.search.onTap(() {}),
-                    leading: AppIcons.menu.onTap(() {})),
+                    leading: AppIcons.menu.onTap(() {
+                      addAllProduct.addAllProduct(cart);
+                    })),
                 SizedBox(
                   height: 20.h,
                 ),

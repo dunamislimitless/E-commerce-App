@@ -9,7 +9,7 @@
     },
     {
       "name": "_flutterfire_internals",
-      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/_flutterfire_internals-1.3.46",
+      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/_flutterfire_internals-1.3.44",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -27,9 +27,9 @@
     },
     {
       "name": "args",
-      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/args-2.6.0",
+      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/args-2.5.0",
       "packageUri": "lib/",
-      "languageVersion": "3.3"
+      "languageVersion": "3.0"
     },
     {
       "name": "async",
@@ -75,7 +75,7 @@
     },
     {
       "name": "build_runner",
-      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/build_runner-2.4.13",
+      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/build_runner-2.4.12",
       "packageUri": "lib/",
       "languageVersion": "3.5"
     },
@@ -117,27 +117,27 @@
     },
     {
       "name": "cloud_firestore",
-      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/cloud_firestore-5.5.0",
+      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/cloud_firestore-5.4.4",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "cloud_firestore_platform_interface",
-      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/cloud_firestore_platform_interface-6.5.0",
+      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/cloud_firestore_platform_interface-6.4.3",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "cloud_firestore_web",
-      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/cloud_firestore_web-4.3.4",
+      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/cloud_firestore_web-4.3.2",
       "packageUri": "lib/",
       "languageVersion": "3.4"
     },
     {
       "name": "code_builder",
-      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/code_builder-4.10.1",
+      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/code_builder-4.10.0",
       "packageUri": "lib/",
-      "languageVersion": "3.5"
+      "languageVersion": "3.0"
     },
     {
       "name": "collection",
@@ -147,9 +147,9 @@
     },
     {
       "name": "convert",
-      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/convert-3.1.2",
+      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/convert-3.1.1",
       "packageUri": "lib/",
-      "languageVersion": "3.4"
+      "languageVersion": "2.18"
     },
     {
       "name": "cross_file",
@@ -159,7 +159,7 @@
     },
     {
       "name": "crypto",
-      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/crypto-3.0.6",
+      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/crypto-3.0.5",
       "packageUri": "lib/",
       "languageVersion": "3.4"
     },
@@ -201,7 +201,7 @@
     },
     {
       "name": "file",
-      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/file-7.0.1",
+      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/file-7.0.0",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -231,25 +231,25 @@
     },
     {
       "name": "firebase_auth",
-      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/firebase_auth-5.3.3",
+      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/firebase_auth-5.3.1",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "firebase_auth_platform_interface",
-      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/firebase_auth_platform_interface-7.4.9",
+      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/firebase_auth_platform_interface-7.4.7",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "firebase_auth_web",
-      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/firebase_auth_web-5.13.4",
+      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/firebase_auth_web-5.13.2",
       "packageUri": "lib/",
       "languageVersion": "3.4"
     },
     {
       "name": "firebase_core",
-      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/firebase_core-3.8.0",
+      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/firebase_core-3.6.0",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -267,27 +267,27 @@
     },
     {
       "name": "firebase_storage",
-      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/firebase_storage-12.3.6",
+      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/firebase_storage-12.3.4",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "firebase_storage_platform_interface",
-      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/firebase_storage_platform_interface-5.1.33",
+      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/firebase_storage_platform_interface-5.1.31",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "firebase_storage_web",
-      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/firebase_storage_web-3.10.5",
+      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/firebase_storage_web-3.10.3",
       "packageUri": "lib/",
       "languageVersion": "3.4"
     },
     {
       "name": "fixnum",
-      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/fixnum-1.1.1",
+      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/fixnum-1.1.0",
       "packageUri": "lib/",
-      "languageVersion": "3.1"
+      "languageVersion": "2.19"
     },
     {
       "name": "flutter",
@@ -357,9 +357,9 @@
     },
     {
       "name": "flutter_svg",
-      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/flutter_svg-2.0.14",
+      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/flutter_svg-2.0.10+1",
       "packageUri": "lib/",
-      "languageVersion": "3.4"
+      "languageVersion": "2.19"
     },
     {
       "name": "flutter_test",
@@ -525,9 +525,9 @@
     },
     {
       "name": "logging",
-      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/logging-1.3.0",
+      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/logging-1.2.0",
       "packageUri": "lib/",
-      "languageVersion": "3.4"
+      "languageVersion": "2.19"
     },
     {
       "name": "macros",
@@ -555,7 +555,7 @@
     },
     {
       "name": "mime",
-      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/mime-2.0.0",
+      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/mime-1.0.6",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -579,21 +579,21 @@
     },
     {
       "name": "path_parsing",
-      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/path_parsing-1.1.0",
+      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/path_parsing-1.0.1",
       "packageUri": "lib/",
-      "languageVersion": "3.3"
+      "languageVersion": "2.12"
     },
     {
       "name": "path_provider",
-      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/path_provider-2.1.5",
+      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/path_provider-2.1.4",
       "packageUri": "lib/",
-      "languageVersion": "3.4"
+      "languageVersion": "3.2"
     },
     {
       "name": "path_provider_android",
-      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/path_provider_android-2.2.12",
+      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/path_provider_android-2.2.10",
       "packageUri": "lib/",
-      "languageVersion": "3.5"
+      "languageVersion": "3.4"
     },
     {
       "name": "path_provider_foundation",
@@ -627,7 +627,7 @@
     },
     {
       "name": "platform",
-      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/platform-3.1.6",
+      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/platform-3.1.5",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -741,27 +741,27 @@
     },
     {
       "name": "typed_data",
-      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/typed_data-1.4.0",
+      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/typed_data-1.3.2",
       "packageUri": "lib/",
-      "languageVersion": "3.5"
+      "languageVersion": "2.17"
     },
     {
       "name": "vector_graphics",
-      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/vector_graphics-1.1.14",
+      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/vector_graphics-1.1.11+1",
       "packageUri": "lib/",
-      "languageVersion": "3.4"
+      "languageVersion": "2.17"
     },
     {
       "name": "vector_graphics_codec",
-      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/vector_graphics_codec-1.1.12",
+      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/vector_graphics_codec-1.1.11+1",
       "packageUri": "lib/",
-      "languageVersion": "3.4"
+      "languageVersion": "2.17"
     },
     {
       "name": "vector_graphics_compiler",
-      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/vector_graphics_compiler-1.1.15",
+      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/vector_graphics_compiler-1.1.11+1",
       "packageUri": "lib/",
-      "languageVersion": "3.4"
+      "languageVersion": "2.19"
     },
     {
       "name": "vector_math",
@@ -783,7 +783,7 @@
     },
     {
       "name": "web",
-      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/web-1.1.0",
+      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/web-1.0.0",
       "packageUri": "lib/",
       "languageVersion": "3.4"
     },
@@ -801,9 +801,9 @@
     },
     {
       "name": "xdg_directories",
-      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/xdg_directories-1.1.0",
+      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/xdg_directories-1.0.4",
       "packageUri": "lib/",
-      "languageVersion": "3.3"
+      "languageVersion": "3.0"
     },
     {
       "name": "xml",
@@ -824,7 +824,7 @@
       "languageVersion": "3.3"
     }
   ],
-  "generated": "2024-11-18T22:50:04.060751Z",
+  "generated": "2024-11-23T21:13:45.957397Z",
   "generator": "pub",
   "generatorVersion": "3.5.4",
   "flutterRoot": "file:///Users/samuelogundoju/fvm/versions/3.24.4",

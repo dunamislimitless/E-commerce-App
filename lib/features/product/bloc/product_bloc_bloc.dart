@@ -53,6 +53,10 @@ class ProductBlocBloc extends Bloc<ProductBlocEvent, ProductBlocState> {
       emit(ProductErrorState(error: "${e.message} with Statuscode ${e.code}"));
     }
   }
+
+  void addAllProduct(List<FinalCart> cart) async {
+    await productService.uploadCartItems(cart);
+  }
 }
 // firebase_storage.FirebaseStorage storage =
 //     firebase_storage.FirebaseStorage.instance;

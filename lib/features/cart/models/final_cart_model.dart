@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_app/app/utils/enums/product_enum.dart';
 import 'package:equatable/equatable.dart';
 
@@ -56,7 +55,7 @@ class FinalCart extends Equatable {
       itemCount: json["item_count"] ?? 0,
       itemDescription: json["item_description"] ?? "",
       reviews: json["reviews"] ?? "",
-      timeCreated: (json['time_created'] as Timestamp).toDate(),
+      timeCreated: (json['time_created']).toDate(),
     );
   }
 

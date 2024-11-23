@@ -51,4 +51,23 @@ class ProductServices {
       return null;
     }
   }
+
+  Future<void> uploadCartItems(List<FinalCart> cart) async {
+    final collectionRef = FirebaseFirestore.instance.collection('product');
+
+    WriteBatch batch = FirebaseFirestore.instance.batch();
+
+    for (var item in cart) {
+      final docRef =
+          collectionRef.doc(item.id); // Use item's ID as the document ID
+      batch.set(docRef, item.toJson());
+    }
+
+    try {
+      await batch.commit();
+      print("Cart items uploaded successfully!");
+    } catch (e) {
+      print("Failed to upload cart items: $e");
+    }
+  }
 }
