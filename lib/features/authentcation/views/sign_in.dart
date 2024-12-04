@@ -116,18 +116,33 @@ class _SigninState extends State<Signin> with Validators {
                   },
                 ),
                 SizedBox(height: 8.0.h),
-                CustomButton(
-                  buttontext: AppString.register,
-                  onPressed: () {
-                    Navigator.push(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(AppString.dontHaveAnAccount).padding(right: 5),
+                    Text(
+                      AppString.register,
+                      style: TextStyle(
+                        color: AppColors.discountColor,
+                      ),
+                    ).onTap(() => Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => CreateAccountScreen()));
-                  },
-                  color: AppColors.lightButton,
-                  textColor: AppColors.cardColor,
-                  height: 50.h,
+                            builder: (context) => CreateAccountScreen())))
+                  ],
                 ),
+                // CustomButton(
+                //   buttontext: AppString.register,
+                //   onPressed: () {
+                //     Navigator.push(
+                //         context,
+                //         MaterialPageRoute(
+                //             builder: (context) => CreateAccountScreen()));
+                //   },
+                //   color: AppColors.lightButton,
+                //   textColor: AppColors.cardColor,
+                //   height: 50.h,
+                // ),
               ],
             ),
           ),

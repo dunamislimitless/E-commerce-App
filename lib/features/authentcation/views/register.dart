@@ -3,6 +3,7 @@ import 'package:e_commerce_app/app/utils/appstrings.dart';
 import 'package:e_commerce_app/app/utils/colors.dart';
 import 'package:e_commerce_app/app/utils/mixin/validators.dart';
 import 'package:e_commerce_app/app/utils/textstyle.dart';
+import 'package:e_commerce_app/common/bloc/button_state_cubit.dart';
 import 'package:e_commerce_app/data/models/signup_req.dart';
 import 'package:e_commerce_app/domain/usecases/signup.dart';
 import 'package:e_commerce_app/features/authentcation/bloc/auth_bloc.dart';
@@ -204,57 +205,76 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>
                 // ),
                 ,
                 SizedBox(height: 20.0.h),
-                BlocConsumer<AuthBloc, AuthState>(
-                  listener: (context, state) {
-                    if (state is AuthSuccessState) {
-                    } else if (state is AuthErrorState) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text(state.message)),
-                      );
-                    }
-                  },
-                  builder: (context, state) {
-                    if (state is AuthLoadingState) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
+                // BlocConsumer<AuthBloc, AuthState>(
+                //   listener: (context, state) {
+                //     if (state is AuthSuccessState) {
+                //     } else if (state is AuthErrorState) {
+                //       ScaffoldMessenger.of(context).showSnackBar(
+                //         SnackBar(content: Text(state.message)),
+                //       );
+                //     }
+                //   },
+                //   builder: (context, state) {
+                //     if (state is AuthLoadingState) {
+                //       return const Center(child: CircularProgressIndicator());
+                //     }
 
-                    return CustomButton(
-                      buttontext: AppString.register,
-                      onPressed: () {
-                        if (_formKey.currentState?.validate() ?? false) {
-                          // authBloc.add(SignUpEvent(
-                          //   phoneNumber: phoneController.text,
-                          //   email: emailController.text,
-                          //   password: passwordController.text,
-                          //   lastName: lastName.text,
-                          //   firstName: firstName.text,
-                          //   gender: gender.text,
-                          // ));
-                          s1<SignupCase>().call(
-                              param: SignupRequest(
-                                  email: emailController.text,
-                                  password: passwordController.text,
-                                  name: "${firstName.text} ${lastName.text}"));
-
-                          print(
-                              ' NORMAL REQUEST ${SignupRequest(email: emailController.text, password: passwordController.text, name: "${firstName.text} ${lastName.text}")}');
-                        }
-                      },
-                      height: 50.h,
-                    );
-                  },
-                ),
-                SizedBox(height: 16.0.h),
+                //     return
                 CustomButton(
-                  buttontext: AppString.signIn,
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Signin()));
-                  },
+                  buttontext: AppString.register,
                   color: AppColors.discountColor,
-                  textColor: AppColors.cardColor,
+                  onPressed: () {
+                    if (_formKey.currentState?.validate() ?? false) {
+                      // authBloc.add(SignUpEvent(
+                      //   phoneNumber: phoneController.text,
+                      //   email: emailController.text,
+                      //   password: passwordController.text,
+                      //   lastName: lastName.text,
+                      //   firstName: firstName.text,
+                      //   gender: gender.text,
+                      // ));
+
+                      context.read<ButtonStateCubit>().execute(
+                          usecase: s1<SignupCase>(),
+                          params: SignupRequest(
+                              email: emailController.text,
+                              password: passwordController.text,
+                              name: "${firstName.text} ${lastName.text}"));
+                      // s1<SignupCase>().call(
+                      //     param: SignupRequest(
+                      //         email: emailController.text,
+                      //         password: passwordController.text,
+                      //         name: "${firstName.text} ${lastName.text}"));
+                    }
+                  },
                   height: 50.h,
-                )
+                ),
+
+                SizedBox(height: 6.0.h),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(AppString.haveAccount).padding(right: 5),
+                    Text(
+                      AppString.signIn,
+                      style: TextStyle(
+                        color: AppColors.discountColor,
+                      ),
+                    ).onTap(() => Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Signin())))
+                  ],
+                ),
+                // CustomButton(
+                //   buttontext: AppString.signIn,
+                //   onPressed: () {
+                //     Navigator.push(context,
+                //         MaterialPageRoute(builder: (context) => Signin()));
+                //   },
+                //   color: AppColors.discountColor,
+                //   textColor: AppColors.cardColor,
+                //   height: 50.h,
+                // )
               ],
             ),
           ),
