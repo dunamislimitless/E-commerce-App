@@ -38,6 +38,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    context.read<ProductBlocBloc>().add(FetchProductEvent());
+
     cartList = cart;
   }
 
@@ -241,110 +243,136 @@ class _HomeScreenState extends State<HomeScreen> {
                         SizedBox(
                           height: 10.h,
                         ),
-                        GridView.builder(
-                          shrinkWrap: true,
-                          padding: EdgeInsets.zero,
-                          physics: const NeverScrollableScrollPhysics(),
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 8.w,
-                            mainAxisSpacing: 8.h,
-                            childAspectRatio: 0.70,
-                          ),
-                          itemCount: cartList.length > 5 ? 6 : cartList.length,
-                          itemBuilder: (context, index) {
-                            final eachProduct = cart[index];
-                            return Container(
-                              height: 268.h,
-                              width: 180.w,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(6.r)),
-                              child: Padding(
-                                padding: EdgeInsets.all(8.0.w),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(bottom: 12.h),
-                                      child: Align(
-                                        alignment: Alignment.topRight,
-                                        child: AppIcons.favoriteGray,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(bottom: 12.h),
-                                      child: Image.asset(eachProduct.imagePath),
-                                    ),
-                                    Text(
-                                      eachProduct.itemDescription,
-                                      style: AppText.itemText,
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsets.only(bottom: 2.0.h),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          AppIcons.star,
-                                          Padding(
-                                            padding:
-                                                EdgeInsets.only(left: 8.0.w),
-                                            child: Text(
-                                              eachProduct.reviews,
-                                              style: AppText.reviewText,
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            '\$${eachProduct.amount}',
-                                            style: AppText.amountText,
-                                          ),
-                                          Text(AppString.view,
-                                                  style: AppText.view)
-                                              .onTap(() {
-                                            context.read<ProductBlocBloc>().add(
-                                                SelectProductEvent(
-                                                    product: eachProduct));
-                                            widget.navCallback!(1);
-                                            // Navigator.push(
-                                            //     context,
-                                            //     MaterialPageRoute(
-                                            //         builder: (context) =>
-                                            //             ProductDetail(
-                                            //               amount: eachProduct
-                                            //                   .amount,
-                                            //               imagePath: eachProduct
-                                            //                   .imagePath,
-                                            //               descrition: eachProduct
-                                            //                   .itemDescription,
-                                            //               productName: eachProduct
-                                            //                   .itemDescription,
-                                            //               eachProduct:
-                                            //                   eachProduct,
-                                            //             )));
-                                          })
-                                        ]),
-                                  ],
-                                ),
+                        BlocConsumer<ProductBlocBloc, ProductBlocState>(
+                            listener: (context, state) {
+                          if (state is ProductErrorState) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(state.error)),
+                            );
+                          }
+                        }, builder: (context, state) {
+                          if (state is ProductLoading) {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          } else if (state is ProductLoaded) {
+                            cartList = state
+                                .product; // Assign fetched products to cartList
+                            return GridView.builder(
+                              shrinkWrap: true,
+                              padding: EdgeInsets.zero,
+                              physics: const NeverScrollableScrollPhysics(),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 8.w,
+                                mainAxisSpacing: 8.h,
+                                childAspectRatio: 0.70,
                               ),
-                            ).onTap(() {
-                              context
-                                  .read<CartBloc>()
-                                  .add(AddItemEvent(item: eachProduct));
-                              if (widget.widget.moveToCart != null)
-                                widget.widget.moveToCart!();
-                            });
-                          },
-                        ),
+                              itemCount:
+                                  cartList!.length > 5 ? 6 : cartList.length,
+                              itemBuilder: (context, index) {
+                                final eachProduct = cart[index];
+                                return Container(
+                                  height: 268.h,
+                                  width: 180.w,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(6.r)),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0.w),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsets.only(bottom: 12.h),
+                                          child: Align(
+                                            alignment: Alignment.topRight,
+                                            child: AppIcons.favoriteGray,
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsets.only(bottom: 12.h),
+                                          child: Image.asset(
+                                              eachProduct.imagePath),
+                                        ),
+                                        Text(
+                                          eachProduct.itemDescription,
+                                          style: AppText.itemText,
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsets.only(bottom: 2.0.h),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              AppIcons.star,
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    left: 8.0.w),
+                                                child: Text(
+                                                  eachProduct.reviews,
+                                                  style: AppText.reviewText,
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                '\$${eachProduct.amount}',
+                                                style: AppText.amountText,
+                                              ),
+                                              Text(AppString.view,
+                                                      style: AppText.view)
+                                                  .onTap(() {
+                                                context
+                                                    .read<ProductBlocBloc>()
+                                                    .add(SelectProductEvent(
+                                                        product: eachProduct));
+                                                widget.navCallback!(1);
+                                                // Navigator.push(
+                                                //     context,
+                                                //     MaterialPageRoute(
+                                                //         builder: (context) =>
+                                                //             ProductDetail(
+                                                //               amount: eachProduct
+                                                //                   .amount,
+                                                //               imagePath: eachProduct
+                                                //                   .imagePath,
+                                                //               descrition: eachProduct
+                                                //                   .itemDescription,
+                                                //               productName: eachProduct
+                                                //                   .itemDescription,
+                                                //               eachProduct:
+                                                //                   eachProduct,
+                                                //             )));
+                                              })
+                                            ]),
+                                      ],
+                                    ),
+                                  ),
+                                ).onTap(() {
+                                  context
+                                      .read<CartBloc>()
+                                      .add(AddItemEvent(item: eachProduct));
+                                  if (widget.widget.moveToCart != null)
+                                    widget.widget.moveToCart!();
+                                });
+                              },
+                            );
+                          } else {
+                            return Text("no product");
+                          }
+                        }),
                         SizedBox(height: 20.h),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,

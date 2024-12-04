@@ -19,7 +19,5 @@ extension StringHelper on String {
           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
       .hasMatch(this);
 
-  bool isValidatePassword() => RegExp(
-        r'^(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#\$&*~])(?=.{8,})',
-      ).hasMatch(this);
+  bool isValidatePassword() => RegExp(r'^[a-zA-Z0-9]{8,}$').hasMatch(this);
 }

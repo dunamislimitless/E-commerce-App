@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_app/features/cart/models/final_cart_model.dart';
 import 'package:flutter/foundation.dart';
@@ -25,12 +27,12 @@ class ProductServices {
     }
   }
 
-  Future<List<FinalCart>?> getproductData() async {
+  Future<List<FinalCart>> getproductData() async {
     try {
       final querySnapshot =
           await FirebaseFirestore.instance.collection("product").get();
       if (querySnapshot.docs.isNotEmpty) {
-        debugPrint("Fetched product data: ${querySnapshot}");
+        debugPrint("Fetched product data: $querySnapshot");
         debugPrint(
             "Fetched product data: ${querySnapshot.docs.length} documents");
 
@@ -40,16 +42,15 @@ class ProductServices {
 
         debugPrint('Fetched product: $productList');
         return productList;
-      } else {
-        return null;
       }
     } on FirebaseException catch (e) {
       debugPrint("Failed with Error '${e.code}': '${e.message}'");
-      return null;
+      rethrow;
     } catch (e) {
       debugPrint("Unexpected error: $e");
-      return null;
+      rethrow;
     }
+    return [];
   }
 
   Future<void> uploadCartItems(List<FinalCart> cart) async {

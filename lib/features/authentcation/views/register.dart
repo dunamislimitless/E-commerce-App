@@ -3,11 +3,14 @@ import 'package:e_commerce_app/app/utils/appstrings.dart';
 import 'package:e_commerce_app/app/utils/colors.dart';
 import 'package:e_commerce_app/app/utils/mixin/validators.dart';
 import 'package:e_commerce_app/app/utils/textstyle.dart';
+import 'package:e_commerce_app/data/models/signup_req.dart';
+import 'package:e_commerce_app/domain/usecases/signup.dart';
 import 'package:e_commerce_app/features/authentcation/bloc/auth_bloc.dart';
 import 'package:e_commerce_app/features/authentcation/bloc/auth_state.dart';
 import 'package:e_commerce_app/features/authentcation/views/sign_in.dart';
 import 'package:e_commerce_app/features/authentcation/widget/custom_labeled_input.dart';
 import 'package:e_commerce_app/features/dashboard/widget/custom_button.dart';
+import 'package:e_commerce_app/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -219,14 +222,22 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>
                       buttontext: AppString.register,
                       onPressed: () {
                         if (_formKey.currentState?.validate() ?? false) {
-                          authBloc.add(SignUpEvent(
-                            phoneNumber: phoneController.text,
-                            email: emailController.text,
-                            password: passwordController.text,
-                            lastName: lastName.text,
-                            firstName: firstName.text,
-                            gender: gender.text,
-                          ));
+                          // authBloc.add(SignUpEvent(
+                          //   phoneNumber: phoneController.text,
+                          //   email: emailController.text,
+                          //   password: passwordController.text,
+                          //   lastName: lastName.text,
+                          //   firstName: firstName.text,
+                          //   gender: gender.text,
+                          // ));
+                          s1<SignupCase>().call(
+                              param: SignupRequest(
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                  name: "${firstName.text} ${lastName.text}"));
+
+                          print(
+                              ' NORMAL REQUEST ${SignupRequest(email: emailController.text, password: passwordController.text, name: "${firstName.text} ${lastName.text}")}');
                         }
                       },
                       height: 50.h,

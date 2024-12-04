@@ -1,10 +1,12 @@
 import 'package:e_commerce_app/app/utils/colors.dart';
+import 'package:e_commerce_app/common/bloc/button_state_cubit.dart';
 import 'package:e_commerce_app/features/authentcation/bloc/auth_bloc.dart';
 import 'package:e_commerce_app/features/authentcation/views/sign_in.dart';
 import 'package:e_commerce_app/features/dashboard/views/home.dart';
 import 'package:e_commerce_app/features/product/bloc/product_bloc_bloc.dart';
 import 'package:e_commerce_app/controller/services/product_services.dart';
 import 'package:e_commerce_app/features/product/models/product_model.dart';
+import 'package:e_commerce_app/service_locator.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,7 +18,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp();
-
+  setupServiceLocator();
   runApp(const MyApp());
 }
 
@@ -43,6 +45,8 @@ class MyApp extends StatelessWidget {
                     BlocProvider<AuthBloc>(
                       create: (context) => AuthBloc(),
                     ),
+                    BlocProvider<ButtonStateCubit>(
+                        create: (context) => ButtonStateCubit())
                   ],
                   child: MaterialApp(
                     debugShowCheckedModeBanner: false,

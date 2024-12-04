@@ -12,7 +12,7 @@ class ProductAdded extends ProductBlocState {}
 class ProductLoading extends ProductBlocState {}
 
 class ProductLoaded extends ProductBlocState {
-  final List<FinalCart>? product;
+  final List<FinalCart> product;
   ProductLoaded({required this.product});
 }
 
