@@ -119,8 +119,8 @@ class _SigninState extends State<Signin> with Validators {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(AppString.dontHaveAnAccount).padding(right: 5),
-                    Text(
+                    const Text(AppString.dontHaveAnAccount).padding(right: 5),
+                    const Text(
                       AppString.register,
                       style: TextStyle(
                         color: AppColors.discountColor,

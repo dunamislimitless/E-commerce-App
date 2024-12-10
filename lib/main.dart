@@ -1,6 +1,9 @@
 import 'package:e_commerce_app/app/utils/colors.dart';
-import 'package:e_commerce_app/common/bloc/button_state_cubit.dart';
+import 'package:e_commerce_app/common/bloc/auth/auth_state_cubit.dart';
+import 'package:e_commerce_app/common/bloc/auth/auth_statee.dart';
+import 'package:e_commerce_app/common/bloc/button/button_state_cubit.dart';
 import 'package:e_commerce_app/features/authentcation/bloc/auth_bloc.dart';
+import 'package:e_commerce_app/features/authentcation/views/register.dart';
 import 'package:e_commerce_app/features/authentcation/views/sign_in.dart';
 import 'package:e_commerce_app/features/dashboard/views/home.dart';
 import 'package:e_commerce_app/features/product/bloc/product_bloc_bloc.dart';
@@ -46,18 +49,28 @@ class MyApp extends StatelessWidget {
                       create: (context) => AuthBloc(),
                     ),
                     BlocProvider<ButtonStateCubit>(
-                        create: (context) => ButtonStateCubit())
+                        create: (context) => ButtonStateCubit()),
+                    BlocProvider<AuthStateCubit>(
+                        create: (context) => AuthStateCubit())
                   ],
                   child: MaterialApp(
-                    debugShowCheckedModeBanner: false,
-                    title: 'E-commerce App',
-                    theme: ThemeData(
-                      colorScheme: ColorScheme.fromSeed(
-                          seedColor: AppColors.discountColor),
-                      useMaterial3: true,
-                    ),
-                    home: Signin(),
-                  )));
+                      debugShowCheckedModeBanner: false,
+                      title: 'E-commerce App',
+                      theme: ThemeData(
+                        colorScheme: ColorScheme.fromSeed(
+                            seedColor: AppColors.discountColor),
+                        useMaterial3: true,
+                      ),
+                      home: BlocBuilder<AuthStateCubit, AuthStatee>(
+                          builder: (context, state) {
+                        if (state is AuthenticatedState) {
+                          return const DashboardScreen();
+                        }
+                        if (state is UnAuthenticatedState) {
+                          return CreateAccountScreen();
+                        }
+                        return Container();
+                      }))));
         });
   }
 }

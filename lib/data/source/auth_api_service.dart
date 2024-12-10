@@ -4,9 +4,11 @@ import 'package:e_commerce_app/core/constants/api_urls.dart';
 import 'package:e_commerce_app/core/network/dio_client.dart';
 import 'package:e_commerce_app/data/models/signup_req.dart';
 import 'package:e_commerce_app/service_locator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class AuthApiService {
   Future<Either> signUp(SignupRequest signupReq);
+  Future<Either> getUser();
 }
 
 class AuthApiServiceImplement extends AuthApiService {
@@ -15,6 +17,21 @@ class AuthApiServiceImplement extends AuthApiService {
     try {
       var response =
           s1<DioClient>().post(ApiUrls.register, data: signupReq.toJSon());
+
+      return Right(response);
+    } on DioException catch (e) {
+      return Left(e.response!.data['message']);
+    }
+  }
+
+  @override
+  Future<Either> getUser() async {
+    try {
+      SharedPreferences sharedPrefrences =
+          await SharedPreferences.getInstance();
+      final token = sharedPrefrences.get('token');
+      var response = s1<DioClient>().get(ApiUrls.userProfile,
+          options: Options(headers: {'Authorization': 'Bearer $token'}));
 
       return Right(response);
     } on DioException catch (e) {
