@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:e_commerce_app/core/constants/api_urls.dart';
 import 'package:e_commerce_app/core/network/dio_client.dart';
+import 'package:e_commerce_app/data/models/signIn_req.dart';
 import 'package:e_commerce_app/data/models/signup_req.dart';
 import 'package:e_commerce_app/service_locator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -9,14 +10,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 abstract class AuthApiService {
   Future<Either> signUp(SignupRequest signupReq);
   Future<Either> getUser();
+  Future<Either> logIn(SignInRequest signInReq);
 }
 
 class AuthApiServiceImplement extends AuthApiService {
   @override
   Future<Either> signUp(SignupRequest signupReq) async {
     try {
-      var response =
-          s1<DioClient>().post(ApiUrls.register, data: signupReq.toJSon());
+      var response = await s1<DioClient>()
+          .post(ApiUrls.register, data: signupReq.toJSon());
 
       return Right(response);
     } on DioException catch (e) {
@@ -30,8 +32,20 @@ class AuthApiServiceImplement extends AuthApiService {
       SharedPreferences sharedPrefrences =
           await SharedPreferences.getInstance();
       final token = sharedPrefrences.get('token');
-      var response = s1<DioClient>().get(ApiUrls.userProfile,
+      var response = await s1<DioClient>().get(ApiUrls.userProfile,
           options: Options(headers: {'Authorization': 'Bearer $token'}));
+
+      return Right(response);
+    } on DioException catch (e) {
+      return Left(e.response!.data['message']);
+    }
+  }
+
+  @override
+  Future<Either> logIn(SignInRequest signInReq) async {
+    try {
+      var response =
+          await s1<DioClient>().post(ApiUrls.signIn, data: signInReq.toJSon());
 
       return Right(response);
     } on DioException catch (e) {

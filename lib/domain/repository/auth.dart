@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:e_commerce_app/data/models/signIn_req.dart';
 import 'package:e_commerce_app/data/models/signup_req.dart';
 
 abstract class AuthRepository {
@@ -6,4 +7,6 @@ abstract class AuthRepository {
 
   Future<bool> isLoggedIn();
   Future<Either> getUser();
+  Future<Either> logIn(SignInRequest signInReq);
+  Future logOut();
 }

@@ -1,3 +1,5 @@
+import 'package:e_commerce_app/data/models/user_model.dart';
+import 'package:e_commerce_app/domain/entities/user.dart';
 import 'package:e_commerce_app/features/authentcation/model/user_model.dart';
 
 abstract class AuthState {}

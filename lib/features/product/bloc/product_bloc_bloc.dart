@@ -1,12 +1,11 @@
 import 'dart:io';
 
-import 'package:bloc/bloc.dart';
 import 'package:e_commerce_app/features/cart/models/final_cart_model.dart';
 import 'package:e_commerce_app/features/dashboard/models/product_model.dart';
 import 'package:e_commerce_app/controller/services/product_services.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
@@ -16,13 +15,12 @@ part 'product_bloc_event.dart';
 part 'product_bloc_state.dart';
 
 class ProductBlocBloc extends Bloc<ProductBlocEvent, ProductBlocState> {
-  final ProductServices productService;
-  ProductBlocBloc({required this.productService})
-      : super(ProductBlocInitial()) {
+  ProductServices productService = ProductServices();
+  ProductBlocBloc() : super(ProductBlocInitial()) {
     on<SelectProductEvent>(_selectItem);
 
     on<AddProductEvent>(addProduct);
-    //on<FetchProductEvent>(getProduct);
+    // on<FetchProductEvent>(getProduct as EventHandler<FetchProductEvent, ProductBlocState>);
   }
 
   FinalCart? product;
@@ -36,7 +34,7 @@ class ProductBlocBloc extends Bloc<ProductBlocEvent, ProductBlocState> {
     emit(ProductLoading());
     await Future.delayed(Duration(seconds: 1));
     try {
-      await productService.create(product: event.product);
+      // await productService.create(product: event.product);
       emit(ProductAdded());
     } catch (e) {
       emit(ProductErrorState(error: e.toString()));
@@ -58,45 +56,48 @@ class ProductBlocBloc extends Bloc<ProductBlocEvent, ProductBlocState> {
     await productService.uploadCartItems(cart);
   }
 }
-// firebase_storage.FirebaseStorage storage =
-//     firebase_storage.FirebaseStorage.instance;
 
-// File? _photo;
-// final ImagePicker _picker = ImagePicker();
+firebase_storage.FirebaseStorage storage =
+    firebase_storage.FirebaseStorage.instance;
 
-// Future imgFromGallery() async {
-//   final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+File? _photo;
+final ImagePicker _picker = ImagePicker();
 
-//   if (pickedFile != null) {
-//     _photo = File(pickedFile.path);
-//     uploadFile();
-//   } else {
-//     print('No image selected.');
-//   }
-// }
+Future imgFromGallery() async {
+  final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
 
-// Future imgFromCamera() async {
-//   final pickedFile = await _picker.pickImage(source: ImageSource.camera);
+  if (pickedFile != null) {
+    _photo = File(pickedFile.path);
+    uploadFile();
+  } else {
+    print('No image selected.');
+  }
+}
 
-//   if (pickedFile != null) {
-//     _photo = File(pickedFile.path);
-//     uploadFile();
-//   } else {
-//     print('No image selected.');
-//   }
-// }
+Future imgFromCamera() async {
+  final pickedFile = await _picker.pickImage(source: ImageSource.camera);
 
-// Future uploadFile() async {
-//   if (_photo == null) return;
-//   final fileName = basename(_photo!.path);
-//   final destination = 'files/$fileName';
+  if (pickedFile != null) {
+    _photo = File(pickedFile.path);
+    uploadFile();
+  } else {
+    print('No image selected.');
+  }
+}
 
-//   try {
-//     final ref = firebase_storage.FirebaseStorage.instance
-//         .ref(destination)
-//         .child('file/');
-//     await ref.putFile(_photo!);
-//   } catch (e) {
-//     print('error occured');
-//   }
-//}
+Future uploadFile() async {
+  if (_photo == null) return;
+  final fileName = basename(_photo!.path);
+  final destination = 'files/$fileName';
+
+  try {
+    final ref = firebase_storage.FirebaseStorage.instance
+        .ref(destination)
+        .child('file/');
+    await ref.putFile(_photo!);
+  } catch (e) {
+    print('error occured');
+  }
+}
+
+void fetchProduct() async {}

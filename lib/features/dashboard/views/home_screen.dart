@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<ProductBlocBloc>().add(FetchProductEvent());
+    //context.read<ProductBlocBloc>().add(FetchProductEvent());
 
     cartList = cart;
   }
@@ -47,7 +47,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final addAllProduct = context.read<ProductBlocBloc>();
     return BlocConsumer<ButtonBloc, ButtonState>(
         buildWhen: (prev, next) {
           if (next is ButtonSelectedState) {
@@ -77,9 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 PageHeader(
                     title: AppString.home,
                     trailing: AppIcons.search.onTap(() {}),
-                    leading: AppIcons.menu.onTap(() {
-                      addAllProduct.addAllProduct(cart);
-                    })),
+                    leading: AppIcons.menu.onTap(() {})),
                 SizedBox(
                   height: 20.h,
                 ),

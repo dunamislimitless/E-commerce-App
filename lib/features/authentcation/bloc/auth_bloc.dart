@@ -8,67 +8,69 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> with NavigationMixin {
-  final auth = AuthService();
-  final userService = ProfileServices();
+  // final auth = AuthService();
+  // final userService = ProfileServices();
 
   // final userDb = UserServices();
 
   AuthBloc() : super(AuthInitialState()) {
-    on<SignInEvent>(onSignInEvent);
-    on<SignUpEvent>(onSignUpEvent);
-    on<SignOutEvent>(logOut);
-    on<UserProfileEvent>(userProfile);
+    // on<SignInEvent>(onSignInEvent);
+    // on<SignUpEvent>(onSignUpEvent);
+    // on<SignOutEvent>(logOut);
+    // on<UserProfileEvent>(userProfile);
     // on<AddUserEvent>(addUser);
   }
 
-  void onSignInEvent(SignInEvent event, Emitter<AuthState> emit) async {
-    emit(AuthLoadingState());
+  onSignInEvent() {}
 
-    final call =
-        await auth.signInWithEmailAndPassword(event.email, event.password);
+  // void onSignInEvent(SignInEvent event, Emitter<AuthState> emit) async {
+  //   emit(AuthLoadingState());
 
-    if (call.user != null) {
-      emit(AuthSuccessState());
-     // emit(AuthErrorState("${auth.userId}"));
-    } else {
-      emit((AuthErrorState(call.error ?? "Unknown Error")));
-    }
-  }
+  //   final call =
+  //       await auth.signInWithEmailAndPassword(event.email, event.password);
 
-  void onSignUpEvent(SignUpEvent event, Emitter<AuthState> emit) async {
-    emit(AuthLoadingState());
-    final model = UserModel(
-        firstName: event.firstName,
-        lastName: event.lastName,
-        phoneNumber: event.phoneNumber,
-        createdAt: DateTime.now(),
-        gender: event.gender);
+  //   if (call.user != null) {
+  //     emit(AuthSuccessState());
+  //    // emit(AuthErrorState("${auth.userId}"));
+  //   } else {
+  //     emit((AuthErrorState(call.error ?? "Unknown Error")));
+  //   }
+  // }
 
-    final call = await auth.createUserWithEmailAndPassword(
-        email: event.email, password: event.password, model: model);
+  // void onSignUpEvent(SignUpEvent event, Emitter<AuthState> emit) async {
+  //   emit(AuthLoadingState());
+  //   final model = UserModel(
+  //       firstName: event.firstName,
+  //       lastName: event.lastName,
+  //       phoneNumber: event.phoneNumber,
+  //       createdAt: DateTime.now(),
+  //       gender: event.gender);
 
-    if (call.user != null) {
-      debugPrint('User Created Successfully');
+  //   final call = await auth.createUserWithEmailAndPassword(
+  //       email: event.email, password: event.password, model: model);
 
-      emit(AuthSuccessState());
-    } else {
-      emit(AuthErrorState(call.error ??
-          "Unable to register Account, enter email and password!"));
-    }
-  }
+  //   if (call.user != null) {
+  //     debugPrint('User Created Successfully');
 
-  void userProfile(UserProfileEvent event, Emitter<AuthState> emit) async {
-    emit(AuthLoadingState());
+  //     emit(AuthSuccessState());
+  //   } else {
+  //     emit(AuthErrorState(call.error ??
+  //         "Unable to register Account, enter email and password!"));
+  //   }
+  // }
 
-    final userProfile = await userService.getData('${auth.userId}');
+  // void userProfile(UserProfileEvent event, Emitter<AuthState> emit) async {
+  //   emit(AuthLoadingState());
 
-    if (userProfile != null) {
-      debugPrint('NORMAL NORMAL ${userProfile}');
-      emit(UserProfileLoadedState (userModel: userProfile));
-    } else {
-      emit(AuthErrorState("Failed to fetch user profile."));
-    }
-  }
+  //   final userProfile = await userService.getData('${auth.userId}');
+
+  //   if (userProfile != null) {
+  //     debugPrint('NORMAL NORMAL ${userProfile}');
+  //     emit(UserProfileLoadedState (userModel: userProfile));
+  //   } else {
+  //     emit(AuthErrorState("Failed to fetch user profile."));
+  //   }
+  // }
 
   // void addUser(AddUserEvent event, Emitter<AuthState> emit) async {
   //   await Future.delayed(Duration(seconds: 1));
@@ -87,16 +89,16 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> with NavigationMixin {
   //   }
   // }
 
-  void logOut(SignOutEvent event, Emitter<AuthState> emit) async {
-    emit(AuthLoadingState());
+  // void logOut(SignOutEvent event, Emitter<AuthState> emit) async {
+  //   emit(AuthLoadingState());
 
-    try {
-      await auth.signOut();
-      emit(AuthSuccessState());
+  //   try {
+  //     await auth.signOut();
+  //     emit(AuthSuccessState());
 
-      debugPrint('LOGOUT SUCCESSFULY');
-    } catch (e) {
-      emit(AuthErrorState(e.toString() ?? "Unknown Error"));
-    }
-  }
+  //     debugPrint('LOGOUT SUCCESSFULY');
+  //   } catch (e) {
+  //     emit(AuthErrorState(e.toString() ?? "Unknown Error"));
+  //   }
+  // }
 }

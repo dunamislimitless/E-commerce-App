@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:e_commerce_app/data/models/signIn_req.dart';
 import 'package:e_commerce_app/data/models/signup_req.dart';
 import 'package:e_commerce_app/data/models/user_model.dart';
 import 'package:e_commerce_app/data/source/auth_api_service.dart';
@@ -47,5 +48,28 @@ class AuthRepositoryImplementation extends AuthRepository {
       var userEntity = userModel.toEntity();
       return Right(userEntity);
     });
+  }
+
+  @override
+  Future<Either> logIn(SignInRequest signInReq) async {
+    Either result = await s1<AuthApiService>().logIn(signInReq);
+
+    return result.fold((error) {
+      return Left(error);
+    }, (data) async {
+      Response response = data;
+
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+
+      sharedPreferences.setString('token', response.data["access_token"]);
+
+      return Right(response);
+    });
+  }
+
+  @override
+  Future logOut() async {
+    await s1<AuthLocalService>().logOut();
   }
 }
