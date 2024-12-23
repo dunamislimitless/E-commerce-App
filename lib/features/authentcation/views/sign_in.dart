@@ -4,9 +4,9 @@ import 'package:e_commerce_app/app/utils/colors.dart';
 import 'package:e_commerce_app/app/utils/mixin/validators.dart';
 import 'package:e_commerce_app/common/bloc/button/button_state.dart';
 import 'package:e_commerce_app/common/bloc/button/button_state_cubit.dart';
-import 'package:e_commerce_app/data/models/signIn_req.dart';
+import 'package:e_commerce_app/data/models/auth_modal/signIn_req.dart';
 
-import 'package:e_commerce_app/domain/usecases/log_in.dart';
+import 'package:e_commerce_app/domain/usecases/auth_usecases/log_in.dart';
 
 import 'package:e_commerce_app/features/authentcation/views/register.dart';
 import 'package:e_commerce_app/features/authentcation/widget/custom_labeled_input.dart';

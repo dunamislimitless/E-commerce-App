@@ -229,7 +229,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   context,
                                   MaterialPageRoute(
                                       builder: ((context) =>
-                                          ProductCatalog(list: cartList))));
+                                          ProductCatalog())));
 
                               if (value != null && value is int) {
                                 widget.navCallback!(value);
@@ -357,13 +357,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ],
                                     ),
                                   ),
-                                ).onTap(() {
-                                  context
-                                      .read<CartBloc>()
-                                      .add(AddItemEvent(item: eachProduct));
-                                  if (widget.widget.moveToCart != null)
-                                    widget.widget.moveToCart!();
-                                });
+                                );
+                                // .onTap(() {
+                                //   context
+                                //       .read<CartBloc>()
+                                //       .add(AddItemEvent(item: eachProduct));
+                                //   if (widget.widget.moveToCart != null)
+                                //     widget.widget.moveToCart!();
+                                // });
                               },
                             );
                           } else {

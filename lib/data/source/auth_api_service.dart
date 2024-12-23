@@ -2,8 +2,8 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:e_commerce_app/core/constants/api_urls.dart';
 import 'package:e_commerce_app/core/network/dio_client.dart';
-import 'package:e_commerce_app/data/models/signIn_req.dart';
-import 'package:e_commerce_app/data/models/signup_req.dart';
+import 'package:e_commerce_app/data/models/auth_modal/signIn_req.dart';
+import 'package:e_commerce_app/data/models/auth_modal/signup_req.dart';
 import 'package:e_commerce_app/service_locator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

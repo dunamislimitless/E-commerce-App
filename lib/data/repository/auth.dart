@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:e_commerce_app/data/models/signIn_req.dart';
-import 'package:e_commerce_app/data/models/signup_req.dart';
-import 'package:e_commerce_app/data/models/user_model.dart';
+import 'package:e_commerce_app/data/models/auth_modal/signIn_req.dart';
+import 'package:e_commerce_app/data/models/auth_modal/signup_req.dart';
+import 'package:e_commerce_app/data/models/auth_modal/user_model.dart';
 import 'package:e_commerce_app/data/source/auth_api_service.dart';
 import 'package:e_commerce_app/data/source/auth_local_service.dart';
 import 'package:e_commerce_app/domain/repository/auth.dart';

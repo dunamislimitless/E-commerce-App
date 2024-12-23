@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/data/models/product_modal/prduct_modal.dart';
 import 'package:e_commerce_app/features/cart/models/final_cart_model.dart';
 
 abstract class CartEvent {}
@@ -21,7 +22,7 @@ class RemoveCartItemEvent extends CartEvent {
 }
 
 class AddItemEvent extends CartEvent {
-   final FinalCart item;
-   
+  final ProductModal item;
+
   AddItemEvent({required this.item});
 }

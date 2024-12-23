@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:e_commerce_app/data/models/signIn_req.dart';
-import 'package:e_commerce_app/data/models/signup_req.dart';
+import 'package:e_commerce_app/data/models/auth_modal/signIn_req.dart';
+import 'package:e_commerce_app/data/models/auth_modal/signup_req.dart';
 
 abstract class AuthRepository {
   Future<Either> signUp(SignupRequest signupReq);

@@ -4,7 +4,7 @@ import 'package:e_commerce_app/app/utils/textstyle.dart';
 import 'package:e_commerce_app/common/bloc/button/button_state.dart';
 import 'package:e_commerce_app/common/bloc/button/button_state_cubit.dart';
 
-import 'package:e_commerce_app/domain/usecases/signout.dart';
+import 'package:e_commerce_app/domain/usecases/auth_usecases/signout.dart';
 
 import 'package:e_commerce_app/features/authentcation/bloc/cubit/user_dislay_cubit.dart';
 import 'package:e_commerce_app/features/authentcation/bloc/cubit/user_dislay_state.dart';
@@ -39,7 +39,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: BlocBuilder<UserDislayCubit, UserDislayState>(
                   builder: (context, state) {
                 if (state is UserLoadingStte) {
-                  return Center(child: const CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 }
                 if (state is UserLoadedState) {
                   final user = state.userEntiry;

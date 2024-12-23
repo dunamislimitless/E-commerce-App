@@ -138,7 +138,7 @@ class ProductDetail extends StatelessWidget {
                   ),
                   CustomButton(
                     onPressed: () {
-                      context.read<CartBloc>().add(AddItemEvent(item: product));
+                      // context.read<CartBloc>().add(AddItemEvent(item: product));
 
                       if (moveToCart != null) {
                         moveToCart!();
