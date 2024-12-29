@@ -14,6 +14,7 @@ import 'package:e_commerce_app/app/utils/textstyle.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CartCategory extends StatelessWidget {
   CartCategory({super.key});
@@ -33,7 +34,7 @@ class CartCategory extends StatelessWidget {
             PageHeader(
                 title: AppString.category,
                 trailing: AppIcons.search.onTap(() {}),
-                leading: AppIcons.arrowBack.onTap(() {
+                leading: SvgPicture.asset(AppIcons.arrowBack).onTap(() {
                   Navigator.pop(context);
                 })),
             SizedBox(

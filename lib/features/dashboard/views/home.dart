@@ -98,7 +98,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                 },
               ),
               const Cart(),
-              ProfileScreen()
+              const ProfileScreen()
             ],
           ),
         ));

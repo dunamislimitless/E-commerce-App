@@ -1,12 +1,9 @@
 import 'package:flutter_svg/svg.dart';
 
 class AppIcons {
-  static final arrowBack = SvgPicture.asset(
-    'assets/icons/arrowback.svg',
-  );
-  static final cartLoaded = SvgPicture.asset(
-    'assets/icons/cart_with_item.svg',
-  );
+  static const arrowBack = 'assets/icons/arrowback.svg';
+
+  static const cartLoaded = 'assets/icons/cart_with_item.svg';
   static const cart = 'assets/icons/cart.svg';
 
   static final danger = SvgPicture.asset(

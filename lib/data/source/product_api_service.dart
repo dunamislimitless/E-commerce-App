@@ -1,3 +1,4 @@
+import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:e_commerce_app/core/constants/api_urls.dart';
 import 'package:e_commerce_app/core/network/dio_client.dart';
@@ -9,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class ProductApiService {
   Future<List<ProductModal>> getProduct();
+  Future<Either> getEachProduct(String id);
 }
 
 class ProductApiServiceImplement extends ProductApiService {
@@ -31,12 +33,27 @@ class ProductApiServiceImplement extends ProductApiService {
         return data.map((json) => ProductModal.fromJson(json)).toList();
       } else {
         debugPrint("Data is not in expected list format.");
-        return []; // Return an empty list if data is not a list
+        return [];
       }
     } on DioException catch (e) {
       debugPrint("DioException: ${e.response?.realUri}");
-      // Handle error properly: Either return an empty list or rethrow the error
-      return []; // Returning an empty list in case of an error
+
+      return [];
+    }
+  }
+
+  @override
+  Future<Either> getEachProduct(String id) async {
+    try {
+      SharedPreferences sharedPrefrences =
+          await SharedPreferences.getInstance();
+      final token = sharedPrefrences.get('token');
+      var response = await s1<DioClient>().get(ApiUrls.getOneProduct(id),
+          options: Options(headers: {'Authorization': 'Bearer $token'}));
+
+      return Right(response);
+    } on DioException catch (e) {
+      return Left(e.response!.data['message']);
     }
   }
 }

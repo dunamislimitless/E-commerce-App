@@ -1,0 +1,14 @@
+import 'package:dartz/dartz.dart';
+import 'package:e_commerce_app/core/usecase/usecase.dart';
+import 'package:e_commerce_app/data/models/auth_modal/signup_req.dart';
+import 'package:e_commerce_app/data/models/product_modal/each_item_req.dart';
+import 'package:e_commerce_app/domain/repository/auth.dart';
+import 'package:e_commerce_app/domain/repository/product.dart';
+import 'package:e_commerce_app/service_locator.dart';
+
+class SingleItemUseCase implements UseCase<Either, EachProductReq> {
+  @override
+  Future<Either> call({EachProductReq? param}) {
+    return s1<ProductRepository>().getEachProduct(param!);
+  }
+}

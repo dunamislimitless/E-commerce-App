@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:e_commerce_app/data/models/product_modal/prduct_modal.dart';
 import 'package:e_commerce_app/features/cart/models/final_cart_model.dart';
 import 'package:e_commerce_app/features/dashboard/models/product_model.dart';
 import 'package:e_commerce_app/controller/services/product_services.dart';
@@ -23,7 +24,7 @@ class ProductBlocBloc extends Bloc<ProductBlocEvent, ProductBlocState> {
     // on<FetchProductEvent>(getProduct as EventHandler<FetchProductEvent, ProductBlocState>);
   }
 
-  FinalCart? product;
+  ProductModal? product;
 
   void _selectItem(SelectProductEvent event, Emitter<ProductBlocState> emit) {
     product = event.product;

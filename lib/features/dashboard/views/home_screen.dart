@@ -329,30 +329,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 style: AppText.amountText,
                                               ),
                                               Text(AppString.view,
-                                                      style: AppText.view)
-                                                  .onTap(() {
-                                                context
-                                                    .read<ProductBlocBloc>()
-                                                    .add(SelectProductEvent(
-                                                        product: eachProduct));
-                                                widget.navCallback!(1);
-                                                // Navigator.push(
-                                                //     context,
-                                                //     MaterialPageRoute(
-                                                //         builder: (context) =>
-                                                //             ProductDetail(
-                                                //               amount: eachProduct
-                                                //                   .amount,
-                                                //               imagePath: eachProduct
-                                                //                   .imagePath,
-                                                //               descrition: eachProduct
-                                                //                   .itemDescription,
-                                                //               productName: eachProduct
-                                                //                   .itemDescription,
-                                                //               eachProduct:
-                                                //                   eachProduct,
-                                                //             )));
-                                              })
+                                                  style: AppText.view)
+                                              //   .onTap(() {
+                                              // context
+                                              //     .read<ProductBlocBloc>()
+                                              //     .add(SelectProductEvent(
+                                              //         product: eachProduct));
+                                              // widget.navCallback!(1);
+
+                                              // })
                                             ]),
                                       ],
                                     ),
