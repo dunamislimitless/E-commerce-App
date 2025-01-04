@@ -21,6 +21,6 @@ class AuthLocalServiceImplmentation extends AuthLocalService {
   @override
   Future logOut() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    sharedPreferences.clear();
+    sharedPreferences.remove('token');
   }
 }

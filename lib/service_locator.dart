@@ -14,6 +14,7 @@ import 'package:e_commerce_app/domain/usecases/auth_usecases/log_in.dart';
 import 'package:e_commerce_app/domain/usecases/auth_usecases/signout.dart';
 import 'package:e_commerce_app/domain/usecases/auth_usecases/signup.dart';
 import 'package:e_commerce_app/domain/usecases/product_usecase.dart/all_product.dart';
+import 'package:e_commerce_app/domain/usecases/product_usecase.dart/category_usecase.dart';
 import 'package:e_commerce_app/domain/usecases/product_usecase.dart/product_usecase.dart';
 import 'package:get_it/get_it.dart';
 
@@ -46,5 +47,8 @@ void setupServiceLocator() {
   s1.registerSingleton<SignInUsecae>(SignInUsecae());
 
   s1.registerSingleton<GetProductUsecase>(GetProductUsecase());
+
+  s1.registerSingleton<GetCaregoryUsecase>(GetCaregoryUsecase());
+
   s1.registerSingleton<SingleItemUseCase>(SingleItemUseCase());
 }

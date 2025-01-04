@@ -1,5 +1,3 @@
-import 'package:e_commerce_app/domain/entities/product.dart';
-
 class ProductModal {
   ProductModal({
     required this.id,
@@ -60,20 +58,6 @@ class Category {
       image: json["image"] ?? "",
       creationAt: DateTime.tryParse(json["creationAt"] ?? ""),
       updatedAt: DateTime.tryParse(json["updatedAt"] ?? ""),
-    );
-  }
-}
-
-extension ProductXModel on ProductModal {
-  ProductEntity toEntity() {
-    return ProductEntity(
-      id: id,
-      title: title,
-      description: description,
-      images: images,
-      price: price,
-      creationAt: creationAt,
-      updatedAt: updatedAt,
     );
   }
 }

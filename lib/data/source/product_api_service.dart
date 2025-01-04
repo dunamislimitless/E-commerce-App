@@ -11,6 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 abstract class ProductApiService {
   Future<List<ProductModal>> getProduct();
   Future<Either> getEachProduct(String id);
+  Future<List<Category>> getProductCategory();
 }
 
 class ProductApiServiceImplement extends ProductApiService {
@@ -54,6 +55,36 @@ class ProductApiServiceImplement extends ProductApiService {
       return Right(response);
     } on DioException catch (e) {
       return Left(e.response!.data['message']);
+    }
+  }
+
+  @override
+  Future<List<Category>> getProductCategory() async {
+    try {
+      SharedPreferences sharedPrefrences =
+          await SharedPreferences.getInstance();
+      final token = sharedPrefrences.get('token');
+      debugPrint("THIS IS TOKENNNNN $token");
+
+      var response = await s1<DioClient>().get(ApiUrls.getProductCategory,
+          options: Options(headers: {'Authorization': 'Bearer $token'}));
+
+      debugPrint("ResSSS ${response.realUri}");
+
+      final data = response.data;
+
+      print('CAYTRRTTT   $data');
+
+      if (data is List) {
+        return data.map((json) => Category.fromJson(json)).toList();
+      } else {
+        debugPrint("Data is not in expected list format.");
+        return [];
+      }
+    } on DioException catch (e) {
+      debugPrint("DioException: ${e.response?.realUri}");
+
+      return [];
     }
   }
 }

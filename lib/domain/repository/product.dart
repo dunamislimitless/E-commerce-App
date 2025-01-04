@@ -5,5 +5,6 @@ import 'package:e_commerce_app/data/models/product_modal/prduct_modal.dart';
 
 abstract class ProductRepository {
   Future<List<ProductModal>> getProduct();
+  Future<List<Category>> getProductCategory();
   Future<Either> getEachProduct(EachProductReq req);
 }

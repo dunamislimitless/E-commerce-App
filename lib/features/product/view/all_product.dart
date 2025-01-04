@@ -126,13 +126,10 @@ class _ProductCatalogState extends State<ProductCatalog> {
                                               borderRadius:
                                                   BorderRadius.circular(6.r),
                                               child: Image.network(
-                                                each.images
-                                                    .first, // Accessing the first image
+                                                each.images.first.sanitize(),
                                                 fit: BoxFit.cover,
-                                                width: double
-                                                    .infinity, // Optional: Adjust width as needed
-                                                height: 100
-                                                    .h, // Optional: Adjust height as needed
+                                                width: double.infinity,
+                                                height: 100.h,
                                               ),
                                             )
                                           : const Placeholder(

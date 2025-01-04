@@ -2,6 +2,7 @@ import 'package:e_commerce_app/app/utils/colors.dart';
 import 'package:e_commerce_app/common/bloc/auth/auth_state_cubit.dart';
 import 'package:e_commerce_app/common/bloc/auth/auth_statee.dart';
 import 'package:e_commerce_app/common/bloc/button/button_state_cubit.dart';
+import 'package:e_commerce_app/common/bloc/product/product_cubit_state.dart';
 import 'package:e_commerce_app/features/authentcation/bloc/auth_bloc.dart';
 import 'package:e_commerce_app/features/authentcation/bloc/cubit/user_dislay_cubit.dart';
 import 'package:e_commerce_app/features/authentcation/views/register.dart';
@@ -41,8 +42,8 @@ class MyApp extends StatelessWidget {
                     BlocProvider<CartBloc>(
                       create: (context) => CartBloc(),
                     ),
-                    BlocProvider<ProductBlocBloc>(
-                        create: (context) => ProductBlocBloc()),
+                    BlocProvider<ProductCubit>(
+                        create: (context) => ProductCubit()),
                     BlocProvider<AuthBloc>(
                       create: (context) => AuthBloc(),
                     ),

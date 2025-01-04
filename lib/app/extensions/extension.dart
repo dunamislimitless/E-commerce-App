@@ -39,4 +39,9 @@ extension StringHelper on String {
       .hasMatch(this);
 
   bool isValidatePassword() => RegExp(r'^[a-zA-Z0-9]{8,}$').hasMatch(this);
+
+  String sanitize() {
+    final regex = RegExp(r'^[^a-zA-Z]+');
+    return this.replaceFirst(regex, '');
+  }
 }

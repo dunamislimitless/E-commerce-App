@@ -4,6 +4,8 @@ import 'package:e_commerce_app/app/utils/appicons.dart';
 import 'package:e_commerce_app/app/utils/appstrings.dart';
 import 'package:e_commerce_app/app/utils/colors.dart';
 import 'package:e_commerce_app/app/utils/textstyle.dart';
+import 'package:e_commerce_app/common/bloc/product/product_cubit_state.dart';
+import 'package:e_commerce_app/common/bloc/product/product_state.dart';
 import 'package:e_commerce_app/data/models/product_modal/prduct_modal.dart';
 import 'package:e_commerce_app/features/cart/cart_bloc/cart_bloc.dart';
 import 'package:e_commerce_app/features/cart/cart_bloc/cart_event.dart';
@@ -30,7 +32,7 @@ class ProductDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProductBlocBloc, ProductBlocState>(builder: (_, state) {
+    return BlocBuilder<ProductCubit, ProductState>(builder: (_, state) {
       // final product = context.read<ProductBlocBloc>().
       final bool isProductSelected = product != null;
       return Scaffold(
@@ -71,7 +73,7 @@ class ProductDetail extends StatelessWidget {
                                   return ClipRRect(
                                     borderRadius: BorderRadius.circular(6.r),
                                     child: Image.network(
-                                      imageUrl,
+                                      imageUrl.sanitize(),
                                       fit: BoxFit.contain,
                                       width: double.infinity,
                                     ),
@@ -168,7 +170,7 @@ class ProductDetail extends StatelessWidget {
                       context
                           .read<CartBloc>()
                           .add(AddItemEvent(item: product!));
-
+                      print("$product added safely");
                       if (moveToCart != null) {
                         moveToCart!();
                       }

@@ -4,5 +4,6 @@ class ApiUrls {
   static const userProfile = "${baseUrl}auth/profile";
   static const signIn = "${baseUrl}auth/login";
   static const getProduct = "${baseUrl}products/";
+  static const getProductCategory = "${baseUrl}categories/";
   static String getOneProduct(String id) => "${baseUrl}products/$id";
 }

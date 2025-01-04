@@ -14,6 +14,12 @@ class AllProductLoadedState extends ProductState {
   AllProductLoadedState({required this.productModal});
 }
 
+class CategoryLoadedState extends ProductState {
+  final List<Category> category;
+
+  CategoryLoadedState({required this.category});
+}
+
 class ProductFailureState extends ProductState {
   final String errorMessage;
 

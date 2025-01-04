@@ -7,6 +7,7 @@ import 'package:e_commerce_app/domain/repository/product.dart';
 import 'package:e_commerce_app/service_locator.dart';
 
 class ProductRepositoryImplementation extends ProductRepository {
+  ProductApiServiceImplement service = ProductApiServiceImplement();
   @override
   Future<List<ProductModal>> getProduct() async {
     final result = await s1<ProductApiService>().getProduct();
@@ -16,8 +17,6 @@ class ProductRepositoryImplementation extends ProductRepository {
 
   @override
   Future<Either> getEachProduct(EachProductReq req) async {
-    ProductApiServiceImplement service = ProductApiServiceImplement();
-
     final result = await service.getEachProduct("${req.idProduct}");
     return result.fold((error) {
       return Left(error);
@@ -27,5 +26,12 @@ class ProductRepositoryImplementation extends ProductRepository {
 
       return Right(eachProduct);
     });
+  }
+
+  @override
+  Future<List<Category>> getProductCategory() async {
+    final result = await s1<ProductApiService>().getProductCategory();
+
+    return result;
   }
 }
