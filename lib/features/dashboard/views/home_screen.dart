@@ -21,6 +21,7 @@ import 'package:e_commerce_app/features/product/view/all_product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../bloc/dashboard_bloc_bloc.dart';
 
@@ -36,14 +37,19 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   List<ProductModal> cartList = [];
+  List<Category> categories = [];
 
   @override
   void initState() {
     super.initState();
-
+    fetchCategories();
     //var selectCategory =context.read<ProductCubit>().category() as List<Category>;
 
     // cartList =
+  }
+
+  void fetchCategories() {
+    context.read<ProductCubit>().category();
   }
 
   int tab = 0;
@@ -234,10 +240,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              // Text(
-                              //   '${tab == 0 ? AppString.popular : selectCategory[tab - 1].name.capitalizeFirstLetter()} ${AppString.products}',
-                              //   style: AppText.titleText,
-                              // ),
+                              Text(
+                                '${tab == 0 ? AppString.popular : categories[tab - 1].name.capitalizeFirstLetter()} ${AppString.products}',
+                                style: AppText.titleText,
+                              ),
                               Text(
                                 AppString.seeAll,
                                 style: AppText.seeAll,
@@ -339,12 +345,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             6.r),
                                                     child: Image.network(
                                                       eachProduct.images.first
-                                                          .sanitize(), // Accessing the first image
+                                                          .sanitize(),
                                                       fit: BoxFit.cover,
-                                                      width: double
-                                                          .infinity, // Optional: Adjust width as needed
-                                                      height: 100
-                                                          .h, // Optional: Adjust height as needed
+                                                      width: double.infinity,
+                                                      height: 100.h,
                                                     ),
                                                   )
                                                 : const Placeholder(
