@@ -1,26 +1,25 @@
 import 'package:dartz/dartz.dart';
 import 'package:e_commerce_app/common/bloc/product/product_state.dart';
 import 'package:e_commerce_app/core/usecase/usecase.dart';
-import 'package:e_commerce_app/data/models/product_modal/prduct_modal.dart';
-import 'package:e_commerce_app/domain/usecases/auth_usecases/get_user.dart';
-import 'package:e_commerce_app/domain/usecases/product_usecase.dart/all_product.dart';
+import 'package:e_commerce_app/domain/repository/product.dart';
 import 'package:e_commerce_app/domain/usecases/product_usecase.dart/category_usecase.dart';
 import 'package:e_commerce_app/domain/usecases/product_usecase.dart/product_usecase.dart';
-import 'package:e_commerce_app/features/product/bloc/product_bloc_bloc.dart';
-
 import 'package:e_commerce_app/service_locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductCubit extends Cubit<ProductState> {
-  ProductCubit() : super(ProductLoadingState());
+  ProductCubit({required this.productRepository})
+      : super(ProductLoadingState());
+
+  final ProductRepository productRepository;
 
   void getAllProduct() async {
-    var result = await s1<GetProductUsecase>().call();
+    var result = await productRepository.getProduct();
 
-    if (result != null) {
-      emit(AllProductLoadedState(productModal: result));
+    if (result.list != null) {
+      emit(AllProductLoadedState(productModal: result.list ?? []));
     } else {
-      emit(ProductFailureState(errorMessage: 'Failed to load data'));
+      emit(ProductFailureState(errorMessage: result.error ?? ""));
     }
   }
 

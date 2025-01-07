@@ -34,93 +34,90 @@ class _ProfileScreenState extends State<ProfileScreen> {
             appBar: AppBar(
                 title: Center(child: Text('Profile')),
                 automaticallyImplyLeading: false),
-            body: BlocProvider(
-              create: (context) => UserDislayCubit()..displayUser(),
-              child: BlocBuilder<UserDislayCubit, UserDislayState>(
-                  builder: (context, state) {
-                if (state is UserLoadingStte) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                if (state is UserLoadedState) {
-                  final user = state.userEntiry;
-                  return SingleChildScrollView(
-                      child: Padding(
-                          padding: EdgeInsets.all(16.0.w),
-                          child: Column(children: [
-                            SizedBox(height: 20.h),
-                            // CircleAvatar(
-                            //   radius: 60.r,
-                            //   backgroundImage: Image.network(),
-                            // ),
+            body: BlocBuilder<UserDislayCubit, UserDislayState>(
+                builder: (context, state) {
+              if (state is UserLoadingStte) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              if (state is UserLoadedState) {
+                final user = state.userEntiry;
+                return SingleChildScrollView(
+                    child: Padding(
+                        padding: EdgeInsets.all(16.0.w),
+                        child: Column(children: [
+                          SizedBox(height: 20.h),
+                          // CircleAvatar(
+                          //   radius: 60.r,
+                          //   backgroundImage: Image.network(),
+                          // ),
 
-                            ClipOval(
-                                child: Image.network(
-                              user.avatar,
-                              width: 200,
-                              height: 200,
-                            )),
-                            SizedBox(height: 20.h),
-                            Text(user.name, style: AppText.amountText),
-                            SizedBox(height: 10.h),
-                            Text(
-                              user.role,
-                              style: TextStyle(
-                                  fontSize: 16.sp, color: Colors.grey[600]),
-                            ),
-                            SizedBox(height: 20.h),
-                            Divider(color: AppColors.lightButton, thickness: 1),
-                            _buildProfileDetailRow(
-                                Icons.phone, 'Phone', '${user.role}'),
-                            _buildProfileDetailRow(Icons.location_on, 'Address',
-                                '35, Glover Road Ikoyi Lagos'),
-                            _buildProfileDetailRow(
-                                Icons.cake, 'Gender', '${user.role}'),
-                            _buildProfileDetailRow(
-                                Icons.work, 'Occupation', '${user.role}'),
-                            SizedBox(height: 30.h),
-                            // Align(
-                            //   alignment: Alignment.bottomRight,
-                            //   child: Text(AppString.signOut,
-                            //           style: TextStyle(color: Colors.red))
-                            //       .onTap(
-                            //     () {
-                            //       final authBloc = context.read<AuthBloc>();
+                          ClipOval(
+                              child: Image.network(
+                            user.avatar,
+                            width: 200,
+                            height: 200,
+                          )),
+                          SizedBox(height: 20.h),
+                          Text(user.name, style: AppText.amountText),
+                          SizedBox(height: 10.h),
+                          Text(
+                            user.role,
+                            style: TextStyle(
+                                fontSize: 16.sp, color: Colors.grey[600]),
+                          ),
+                          SizedBox(height: 20.h),
+                          Divider(color: AppColors.lightButton, thickness: 1),
+                          _buildProfileDetailRow(
+                              Icons.phone, 'Phone', '${user.role}'),
+                          _buildProfileDetailRow(Icons.location_on, 'Address',
+                              '35, Glover Road Ikoyi Lagos'),
+                          _buildProfileDetailRow(
+                              Icons.cake, 'Gender', '${user.role}'),
+                          _buildProfileDetailRow(
+                              Icons.work, 'Occupation', '${user.role}'),
+                          SizedBox(height: 30.h),
+                          // Align(
+                          //   alignment: Alignment.bottomRight,
+                          //   child: Text(AppString.signOut,
+                          //           style: TextStyle(color: Colors.red))
+                          //       .onTap(
+                          //     () {
+                          //       final authBloc = context.read<AuthBloc>();
 
-                            //       authBloc.add(SignOutEvent());
-                            //     },
-                            //   ),
-                            // ),
+                          //       authBloc.add(SignOutEvent());
+                          //     },
+                          //   ),
+                          // ),
 
-// TODO   Work on the signout and the navigation back to the sign in
+                          // TODO   Work on the signout and the navigation back to the sign in
 
-                            BlocListener<ButtonStateCubit, ButtonStateC>(
-                              listener: (context, state) {
-                                if (state is ButtonSuccessState) {
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Signin()));
-                                }
+                          BlocListener<ButtonStateCubit, ButtonStateC>(
+                            listener: (context, state) {
+                              if (state is ButtonSuccessState) {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Signin()));
+                              }
+                            },
+                            child: CustomButton(
+                              onPressed: () {
+                                context
+                                    .read<ButtonStateCubit>()
+                                    .execute(usecase: SignOutUsecase());
                               },
-                              child: CustomButton(
-                                onPressed: () {
-                                  context
-                                      .read<ButtonStateCubit>()
-                                      .execute(usecase: SignOutUsecase());
-                                },
-                                buttontext: AppString.signOut,
-                                height: 52.h,
-                                color: AppColors.favoriteColor,
-                              ),
-                            )
-                          ])));
-                }
-                if (state is LoadUserFailureState) {
-                  return Text(state.errorMessage);
-                }
-                return Container();
-              }),
-            )));
+                              buttontext: AppString.signOut,
+                              height: 52.h,
+                              color: AppColors.favoriteColor,
+                            ),
+                          )
+                        ])));
+              }
+              if (state is LoadUserFailureState) {
+                return Text(state.errorMessage);
+              }
+              return Container();
+            })));
   }
 
   Widget _buildProfileDetailRow(IconData icon, String title, String value) {

@@ -8,11 +8,22 @@ import 'package:e_commerce_app/service_locator.dart';
 
 class ProductRepositoryImplementation extends ProductRepository {
   ProductApiServiceImplement service = ProductApiServiceImplement();
+
   @override
-  Future<List<ProductModal>> getProduct() async {
+  Future<({List<ProductModal>? list, String? error})> getProduct() async {
     final result = await s1<ProductApiService>().getProduct();
 
-    return result;
+    if (result.data != null) {
+      return (
+        list: List<ProductModal>.from((result.data as List<dynamic>)
+            .map((e) => ProductModal.fromJson(e))),
+        error: null
+      );
+    } else {
+      return (list: null, error: result.error);
+    }
+
+    // return result;
   }
 
   @override

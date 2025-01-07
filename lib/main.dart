@@ -3,14 +3,12 @@ import 'package:e_commerce_app/common/bloc/auth/auth_state_cubit.dart';
 import 'package:e_commerce_app/common/bloc/auth/auth_statee.dart';
 import 'package:e_commerce_app/common/bloc/button/button_state_cubit.dart';
 import 'package:e_commerce_app/common/bloc/product/product_cubit_state.dart';
+import 'package:e_commerce_app/controller/services/product_services.dart';
+import 'package:e_commerce_app/data/repository/product.dart';
 import 'package:e_commerce_app/features/authentcation/bloc/auth_bloc.dart';
 import 'package:e_commerce_app/features/authentcation/bloc/cubit/user_dislay_cubit.dart';
-import 'package:e_commerce_app/features/authentcation/views/register.dart';
 import 'package:e_commerce_app/features/authentcation/views/sign_in.dart';
 import 'package:e_commerce_app/features/dashboard/views/home.dart';
-import 'package:e_commerce_app/features/product/bloc/product_bloc_bloc.dart';
-import 'package:e_commerce_app/controller/services/product_services.dart';
-import 'package:e_commerce_app/features/product/models/product_model.dart';
 import 'package:e_commerce_app/service_locator.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -24,11 +22,13 @@ void main() async {
 
   await Firebase.initializeApp();
   setupServiceLocator();
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final repo = ProductRepositoryImplementation();
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,8 @@ class MyApp extends StatelessWidget {
                       create: (context) => CartBloc(),
                     ),
                     BlocProvider<ProductCubit>(
-                        create: (context) => ProductCubit()),
+                        create: (context) =>
+                            ProductCubit(productRepository: repo)),
                     BlocProvider<AuthBloc>(
                       create: (context) => AuthBloc(),
                     ),

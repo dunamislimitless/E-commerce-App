@@ -9,26 +9,23 @@
       <change beforePath="$PROJECT_DIR$/.dart_tool/package_config_subset" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config_subset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.dart_tool/version" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/version" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/7.6.3/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/7.6.3/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/7.6.3/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/7.6.3/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/7.6.3/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/7.6.3/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/7.6.3/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/7.6.3/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/7.6.3/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/7.6.3/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/7.6.3/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/7.6.3/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/android/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android/local.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ios/Flutter/Generated.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Flutter/Generated.xcconfig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ios/Flutter/flutter_export_environment.sh" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Flutter/flutter_export_environment.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/services/auth_services.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controller/services/auth_services.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controller/services/user_services.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/features/authentcation/bloc/auth_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/authentcation/bloc/auth_bloc.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/features/authentcation/bloc/auth_event.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/authentcation/bloc/auth_event.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/features/authentcation/bloc/auth_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/authentcation/bloc/auth_state.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Podfile.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/common/bloc/product/product_cubit_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/bloc/product/product_cubit_state.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/data/repository/product.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/repository/product.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/data/source/product_api_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/source/product_api_service.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/domain/repository/product.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/domain/repository/product.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/domain/usecases/product_usecase.dart/all_product.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/domain/usecases/product_usecase.dart/all_product.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/authentcation/widget/custom_labeled_input.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/authentcation/widget/custom_labeled_input.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/dashboard/views/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/dashboard/views/home.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/dashboard/views/home_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/dashboard/views/home_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/features/dashboard/views/profile.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/dashboard/views/profile.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/product/view/all_product.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/product/view/all_product.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/service_locator.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/service_locator.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,7 +124,6 @@
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "fix/nav-fix",
     "io.flutter.reload.alreadyRun": "true",
     "kotlin-language-version-configured": "true",
@@ -139,6 +135,10 @@
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SwiftWorkspaceSettings">
+    <option name="detectedToolchain" value="true" />
+    <option name="toolchainPathValue" value="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain" />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="a9bc6ba9-2acc-4e86-9e37-c9aecba37ae7" name="Changes" comment="" />
