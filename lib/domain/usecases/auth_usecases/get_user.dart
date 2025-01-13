@@ -7,6 +7,6 @@ import 'package:e_commerce_app/service_locator.dart';
 class GetUserUseCase implements UseCase<Either, dynamic> {
   @override
   Future<Either> call({dynamic param}) {
-    return s1<AuthRepository>().getUser();
+    return locator<AuthRepository>().getUser();
   }
 }

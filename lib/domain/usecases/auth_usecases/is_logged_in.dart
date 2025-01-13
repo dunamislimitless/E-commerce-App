@@ -7,6 +7,6 @@ import 'package:e_commerce_app/service_locator.dart';
 class IsLoggedInUseCase implements UseCase<bool, dynamic> {
   @override
   Future<bool> call({dynamic param}) {
-    return s1<AuthRepository>().isLoggedIn();
+    return locator<AuthRepository>().isLoggedIn();
   }
 }

@@ -7,7 +7,7 @@ class AuthStateCubit extends Cubit<AuthStatee> {
   AuthStateCubit() : super(AuthIntialState());
 
   void appStarted() async {
-    var isLoggedIn = await s1<IsLoggedInUseCase>().call();
+    var isLoggedIn = await locator<IsLoggedInUseCase>().call();
     if (isLoggedIn) {
       emit(AuthenticatedState());
     } else {

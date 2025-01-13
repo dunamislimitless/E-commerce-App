@@ -7,7 +7,7 @@ class UserDislayCubit extends Cubit<UserDislayState> {
   UserDislayCubit() : super(UserLoadingStte());
 
   void displayUser() async {
-    var result = await s1<GetUserUseCase>().call();
+    var result = await locator<GetUserUseCase>().call();
 
     result.fold((error) {
       emit(LoadUserFailureState(errorMessage: error));

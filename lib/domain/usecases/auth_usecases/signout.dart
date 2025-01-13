@@ -7,6 +7,6 @@ import 'package:e_commerce_app/service_locator.dart';
 class SignOutUsecase implements UseCase<dynamic, dynamic> {
   @override
   Future call({dynamic param}) async {
-    await s1<AuthRepository>().logOut();
+    await locator<AuthRepository>().logOut();
   }
 }

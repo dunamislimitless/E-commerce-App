@@ -14,7 +14,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AuthRepositoryImplementation extends AuthRepository {
   @override
   Future<Either> signUp(SignupRequest signupReq) async {
-    Either result = await s1<AuthApiService>().signUp(signupReq);
+    Either result = await locator<AuthApiService>().signUp(signupReq);
 
     return result.fold((error) {
       return Left(error);
@@ -32,12 +32,12 @@ class AuthRepositoryImplementation extends AuthRepository {
 
   @override
   Future<bool> isLoggedIn() async {
-    return await s1<AuthLocalService>().isLoggedIn();
+    return await locator<AuthLocalService>().isLoggedIn();
   }
 
   @override
   Future<Either> getUser() async {
-    Either result = await s1<AuthApiService>().getUser();
+    Either result = await locator<AuthApiService>().getUser();
 
     return result.fold((error) {
       return Left(error);
@@ -52,7 +52,7 @@ class AuthRepositoryImplementation extends AuthRepository {
 
   @override
   Future<Either> logIn(SignInRequest signInReq) async {
-    Either result = await s1<AuthApiService>().logIn(signInReq);
+    Either result = await locator<AuthApiService>().logIn(signInReq);
 
     return result.fold((error) {
       return Left(error);
@@ -70,6 +70,6 @@ class AuthRepositoryImplementation extends AuthRepository {
 
   @override
   Future logOut() async {
-    await s1<AuthLocalService>().logOut();
+    await locator<AuthLocalService>().logOut();
   }
 }

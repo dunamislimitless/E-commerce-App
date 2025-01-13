@@ -1,13 +1,13 @@
 import 'package:dartz/dartz.dart';
+import 'package:e_commerce_app/app/utils/mixin/toast_mixin.dart';
 import 'package:e_commerce_app/common/bloc/product/product_state.dart';
 import 'package:e_commerce_app/core/usecase/usecase.dart';
 import 'package:e_commerce_app/domain/repository/product.dart';
 import 'package:e_commerce_app/domain/usecases/product_usecase.dart/category_usecase.dart';
-import 'package:e_commerce_app/domain/usecases/product_usecase.dart/product_usecase.dart';
 import 'package:e_commerce_app/service_locator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ProductCubit extends Cubit<ProductState> {
+class ProductCubit extends Cubit<ProductState> with ToastMixin {
   ProductCubit({required this.productRepository})
       : super(ProductLoadingState());
 
@@ -23,26 +23,24 @@ class ProductCubit extends Cubit<ProductState> {
     }
   }
 
-  void getEachProduct({dynamic params, required UseCase usecase}) async {
-    try {
-      Either result = await s1<SingleItemUseCase>().call();
-      result.fold((error) {
-        emit(ProductFailureState(errorMessage: error));
-      }, (data) {
-        emit(AllProductLoadedState(productModal: data));
-      });
-    } catch (e) {
-      emit(ProductFailureState(errorMessage: e.toString()));
+  void getEachProduct() async {
+    var result = await productRepository.getEachProduct();
+
+    if (result.product != null) {
+      emit(ProductLoadedState(producttModal: result.product));
+    } else {
+      emit(ProductFailureState(errorMessage: result.error ?? ""));
     }
   }
 
   void category() async {
-    var result = await s1<GetCaregoryUsecase>().call();
+    var result = await productRepository.getCategory();
 
-    if (result != null) {
-      emit(CategoryLoadedState(category: result));
+    if (result.list != null) {
+      emit(CategoryLoadedState(category: result.list ?? []));
     } else {
-      emit(ProductFailureState(errorMessage: 'Failed to load data'));
+      emit(ProductFailureState(
+          errorMessage: result.error ?? 'Failed to load data'));
     }
   }
 }

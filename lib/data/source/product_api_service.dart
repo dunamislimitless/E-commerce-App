@@ -10,12 +10,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 abstract class ProductApiService {
   Future<({dynamic data, String? error})> getProduct();
 
-  Future<Either> getEachProduct(String id);
+  Future<({dynamic data, String? error})> getEachProduct();
 
-  Future<List<Category>> getProductCategory();
+  Future<({dynamic data, String? error})> getCategory();
+  Future<({dynamic data, String? error})> getProductsByCategory();
 }
 
 class ProductApiServiceImplement extends ProductApiService {
+  final _api = locator<DioClient>();
+
   @override
   Future<({dynamic data, String? error})> getProduct() async {
     try {
@@ -24,7 +27,7 @@ class ProductApiServiceImplement extends ProductApiService {
       final token = sharedPrefrences.get('token');
       debugPrint("THIS IS TOKENNNNN $token");
 
-      var response = await s1<DioClient>().get(ApiUrls.getProduct,
+      var response = await _api.get(ApiUrls.getProduct,
           options: Options(headers: {'Authorization': 'Bearer $token'}));
       final status = response.statusCode ?? 0;
       if (status > 199 && status < 300) {
@@ -51,47 +54,86 @@ class ProductApiServiceImplement extends ProductApiService {
   }
 
   @override
-  Future<Either> getEachProduct(String id) async {
+  Future<({dynamic data, String? error})> getEachProduct({String? id}) async {
     try {
       SharedPreferences sharedPrefrences =
           await SharedPreferences.getInstance();
       final token = sharedPrefrences.get('token');
-      var response = await s1<DioClient>().get(ApiUrls.getOneProduct(id),
-          options: Options(headers: {'Authorization': 'Bearer $token'}));
 
-      return Right(response);
+      var response = await _api.get("${ApiUrls.getOneProduct}$id",
+          options: Options(headers: {'Authorization': 'Bearer $token'}));
+      final status = response.statusCode ?? 0;
+      if (status > 199 && status < 300) {
+        return (data: response.data, error: null);
+      } else {
+        return (data: null, error: "Data is not in expected list format.");
+      }
     } on DioException catch (e) {
-      return Left(e.response!.data['message']);
+      debugPrint("DioException: ${e.response?.realUri}");
+
+      return (data: null, error: "DioException: ${e.response?.realUri}");
     }
   }
 
   @override
-  Future<List<Category>> getProductCategory() async {
+  Future<({dynamic data, String? error})> getCategory() async {
     try {
       SharedPreferences sharedPrefrences =
           await SharedPreferences.getInstance();
       final token = sharedPrefrences.get('token');
       debugPrint("THIS IS TOKENNNNN $token");
 
-      var response = await s1<DioClient>().get(ApiUrls.getProductCategory,
+      var response = await locator<DioClient>().get(ApiUrls.getCategory,
           options: Options(headers: {'Authorization': 'Bearer $token'}));
 
-      debugPrint("ResSSS ${response.realUri}");
+      final status = response.statusCode ?? 0;
 
-      final data = response.data;
-
-      print('CAYTRRTTT   $data');
-
-      if (data is List) {
-        return data.map((json) => Category.fromJson(json)).toList();
+      if (status > 199 && status < 300) {
+        return (data: response.data, error: null);
       } else {
-        debugPrint("Data is not in expected list format.");
-        return [];
+        return (data: null, error: "Data is not in expected list format.");
+      }
+
+      // final data = response.data;
+      //
+      // if (data is List) {
+      //   return (
+      //     list: data.map((json) => ProductModal.fromJson(json)).toList(),
+      //     error: null
+      //   );
+      // } else {
+      //   return (list: null, error: "Data is not in expected list format.");
+      // }
+    } on DioException catch (e) {
+      debugPrint("DioException: ${e.response?.realUri}");
+
+      return (data: null, error: "DioException: ${e.response?.realUri}");
+    }
+  }
+
+  @override
+  Future<({dynamic data, String? error})> getProductsByCategory(
+      {String? id}) async {
+    try {
+      SharedPreferences sharedPrefrences =
+          await SharedPreferences.getInstance();
+      final token = sharedPrefrences.get('token');
+
+      var response = await locator<DioClient>().get(
+          "${ApiUrls.getCategory}$id/products",
+          options: Options(headers: {'Authorization': 'Bearer $token'}));
+
+      final status = response.statusCode ?? 0;
+
+      if (status > 199 && status < 300) {
+        return (data: response.data, error: null);
+      } else {
+        return (data: null, error: "Data is not in expected list format.");
       }
     } on DioException catch (e) {
       debugPrint("DioException: ${e.response?.realUri}");
 
-      return [];
+      return (data: null, error: "DioException: ${e.response?.realUri}");
     }
   }
 }

@@ -7,6 +7,6 @@ import 'package:e_commerce_app/service_locator.dart';
 class SignupCase implements UseCase<Either, SignupRequest> {
   @override
   Future<Either> call({SignupRequest? param}) {
-    return s1<AuthRepository>().signUp(param!);
+    return locator<AuthRepository>().signUp(param!);
   }
 }

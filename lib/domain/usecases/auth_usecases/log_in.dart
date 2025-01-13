@@ -8,6 +8,6 @@ import 'package:e_commerce_app/service_locator.dart';
 class SignInUsecae implements UseCase<Either, SignInRequest> {
   @override
   Future<Either> call({SignInRequest? param}) {
-    return s1<AuthRepository>().logIn(param!);
+    return locator<AuthRepository>().logIn(param!);
   }
 }

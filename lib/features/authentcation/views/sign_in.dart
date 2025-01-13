@@ -126,7 +126,7 @@ class _SigninState extends State<Signin> with Validators {
                           color: AppColors.discountColor,
                           onPressed: () {
                             context.read<ButtonStateCubit>().execute(
-                                usecase: s1<SignInUsecae>(),
+                                usecase: locator<SignInUsecae>(),
                                 params: SignInRequest(
                                   email: emailController.text,
                                   password: passwordController.text,

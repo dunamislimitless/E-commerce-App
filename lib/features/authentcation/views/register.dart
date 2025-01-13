@@ -254,12 +254,12 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>
                         // ));
 
                         context.read<ButtonStateCubit>().execute(
-                            usecase: s1<SignupCase>(),
+                            usecase: locator<SignupCase>(),
                             params: SignupRequest(
                                 email: emailController.text,
                                 password: passwordController.text,
                                 name: "${firstName.text} ${lastName.text}"));
-                        // s1<SignupCase>().call(
+                        // locator<SignupCase>().call(
                         //     param: SignupRequest(
                         //         email: emailController.text,
                         //         password: passwordController.text,

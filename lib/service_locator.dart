@@ -12,40 +12,35 @@ import 'package:e_commerce_app/domain/usecases/auth_usecases/log_in.dart';
 import 'package:e_commerce_app/domain/usecases/auth_usecases/signout.dart';
 import 'package:e_commerce_app/domain/usecases/auth_usecases/signup.dart';
 import 'package:e_commerce_app/domain/usecases/product_usecase.dart/category_usecase.dart';
-import 'package:e_commerce_app/domain/usecases/product_usecase.dart/product_usecase.dart';
 import 'package:get_it/get_it.dart';
 
-final s1 = GetIt.instance;
+final locator = GetIt.instance;
 
 void setupServiceLocator() {
-  s1.registerSingleton<DioClient>(DioClient());
+  locator.registerSingleton<DioClient>(DioClient());
 
   //service
-  s1.registerSingleton<AuthApiService>(AuthApiServiceImplement());
+  locator.registerSingleton<AuthApiService>(AuthApiServiceImplement());
 
-  s1.registerSingleton<AuthLocalService>(AuthLocalServiceImplmentation());
-  s1.registerSingleton<ProductApiService>(ProductApiServiceImplement());
+  locator.registerSingleton<AuthLocalService>(AuthLocalServiceImplmentation());
+  locator.registerSingleton<ProductApiService>(ProductApiServiceImplement());
 
 // Repositories...
 
-  s1.registerSingleton<AuthRepository>(AuthRepositoryImplementation());
-  s1.registerSingleton<ProductRepository>(ProductRepositoryImplementation());
+  locator.registerSingleton<AuthRepository>(AuthRepositoryImplementation());
+  //locator.registerSingleton<ProductRepository>(ProductRepositoryImplementation());
 
 //usecases
 
-  s1.registerSingleton<SignupCase>(SignupCase());
+  locator.registerSingleton<SignupCase>(SignupCase());
 
-  s1.registerSingleton<SignOutUsecase>(SignOutUsecase());
+  locator.registerSingleton<SignOutUsecase>(SignOutUsecase());
 
-  s1.registerSingleton<IsLoggedInUseCase>(IsLoggedInUseCase());
+  locator.registerSingleton<IsLoggedInUseCase>(IsLoggedInUseCase());
 
-  s1.registerSingleton<GetUserUseCase>(GetUserUseCase());
+  locator.registerSingleton<GetUserUseCase>(GetUserUseCase());
 
-  s1.registerSingleton<SignInUsecae>(SignInUsecae());
+  locator.registerSingleton<SignInUsecae>(SignInUsecae());
 
-  // s1.registerSingleton<GetProductUsecase>(GetProductUsecase());
-
-  s1.registerSingleton<GetCaregoryUsecase>(GetCaregoryUsecase());
-
-  s1.registerSingleton<SingleItemUseCase>(SingleItemUseCase());
+  // locator.registerSingleton<GetProductUsecase>(GetProductUsecase());
 }

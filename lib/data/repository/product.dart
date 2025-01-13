@@ -11,7 +11,7 @@ class ProductRepositoryImplementation extends ProductRepository {
 
   @override
   Future<({List<ProductModal>? list, String? error})> getProduct() async {
-    final result = await s1<ProductApiService>().getProduct();
+    final result = await service.getProduct();
 
     if (result.data != null) {
       return (
@@ -27,22 +27,45 @@ class ProductRepositoryImplementation extends ProductRepository {
   }
 
   @override
-  Future<Either> getEachProduct(EachProductReq req) async {
-    final result = await service.getEachProduct("${req.idProduct}");
-    return result.fold((error) {
-      return Left(error);
-    }, (data) {
-      Response response = data;
-      var eachProduct = ProductModal.fromJson(response.data);
+  Future<({ProductModal? product, String? error})> getEachProduct(
+      {String? id}) async {
+    final result = await service.getEachProduct();
 
-      return Right(eachProduct);
-    });
+    if (result.data != null) {
+      return (product: ProductModal.fromJson(result.data), error: null);
+    } else {
+      return (product: null, error: result.error);
+    }
   }
 
   @override
-  Future<List<Category>> getProductCategory() async {
-    final result = await s1<ProductApiService>().getProductCategory();
+  Future<({List<Category>? list, String? error})> getCategory() async {
+    final result = await service.getCategory();
+    if (result.data != null) {
+      return (
+        list: List<Category>.from(
+            (result.data as List<dynamic>).map((e) => Category.fromJson(e))),
+        error: null
+      );
+    } else {
+      return (list: null, error: result.error);
+    }
 
-    return result;
+    // return result;
+  }
+
+  @override
+  Future<({String? error, List<ProductModal>? list})> getProductsByCategory(
+      {String? id}) async {
+    final result = await service.getProductsByCategory();
+    if (result.data != null) {
+      return (
+        list: List<ProductModal>.from((result.data as List<dynamic>)
+            .map((e) => ProductModal.fromJson(e))),
+        error: result.error
+      );
+    } else {
+      return (list: null, error: result.error);
+    }
   }
 }

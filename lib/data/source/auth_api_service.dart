@@ -17,7 +17,7 @@ class AuthApiServiceImplement extends AuthApiService {
   @override
   Future<Either> signUp(SignupRequest signupReq) async {
     try {
-      var response = await s1<DioClient>()
+      var response = await locator<DioClient>()
           .post(ApiUrls.register, data: signupReq.toJSon());
 
       return Right(response);
@@ -32,7 +32,7 @@ class AuthApiServiceImplement extends AuthApiService {
       SharedPreferences sharedPrefrences =
           await SharedPreferences.getInstance();
       final token = sharedPrefrences.get('token');
-      var response = await s1<DioClient>().get(ApiUrls.userProfile,
+      var response = await locator<DioClient>().get(ApiUrls.userProfile,
           options: Options(headers: {'Authorization': 'Bearer $token'}));
 
       return Right(response);
@@ -44,8 +44,8 @@ class AuthApiServiceImplement extends AuthApiService {
   @override
   Future<Either> logIn(SignInRequest signInReq) async {
     try {
-      var response =
-          await s1<DioClient>().post(ApiUrls.signIn, data: signInReq.toJSon());
+      var response = await locator<DioClient>()
+          .post(ApiUrls.signIn, data: signInReq.toJSon());
 
       return Right(response);
     } on DioException catch (e) {
