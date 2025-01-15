@@ -14,6 +14,12 @@ class AllProductLoadedState extends ProductState {
   AllProductLoadedState({required this.productModal});
 }
 
+class CategoryProductState extends ProductState {
+  final List<ProductModal> productModal;
+
+  CategoryProductState({required this.productModal});
+}
+
 class ProductLoadedState extends ProductState {
   final ProductModal? producttModal;
 

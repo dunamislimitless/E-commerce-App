@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:e_commerce_app/app/extensions/extension.dart';
 import 'package:e_commerce_app/app/utils/app_ipngs.dart';
 import 'package:e_commerce_app/app/utils/appicons.dart';
@@ -20,7 +22,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class HomeScreen extends StatefulWidget with ToastMixin {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, required this.widget, this.navCallback});
 
   final DashboardScreen widget;
@@ -69,7 +71,9 @@ class _HomeScreenState extends State<HomeScreen> {
       if (state is ProductLoadingState) {
         return const Center(child: CircularProgressIndicator());
       }
-      if (state is AllProductLoadedState || state is CategoryLoadedState) {
+      if (state is AllProductLoadedState ||
+          state is CategoryLoadedState ||
+          state is CategoryProductState) {
         products = state is AllProductLoadedState
             ? List.from(state.productModal)
             : this.products;
@@ -77,6 +81,10 @@ class _HomeScreenState extends State<HomeScreen> {
         categories = state is CategoryLoadedState
             ? List.from(state.category)
             : this.categories;
+
+        products = state is CategoryProductState
+            ? List.from(state.productModal)
+            : this.products;
       }
 
       return Padding(
@@ -148,7 +156,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                   padding:
                                       const EdgeInsets.symmetric(horizontal: 8),
                                   child: GestureDetector(
-                                    onTap: () => setState(() => tab = index),
+                                    onTap: () {
+                                      setState(() => tab = index);
+                                      debugPrint(
+                                          "Data from Category of Product  HIAN !!!!!");
+
+                                      context.read<ProductCubit>()
+                                        ..productsByCategory(
+                                            categoryID:
+                                                categories[index - 1].id);
+                                    },
                                     child: Container(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 6, horizontal: 12),

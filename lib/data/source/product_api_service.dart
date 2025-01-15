@@ -113,7 +113,7 @@ class ProductApiServiceImplement extends ProductApiService {
 
   @override
   Future<({dynamic data, String? error})> getProductsByCategory(
-      {String? id}) async {
+      {int? id}) async {
     try {
       SharedPreferences sharedPrefrences =
           await SharedPreferences.getInstance();

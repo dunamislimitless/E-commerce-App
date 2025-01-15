@@ -43,4 +43,15 @@ class ProductCubit extends Cubit<ProductState> with ToastMixin {
           errorMessage: result.error ?? 'Failed to load data'));
     }
   }
+
+  void productsByCategory({int? categoryID}) async {
+    var result = await productRepository.getProductsByCategory(id: categoryID);
+
+    if (result.list != null) {
+      emit(CategoryProductState(productModal: result.list ?? []));
+    } else {
+      emit(ProductFailureState(
+          errorMessage: result.error ?? 'Failed to load data'));
+    }
+  }
 }
