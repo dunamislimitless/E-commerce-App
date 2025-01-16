@@ -37,3 +37,9 @@ class ProductFailureState extends ProductState {
 
   ProductFailureState({required this.errorMessage});
 }
+
+class SelectProductState extends ProductState {
+  final ProductModal product;
+
+  SelectProductState({required this.product});
+}

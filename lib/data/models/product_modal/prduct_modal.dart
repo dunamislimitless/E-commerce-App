@@ -1,14 +1,14 @@
 class ProductModal {
-  ProductModal({
-    required this.id,
-    required this.title,
-    required this.price,
-    required this.description,
-    required this.images,
-    required this.creationAt,
-    required this.updatedAt,
-    required this.category,
-  });
+  ProductModal(
+      {required this.id,
+      required this.title,
+      required this.price,
+      required this.description,
+      required this.images,
+      required this.creationAt,
+      required this.updatedAt,
+      required this.category,
+      required this.itemCount});
 
   final int id;
   final String title;
@@ -18,6 +18,20 @@ class ProductModal {
   final DateTime? creationAt;
   final DateTime? updatedAt;
   final Category? category;
+  final num itemCount;
+
+  ProductModal copyWith({num? itemCount}) {
+    return ProductModal(
+        id: id,
+        title: title,
+        price: price,
+        description: description,
+        images: images,
+        creationAt: creationAt,
+        updatedAt: updatedAt,
+        category: category,
+        itemCount: itemCount ?? this.itemCount);
+  }
 
   factory ProductModal.fromJson(Map<String, dynamic> json) {
     return ProductModal(
@@ -30,6 +44,7 @@ class ProductModal {
           : List<String>.from(json["images"]!.map((x) => x)),
       creationAt: DateTime.tryParse(json["creationAt"] ?? ""),
       updatedAt: DateTime.tryParse(json["updatedAt"] ?? ""),
+      itemCount: json["item_count"] ?? 0,
       category:
           json["category"] == null ? null : Category.fromJson(json["category"]),
     );

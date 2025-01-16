@@ -81,8 +81,10 @@ class _DashboardScreenState extends State<DashboardScreen>
         children: [
           HomeScreen(
             widget: widget,
-            navCallback: (page) {
+            navCallback: (page, product) {
               if (page != null) _tabController.animateTo(page);
+
+              debugPrint("Page  $page");
             },
           ),
           ProductDetail(

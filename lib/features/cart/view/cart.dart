@@ -75,8 +75,7 @@ class Cart extends StatelessWidget {
                           cartBloc.add(RemoveCartItemEvent(each.id));
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              content: Text(
-                                  "${each.itemDescription} removed from cart"),
+                              content: Text("${each.title} removed from cart"),
                             ),
                           );
                         },
@@ -122,12 +121,14 @@ class Cart extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        each.itemDescription,
+                                        each.title.shorten(30),
                                         style: AppText.itemText,
                                       ),
                                       Padding(
                                         padding: EdgeInsets.only(
-                                            bottom: 2.0.h, top: 8.0.h),
+                                            bottom: 2.0.h,
+                                            top: 8.0.h,
+                                            left: 10),
                                         child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
@@ -137,7 +138,7 @@ class Cart extends StatelessWidget {
                                               padding:
                                                   EdgeInsets.only(left: 12.0.w),
                                               child: Text(
-                                                each.reviews,
+                                                "200",
                                                 style: AppText.reviewText,
                                               ),
                                             )
@@ -150,7 +151,7 @@ class Cart extends StatelessWidget {
                                       Align(
                                         alignment: Alignment.bottomLeft,
                                         child: Text(
-                                          '\$${(each.amount * each.itemCount).toStringAsFixed(2)}',
+                                          '\$${(each.price * each.itemCount).toStringAsFixed(2)}',
                                           style: AppText.amountText,
                                         ),
                                       )
@@ -212,7 +213,7 @@ class Cart extends StatelessWidget {
                                   child: SizedBox(
                                     height: 95.h,
                                     width: 84.w,
-                                    child: Image.asset(each.imagePath),
+                                    child: Image.network(each.images.first),
                                   ),
                                 ),
                               ],

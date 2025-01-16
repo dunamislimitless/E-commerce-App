@@ -35,44 +35,44 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
         designSize: const Size(414, 896),
         builder: (context, child) {
-          return RepositoryProvider(
-              create: (context) => ProductServices(),
-              child: MultiBlocProvider(
-                  providers: [
-                    BlocProvider<CartBloc>(
-                      create: (context) => CartBloc(),
-                    ),
-                    BlocProvider<ProductCubit>(
-                        create: (context) =>
-                            ProductCubit(productRepository: repo)),
-                    BlocProvider<AuthBloc>(
-                      create: (context) => AuthBloc(),
-                    ),
-                    BlocProvider<ButtonStateCubit>(
-                        create: (context) => ButtonStateCubit()),
-                    BlocProvider<AuthStateCubit>(
-                        create: (context) => AuthStateCubit()..appStarted()),
-                    BlocProvider<UserDislayCubit>(
-                        create: (context) => UserDislayCubit())
-                  ],
-                  child: MaterialApp(
-                      debugShowCheckedModeBanner: false,
-                      title: 'E-commerce App',
-                      theme: ThemeData(
-                        colorScheme: ColorScheme.fromSeed(
-                            seedColor: AppColors.discountColor),
-                        useMaterial3: true,
-                      ),
-                      home: BlocBuilder<AuthStateCubit, AuthStatee>(
-                          builder: (context, state) {
-                        if (state is AuthenticatedState) {
-                          return const DashboardScreen();
-                        }
-                        if (state is UnAuthenticatedState) {
-                          return Signin();
-                        }
-                        return Container();
-                      }))));
+          // return RepositoryProvider(
+          //     create: (context) => ProductSrvices(),
+          //     child:
+          return MultiBlocProvider(
+              providers: [
+                BlocProvider<CartBloc>(
+                  create: (context) => CartBloc(),
+                ),
+                BlocProvider<ProductCubit>(
+                    create: (context) => ProductCubit(productRepository: repo)),
+                BlocProvider<AuthBloc>(
+                  create: (context) => AuthBloc(),
+                ),
+                BlocProvider<ButtonStateCubit>(
+                    create: (context) => ButtonStateCubit()),
+                BlocProvider<AuthStateCubit>(
+                    create: (context) => AuthStateCubit()..appStarted()),
+                BlocProvider<UserDislayCubit>(
+                    create: (context) => UserDislayCubit())
+              ],
+              child: MaterialApp(
+                  debugShowCheckedModeBanner: false,
+                  title: 'E-commerce App',
+                  theme: ThemeData(
+                    colorScheme: ColorScheme.fromSeed(
+                        seedColor: AppColors.discountColor),
+                    useMaterial3: true,
+                  ),
+                  home: BlocBuilder<AuthStateCubit, AuthStatee>(
+                      builder: (context, state) {
+                    if (state is AuthenticatedState) {
+                      return const DashboardScreen();
+                    }
+                    if (state is UnAuthenticatedState) {
+                      return Signin();
+                    }
+                    return Container();
+                  })));
         });
   }
 }
