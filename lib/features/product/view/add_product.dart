@@ -1,352 +1,355 @@
-import 'dart:io';
+// import 'dart:io';
 
-import 'package:e_commerce_app/app/utils/enums/product_enum.dart';
-import 'package:e_commerce_app/features/cart/cart_bloc/cart_event.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+// import 'package:e_commerce_app/app/utils/enums/product_enum.dart';
+// import 'package:e_commerce_app/data/models/product_modal/prduct_modal.dart';
+// import 'package:e_commerce_app/features/cart/cart_bloc/cart_event.dart';
+// import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:e_commerce_app/app/utils/app_ipngs.dart';
-import 'package:e_commerce_app/app/utils/appstrings.dart';
-import 'package:e_commerce_app/app/utils/colors.dart';
-import 'package:e_commerce_app/app/utils/textstyle.dart';
-import 'package:e_commerce_app/features/authentcation/widget/custom_labeled_input.dart';
-import 'package:e_commerce_app/features/cart/models/final_cart_model.dart';
-import 'package:e_commerce_app/features/dashboard/widget/custom_button.dart';
-import 'package:e_commerce_app/features/product/bloc/product_bloc_bloc.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'package:path/path.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:e_commerce_app/app/utils/app_ipngs.dart';
+// import 'package:e_commerce_app/app/utils/appstrings.dart';
+// import 'package:e_commerce_app/app/utils/colors.dart';
+// import 'package:e_commerce_app/app/utils/textstyle.dart';
+// import 'package:e_commerce_app/features/authentcation/widget/custom_labeled_input.dart';
+// import 'package:e_commerce_app/features/cart/models/final_cart_model.dart';
+// import 'package:e_commerce_app/features/dashboard/widget/custom_button.dart';
+// import 'package:e_commerce_app/features/product/bloc/product_bloc_bloc.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter/services.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
+// import 'package:flutter_screenutil/flutter_screenutil.dart';
+// import 'package:image_picker/image_picker.dart';
+// import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+// import 'package:path/path.dart';
 
-class AddProduct extends StatefulWidget {
-  AddProduct({super.key});
+// class AddProduct extends StatefulWidget {
+//   AddProduct({super.key});
 
-  @override
-  State<AddProduct> createState() => _AddProductState();
-}
+//   @override
+//   State<AddProduct> createState() => _AddProductState();
+// }
 
-class _AddProductState extends State<AddProduct> {
-  firebase_storage.FirebaseStorage storage =
-      firebase_storage.FirebaseStorage.instance;
-  Categories? selectedCategories;
-  File? image;
-  final ImagePicker picker = ImagePicker();
-  final productNameController = TextEditingController();
+// class _AddProductState extends State<AddProduct> {
+//   firebase_storage.FirebaseStorage storage =
+//       firebase_storage.FirebaseStorage.instance;
+//   //Categories? selectedCategories;
+//   File? image;
+//   final ImagePicker picker = ImagePicker();
+//   final productNameController = TextEditingController();
 
-  final productDescriptionController = TextEditingController();
-  final categoriesController = TextEditingController();
-  final countController = TextEditingController();
-  final reviewController = TextEditingController();
-  final priceController = TextEditingController();
-  final ratingController = TextEditingController();
+//   final productDescriptionController = TextEditingController();
+//   final categoriesController = TextEditingController();
+//   final countController = TextEditingController();
+//   final reviewController = TextEditingController();
+//   final priceController = TextEditingController();
+//   final ratingController = TextEditingController();
 
-  void dispose() {
-    priceController.dispose();
-    productDescriptionController.dispose();
-    productNameController.dispose();
-    countController.dispose();
-    reviewController.dispose();
-    ratingController.dispose();
-    categoriesController.dispose();
-    super.dispose();
-  }
+//   void dispose() {
+//     priceController.dispose();
+//     productDescriptionController.dispose();
+//     productNameController.dispose();
+//     countController.dispose();
+//     reviewController.dispose();
+//     ratingController.dispose();
+//     categoriesController.dispose();
+//     super.dispose();
+//   }
 
-  Future imgFromGallery() async {
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+//   Future imgFromGallery() async {
+//     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
-    setState(() {
-      if (pickedFile != null) {
-        image = File(pickedFile.path);
-      } else {
-        print('No image selected.');
-      }
-    });
-  }
+//     setState(() {
+//       if (pickedFile != null) {
+//         image = File(pickedFile.path);
+//       } else {
+//         print('No image selected.');
+//       }
+//     });
+//   }
 
-  Future imgFromCamera() async {
-    final pickedFile = await picker.pickImage(source: ImageSource.camera);
+//   Future imgFromCamera() async {
+//     final pickedFile = await picker.pickImage(source: ImageSource.camera);
 
-    setState(() {
-      if (pickedFile != null) {
-        image = File(pickedFile.path);
-      } else {
-        print('No image selected.');
-      }
-    });
-  }
+//     setState(() {
+//       if (pickedFile != null) {
+//         image = File(pickedFile.path);
+//       } else {
+//         print('No image selected.');
+//       }
+//     });
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    final productBloc = context.read<ProductBlocBloc>();
+//   @override
+//   Widget build(BuildContext context) {
+//     final productBloc = context.read<ProductBlocBloc>();
 
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Center(child: Text('Add Product')),
-        ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(16.0.w),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              SizedBox(height: 10.h),
-              CustomLabeledInput(
-                title: 'Product Name',
-                label: 'Enter Product Name',
-                prefixIcon: Icons.military_tech_rounded,
-                controller: productNameController,
-              ),
-              CustomLabeledInput(
-                title: 'Product Description',
-                label: 'Enter Product Description',
-                prefixIcon: Icons.abc_outlined,
-                controller: productDescriptionController,
-              ),
-              CustomLabeledInput(
-                title: 'Price',
-                label: 'Enter Product Price',
-                prefixIcon: Icons.money,
-                keyboardType: TextInputType.number,
-                controller: priceController,
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              ),
-              // CustomLabeledInput(
-              //   title: 'Price',
-              //   label: 'Enter Product Price',
-              //   prefixIcon: Icons.money,
-              //   keyboardType: TextInputType.number,
-              //   controller: priceController,
-              //   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              // ),
-              CustomLabeledInput(
-                title: "Review",
-                label: 'Enter Product review',
-                prefixIcon: Icons.money,
-                keyboardType: TextInputType.number,
-                controller: reviewController,
-              ),
-              const Text(
-                AppString.category,
-                style:
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-              ),
-              SizedBox(height: 6.0.h),
+//     return SafeArea(
+//       child: Scaffold(
+//         appBar: AppBar(
+//           title: Center(child: Text('Add Product')),
+//         ),
+//         body: SingleChildScrollView(
+//           child: Padding(
+//             padding: EdgeInsets.all(16.0.w),
+//             child:
+//                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+//               SizedBox(height: 10.h),
+//               CustomLabeledInput(
+//                 title: 'Product Name',
+//                 label: 'Enter Product Name',
+//                 prefixIcon: Icons.military_tech_rounded,
+//                 controller: productNameController,
+//               ),
+//               CustomLabeledInput(
+//                 title: 'Product Description',
+//                 label: 'Enter Product Description',
+//                 prefixIcon: Icons.abc_outlined,
+//                 controller: productDescriptionController,
+//               ),
+//               CustomLabeledInput(
+//                 title: 'Price',
+//                 label: 'Enter Product Price',
+//                 prefixIcon: Icons.money,
+//                 keyboardType: TextInputType.number,
+//                 controller: priceController,
+//                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+//               ),
+//               // CustomLabeledInput(
+//               //   title: 'Price',
+//               //   label: 'Enter Product Price',
+//               //   prefixIcon: Icons.money,
+//               //   keyboardType: TextInputType.number,
+//               //   controller: priceController,
+//               //   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+//               // ),
+//               CustomLabeledInput(
+//                 title: "Review",
+//                 label: 'Enter Product review',
+//                 prefixIcon: Icons.money,
+//                 keyboardType: TextInputType.number,
+//                 controller: reviewController,
+//               ),
+//               const Text(
+//                 AppString.category,
+//                 style:
+//                     TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+//               ),
+//               SizedBox(height: 6.0.h),
 
-              Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.0.r),
-                  border: Border.all(
-                    color: Colors.black,
-                    width: 1.0.r,
-                  ),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.only(left: 12.0.h),
-                  child: DropdownButton<Categories>(
-                    value: selectedCategories,
-                    underline: SizedBox.shrink(),
-                    isExpanded: true,
-                    items: Categories.values.map((Categories categories) {
-                      return DropdownMenuItem<Categories>(
-                        value: categories,
-                        child: Text(categories.name.toUpperCase()),
-                      );
-                    }).toList(),
-                    onChanged: (Categories? newValue) {
-                      setState(() {
-                        selectedCategories = newValue!;
-                        categoriesController.text = newValue.name;
-                      });
-                    },
-                  ),
-                ),
-              ),
-              SizedBox(height: 24.0.h),
-              CustomLabeledInput(
-                title: "Enter how many Product do you want",
-                label: '',
-                prefixIcon: Icons.money,
-                keyboardType: TextInputType.number,
-                controller: countController,
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-              ),
-              const Text(
-                AppString.rating,
-                style:
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              RatingBar.builder(
-                initialRating: 3,
-                minRating: 1,
-                direction: Axis.horizontal,
-                allowHalfRating: true,
-                itemSize: 20,
-                itemCount: 5,
-                itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-                itemBuilder: (context, _) => const Icon(
-                  Icons.star,
-                  color: Colors.amber,
-                ),
-                onRatingUpdate: (rating) {
-                  debugPrint("Na Ratimg Be This $rating");
-                  ratingController.text = "$rating";
-                },
-              ),
-              // CustomButton(
-              //   onPressed: () {},
-              //   height: 52,
-              //   textColor: AppColors.lightButton,
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.center,
-              //     children: [
-              //       Icon(
-              //         Icons.add,
-              //         color: AppColors.discountColor,
-              //       ),
-              //       SizedBox(
-              //         width: 16.w,
-              //       ),
-              //       Text(AppString.addImage)
-              //     ],
-              //   ),
-              // ),
+//               // Container(
+//               //   width: double.infinity,
+//               //   decoration: BoxDecoration(
+//               //     borderRadius: BorderRadius.circular(8.0.r),
+//               //     border: Border.all(
+//               //       color: Colors.black,
+//               //       width: 1.0.r,
+//               //     ),
+//               //   ),
+//               //   child: Padding(
+//               //     padding: EdgeInsets.only(left: 12.0.h),
+//               //     child: DropdownButton<Categories>(
+//               //       value: selectedCategories,
+//               //       underline: SizedBox.shrink(),
+//               //       isExpanded: true,
+//               //       items: Categories.values.map((Categories categories) {
+//               //         return DropdownMenuItem<Categories>(
+//               //           value: categories,
+//               //           child: Text(categories.name.toUpperCase()),
+//               //         );
+//               //       }).toList(),
+//               //       onChanged: (Categories? newValue) {
+//               //         setState(() {
+//               //           selectedCategories = newValue!;
+//               //           categoriesController.text = newValue.name;
+//               //         });
+//               //       },
+//               //     ),
+//               //   ),
+//               // )
+              
+//               SizedBox(height: 24.0.h),
+//               CustomLabeledInput(
+//                 title: "Enter how many Product do you want",
+//                 label: '',
+//                 prefixIcon: Icons.money,
+//                 keyboardType: TextInputType.number,
+//                 controller: countController,
+//                 inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+//               ),
+//               const Text(
+//                 AppString.rating,
+//                 style:
+//                     TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+//               ),
+//               SizedBox(
+//                 height: 10,
+//               ),
+//               RatingBar.builder(
+//                 initialRating: 3,
+//                 minRating: 1,
+//                 direction: Axis.horizontal,
+//                 allowHalfRating: true,
+//                 itemSize: 20,
+//                 itemCount: 5,
+//                 itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
+//                 itemBuilder: (context, _) => const Icon(
+//                   Icons.star,
+//                   color: Colors.amber,
+//                 ),
+//                 onRatingUpdate: (rating) {
+//                   debugPrint("Na Ratimg Be This $rating");
+//                   ratingController.text = "$rating";
+//                 },
+//               ),
+//               // CustomButton(
+//               //   onPressed: () {},
+//               //   height: 52,
+//               //   textColor: AppColors.lightButton,
+//               //   child: Row(
+//               //     mainAxisAlignment: MainAxisAlignment.center,
+//               //     children: [
+//               //       Icon(
+//               //         Icons.add,
+//               //         color: AppColors.discountColor,
+//               //       ),
+//               //       SizedBox(
+//               //         width: 16.w,
+//               //       ),
+//               //       Text(AppString.addImage)
+//               //     ],
+//               //   ),
+//               // ),
 
-              Center(
-                child: GestureDetector(
-                  onTap: () {
-                    showPicker(context);
-                  },
-                  child: CircleAvatar(
-                    radius: 55,
-                    backgroundColor: Color(0xffFDCF09),
-                    child: image != null
-                        ? ClipRRect(
-                            borderRadius: BorderRadius.circular(50),
-                            child: Image.file(
-                              image!,
-                              width: 100,
-                              height: 100,
-                              fit: BoxFit.fitHeight,
-                            ),
-                          )
-                        : Container(
-                            decoration: BoxDecoration(
-                                color: Colors.grey[200],
-                                borderRadius: BorderRadius.circular(50)),
-                            width: 100,
-                            height: 100,
-                            child: Icon(
-                              Icons.camera_alt,
-                              color: Colors.grey[800],
-                            ),
-                          ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              BlocConsumer<ProductBlocBloc, ProductBlocState>(
-                  listener: (context, state) {
-                if (state is ProductSuccessState) {
-                } else if (state is ProductErrorState) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text(state.error)),
-                  );
-                }
-              }, builder: (context, state) {
-                if (state is ProductLoading) {
-                  return Center(child: CircularProgressIndicator());
-                }
+//               Center(
+//                 child: GestureDetector(
+//                   onTap: () {
+//                     showPicker(context);
+//                   },
+//                   child: CircleAvatar(
+//                     radius: 55,
+//                     backgroundColor: Color(0xffFDCF09),
+//                     child: image != null
+//                         ? ClipRRect(
+//                             borderRadius: BorderRadius.circular(50),
+//                             child: Image.file(
+//                               image!,
+//                               width: 100,
+//                               height: 100,
+//                               fit: BoxFit.fitHeight,
+//                             ),
+//                           )
+//                         : Container(
+//                             decoration: BoxDecoration(
+//                                 color: Colors.grey[200],
+//                                 borderRadius: BorderRadius.circular(50)),
+//                             width: 100,
+//                             height: 100,
+//                             child: Icon(
+//                               Icons.camera_alt,
+//                               color: Colors.grey[800],
+//                             ),
+//                           ),
+//                   ),
+//                 ),
+//               ),
+//               SizedBox(
+//                 height: 20.h,
+//               ),
+//               BlocConsumer<ProductBlocBloc, ProductBlocState>(
+//                   listener: (context, state) {
+//                 if (state is ProductSuccessState) {
+//                 } else if (state is ProductErrorState) {
+//                   ScaffoldMessenger.of(context).showSnackBar(
+//                     SnackBar(content: Text(state.error)),
+//                   );
+//                 }
+//               }, builder: (context, state) {
+//                 if (state is ProductLoading) {
+//                   return Center(child: CircularProgressIndicator());
+//                 }
 
-                return CustomButton(
-                  onPressed: () async {
-                    final ratingValue = double.tryParse(
-                            ratingController.text) ??
-                        0.0; // Retrieve the rating value from the controller
-                    debugPrint('User Rating: $ratingValue');
+//                 return CustomButton(
+//                   onPressed: () async {
+//                     final ratingValue = double.tryParse(
+//                             ratingController.text) ??
+//                         0.0; // Retrieve the rating value from the controller
+//                     debugPrint('User Rating: $ratingValue');
 
-                    if (ratingValue == 0.0) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                            content: Text(
-                                "Please provide a rating for the product")),
-                      );
-                      return;
-                    }
+//                     if (ratingValue == 0.0) {
+//                       ScaffoldMessenger.of(context).showSnackBar(
+//                         SnackBar(
+//                             content: Text(
+//                                 "Please provide a rating for the product")),
+//                       );
+//                       return;
+//                     }
 
-                    // if (image == null) return;
-                    // final fileName = basename(image!.path);
-                    // final destination = 'files/$fileName';
+//                     // if (image == null) return;
+//                     // final fileName = basename(image!.path);
+//                     // final destination = 'files/$fileName';
 
-                    try {
-                      // final ref = firebase_storage.FirebaseStorage.instance
-                      //     .ref(destination)
-                      //     .child('file/');
-                      // await ref.putFile(image!);
+//                     try {
+//                       // final ref = firebase_storage.FirebaseStorage.instance
+//                       //     .ref(destination)
+//                       //     .child('file/');
+//                       // await ref.putFile(image!);
 
-                      // final imageUrl = await ref.getDownloadURL();
+//                       // final imageUrl = await ref.getDownloadURL();
 
-                      productBloc.add(AddProductEvent(
-                          product: FinalCart(
-                              amount: num.parse(priceController.text),
-                              id: "id1",
-                              imagePath: "mhtf tytf ",
-                              itemCount: num.parse(countController.text),
-                              itemDescription:
-                                  productDescriptionController.text,
-                              reviews: ratingValue.toString(),
-                              category: selectedCategories.toString())));
-                      debugPrint('DONezDDDDD');
-                      debugPrint('CATEGORY FiAM  ${categoriesController.text}');
-                    } catch (e) {
-                      debugPrint('ERROR  OCCURED');
-                    }
-                  },
-                  height: 52,
-                  buttontext: 'Update Product',
-                  color: AppColors.discountColor,
-                );
-              })
-            ]),
-          ),
-        ),
-      ),
-    );
-  }
+//                       productBloc.add(AddProductEvent(
+//                           product: FinalCart(
+//                               amount: num.parse(priceController.text),
+//                               id: "id1",
+//                               imagePath: "mhtf tytf ",
+//                               itemCount: num.parse(countController.text),
+//                               itemDescription:
+//                                   productDescriptionController.text,
+//                               reviews: ratingValue.toString(),
+//                              // category: selectedCategories.toString(
+//                              )));
+//                       debugPrint('DONezDDDDD');
+//                       debugPrint('CATEGORY FiAM  ${categoriesController.text}');
+//                     } catch (e) {
+//                       debugPrint('ERROR  OCCURED');
+//                     }
+//                   },
+//                   height: 52,
+//                   buttontext: 'Update Product',
+//                   color: AppColors.discountColor,
+//                 );
+//               })
+//             ]),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
 
-  void showPicker(context) {
-    showModalBottomSheet(
-        context: context,
-        builder: (BuildContext bc) {
-          return SafeArea(
-            child: Wrap(
-              children: <Widget>[
-                ListTile(
-                    leading: const Icon(Icons.photo_library),
-                    title: const Text('Gallery'),
-                    onTap: () {
-                      imgFromGallery();
-                      Navigator.of(context).pop();
-                    }),
-                ListTile(
-                  leading: const Icon(Icons.photo_camera),
-                  title: const Text('Camera'),
-                  onTap: () {
-                    imgFromCamera();
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            ),
-          );
-        });
-  }
-}
+//   void showPicker(context) {
+//     showModalBottomSheet(
+//         context: context,
+//         builder: (BuildContext bc) {
+//           return SafeArea(
+//             child: Wrap(
+//               children: <Widget>[
+//                 ListTile(
+//                     leading: const Icon(Icons.photo_library),
+//                     title: const Text('Gallery'),
+//                     onTap: () {
+//                       imgFromGallery();
+//                       Navigator.of(context).pop();
+//                     }),
+//                 ListTile(
+//                   leading: const Icon(Icons.photo_camera),
+//                   title: const Text('Camera'),
+//                   onTap: () {
+//                     imgFromCamera();
+//                     Navigator.of(context).pop();
+//                   },
+//                 ),
+//               ],
+//             ),
+//           );
+//         });
+//   }
+// }

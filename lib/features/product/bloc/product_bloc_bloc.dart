@@ -1,59 +1,63 @@
-import 'dart:io';
+// import 'dart:io';
 
-import 'package:bloc/bloc.dart';
-import 'package:e_commerce_app/features/cart/models/final_cart_model.dart';
-import 'package:e_commerce_app/features/dashboard/models/product_model.dart';
-import 'package:e_commerce_app/controller/services/product_services.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:meta/meta.dart';
+// import 'package:e_commerce_app/data/models/product_modal/prduct_modal.dart';
+// import 'package:e_commerce_app/features/cart/models/final_cart_model.dart';
+// import 'package:e_commerce_app/features/dashboard/models/product_model.dart';
+// import 'package:e_commerce_app/controller/services/product_services.dart';
+// import 'package:firebase_storage/firebase_storage.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:image_picker/image_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'package:path/path.dart';
+// import 'package:image_picker/image_picker.dart';
+// import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+// import 'package:path/path.dart';
 
-part 'product_bloc_event.dart';
-part 'product_bloc_state.dart';
+// part 'product_bloc_event.dart';
+// part 'product_bloc_state.dart';
 
-class ProductBlocBloc extends Bloc<ProductBlocEvent, ProductBlocState> {
-  final ProductServices productService;
-  ProductBlocBloc({required this.productService})
-      : super(ProductBlocInitial()) {
-    on<SelectProductEvent>(_selectItem);
+// class ProductBlocBloc extends Bloc<ProductBlocEvent, ProductBlocState> {
+//   ProductServices productService = ProductServices();
+//   ProductBlocBloc() : super(ProductBlocInitial()) {
+//     on<SelectProductEvent>(_selectItem);
 
-    on<AddProductEvent>(addProduct);
-    on<FetchProductEvent>(getProduct);
-  }
+//     on<AddProductEvent>(addProduct);
+//     // on<FetchProductEvent>(getProduct as EventHandler<FetchProductEvent, ProductBlocState>);
+//   }
 
-  FinalCart? product;
+//   ProductModal? product;
 
-  void _selectItem(SelectProductEvent event, Emitter<ProductBlocState> emit) {
-    product = event.product;
-    emit(SelectProduct());
-  }
+//   void _selectItem(SelectProductEvent event, Emitter<ProductBlocState> emit) {
+//     product = event.product;
+//     emit(SelectProduct());
+//   }
 
-  void addProduct(AddProductEvent event, Emitter<ProductBlocState> emit) async {
-    emit(ProductLoading());
-    await Future.delayed(Duration(seconds: 1));
-    try {
-      await productService.create(product: event.product);
-      emit(ProductAdded());
-    } catch (e) {
-      emit(ProductErrorState(error: e.toString()));
-    }
-  }
+//   void addProduct(AddProductEvent event, Emitter<ProductBlocState> emit) async {
+//     emit(ProductLoading());
+//     await Future.delayed(Duration(seconds: 1));
+//     try {
+//       // await productService.create(product: event.product);
+//       emit(ProductAdded());
+//     } catch (e) {
+//       emit(ProductErrorState(error: e.toString()));
+//     }
+//   }
 
-  void getProduct(
-      FetchProductEvent event, Emitter<ProductBlocState> emit) async {
-    emit(ProductLoading());
-    try {
-      final fetchedproduct = await productService.getproductData();
-      emit(ProductLoaded(product: fetchedproduct));
-      emit(ProductSuccessState());
-    } on FirebaseException catch (e) {
-      emit(ProductErrorState(error: "${e.message} with Statuscode ${e.code}"));
-    }
-  }
-}
+//   Future<List<FinalCart>> getProduct() async {
+//     try {
+//       final fetchedproduct = await productService.getproductData();
+//       debugPrint("Normal FGSSDQ $fetchedproduct");
+//       return fetchedproduct;
+//     } catch (e) {
+//       print('ERROR: $e');
+//     }
+//     return [];
+//   }
+
+//   void addAllProduct(List<FinalCart> cart) async {
+//     await productService.uploadCartItems(cart);
+//   }
+// }
+
 // firebase_storage.FirebaseStorage storage =
 //     firebase_storage.FirebaseStorage.instance;
 
@@ -95,4 +99,6 @@ class ProductBlocBloc extends Bloc<ProductBlocEvent, ProductBlocState> {
 //   } catch (e) {
 //     print('error occured');
 //   }
-//}
+// }
+
+// void fetchProduct() async {}

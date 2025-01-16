@@ -1,18 +1,18 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_app/app/utils/enums/product_enum.dart';
 import 'package:equatable/equatable.dart';
 
 class FinalCart extends Equatable {
-  FinalCart(
-      {required this.amount,
-      required this.id,
-      required this.imagePath,
-      required this.itemCount,
-      required this.itemDescription,
-      required this.reviews,
-      this.timeCreated,
-      this.category,
-      this.categories});
+  FinalCart({
+    required this.amount,
+    required this.id,
+    required this.imagePath,
+    required this.itemCount,
+    required this.itemDescription,
+    required this.reviews,
+    this.timeCreated,
+    this.category,
+    //this.categories
+  });
 
   final num amount;
   final String id;
@@ -21,7 +21,7 @@ class FinalCart extends Equatable {
   final String itemDescription;
   final String reviews;
   final DateTime? timeCreated;
-  Categories? categories;
+  // Categories? categories;
   String? category;
 
   FinalCart copyWith({
@@ -32,7 +32,7 @@ class FinalCart extends Equatable {
     String? reviews,
     num? itemCount,
     DateTime? timeCreated,
-    Categories? categories,
+    //  Categories? categories,
     String? category,
   }) {
     return FinalCart(
@@ -56,7 +56,7 @@ class FinalCart extends Equatable {
       itemCount: json["item_count"] ?? 0,
       itemDescription: json["item_description"] ?? "",
       reviews: json["reviews"] ?? "",
-      timeCreated: (json['time_created'] as Timestamp).toDate(),
+      timeCreated: (json['time_created']).toDate(),
     );
   }
 

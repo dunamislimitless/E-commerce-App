@@ -7,13 +7,12 @@ abstract class ButtonEvent {}
 
 class SelectButtonEvent extends ButtonEvent {
   final int index;
-  
 
   SelectButtonEvent(this.index);
 }
+
 class UpdateCategoryEvent extends ButtonEvent {
-  final Categories selectedCategory;
-  
+  final Category selectedCategory;
+
   UpdateCategoryEvent(this.selectedCategory);
-  
 }

@@ -1,23 +1,23 @@
-part of 'product_bloc_bloc.dart';
+// part of 'product_bloc_bloc.dart';
 
-abstract class ProductBlocEvent {}
+// abstract class ProductBlocEvent {}
 
-class SelectProductEvent extends ProductBlocEvent {
-  final FinalCart product;
+// class SelectProductEvent extends ProductBlocEvent {
+//   final ProductModal product;
 
-  SelectProductEvent({required this.product});
-}
+//   SelectProductEvent({required this.product});
+// }
 
-class AddProductEvent extends ProductBlocEvent {
-  final FinalCart product;
+// class AddProductEvent extends ProductBlocEvent {
+//   final FinalCart product;
 
-  AddProductEvent({required this.product});
-}
+//   AddProductEvent({required this.product});
+// }
 
-class UploadImageEvent extends ProductBlocEvent {
-  final File? image;
+// class UploadImageEvent extends ProductBlocEvent {
+//   final File? image;
 
-  UploadImageEvent({required this.image});
-}
+//   UploadImageEvent({required this.image});
+// }
 
-class FetchProductEvent extends ProductBlocEvent {}
+// class FetchProductEvent extends ProductBlocEvent {}

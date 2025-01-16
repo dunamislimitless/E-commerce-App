@@ -59,6 +59,8 @@ class AppString {
   static const view = 'View';
   static const emptycart =
       'Your Cart is empty,\n\nKindly choose a product you want to ay for';
+  static const haveAccount = 'Do you have an Account?';
+  static const dontHaveAnAccount = 'Kindly create an Account';
 
   static const productDescription =
       'Maecenas cursus magna vitae convallis congue. Vestibulum dignissim augue odio, congue rutrum magna gravida ac. Sed rhoncus eu arcu a tempus.';

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_app/features/cart/models/final_cart_model.dart';
 import 'package:flutter/foundation.dart';
@@ -25,12 +27,12 @@ class ProductServices {
     }
   }
 
-  Future<List<FinalCart>?> getproductData() async {
+  Future<List<FinalCart>> getproductData() async {
     try {
       final querySnapshot =
           await FirebaseFirestore.instance.collection("product").get();
       if (querySnapshot.docs.isNotEmpty) {
-        debugPrint("Fetched product data: ${querySnapshot}");
+        debugPrint("Fetched product data: $querySnapshot");
         debugPrint(
             "Fetched product data: ${querySnapshot.docs.length} documents");
 
@@ -40,15 +42,33 @@ class ProductServices {
 
         debugPrint('Fetched product: $productList');
         return productList;
-      } else {
-        return null;
       }
     } on FirebaseException catch (e) {
       debugPrint("Failed with Error '${e.code}': '${e.message}'");
-      return null;
+      rethrow;
     } catch (e) {
       debugPrint("Unexpected error: $e");
-      return null;
+      rethrow;
+    }
+    return [];
+  }
+
+  Future<void> uploadCartItems(List<FinalCart> cart) async {
+    final collectionRef = FirebaseFirestore.instance.collection('product');
+
+    WriteBatch batch = FirebaseFirestore.instance.batch();
+
+    for (var item in cart) {
+      final docRef =
+          collectionRef.doc(item.id); // Use item's ID as the document ID
+      batch.set(docRef, item.toJson());
+    }
+
+    try {
+      await batch.commit();
+      print("Cart items uploaded successfully!");
+    } catch (e) {
+      print("Failed to upload cart items: $e");
     }
   }
 }

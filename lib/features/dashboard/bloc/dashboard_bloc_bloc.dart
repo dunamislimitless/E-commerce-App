@@ -1,5 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:e_commerce_app/app/utils/enums/product_enum.dart';
+import 'package:e_commerce_app/data/models/product_modal/prduct_modal.dart';
+import 'package:e_commerce_app/domain/usecases/product_usecase.dart/category_usecase.dart';
+import 'package:e_commerce_app/features/product/bloc/product_bloc_bloc.dart';
+import 'package:e_commerce_app/service_locator.dart';
 import 'package:meta/meta.dart';
 
 part 'dashboard_bloc_event.dart';
@@ -16,7 +20,7 @@ part 'dashboard_bloc_state.dart';
 class ButtonBloc extends Bloc<ButtonEvent, ButtonState> {
   // int? selectedIndex;
 
-  Categories? selectedCategory;
+  Category? selectedCategory;
 
   ButtonBloc() : super(ButtonInitialState()) {
     on<SelectButtonEvent>(_selectButton);

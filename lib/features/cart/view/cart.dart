@@ -13,6 +13,7 @@ import 'package:e_commerce_app/features/dashboard/widget/page_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class Cart extends StatelessWidget {
   const Cart({super.key});
@@ -31,8 +32,8 @@ class Cart extends StatelessWidget {
             ),
             PageHeader(
               title: AppString.cart,
-              trailing: AppIcons.cartLoaded.onTap(() {}),
-              leading: AppIcons.arrowBack.onTap(() {
+              trailing: SvgPicture.asset(AppIcons.cartLoaded).onTap(() {}),
+              leading: SvgPicture.asset(AppIcons.arrowBack).onTap(() {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                       builder: (context) => const DashboardScreen()),

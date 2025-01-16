@@ -14,9 +14,7 @@ mixin Validators {
     } else if (!value.isValidatePassword()) {
       return 'Password must contain at least:\n'
           '- One uppercase letter\n'
-          '- One lowercase letter\n'
-          '- One special character\n'
-          '- 8 characters minimum';
+          '- One lowercase letter\n';
     }
     return null;
   }

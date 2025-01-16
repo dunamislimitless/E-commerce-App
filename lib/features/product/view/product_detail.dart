@@ -1,8 +1,12 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:e_commerce_app/app/extensions/extension.dart';
 import 'package:e_commerce_app/app/utils/appicons.dart';
 import 'package:e_commerce_app/app/utils/appstrings.dart';
 import 'package:e_commerce_app/app/utils/colors.dart';
 import 'package:e_commerce_app/app/utils/textstyle.dart';
+import 'package:e_commerce_app/common/bloc/product/product_cubit_state.dart';
+import 'package:e_commerce_app/common/bloc/product/product_state.dart';
+import 'package:e_commerce_app/data/models/product_modal/prduct_modal.dart';
 import 'package:e_commerce_app/features/cart/cart_bloc/cart_bloc.dart';
 import 'package:e_commerce_app/features/cart/cart_bloc/cart_event.dart';
 import 'package:e_commerce_app/features/cart/view/cart.dart';
@@ -17,27 +21,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ProductDetail extends StatelessWidget {
-  const ProductDetail({
+  ProductDetail({
     super.key,
-    // required this.amount,
-    // required this.imagePath,
-    // // required this.eachProduct,
-    // required this.descrition,
-    // required this.productName,
     this.moveToCart,
+    this.product,
   });
 
-  // final num amount;
-  // final String imagePath;
-  // final String descrition;
-  // // final FinalCart eachProduct;
-  // final String productName;
   final VoidCallback? moveToCart;
+  ProductModal? product;
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProductBlocBloc, ProductBlocState>(builder: (_, state) {
-      final product = context.read<ProductBlocBloc>().product;
+    return BlocBuilder<ProductCubit, ProductState>(builder: (_, state) {
+      // final product = context.read<ProductBlocBloc>().
       final bool isProductSelected = product != null;
       return Scaffold(
         backgroundColor: AppColors.cardColor,
@@ -51,19 +47,44 @@ class ProductDetail extends StatelessWidget {
                   height: 50.h,
                 ),
                 PageHeader(
-                  title: AppString.popularDetail,
-                  trailing: SvgPicture.asset(AppIcons.favorite).onTap(() {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => const Cart()),
-                    );
-                  }),
-                  leading: null,
-                ),
+                    title: AppString.popularDetail,
+                    trailing: SvgPicture.asset(AppIcons.favorite).onTap(() {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => const Cart()),
+                      );
+                    }),
+                    leading: SvgPicture.asset(AppIcons.arrowBack).onTap(() {
+                      Navigator.pop(context);
+                    })),
                 SizedBox(
                   height: 30.h,
                 ),
                 isProductSelected
-                    ? Image.asset(product.imagePath)
+                    ? Padding(
+                        padding: EdgeInsets.only(bottom: 12.h),
+                        child: product!.images.isNotEmpty
+                            ? CarouselSlider(
+                                options: CarouselOptions(
+                                  viewportFraction: 1.0,
+                                  enableInfiniteScroll: true,
+                                  autoPlay: true,
+                                ),
+                                items: product!.images.map((imageUrl) {
+                                  return ClipRRect(
+                                    borderRadius: BorderRadius.circular(6.r),
+                                    child: Image.network(
+                                      imageUrl.sanitize(),
+                                      fit: BoxFit.contain,
+                                      width: double.infinity,
+                                    ),
+                                  );
+                                }).toList(),
+                              )
+                            : const Placeholder(
+                                fallbackHeight: 300,
+                                fallbackWidth: 300,
+                              ),
+                      )
                     : Text(
                         "Choose a product to view",
                         style: AppText.productName,
@@ -76,50 +97,58 @@ class ProductDetail extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text(
-                            product.itemDescription,
-                            style: AppText.productName,
-                          ),
-                          SizedBox(
-                            height: 8.h,
-                          ),
-                          Text(
-                            AppString.unisex,
-                            style: AppText.regular400,
-                          ),
-                          SizedBox(
-                            height: 11.h,
-                          ),
-                          const RatingIndicator(),
-                          SizedBox(
-                            height: 30.h,
-                          ),
-                          Text(
-                            AppString.color,
-                            style: AppText.titleText,
-                          ),
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                          const ColorSelectorPage(),
-                          SizedBox(
-                            height: 34.h,
-                          ),
-                          Text(
-                            AppString.about,
-                            style: AppText.titleText,
-                          ),
-                        ],
+                      Flexible(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              product!.title,
+                              style: AppText.productName,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ).padding(right: 15),
+                            SizedBox(
+                              height: 8.h,
+                            ),
+                            Text(
+                              AppString.unisex,
+                              style: AppText.regular400,
+                            ),
+                            SizedBox(
+                              height: 11.h,
+                            ),
+                            const RatingIndicator(),
+                            SizedBox(
+                              height: 30.h,
+                            ),
+                            Text(
+                              AppString.color,
+                              style: AppText.titleText,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                            const ColorSelectorPage(),
+                            SizedBox(
+                              height: 34.h,
+                            ),
+                            Text(
+                              AppString.about,
+                              style: AppText.titleText,
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        width: 15,
                       ),
                       Column(
                         children: [
                           SizedBox(height: 10.h),
                           Text(
-                            '\$${product.amount}',
+                            '\$${product!.price}',
                             style: AppText.amountText,
                           ),
                         ],
@@ -130,7 +159,7 @@ class ProductDetail extends StatelessWidget {
                     height: 14.h,
                   ),
                   Text(
-                    product.itemDescription,
+                    product!.description,
                     style: AppText.reviewText,
                   ),
                   SizedBox(
@@ -138,8 +167,10 @@ class ProductDetail extends StatelessWidget {
                   ),
                   CustomButton(
                     onPressed: () {
-                      context.read<CartBloc>().add(AddItemEvent(item: product));
-
+                      context
+                          .read<CartBloc>()
+                          .add(AddItemEvent(item: product!));
+                      print("$product added safely");
                       if (moveToCart != null) {
                         moveToCart!();
                       }
