@@ -56,6 +56,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             user.avatar,
                             width: 200,
                             height: 200,
+                            errorBuilder: (_, __, ___) => Container(
+                              width: double.infinity,
+                              child: Icon(Icons.image_not_supported_rounded),
+                              padding: EdgeInsets.all(48),
+                            ),
                           )),
                           SizedBox(height: 20.h),
                           Text(user.name, style: AppText.amountText),

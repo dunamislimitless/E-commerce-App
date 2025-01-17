@@ -67,6 +67,12 @@ class ProductDetail extends StatelessWidget {
                                   imageUrl.sanitize(),
                                   fit: BoxFit.contain,
                                   width: double.infinity,
+                                  errorBuilder: (_, __, ___) => Container(
+                                    width: double.infinity,
+                                    child:
+                                        Icon(Icons.image_not_supported_rounded),
+                                    padding: EdgeInsets.all(48),
+                                  ),
                                 ),
                               );
                             }).toList(),

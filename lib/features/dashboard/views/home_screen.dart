@@ -271,6 +271,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                             child: Image.network(
                                               eachProduct.images.first
                                                   .sanitize(),
+                                              errorBuilder: (_, __, ___) =>
+                                                  Container(
+                                                width: double.infinity,
+                                                child: Icon(Icons
+                                                    .image_not_supported_rounded),
+                                                padding: EdgeInsets.all(48),
+                                              ),
                                               fit: BoxFit.cover,
                                               width: double.infinity,
                                               height: 100.h,

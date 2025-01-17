@@ -213,7 +213,15 @@ class Cart extends StatelessWidget {
                                   child: SizedBox(
                                     height: 95.h,
                                     width: 84.w,
-                                    child: Image.network(each.images.first),
+                                    child: Image.network(
+                                      each.images.first,
+                                      errorBuilder: (_, __, ___) => Container(
+                                        width: double.infinity,
+                                        child: Icon(
+                                            Icons.image_not_supported_rounded),
+                                        padding: EdgeInsets.all(10),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ],
@@ -257,14 +265,14 @@ class Cart extends StatelessWidget {
                             ),
                             CustomRow(
                               options: 'Subtotal',
-                              object: '\$$subtotal',
+                              object: '\$${subtotal.toStringAsFixed(2)}',
                             ),
                             SizedBox(
                               height: 8.h,
                             ),
                             CustomRow(
                               options: 'Discount (10%)',
-                              object: '\$$discount',
+                              object: '\$${discount.toStringAsFixed(2)}',
                             ),
                             SizedBox(
                               height: 8.h,
@@ -274,7 +282,7 @@ class Cart extends StatelessWidget {
                             ),
                             CustomRow(
                               options: 'Total',
-                              object: '\$$total',
+                              object: '\$${total.toStringAsFixed(2)}',
                               textStyle: AppText.cartAmount,
                             ),
                           ],
