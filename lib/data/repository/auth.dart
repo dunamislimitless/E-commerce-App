@@ -12,9 +12,10 @@ import 'package:e_commerce_app/service_locator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthRepositoryImplementation extends AuthRepository {
+  AuthApiServiceImplement api = AuthApiServiceImplement();
   @override
   Future<Either> signUp(SignupRequest signupReq) async {
-    Either result = await locator<AuthApiService>().signUp(signupReq);
+    Either result = await api.signUp(signupReq);
 
     return result.fold((error) {
       return Left(error);
@@ -37,7 +38,7 @@ class AuthRepositoryImplementation extends AuthRepository {
 
   @override
   Future<Either> getUser() async {
-    Either result = await locator<AuthApiService>().getUser();
+    Either result = await api.getUser();
 
     return result.fold((error) {
       return Left(error);
@@ -45,14 +46,13 @@ class AuthRepositoryImplementation extends AuthRepository {
       Response response = data;
       var userModel = UserModellls.fromJson(response.data);
 
-      var userEntity = userModel.toEntity();
-      return Right(userEntity);
+      return Right(userModel);
     });
   }
 
   @override
   Future<Either> logIn(SignInRequest signInReq) async {
-    Either result = await locator<AuthApiService>().logIn(signInReq);
+    Either result = await api.logIn(signInReq);
 
     return result.fold((error) {
       return Left(error);

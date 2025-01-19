@@ -12,7 +12,7 @@ import 'package:e_commerce_app/features/cart/cart_bloc/cart_event.dart';
 import 'package:e_commerce_app/features/cart/view/cart.dart';
 import 'package:e_commerce_app/features/dashboard/widget/custom_button.dart';
 import 'package:e_commerce_app/features/dashboard/widget/page_header.dart';
-import 'package:e_commerce_app/features/product/bloc/product_bloc_bloc.dart';
+
 import 'package:e_commerce_app/features/product/widget/rating_bar.dart';
 import 'package:e_commerce_app/features/product/widget/user_colour_specification.dart';
 import 'package:flutter/material.dart';
@@ -63,17 +63,24 @@ class ProductDetail extends StatelessWidget {
                             items: product.images.map((imageUrl) {
                               return ClipRRect(
                                 borderRadius: BorderRadius.circular(6.r),
-                                child: Image.network(
-                                  imageUrl.sanitize(),
-                                  fit: BoxFit.contain,
-                                  width: double.infinity,
-                                  errorBuilder: (_, __, ___) => Container(
+                                child: Image.network(imageUrl.sanitize(),
+                                    fit: BoxFit.contain,
                                     width: double.infinity,
-                                    child:
-                                        Icon(Icons.image_not_supported_rounded),
-                                    padding: EdgeInsets.all(48),
-                                  ),
-                                ),
+                                    errorBuilder: (_, __, ___) => Center(
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                                color: Colors.black
+                                                    .withOpacity(.1)),
+                                            height: 95,
+                                            width: 84,
+                                            child: Icon(
+                                              Icons.image_not_supported,
+                                              color:
+                                                  Colors.black.withOpacity(.3),
+                                            ),
+                                          ),
+                                        )),
                               );
                             }).toList(),
                           )

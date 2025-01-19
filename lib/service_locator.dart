@@ -6,10 +6,8 @@ import 'package:e_commerce_app/data/source/auth_local_service.dart';
 import 'package:e_commerce_app/data/source/product_api_service.dart';
 import 'package:e_commerce_app/domain/repository/auth.dart';
 import 'package:e_commerce_app/domain/repository/product.dart';
-import 'package:e_commerce_app/domain/usecases/auth_usecases/get_user.dart';
 import 'package:e_commerce_app/domain/usecases/auth_usecases/is_logged_in.dart';
 import 'package:e_commerce_app/domain/usecases/auth_usecases/log_in.dart';
-import 'package:e_commerce_app/domain/usecases/auth_usecases/signout.dart';
 import 'package:e_commerce_app/domain/usecases/auth_usecases/signup.dart';
 import 'package:e_commerce_app/domain/usecases/product_usecase.dart/category_usecase.dart';
 import 'package:get_it/get_it.dart';
@@ -34,11 +32,9 @@ void setupServiceLocator() {
 
   locator.registerSingleton<SignupCase>(SignupCase());
 
-  locator.registerSingleton<SignOutUsecase>(SignOutUsecase());
-
   locator.registerSingleton<IsLoggedInUseCase>(IsLoggedInUseCase());
 
-  locator.registerSingleton<GetUserUseCase>(GetUserUseCase());
+  //locator.registerSingleton<GetUserUseCase>(GetUserUseCase());
 
   locator.registerSingleton<SignInUsecae>(SignInUsecae());
 

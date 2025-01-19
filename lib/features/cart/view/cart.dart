@@ -213,15 +213,22 @@ class Cart extends StatelessWidget {
                                   child: SizedBox(
                                     height: 95.h,
                                     width: 84.w,
-                                    child: Image.network(
-                                      each.images.first,
-                                      errorBuilder: (_, __, ___) => Container(
-                                        width: double.infinity,
-                                        child: Icon(
-                                            Icons.image_not_supported_rounded),
-                                        padding: EdgeInsets.all(10),
-                                      ),
-                                    ),
+                                    child: Image.network(each.images.first,
+                                        errorBuilder: (_, __, ___) => Center(
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    color: Colors.black
+                                                        .withOpacity(.1)),
+                                                height: 95,
+                                                width: 84,
+                                                child: Icon(
+                                                  Icons.image_not_supported,
+                                                  color: Colors.black
+                                                      .withOpacity(.3),
+                                                ),
+                                              ),
+                                            )),
                                   ),
                                 ),
                               ],

@@ -272,11 +272,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                               eachProduct.images.first
                                                   .sanitize(),
                                               errorBuilder: (_, __, ___) =>
-                                                  Container(
-                                                width: double.infinity,
-                                                child: Icon(Icons
-                                                    .image_not_supported_rounded),
-                                                padding: EdgeInsets.all(48),
+                                                  Center(
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                      shape: BoxShape.circle,
+                                                      color: Colors.black
+                                                          .withOpacity(.1)),
+                                                  height: 95,
+                                                  width: 84,
+                                                  child: Icon(
+                                                    Icons.image_not_supported,
+                                                    color: Colors.black
+                                                        .withOpacity(.3),
+                                                  ),
+                                                ),
                                               ),
                                               fit: BoxFit.cover,
                                               width: double.infinity,

@@ -122,12 +122,13 @@ class ProductCatalog extends StatelessWidget {
                                             BorderRadius.circular(6.r),
                                         child: Image.network(
                                           each.images.first.sanitize(),
-                                          errorBuilder: (_, __, ___) =>
-                                              Container(
-                                            width: double.infinity,
-                                            child: Icon(Icons
-                                                .image_not_supported_rounded),
-                                            padding: EdgeInsets.all(48),
+                                          errorBuilder: (_, __, ___) => Center(
+                                            child: Container(
+                                              width: double.infinity,
+                                              child: Icon(Icons
+                                                  .image_not_supported_rounded),
+                                              padding: EdgeInsets.all(48),
+                                            ),
                                           ),
                                           fit: BoxFit.cover,
                                           width: double.infinity,

@@ -4,16 +4,15 @@ import 'package:e_commerce_app/app/utils/textstyle.dart';
 import 'package:e_commerce_app/common/bloc/button/button_state.dart';
 import 'package:e_commerce_app/common/bloc/button/button_state_cubit.dart';
 
-import 'package:e_commerce_app/domain/usecases/auth_usecases/signout.dart';
-
-import 'package:e_commerce_app/features/authentcation/bloc/cubit/user_dislay_cubit.dart';
-import 'package:e_commerce_app/features/authentcation/bloc/cubit/user_dislay_state.dart';
+import 'package:e_commerce_app/features/authentcation/bloc/cubit/user_display_cubit.dart';
+import 'package:e_commerce_app/features/authentcation/bloc/cubit/user_display_state.dart';
 import 'package:e_commerce_app/features/authentcation/views/sign_in.dart';
 import 'package:e_commerce_app/features/dashboard/widget/custom_button.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:path/path.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -22,17 +21,13 @@ class ProfileScreen extends StatefulWidget {
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-void iniState() {}
-
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    // context.read<AuthBloc>().add(UserProfileEvent());
-
     return SafeArea(
         child: Scaffold(
             appBar: AppBar(
-                title: Center(child: Text('Profile')),
+                title: const Center(child: Text('Profile')),
                 automaticallyImplyLeading: false),
             body: BlocBuilder<UserDislayCubit, UserDislayState>(
                 builder: (context, state) {
@@ -40,7 +35,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 return const Center(child: CircularProgressIndicator());
               }
               if (state is UserLoadedState) {
-                final user = state.userEntiry;
+                final user = state.user;
                 return SingleChildScrollView(
                     child: Padding(
                         padding: EdgeInsets.all(16.0.w),
@@ -52,16 +47,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           // ),
 
                           ClipOval(
-                              child: Image.network(
-                            user.avatar,
-                            width: 200,
-                            height: 200,
-                            errorBuilder: (_, __, ___) => Container(
-                              width: double.infinity,
-                              child: Icon(Icons.image_not_supported_rounded),
-                              padding: EdgeInsets.all(48),
-                            ),
-                          )),
+                              child: Image.network(user.avatar,
+                                  width: 200,
+                                  height: 200,
+                                  errorBuilder: (_, __, ___) => Center(
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color:
+                                                  Colors.black.withOpacity(.1)),
+                                          height: 200,
+                                          width: 200,
+                                          child: Icon(
+                                            Icons.image_not_supported,
+                                            color: Colors.black.withOpacity(.3),
+                                          ),
+                                        ),
+                                      ))),
                           SizedBox(height: 20.h),
                           Text(user.name, style: AppText.amountText),
                           SizedBox(height: 10.h),
@@ -96,26 +98,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
                           // TODO   Work on the signout and the navigation back to the sign in
 
-                          BlocListener<ButtonStateCubit, ButtonStateC>(
-                            listener: (context, state) {
-                              if (state is ButtonSuccessState) {
+                          CustomButton(
+                            onPressed: () {
+                              final logOut =
+                                  context.read<UserDislayCubit>().logOut();
+
+                              Future.delayed(Duration(seconds: 4));
+
+                              if (logOut != null) {
                                 Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => Signin()));
                               }
                             },
-                            child: CustomButton(
-                              onPressed: () {
-                                context
-                                    .read<ButtonStateCubit>()
-                                    .execute(usecase: SignOutUsecase());
-                              },
-                              buttontext: AppString.signOut,
-                              height: 52.h,
-                              color: AppColors.favoriteColor,
-                            ),
-                          )
+                            buttontext: AppString.signOut,
+                            height: 52.h,
+                            color: AppColors.favoriteColor,
+                          ),
                         ])));
               }
               if (state is LoadUserFailureState) {
