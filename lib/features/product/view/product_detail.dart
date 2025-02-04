@@ -6,7 +6,7 @@ import 'package:e_commerce_app/app/utils/colors.dart';
 import 'package:e_commerce_app/app/utils/textstyle.dart';
 import 'package:e_commerce_app/common/bloc/product/product_cubit_state.dart';
 import 'package:e_commerce_app/common/bloc/product/product_state.dart';
-import 'package:e_commerce_app/data/models/product_modal/prduct_modal.dart';
+
 import 'package:e_commerce_app/features/cart/cart_bloc/cart_bloc.dart';
 import 'package:e_commerce_app/features/cart/cart_bloc/cart_event.dart';
 import 'package:e_commerce_app/features/cart/view/cart.dart';
@@ -47,9 +47,6 @@ class ProductDetail extends StatelessWidget {
                         Navigator.of(context).push(
                           MaterialPageRoute(builder: (context) => const Cart()),
                         );
-                      }),
-                      leading: SvgPicture.asset(AppIcons.arrowBack).onTap(() {
-                        Navigator.pop(context);
                       }),
                     ),
                     SizedBox(height: 30.h),
@@ -158,12 +155,9 @@ class ProductDetail extends StatelessWidget {
           return Scaffold(
             backgroundColor: AppColors.cardColor,
             body: Center(
-              child: Text(
-                "Product details are inactive.\n\nPlease select a product.",
-                style: AppText.reviewText.copyWith(
-                  color: Colors.grey,
-                  fontSize: 20.sp,
-                ),
+              child: const Text(
+                "You have not choosed a product to view.\nPlease select a product to view.",
+                style: TextStyle(fontSize: 16),
                 textAlign: TextAlign.center,
               ).padding(left: 15, right: 15),
             ),

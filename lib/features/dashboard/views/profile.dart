@@ -119,7 +119,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ])));
               }
               if (state is LoadUserFailureState) {
-                return Text(state.errorMessage);
+                return Center(child: Text(state.errorMessage));
               }
               return Container();
             })));

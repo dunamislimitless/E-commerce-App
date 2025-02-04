@@ -39,7 +39,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    // fetchCategories();
 
     context.read<ProductCubit>()
       ..getAllProduct()
@@ -230,153 +229,173 @@ class _HomeScreenState extends State<HomeScreen> {
                     SizedBox(
                       height: 10.h,
                     ),
-                    GridView.builder(
-                        shrinkWrap: true,
-                        padding: EdgeInsets.zero,
-                        physics: const NeverScrollableScrollPhysics(),
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 8.w,
-                          mainAxisSpacing: 8.h,
-                          childAspectRatio: 0.70,
-                        ),
-                        itemCount: products!.length > 5 ? 6 : products.length,
-                        itemBuilder: (context, index) {
-                          final eachProduct = products[index];
-                          return Container(
-                            height: 268.h,
-                            width: 180.w,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(6.r)),
-                            child: Padding(
-                              padding: EdgeInsets.all(8.0.w),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(bottom: 12.h),
-                                    child: Align(
-                                      alignment: Alignment.topRight,
-                                      child: AppIcons.favoriteGray,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(bottom: 12.h),
-                                    child: eachProduct.images.isNotEmpty
-                                        ? ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(6.r),
-                                            child: Image.network(
-                                              eachProduct.images.first
-                                                  .sanitize(),
-                                              errorBuilder: (_, __, ___) =>
-                                                  Center(
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                      color: Colors.black
-                                                          .withOpacity(.1)),
-                                                  height: 95,
-                                                  width: 84,
-                                                  child: Icon(
-                                                    Icons.image_not_supported,
-                                                    color: Colors.black
-                                                        .withOpacity(.3),
-                                                  ),
-                                                ),
-                                              ),
-                                              fit: BoxFit.cover,
-                                              width: double.infinity,
-                                              height: 100.h,
-                                            ),
-                                          )
-                                        : const Placeholder(
-                                            fallbackHeight: 100,
-                                            fallbackWidth: 100,
-                                          ),
-                                  ),
-                                  Text(
-                                    eachProduct.title,
-                                    style: AppText.itemText,
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(bottom: 2.0.h),
-                                    child: Row(
+                    SizedBox(
+                      child: state is CategoryProductLoadingState
+                          ? const Center(child: CircularProgressIndicator())
+                          : GridView.builder(
+                              shrinkWrap: true,
+                              padding: EdgeInsets.zero,
+                              physics: const NeverScrollableScrollPhysics(),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 8.w,
+                                mainAxisSpacing: 8.h,
+                                childAspectRatio: 0.70,
+                              ),
+                              itemCount:
+                                  products!.length > 5 ? 6 : products.length,
+                              itemBuilder: (context, index) {
+                                final eachProduct = products[index];
+                                return Container(
+                                  height: 268.h,
+                                  width: 180.w,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(6.r)),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0.w),
+                                    child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        AppIcons.star,
                                         Padding(
-                                          padding: EdgeInsets.only(left: 8.0.w),
-                                          child: Text(
-                                            "200",
-                                            style: AppText.reviewText,
+                                          padding:
+                                              EdgeInsets.only(bottom: 12.h),
+                                          child: Align(
+                                            alignment: Alignment.topRight,
+                                            child: AppIcons.favoriteGray,
                                           ),
-                                        )
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsets.only(bottom: 12.h),
+                                          child: eachProduct.images.isNotEmpty
+                                              ? ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          6.r),
+                                                  child: Image.network(
+                                                    eachProduct.images.first
+                                                        .sanitize(),
+                                                    errorBuilder:
+                                                        (_, __, ___) => Center(
+                                                      child: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                                shape: BoxShape
+                                                                    .circle,
+                                                                color: Colors
+                                                                    .black
+                                                                    .withOpacity(
+                                                                        .1)),
+                                                        height: 95,
+                                                        width: 84,
+                                                        child: Icon(
+                                                          Icons
+                                                              .image_not_supported,
+                                                          color: Colors.black
+                                                              .withOpacity(.3),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    fit: BoxFit.cover,
+                                                    width: double.infinity,
+                                                    height: 100.h,
+                                                  ),
+                                                )
+                                              : const Placeholder(
+                                                  fallbackHeight: 100,
+                                                  fallbackWidth: 100,
+                                                ),
+                                        ),
+                                        Text(
+                                          eachProduct.title,
+                                          style: AppText.itemText,
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsets.only(bottom: 2.0.h),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              AppIcons.star,
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    left: 8.0.w),
+                                                child: Text(
+                                                  "200",
+                                                  style: AppText.reviewText,
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                '\$${eachProduct.price}',
+                                                style: AppText.amountText,
+                                              ),
+                                              Text(AppString.view,
+                                                      style: AppText.view)
+                                                  .onTap(() {
+                                                if (eachProduct != null) {
+                                                  debugPrint(
+                                                      'NORMAL $eachProduct ${eachProduct.description} eachProduct Emtyyyy');
+
+                                                  fetchedProducts.selectProduct(
+                                                      eachProduct);
+
+                                                  if (widget.navCallback !=
+                                                      null) {
+                                                    widget.navCallback!(
+                                                        1, eachProduct);
+                                                  } else {
+                                                    debugPrint(
+                                                        'navCallback is null');
+                                                  }
+
+                                                  // context.read<ProductBlocBloc>().add(
+                                                  //     SelectProductEvent(
+                                                  //         product: each));
+                                                  // if (widget.navCallback != null) {
+                                                  //   widget.navCallback!(1);
+                                                  // } else {
+                                                  //   print('navCallback is null');
+                                                  // }
+                                                } else {
+                                                  debugPrint(
+                                                      'EMTYYTYYTYY ITEM $eachProduct');
+                                                }
+                                              })
+                                              //   .onTap(() {
+                                              // context
+                                              //     .read<ProductBlocBloc>()
+                                              //     .add(SelectProductEvent(
+                                              //         product: eachProduct));
+                                              // widget.navCallback!(1);
+
+                                              // })
+                                            ])
                                       ],
                                     ),
                                   ),
-                                  Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          '\$${eachProduct.price}',
-                                          style: AppText.amountText,
-                                        ),
-                                        Text(AppString.view,
-                                                style: AppText.view)
-                                            .onTap(() {
-                                          if (eachProduct != null) {
-                                            debugPrint(
-                                                'NORMAL $eachProduct ${eachProduct.description} eachProduct Emtyyyy');
-
-                                            fetchedProducts
-                                                .selectProduct(eachProduct);
-
-                                            if (widget.navCallback != null) {
-                                              widget.navCallback!(
-                                                  1, eachProduct);
-                                            } else {
-                                              debugPrint('navCallback is null');
-                                            }
-
-                                            // context.read<ProductBlocBloc>().add(
-                                            //     SelectProductEvent(
-                                            //         product: each));
-                                            // if (widget.navCallback != null) {
-                                            //   widget.navCallback!(1);
-                                            // } else {
-                                            //   print('navCallback is null');
-                                            // }
-                                          } else {
-                                            debugPrint(
-                                                'EMTYYTYYTYY ITEM $eachProduct');
-                                          }
-                                        })
-                                        //   .onTap(() {
-                                        // context
-                                        //     .read<ProductBlocBloc>()
-                                        //     .add(SelectProductEvent(
-                                        //         product: eachProduct));
-                                        // widget.navCallback!(1);
-
-                                        // })
-                                      ])
-                                ],
-                              ),
-                            ),
-                          );
-                          // .onTap(() {
-                          //   context
-                          //       .read<CartBloc>()
-                          //       .add(AddItemEvent(item: eachProduct));
-                          //   if (widget.widget.moveToCart != null)
-                          //     widget.widget.moveToCart!();
-                          // });
-                        }),
+                                );
+                                // .onTap(() {
+                                //   context
+                                //       .read<CartBloc>()
+                                //       .add(AddItemEvent(item: eachProduct));
+                                //   if (widget.widget.moveToCart != null)
+                                //     widget.widget.moveToCart!();
+                                // });
+                              }),
+                    ),
                     SizedBox(height: 20.h),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

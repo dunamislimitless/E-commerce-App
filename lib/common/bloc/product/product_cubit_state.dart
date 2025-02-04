@@ -16,6 +16,7 @@ class ProductCubit extends Cubit<ProductState> with ToastMixin {
   ProductModal? product;
 
   void getAllProduct() async {
+    emit(CategoryProductLoadingState());
     var result = await productRepository.getProduct();
 
     if (result.list != null) {
@@ -26,6 +27,7 @@ class ProductCubit extends Cubit<ProductState> with ToastMixin {
   }
 
   void getEachProduct() async {
+    emit(CategoryProductLoadingState());
     var result = await productRepository.getEachProduct();
 
     if (result.product != null) {
@@ -36,6 +38,7 @@ class ProductCubit extends Cubit<ProductState> with ToastMixin {
   }
 
   void category() async {
+    emit(CategoryProductLoadingState());
     var result = await productRepository.getCategory();
 
     if (result.list != null) {
@@ -47,6 +50,7 @@ class ProductCubit extends Cubit<ProductState> with ToastMixin {
   }
 
   void productsByCategory({int? categoryID}) async {
+    emit(CategoryProductLoadingState());
     var result = await productRepository.getProductsByCategory(id: categoryID);
 
     if (result.list != null) {
@@ -58,6 +62,7 @@ class ProductCubit extends Cubit<ProductState> with ToastMixin {
   }
 
   void selectProduct(ProductModal selectedProduct) {
+    emit(ProductLoadingState());
     product = selectedProduct;
     emit(SelectProductState(product: product!));
   }

@@ -58,7 +58,7 @@ class AppString {
   static const remove = 'Remove';
   static const view = 'View';
   static const emptycart =
-      'Your Cart is empty,\n\nKindly choose a product you want to ay for';
+      'Your Cart is empty,\n\nKindly choose a product you want to pay for';
   static const haveAccount = 'Do you have an Account?';
   static const dontHaveAnAccount = 'Kindly create an Account';
 

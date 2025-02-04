@@ -43,3 +43,5 @@ class SelectProductState extends ProductState {
 
   SelectProductState({required this.product});
 }
+
+class CategoryProductLoadingState extends ProductState {}
