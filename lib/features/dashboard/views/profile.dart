@@ -24,6 +24,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
+    context.read<UserDislayCubit>()..displayUser();
     return SafeArea(
         child: Scaffold(
             appBar: AppBar(
@@ -119,7 +120,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ])));
               }
               if (state is LoadUserFailureState) {
-                return Center(child: Text(state.errorMessage));
+                return Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(state.errorMessage),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      CustomButton(
+                        onPressed: () {
+                          final logOut =
+                              context.read<UserDislayCubit>().logOut();
+
+                          Future.delayed(Duration(seconds: 4));
+
+                          if (logOut != null) {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Signin()));
+                          }
+                        },
+                        buttontext: AppString.signOut,
+                        height: 52.h,
+                        color: AppColors.favoriteColor,
+                      ),
+                    ],
+                  ),
+                );
               }
               return Container();
             })));
