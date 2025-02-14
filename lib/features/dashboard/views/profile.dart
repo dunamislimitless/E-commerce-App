@@ -14,17 +14,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:path/path.dart';
 
-class ProfileScreen extends StatefulWidget {
+class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
-}
-
-class _ProfileScreenState extends State<ProfileScreen> {
-  @override
   Widget build(BuildContext context) {
-    context.read<UserDislayCubit>()..displayUser();
+    context.read<UserDislayCubit>().displayUser();
     return SafeArea(
         child: Scaffold(
             appBar: AppBar(
@@ -84,18 +79,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           _buildProfileDetailRow(
                               Icons.work, 'Occupation', '${user.role}'),
                           SizedBox(height: 30.h),
-                          // Align(
-                          //   alignment: Alignment.bottomRight,
-                          //   child: Text(AppString.signOut,
-                          //           style: TextStyle(color: Colors.red))
-                          //       .onTap(
-                          //     () {
-                          //       final authBloc = context.read<AuthBloc>();
-
-                          //       authBloc.add(SignOutEvent());
-                          //     },
-                          //   ),
-                          // ),
 
                           // TODO   Work on the signout and the navigation back to the sign in
 

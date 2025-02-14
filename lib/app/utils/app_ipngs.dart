@@ -13,4 +13,6 @@ class AppImage {
   static const desk = 'assets/images/desk.png';
   static const watch = 'assets/images/watch.png';
   static const wristWatch = 'assets/images/wristwatch.png';
+
+  static const suceesIcon = 'assets/icons/success_animation.gif';
 }
