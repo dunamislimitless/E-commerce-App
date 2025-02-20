@@ -40,14 +40,10 @@ class CustomButton extends StatelessWidget {
   }
 
   Widget loading(BuildContext context) {
-    return ElevatedButton(
-        onPressed: null,
-        style: ButtonStyle(
-            backgroundColor:
-                WidgetStateProperty.all(color ?? AppColors.lightButton),
-            padding: WidgetStateProperty.all(
-                EdgeInsets.only(left: 8.w, right: 8.w))),
-        child: CircularProgressIndicator());
+    return const Center(
+        child: CircularProgressIndicator(
+      color: AppColors.discountColor,
+    ));
   }
 
   Widget initial(BuildContext context) {

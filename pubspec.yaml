@@ -37,6 +37,7 @@ dependencies:
   logger: ^2.5.0
   shared_preferences: ^2.3.3
   fluttertoast: ^8.2.10
+  lottie: ^2.6.0
 
 dev_dependencies:
   flutter_test:

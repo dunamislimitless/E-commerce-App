@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:e_commerce_app/app/extensions/extension.dart';
 import 'package:e_commerce_app/app/utils/app_ipngs.dart';
 import 'package:e_commerce_app/app/utils/appicons.dart';
@@ -20,42 +22,37 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class HomeScreen extends StatefulWidget with ToastMixin {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key, required this.widget, this.navCallback});
 
   final DashboardScreen widget;
-  final Function(int? toScreen)? navCallback;
+  final Function(int? toScreen, ProductModal? product)? navCallback;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  //List<ProductModal> cartList = [];
   List<Category> categories = [];
   List<ProductModal> products = [];
 
   @override
   void initState() {
     super.initState();
-    // fetchCategories();
 
     context.read<ProductCubit>()
       ..getAllProduct()
       ..category();
-
-    // cartList =
   }
 
   int tab = 0;
 
-//  List<ProductModal> products = [];
-
   @override
   Widget build(BuildContext context) {
+    final fetchedProducts = context.read<ProductCubit>();
+
     return BlocConsumer<ProductCubit, ProductState>(listener: (_, state) {
       if (state is ProductFailureState) {
-        //TODO: Show toast for error
         Fluttertoast.showToast(
           msg: state.errorMessage,
           toastLength: Toast.LENGTH_SHORT,
@@ -69,14 +66,20 @@ class _HomeScreenState extends State<HomeScreen> {
       if (state is ProductLoadingState) {
         return const Center(child: CircularProgressIndicator());
       }
-      if (state is AllProductLoadedState || state is CategoryLoadedState) {
+      if (state is AllProductLoadedState ||
+          state is CategoryLoadedState ||
+          state is CategoryProductState) {
         products = state is AllProductLoadedState
             ? List.from(state.productModal)
-            : this.products;
+            : products;
 
         categories = state is CategoryLoadedState
             ? List.from(state.category)
-            : this.categories;
+            : categories;
+
+        products = state is CategoryProductState
+            ? List.from(state.productModal)
+            : products;
       }
 
       return Padding(
@@ -148,7 +151,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                   padding:
                                       const EdgeInsets.symmetric(horizontal: 8),
                                   child: GestureDetector(
-                                    onTap: () => setState(() => tab = index),
+                                    onTap: () {
+                                      setState(() => tab = index);
+
+                                      if (index == 0) {
+                                        fetchedProducts.getAllProduct();
+                                      } else {
+                                        fetchedProducts.productsByCategory(
+                                            categoryID:
+                                                categories[index - 1].id);
+                                      }
+                                    },
                                     child: Container(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 6, horizontal: 12),
@@ -191,124 +204,198 @@ class _HomeScreenState extends State<HomeScreen> {
                         Text(
                           AppString.seeAll,
                           style: AppText.seeAll,
-                        ).onTap(() async {
-                          final value = await Navigator.push(
+                        ).onTap(() {
+                          Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: ((context) => ProductDetail())));
+                                  builder: (context) => ProductCatalog(
+                                        product: products,
+                                        navCallback: (
+                                            {int? toScreen,
+                                            ProductModal? product}) {
+                                          widget.navCallback!(
+                                              toScreen, product);
+                                        },
+                                      )));
 
-                          if (value != null && value is int) {
-                            widget.navCallback!(value);
-                          }
+                          // final value = 1;
+
+                          // if (value != null && value is int) {
+                          //   widget.navCallback!(value, products);
+                          // }
                         })
                       ],
                     ),
                     SizedBox(
                       height: 10.h,
                     ),
-                    GridView.builder(
-                        shrinkWrap: true,
-                        padding: EdgeInsets.zero,
-                        physics: const NeverScrollableScrollPhysics(),
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 8.w,
-                          mainAxisSpacing: 8.h,
-                          childAspectRatio: 0.70,
-                        ),
-                        itemCount: products!.length > 5 ? 6 : products.length,
-                        itemBuilder: (context, index) {
-                          final eachProduct = products[index];
-                          return Container(
-                            height: 268.h,
-                            width: 180.w,
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(6.r)),
-                            child: Padding(
-                              padding: EdgeInsets.all(8.0.w),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.only(bottom: 12.h),
-                                    child: Align(
-                                      alignment: Alignment.topRight,
-                                      child: AppIcons.favoriteGray,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(bottom: 12.h),
-                                    child: eachProduct.images.isNotEmpty
-                                        ? ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(6.r),
-                                            child: Image.network(
-                                              eachProduct.images.first
-                                                  .sanitize(),
-                                              fit: BoxFit.cover,
-                                              width: double.infinity,
-                                              height: 100.h,
-                                            ),
-                                          )
-                                        : const Placeholder(
-                                            fallbackHeight: 100,
-                                            fallbackWidth: 100,
-                                          ),
-                                  ),
-                                  Text(
-                                    eachProduct.title,
-                                    style: AppText.itemText,
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(bottom: 2.0.h),
-                                    child: Row(
+                    SizedBox(
+                      child: state is CategoryProductLoadingState
+                          ? const Center(child: CircularProgressIndicator())
+                          : GridView.builder(
+                              shrinkWrap: true,
+                              padding: EdgeInsets.zero,
+                              physics: const NeverScrollableScrollPhysics(),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 8.w,
+                                mainAxisSpacing: 8.h,
+                                childAspectRatio: 0.70,
+                              ),
+                              itemCount:
+                                  products!.length > 5 ? 6 : products.length,
+                              itemBuilder: (context, index) {
+                                final eachProduct = products[index];
+                                return Container(
+                                  height: 268.h,
+                                  width: 180.w,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(6.r)),
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0.w),
+                                    child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
-                                        AppIcons.star,
                                         Padding(
-                                          padding: EdgeInsets.only(left: 8.0.w),
-                                          child: Text(
-                                            "200",
-                                            style: AppText.reviewText,
+                                          padding:
+                                              EdgeInsets.only(bottom: 12.h),
+                                          child: Align(
+                                            alignment: Alignment.topRight,
+                                            child: AppIcons.favoriteGray,
                                           ),
-                                        )
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsets.only(bottom: 12.h),
+                                          child: eachProduct.images.isNotEmpty
+                                              ? ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          6.r),
+                                                  child: Image.network(
+                                                    eachProduct.images.first
+                                                        .sanitize(),
+                                                    errorBuilder:
+                                                        (_, __, ___) => Center(
+                                                      child: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                                shape: BoxShape
+                                                                    .circle,
+                                                                color: Colors
+                                                                    .black
+                                                                    .withOpacity(
+                                                                        .1)),
+                                                        height: 95,
+                                                        width: 84,
+                                                        child: Icon(
+                                                          Icons
+                                                              .image_not_supported,
+                                                          color: Colors.black
+                                                              .withOpacity(.3),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    fit: BoxFit.cover,
+                                                    width: double.infinity,
+                                                    height: 100.h,
+                                                  ),
+                                                )
+                                              : const Placeholder(
+                                                  fallbackHeight: 100,
+                                                  fallbackWidth: 100,
+                                                ),
+                                        ),
+                                        Text(
+                                          eachProduct.title,
+                                          style: AppText.itemText,
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsets.only(bottom: 2.0.h),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              AppIcons.star,
+                                              Padding(
+                                                padding: EdgeInsets.only(
+                                                    left: 8.0.w),
+                                                child: Text(
+                                                  "200",
+                                                  style: AppText.reviewText,
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                '\$${eachProduct.price}',
+                                                style: AppText.amountText,
+                                              ),
+                                              Text(AppString.view,
+                                                      style: AppText.view)
+                                                  .onTap(() {
+                                                if (eachProduct != null) {
+                                                  debugPrint(
+                                                      'NORMAL $eachProduct ${eachProduct.description} eachProduct Emtyyyy');
+
+                                                  fetchedProducts.selectProduct(
+                                                      eachProduct);
+
+                                                  if (widget.navCallback !=
+                                                      null) {
+                                                    widget.navCallback!(
+                                                        1, eachProduct);
+                                                  } else {
+                                                    debugPrint(
+                                                        'navCallback is null');
+                                                  }
+
+                                                  // context.read<ProductBlocBloc>().add(
+                                                  //     SelectProductEvent(
+                                                  //         product: each));
+                                                  // if (widget.navCallback != null) {
+                                                  //   widget.navCallback!(1);
+                                                  // } else {
+                                                  //   print('navCallback is null');
+                                                  // }
+                                                } else {
+                                                  debugPrint(
+                                                      'EMTYYTYYTYY ITEM $eachProduct');
+                                                }
+                                              })
+                                              //   .onTap(() {
+                                              // context
+                                              //     .read<ProductBlocBloc>()
+                                              //     .add(SelectProductEvent(
+                                              //         product: eachProduct));
+                                              // widget.navCallback!(1);
+
+                                              // })
+                                            ])
                                       ],
                                     ),
                                   ),
-                                  Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          '\$${eachProduct.price}',
-                                          style: AppText.amountText,
-                                        ),
-                                        Text(AppString.view,
-                                            style: AppText.view)
-                                        //   .onTap(() {
-                                        // context
-                                        //     .read<ProductBlocBloc>()
-                                        //     .add(SelectProductEvent(
-                                        //         product: eachProduct));
-                                        // widget.navCallback!(1);
-
-                                        // })
-                                      ]),
-                                ],
-                              ),
-                            ),
-                          );
-                          // .onTap(() {
-                          //   context
-                          //       .read<CartBloc>()
-                          //       .add(AddItemEvent(item: eachProduct));
-                          //   if (widget.widget.moveToCart != null)
-                          //     widget.widget.moveToCart!();
-                          // });
-                        }),
+                                );
+                                // .onTap(() {
+                                //   context
+                                //       .read<CartBloc>()
+                                //       .add(AddItemEvent(item: eachProduct));
+                                //   if (widget.widget.moveToCart != null)
+                                //     widget.widget.moveToCart!();
+                                // });
+                              }),
+                    ),
                     SizedBox(height: 20.h),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -343,65 +430,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       );
-    });
-  }
-
-  Widget _buildCategorySelector() {
-    return BlocBuilder<ProductCubit, ProductState>(builder: (context, state) {
-      if (state is ProductLoadingState) {
-        return const Center(child: CircularProgressIndicator());
-      }
-      if (state is ProductFailureState) {
-        return Text(state.errorMessage);
-      }
-      if (state is CategoryLoadedState) {
-        categories = List.from(state.category);
-
-        return Row(
-          children: [
-            Expanded(
-              child: SizedBox(
-                height: 34.h,
-                child: ListView.builder(
-                  itemCount: categories.length + 1,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    final isSelected = tab == index;
-                    final category = index == 0
-                        ? AppString.all
-                        : categories[index - 1].name.capitalizeFirstLetter();
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: GestureDetector(
-                        onTap: () => setState(() => tab = index),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 6, horizontal: 12),
-                          decoration: BoxDecoration(
-                            color: isSelected
-                                ? AppColors.discountColor
-                                : AppColors.backgroundColor,
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          child: Text(
-                            category,
-                            style: TextStyle(
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w500,
-                              color: isSelected ? Colors.white : Colors.black,
-                            ),
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ),
-          ],
-        );
-      }
-      return SizedBox.shrink();
     });
   }
 }

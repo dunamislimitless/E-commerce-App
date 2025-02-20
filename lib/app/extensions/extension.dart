@@ -44,4 +44,9 @@ extension StringHelper on String {
     final regex = RegExp(r'^[^a-zA-Z]+');
     return this.replaceFirst(regex, '');
   }
+
+  String shorten(int maxLength) {
+    if (this.length <= maxLength) return this;
+    return '${this.substring(0, maxLength)}...';
+  }
 }

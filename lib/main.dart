@@ -4,9 +4,10 @@ import 'package:e_commerce_app/common/bloc/auth/auth_statee.dart';
 import 'package:e_commerce_app/common/bloc/button/button_state_cubit.dart';
 import 'package:e_commerce_app/common/bloc/product/product_cubit_state.dart';
 import 'package:e_commerce_app/controller/services/product_services.dart';
+import 'package:e_commerce_app/data/repository/auth.dart';
 import 'package:e_commerce_app/data/repository/product.dart';
 import 'package:e_commerce_app/features/authentcation/bloc/auth_bloc.dart';
-import 'package:e_commerce_app/features/authentcation/bloc/cubit/user_dislay_cubit.dart';
+import 'package:e_commerce_app/features/authentcation/bloc/cubit/user_display_cubit.dart';
 import 'package:e_commerce_app/features/authentcation/views/sign_in.dart';
 import 'package:e_commerce_app/features/dashboard/views/home.dart';
 import 'package:e_commerce_app/service_locator.dart';
@@ -29,50 +30,53 @@ class MyApp extends StatelessWidget {
   MyApp({super.key});
 
   final repo = ProductRepositoryImplementation();
+  final authRepo = AuthRepositoryImplementation();
 
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
         designSize: const Size(414, 896),
         builder: (context, child) {
-          return RepositoryProvider(
-              create: (context) => ProductServices(),
-              child: MultiBlocProvider(
-                  providers: [
-                    BlocProvider<CartBloc>(
-                      create: (context) => CartBloc(),
-                    ),
-                    BlocProvider<ProductCubit>(
-                        create: (context) =>
-                            ProductCubit(productRepository: repo)),
-                    BlocProvider<AuthBloc>(
-                      create: (context) => AuthBloc(),
-                    ),
-                    BlocProvider<ButtonStateCubit>(
-                        create: (context) => ButtonStateCubit()),
-                    BlocProvider<AuthStateCubit>(
-                        create: (context) => AuthStateCubit()..appStarted()),
-                    BlocProvider<UserDislayCubit>(
-                        create: (context) => UserDislayCubit())
-                  ],
-                  child: MaterialApp(
-                      debugShowCheckedModeBanner: false,
-                      title: 'E-commerce App',
-                      theme: ThemeData(
-                        colorScheme: ColorScheme.fromSeed(
-                            seedColor: AppColors.discountColor),
-                        useMaterial3: true,
-                      ),
-                      home: BlocBuilder<AuthStateCubit, AuthStatee>(
-                          builder: (context, state) {
-                        if (state is AuthenticatedState) {
-                          return const DashboardScreen();
-                        }
-                        if (state is UnAuthenticatedState) {
-                          return Signin();
-                        }
-                        return Container();
-                      }))));
+          // return RepositoryProvider(
+          //     create: (context) => ProductSrvices(),
+          //     child:
+          return MultiBlocProvider(
+              providers: [
+                BlocProvider<CartBloc>(
+                  create: (context) => CartBloc(),
+                ),
+                BlocProvider<ProductCubit>(
+                    create: (context) => ProductCubit(productRepository: repo)),
+                BlocProvider<AuthBloc>(
+                  create: (context) => AuthBloc(),
+                ),
+                BlocProvider<ButtonStateCubit>(
+                    create: (context) => ButtonStateCubit()),
+                BlocProvider<AuthStateCubit>(
+                    create: (context) => AuthStateCubit()..appStarted()),
+                BlocProvider<UserDislayCubit>(
+                    create: (context) =>
+                        UserDislayCubit(authRepository: authRepo)
+                          ..displayUser())
+              ],
+              child: MaterialApp(
+                  debugShowCheckedModeBanner: false,
+                  title: 'E-commerce App',
+                  theme: ThemeData(
+                    colorScheme: ColorScheme.fromSeed(
+                        seedColor: AppColors.discountColor),
+                    useMaterial3: true,
+                  ),
+                  home: BlocBuilder<AuthStateCubit, AuthStatee>(
+                      builder: (context, state) {
+                    if (state is AuthenticatedState) {
+                      return const DashboardScreen();
+                    }
+                    if (state is UnAuthenticatedState) {
+                      return Signin();
+                    }
+                    return Container();
+                  })));
         });
   }
 }

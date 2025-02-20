@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/data/models/product_modal/prduct_modal.dart';
 import 'package:e_commerce_app/features/cart/cart_bloc/cart_event.dart';
 import 'package:e_commerce_app/features/cart/cart_bloc/cart_state.dart';
 import 'package:e_commerce_app/features/cart/models/final_cart_model.dart';
@@ -41,16 +42,16 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     });
     on<AddItemEvent>((event, emit) {
       if (items.where((e) => e.id == event.item.id).isEmpty) {
-        //items.add(event.item);
+        items.add(event.item);
       }
       emit(CartStateUpdate());
     });
   }
-  final List<FinalCart> items = [];
+  final List<ProductModal> items = [];
 
   num calculateSubtotal() {
     return items.fold(
-        0, (total, current) => total + (current.amount * current.itemCount));
+        0, (total, current) => total + (current.price * current.itemCount));
   }
 
   num calculateDiscount(num percentage) {

@@ -10,6 +10,10 @@ analyzer
 3.3
 file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/analyzer-6.7.0/
 file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/analyzer-6.7.0/lib/
+archive
+3.0
+file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/archive-3.6.1/
+file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/archive-3.6.1/lib/
 args
 3.0
 file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/args-2.5.0/
@@ -362,6 +366,10 @@ logging
 2.19
 file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/logging-1.2.0/
 file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/logging-1.2.0/lib/
+lottie
+3.1
+file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/lottie-2.7.0/
+file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/lottie-2.7.0/lib/
 macros
 3.4
 file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/macros-0.1.2-main.4/

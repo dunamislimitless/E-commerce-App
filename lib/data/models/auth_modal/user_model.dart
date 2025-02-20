@@ -1,5 +1,3 @@
-import 'package:e_commerce_app/domain/entities/user.dart';
-
 class UserModellls {
   UserModellls({
     required this.id,
@@ -26,17 +24,5 @@ class UserModellls {
       role: json["role"] ?? "",
       avatar: json["avatar"] ?? "",
     );
-  }
-}
-
-extension UserXmodel on UserModellls {
-  UserEntity toEntity() {
-    return UserEntity(
-        id: id,
-        email: email,
-        password: password,
-        name: name,
-        role: role,
-        avatar: avatar);
   }
 }

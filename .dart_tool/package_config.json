@@ -26,6 +26,12 @@
       "languageVersion": "3.3"
     },
     {
+      "name": "archive",
+      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/archive-3.6.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "args",
       "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/args-2.5.0",
       "packageUri": "lib/",
@@ -572,6 +578,12 @@
       "languageVersion": "2.19"
     },
     {
+      "name": "lottie",
+      "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/lottie-2.7.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.1"
+    },
+    {
       "name": "macros",
       "rootUri": "file:///Users/samuelogundoju/.pub-cache/hosted/pub.dev/macros-0.1.2-main.4",
       "packageUri": "lib/",
@@ -908,7 +920,7 @@
       "languageVersion": "3.3"
     }
   ],
-  "generated": "2025-01-08T00:27:47.834750Z",
+  "generated": "2025-02-14T22:20:31.776272Z",
   "generator": "pub",
   "generatorVersion": "3.5.4",
   "flutterRoot": "file:///Users/samuelogundoju/fvm/versions/3.24.4",

@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:e_commerce_app/data/models/product_modal/each_item_req.dart';
 import 'package:e_commerce_app/data/models/product_modal/prduct_modal.dart';
 import 'package:e_commerce_app/data/source/product_api_service.dart';
 import 'package:e_commerce_app/domain/repository/product.dart';
@@ -56,8 +55,8 @@ class ProductRepositoryImplementation extends ProductRepository {
 
   @override
   Future<({String? error, List<ProductModal>? list})> getProductsByCategory(
-      {String? id}) async {
-    final result = await service.getProductsByCategory();
+      {int? id}) async {
+    final result = await service.getProductsByCategory(id: id);
     if (result.data != null) {
       return (
         list: List<ProductModal>.from((result.data as List<dynamic>)

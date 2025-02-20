@@ -10,6 +10,8 @@ import 'package:e_commerce_app/features/cart/widget/custom_row.dart';
 import 'package:e_commerce_app/features/dashboard/views/home.dart';
 import 'package:e_commerce_app/features/dashboard/widget/custom_button.dart';
 import 'package:e_commerce_app/features/dashboard/widget/page_header.dart';
+import 'package:e_commerce_app/features/product/view/payment.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -75,8 +77,7 @@ class Cart extends StatelessWidget {
                           cartBloc.add(RemoveCartItemEvent(each.id));
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              content: Text(
-                                  "${each.itemDescription} removed from cart"),
+                              content: Text("${each.title} removed from cart"),
                             ),
                           );
                         },
@@ -122,12 +123,14 @@ class Cart extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        each.itemDescription,
+                                        each.title.shorten(30),
                                         style: AppText.itemText,
                                       ),
                                       Padding(
                                         padding: EdgeInsets.only(
-                                            bottom: 2.0.h, top: 8.0.h),
+                                            bottom: 2.0.h,
+                                            top: 8.0.h,
+                                            left: 10),
                                         child: Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
@@ -137,7 +140,7 @@ class Cart extends StatelessWidget {
                                               padding:
                                                   EdgeInsets.only(left: 12.0.w),
                                               child: Text(
-                                                each.reviews,
+                                                "200",
                                                 style: AppText.reviewText,
                                               ),
                                             )
@@ -150,7 +153,7 @@ class Cart extends StatelessWidget {
                                       Align(
                                         alignment: Alignment.bottomLeft,
                                         child: Text(
-                                          '\$${(each.amount * each.itemCount).toStringAsFixed(2)}',
+                                          '\$${(each.price * each.itemCount).toStringAsFixed(2)}',
                                           style: AppText.amountText,
                                         ),
                                       )
@@ -212,7 +215,22 @@ class Cart extends StatelessWidget {
                                   child: SizedBox(
                                     height: 95.h,
                                     width: 84.w,
-                                    child: Image.asset(each.imagePath),
+                                    child: Image.network(each.images.first,
+                                        errorBuilder: (_, __, ___) => Center(
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    color: Colors.black
+                                                        .withOpacity(.1)),
+                                                height: 95,
+                                                width: 84,
+                                                child: Icon(
+                                                  Icons.image_not_supported,
+                                                  color: Colors.black
+                                                      .withOpacity(.3),
+                                                ),
+                                              ),
+                                            )),
                                   ),
                                 ),
                               ],
@@ -256,14 +274,14 @@ class Cart extends StatelessWidget {
                             ),
                             CustomRow(
                               options: 'Subtotal',
-                              object: '\$$subtotal',
+                              object: '\$${subtotal.toStringAsFixed(2)}',
                             ),
                             SizedBox(
                               height: 8.h,
                             ),
                             CustomRow(
                               options: 'Discount (10%)',
-                              object: '\$$discount',
+                              object: '\$${discount.toStringAsFixed(2)}',
                             ),
                             SizedBox(
                               height: 8.h,
@@ -273,7 +291,7 @@ class Cart extends StatelessWidget {
                             ),
                             CustomRow(
                               options: 'Total',
-                              object: '\$$total',
+                              object: '\$${total.toStringAsFixed(2)}',
                               textStyle: AppText.cartAmount,
                             ),
                           ],
@@ -288,7 +306,10 @@ class Cart extends StatelessWidget {
               height: 30.h,
             ),
             CustomButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Payment()));
+              },
               buttontext: AppString.c2Pay,
               height: 48.h,
               color: AppColors.discountColor,

@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:e_commerce_app/app/utils/mixin/toast_mixin.dart';
 import 'package:e_commerce_app/common/bloc/product/product_state.dart';
 import 'package:e_commerce_app/core/usecase/usecase.dart';
+import 'package:e_commerce_app/data/models/product_modal/prduct_modal.dart';
 import 'package:e_commerce_app/domain/repository/product.dart';
 import 'package:e_commerce_app/domain/usecases/product_usecase.dart/category_usecase.dart';
 import 'package:e_commerce_app/service_locator.dart';
@@ -12,8 +13,10 @@ class ProductCubit extends Cubit<ProductState> with ToastMixin {
       : super(ProductLoadingState());
 
   final ProductRepository productRepository;
+  ProductModal? product;
 
   void getAllProduct() async {
+    emit(CategoryProductLoadingState());
     var result = await productRepository.getProduct();
 
     if (result.list != null) {
@@ -24,6 +27,7 @@ class ProductCubit extends Cubit<ProductState> with ToastMixin {
   }
 
   void getEachProduct() async {
+    emit(CategoryProductLoadingState());
     var result = await productRepository.getEachProduct();
 
     if (result.product != null) {
@@ -34,6 +38,7 @@ class ProductCubit extends Cubit<ProductState> with ToastMixin {
   }
 
   void category() async {
+    emit(CategoryProductLoadingState());
     var result = await productRepository.getCategory();
 
     if (result.list != null) {
@@ -42,5 +47,23 @@ class ProductCubit extends Cubit<ProductState> with ToastMixin {
       emit(ProductFailureState(
           errorMessage: result.error ?? 'Failed to load data'));
     }
+  }
+
+  void productsByCategory({int? categoryID}) async {
+    emit(CategoryProductLoadingState());
+    var result = await productRepository.getProductsByCategory(id: categoryID);
+
+    if (result.list != null) {
+      emit(CategoryProductState(productModal: result.list ?? []));
+    } else {
+      emit(ProductFailureState(
+          errorMessage: result.error ?? 'Failed to load data'));
+    }
+  }
+
+  void selectProduct(ProductModal selectedProduct) {
+    emit(ProductLoadingState());
+    product = selectedProduct;
+    emit(SelectProductState(product: product!));
   }
 }
