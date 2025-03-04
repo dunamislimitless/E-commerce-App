@@ -1,10 +1,8 @@
 import 'package:e_commerce_app/data/models/product_modal/prduct_modal.dart';
 import 'package:e_commerce_app/features/cart/cart_bloc/cart_event.dart';
 import 'package:e_commerce_app/features/cart/cart_bloc/cart_state.dart';
-import 'package:e_commerce_app/features/cart/models/final_cart_model.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../app/utils/app_ipngs.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartBloc extends Bloc<CartEvent, CartState> {
   CartBloc() : super(CartStateInit()) {
@@ -42,7 +40,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     });
     on<AddItemEvent>((event, emit) {
       if (items.where((e) => e.id == event.item.id).isEmpty) {
-        items.add(event.item);
+        items.add(event.item.copyWith(itemCount: 1));
       }
       emit(CartStateUpdate());
     });

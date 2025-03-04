@@ -2,9 +2,8 @@ import 'package:e_commerce_app/app/utils/app_ipngs.dart';
 import 'package:e_commerce_app/app/utils/appstrings.dart';
 import 'package:e_commerce_app/app/utils/colors.dart';
 import 'package:e_commerce_app/features/dashboard/views/home.dart';
-import 'package:e_commerce_app/features/dashboard/views/home_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Payment extends StatelessWidget {
@@ -15,7 +14,7 @@ class Payment extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Payment Successful',
+          AppString.paymentSuccesf,
           style: TextStyle(
             color: Colors.white,
           ),
@@ -53,7 +52,7 @@ class Payment extends StatelessWidget {
                       Icon(Icons.check_circle, color: Colors.green, size: 60.w),
                       SizedBox(height: 10.h),
                       Text(
-                        'Payment Successful!',
+                        AppString.paymentSuccesf,
                         style: TextStyle(
                           fontSize: 22.sp,
                           fontWeight: FontWeight.bold,
@@ -63,7 +62,7 @@ class Payment extends StatelessWidget {
                       ),
                       SizedBox(height: 10.h),
                       Text(
-                        'Your payment has been received successfully.',
+                        AppString.successMsg,
                         style: TextStyle(
                           fontSize: 16.sp,
                           color: Colors.grey[700],
@@ -79,11 +78,13 @@ class Payment extends StatelessWidget {
 
               // Return Home Button
               ElevatedButton.icon(
-                onPressed: () => Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => DashboardScreen())),
+                onPressed: () => Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const DashboardScreen())),
                 icon: Icon(Icons.home, size: 24.w),
                 label: Text(
-                  'Return to Home',
+                  AppString.r2home,
                   style: TextStyle(fontSize: 18.sp),
                 ),
                 style: ElevatedButton.styleFrom(
