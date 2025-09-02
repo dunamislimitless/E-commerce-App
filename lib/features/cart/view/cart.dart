@@ -10,7 +10,7 @@ import 'package:e_commerce_app/features/cart/widget/custom_row.dart';
 import 'package:e_commerce_app/features/dashboard/views/home.dart';
 import 'package:e_commerce_app/features/dashboard/widget/custom_button.dart';
 import 'package:e_commerce_app/features/dashboard/widget/page_header.dart';
-import 'package:e_commerce_app/features/product/view/payment.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -307,8 +307,7 @@ class Cart extends StatelessWidget {
             ),
             CustomButton(
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Payment()));
+                // MaterialPageRoute(builder: (context) => Payment()));
               },
               buttontext: AppString.c2Pay,
               height: 48.h,

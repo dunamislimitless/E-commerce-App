@@ -43,6 +43,9 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>
 
   final _formKey = GlobalKey<FormState>();
   bool obscure = true;
+  bool _hasMinLength = false;
+  bool _hasNumber = false;
+  bool _hasLetter = false;
 
   @override
   void dispose() {
@@ -54,6 +57,14 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>
     phoneController.dispose();
 
     super.dispose();
+  }
+
+  void _validatePassword(String password) {
+    setState(() {
+      _hasMinLength = password.length >= 8;
+      _hasNumber = password.contains(RegExp(r'\d'));
+      _hasLetter = password.contains(RegExp(r'[a-zA-Z]'));
+    });
   }
 
   @override
@@ -173,22 +184,65 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>
                     controller: occupation,
                     keyboardType: TextInputType.text,
                   ),
-                  CustomLabeledInput(
-                      label: AppString.password,
-                      title: AppString.password,
-                      prefixIcon: Icons.security,
-                      controller: passwordController,
-                      keyboardType: TextInputType.visiblePassword,
-                      validate: (value) => validatePassword(value),
-                      obscureText: obscure,
-                      suffix: Icon(
-                        obscure ? Icons.visibility_off : Icons.visibility,
-                        color: AppColors.lightButton,
-                      ).onTap(() {
-                        setState(() {
-                          obscure = !obscure; //
-                        });
-                      })),
+                  TextFormField(
+                    controller: passwordController,
+                    obscureText: obscure,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5)),
+                      focusedBorder: const OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: AppColors.discountColor)),
+                      labelText: "Password",
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                            obscure ? Icons.visibility_off : Icons.visibility),
+                        onPressed: () => setState(() => obscure = !obscure),
+                      ),
+                    ),
+                    onChanged: _validatePassword,
+                    validator: (value) {
+                      if (value == null || value.isEmpty)
+                        return "Enter a password";
+                      if (!_hasMinLength || !_hasNumber || !_hasLetter) {
+                        return "Weak password";
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 30),
+
+                  // Password Requirements
+                  Row(
+                    children: [
+                      Icon(_hasMinLength ? Icons.check_circle : Icons.cancel,
+                          color: _hasMinLength ? Colors.green : Colors.red),
+                      const SizedBox(width: 8),
+                      const Text("At least 8 Characters"),
+                      SizedBox(width: 10.w),
+                      Expanded(
+                        child: Row(
+                          children: [
+                            Icon(_hasNumber ? Icons.check_circle : Icons.cancel,
+                                color: _hasNumber ? Colors.green : Colors.red),
+                            const SizedBox(width: 8),
+                            const Text("At least 1 Number"),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  Row(
+                    children: [
+                      Icon(_hasLetter ? Icons.check_circle : Icons.cancel,
+                          color: _hasLetter ? Colors.green : Colors.red),
+                      const SizedBox(width: 8),
+                      const Text("At least 1 Letter"),
+                    ],
+                  ),
+                  SizedBox(height: 20.0.h),
+
                   const Text(
                     AppString.number,
                     style: TextStyle(
