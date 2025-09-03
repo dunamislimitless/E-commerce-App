@@ -9,8 +9,8 @@ class SignInRequest {
   });
   Map<String, dynamic> toJSon() {
     return <String, dynamic>{
-      "email": email,
-      "password": password,
+      "email": email.trim().toLowerCase(),
+      "password": password.trim(),
     };
   }
 }

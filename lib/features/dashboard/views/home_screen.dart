@@ -1,5 +1,6 @@
+import 'dart:io';
 import 'dart:math';
-
+import 'package:flutter/cupertino.dart';
 import 'package:e_commerce_app/app/extensions/extension.dart';
 import 'package:e_commerce_app/app/utils/app_ipngs.dart';
 import 'package:e_commerce_app/app/utils/appicons.dart';
@@ -17,6 +18,8 @@ import 'package:e_commerce_app/features/dashboard/widget/latest_cart.dart';
 import 'package:e_commerce_app/features/dashboard/widget/page_header.dart';
 import 'package:e_commerce_app/features/product/view/all_product.dart';
 import 'package:e_commerce_app/features/product/view/product_detail.dart';
+import 'package:flutter/cupertino.dart'
+    show CupertinoAlertDialog, showCupertinoDialog, CupertinoDialogAction;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -36,6 +39,9 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Category> categories = [];
   List<ProductModal> products = [];
 
+  List<ProductModal> filteredProducts = []; // 👈 for search results
+  final TextEditingController _searchController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
@@ -46,6 +52,40 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   int tab = 0;
+
+  void _showPlatformDialog() {
+    if (Platform.isIOS) {
+      // iOS-style dialog (Cupertino)
+      showCupertinoDialog(
+        context: context,
+        builder: (context) => CupertinoAlertDialog(
+          title: Text('Feature Coming Soon'),
+          content: Text('This feature is not available at the moment.'),
+          actions: [
+            CupertinoDialogAction(
+              child: Text('OK'),
+              onPressed: () => Navigator.pop(context),
+            ),
+          ],
+        ),
+      );
+    } else {
+      // Android-style dialog (Material)
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('Coming Soon'),
+          content: Text('This feature is not available at the moment.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('OK'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,8 +132,12 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             PageHeader(
                 title: AppString.home,
-                trailing: AppIcons.search.onTap(() {}),
-                leading: AppIcons.menu.onTap(() {})),
+                trailing: AppIcons.search.onTap(() {
+                  _showPlatformDialog();
+                }),
+                leading: AppIcons.menu.onTap(() {
+                  _showPlatformDialog();
+                })),
             SizedBox(
               height: 20.h,
             ),
@@ -101,10 +145,13 @@ class _HomeScreenState extends State<HomeScreen> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    const DiscountContaieer(
+                    DiscountContaieer(
                       discountPercent: '30%',
                       item: 'home decoration products',
                       imagepath: AppImage.flowerVase,
+                      onTap: () {
+                        _showPlatformDialog();
+                      },
                     ),
                     SizedBox(
                       height: 16.h,
@@ -264,9 +311,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                         Padding(
                                           padding:
                                               EdgeInsets.only(bottom: 12.h),
-                                          child: Align(
-                                            alignment: Alignment.topRight,
-                                            child: AppIcons.favoriteGray,
+                                          child: GestureDetector(
+                                            onTap: () {
+                                              _showPlatformDialog();
+                                            },
+                                            child: Align(
+                                              alignment: Alignment.topRight,
+                                              child: AppIcons.favoriteGray,
+                                            ),
                                           ),
                                         ),
                                         Padding(
@@ -408,21 +460,21 @@ class _HomeScreenState extends State<HomeScreen> {
                           AppString.addProduct,
                           style: AppText.seeAll,
                         ).onTap(() {
-                          //   Navigator.push(
-                          //       context,
-                          //       MaterialPageRoute(
-                          //           builder: (context) => AddProduct());
-                          //
-                          //
+                          _showPlatformDialog();
                         })
                       ],
                     ),
                     SizedBox(height: 10.h),
-                    const LatestCart(
-                        imagePath: AppImage.headie,
-                        itemDescription: 'Headphone Holder',
-                        reviews: '(1446)',
-                        amount: '\$34.90'),
+                    GestureDetector(
+                      onTap: () {
+                        _showPlatformDialog();
+                      },
+                      child: const LatestCart(
+                          imagePath: AppImage.headie,
+                          itemDescription: 'Headphone Holder',
+                          reviews: '(1446)',
+                          amount: '\$34.90'),
+                    ),
                   ],
                 ),
               ),

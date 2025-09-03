@@ -46,7 +46,7 @@ class _SigninState extends State<Signin> with Validators {
             listener: (context, state) {
               if (state is ButtonFailureState) {
                 var snackBar = SnackBar(
-                  content: Text(state.errorMessage),
+                  content: Text(state.errorMessage.toString()),
                 );
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
               }
@@ -55,6 +55,11 @@ class _SigninState extends State<Signin> with Validators {
                     context,
                     MaterialPageRoute(
                         builder: (context) => const DashboardScreen()));
+
+                var snackBar = SnackBar(
+                  content: Text("Login Successful"),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
               }
             },
             child: Stack(children: [

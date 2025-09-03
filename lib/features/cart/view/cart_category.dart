@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:e_commerce_app/app/utils/app_ipngs.dart';
 import 'package:e_commerce_app/app/utils/appicons.dart';
 import 'package:e_commerce_app/app/utils/appstrings.dart';
@@ -11,6 +13,7 @@ import 'package:e_commerce_app/features/dashboard/models/options_model.dart';
 import 'package:e_commerce_app/features/dashboard/widget/page_header.dart';
 import 'package:e_commerce_app/features/cart/models/product_container_model.dart';
 import 'package:e_commerce_app/app/utils/textstyle.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,6 +21,40 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class CartCategory extends StatelessWidget {
   CartCategory({super.key});
+
+  void _showPlatformDialog(BuildContext context) {
+    if (Platform.isIOS) {
+      // iOS-style dialog (Cupertino)
+      showCupertinoDialog(
+        context: context,
+        builder: (context) => CupertinoAlertDialog(
+          title: Text('Feature Coming Soon'),
+          content: Text('This feature is not available at the moment.'),
+          actions: [
+            CupertinoDialogAction(
+              child: Text('OK'),
+              onPressed: () => Navigator.pop(context),
+            ),
+          ],
+        ),
+      );
+    } else {
+      // Android-style dialog (Material)
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('Coming Soon'),
+          content: Text('This feature is not available at the moment.'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text('OK'),
+            ),
+          ],
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,16 +70,21 @@ class CartCategory extends StatelessWidget {
             ),
             PageHeader(
                 title: AppString.category,
-                trailing: AppIcons.search.onTap(() {}),
+                trailing: AppIcons.search.onTap(() {
+                  _showPlatformDialog(context);
+                }),
                 leading: SvgPicture.asset(AppIcons.arrowBack).onTap(() {
                   Navigator.pop(context);
                 })),
             SizedBox(
               height: 20.h,
             ),
-            const DiscountContaieer(
+            DiscountContaieer(
                 discountPercent: '15%',
                 item: 'women shoes',
+                onTap: () {
+                  _showPlatformDialog(context);
+                },
                 imagepath: AppImage.shoes),
             SizedBox(
               height: 14.h,
@@ -59,38 +101,43 @@ class CartCategory extends StatelessWidget {
                 itemCount: product.length,
                 itemBuilder: (context, index) {
                   final each = product[index];
-                  return Container(
-                    // height: 120.h,
-                    width: 118.w,
-                    decoration: BoxDecoration(
-                        color: AppColors.cardColor,
-                        borderRadius: BorderRadius.circular(10.sp)),
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                          top: 20.h, bottom: 20.w, left: 24.w, right: 24.w),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: 44.h,
-                            width: 44.w,
-                            decoration: BoxDecoration(
-                                color: AppColors.backgroundColor,
-                                borderRadius: BorderRadius.circular(10.sp)),
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 6.h, vertical: 6.w),
-                              child: each.icon,
+                  return GestureDetector(
+                    onTap: () {
+                      _showPlatformDialog(context);
+                    },
+                    child: Container(
+                      // height: 120.h,
+                      width: 118.w,
+                      decoration: BoxDecoration(
+                          color: AppColors.cardColor,
+                          borderRadius: BorderRadius.circular(10.sp)),
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            top: 20.h, bottom: 20.w, left: 24.w, right: 24.w),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 44.h,
+                              width: 44.w,
+                              decoration: BoxDecoration(
+                                  color: AppColors.backgroundColor,
+                                  borderRadius: BorderRadius.circular(10.sp)),
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 6.h, vertical: 6.w),
+                                child: each.icon,
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            height: 22.h,
-                          ),
-                          Text(
-                            each.name,
-                            style: AppText.seeAll,
-                          )
-                        ],
+                            SizedBox(
+                              height: 22.h,
+                            ),
+                            Text(
+                              each.name,
+                              style: AppText.seeAll,
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   );

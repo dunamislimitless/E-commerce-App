@@ -8,6 +8,7 @@ import 'package:e_commerce_app/data/source/auth_local_service.dart';
 import 'package:e_commerce_app/domain/repository/auth.dart';
 import 'package:e_commerce_app/features/authentcation/model/user_model.dart';
 import 'package:e_commerce_app/service_locator.dart';
+import 'package:flutter/material.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -17,15 +18,19 @@ class AuthRepositoryImplementation extends AuthRepository {
   Future<Either> signUp(SignupRequest signupReq) async {
     Either result = await api.signUp(signupReq);
 
+    print('HALA ${signupReq.toJSon()}');
+
     return result.fold((error) {
+      debugPrint(" Error $error");
       return Left(error);
     }, (data) async {
       Response response = data;
+    
 
-      SharedPreferences sharedPreferences =
-          await SharedPreferences.getInstance();
+      // SharedPreferences sharedPreferences =
+      //     await SharedPreferences.getInstance();
 
-      sharedPreferences.setString('token', response.data["access_token"]);
+      //  sharedPreferences.setString('token', response.data["access_token"]);
 
       return Right(response);
     });
@@ -47,6 +52,9 @@ class AuthRepositoryImplementation extends AuthRepository {
       var userModel = UserModellls.fromJson(response.data);
 
       return Right(userModel);
+
+
+
     });
   }
 

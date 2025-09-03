@@ -3,7 +3,7 @@ import 'package:e_commerce_app/common/bloc/auth/auth_state_cubit.dart';
 import 'package:e_commerce_app/common/bloc/auth/auth_statee.dart';
 import 'package:e_commerce_app/common/bloc/button/button_state_cubit.dart';
 import 'package:e_commerce_app/common/bloc/product/product_cubit_state.dart';
-import 'package:e_commerce_app/controller/services/product_services.dart';
+
 import 'package:e_commerce_app/data/repository/auth.dart';
 import 'package:e_commerce_app/data/repository/product.dart';
 import 'package:e_commerce_app/features/authentcation/bloc/auth_bloc.dart';
@@ -11,7 +11,7 @@ import 'package:e_commerce_app/features/authentcation/bloc/cubit/user_display_cu
 import 'package:e_commerce_app/features/authentcation/views/sign_in.dart';
 import 'package:e_commerce_app/features/dashboard/views/home.dart';
 import 'package:e_commerce_app/service_locator.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,7 +21,7 @@ import 'features/cart/cart_bloc/cart_bloc.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp();
+  // await Firebase.initializeApp();
   setupServiceLocator();
   runApp(MyApp());
 }

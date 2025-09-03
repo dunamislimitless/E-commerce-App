@@ -64,20 +64,15 @@ class ProfileScreen extends StatelessWidget {
                           Text(user.name, style: AppText.amountText),
                           SizedBox(height: 10.h),
                           Text(
-                            user.role,
+                            "User ID: ${user.id}",
                             style: TextStyle(
                                 fontSize: 16.sp, color: Colors.grey[600]),
                           ),
                           SizedBox(height: 20.h),
                           Divider(color: AppColors.lightButton, thickness: 1),
                           _buildProfileDetailRow(
-                              Icons.phone, 'Phone', '${user.role}'),
-                          _buildProfileDetailRow(Icons.location_on, 'Address',
-                              '35, Glover Road Ikoyi Lagos'),
-                          _buildProfileDetailRow(
-                              Icons.cake, 'Gender', '${user.role}'),
-                          _buildProfileDetailRow(
-                              Icons.work, 'Occupation', '${user.role}'),
+                              Icons.work, 'Role', '${user.role}'),
+
                           SizedBox(height: 30.h),
 
                           // TODO   Work on the signout and the navigation back to the sign in

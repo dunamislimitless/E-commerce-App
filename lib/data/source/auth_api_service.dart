@@ -19,6 +19,7 @@ class AuthApiServiceImplement extends AuthApiService {
     try {
       var response = await locator<DioClient>()
           .post(ApiUrls.register, data: signupReq.toJSon());
+      print(signupReq.toJSon());
 
       return Right(response);
     } on DioException catch (e) {

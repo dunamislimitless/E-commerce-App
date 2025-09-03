@@ -8,14 +8,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DiscountContaieer extends StatelessWidget {
-  const DiscountContaieer(
+  DiscountContaieer(
       {super.key,
       required this.discountPercent,
       required this.item,
+      required this.onTap,
       required this.imagepath});
   final String discountPercent;
   final String item;
   final String imagepath;
+  VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +47,7 @@ class DiscountContaieer extends StatelessWidget {
                     height: 18.h,
                   ),
                   CustomButton(
-                    onPressed: () {},
+                    onPressed: onTap,
                     buttontext: AppString.getNow,
                   )
                 ],

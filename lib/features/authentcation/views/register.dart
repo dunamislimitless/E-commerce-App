@@ -1,3 +1,4 @@
+import 'package:another_flushbar/flushbar.dart';
 import 'package:e_commerce_app/app/extensions/extension.dart';
 import 'package:e_commerce_app/app/utils/appstrings.dart';
 import 'package:e_commerce_app/app/utils/colors.dart';
@@ -56,6 +57,18 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>
     super.dispose();
   }
 
+  bool _hasMinLength = false;
+  bool _hasNumber = false;
+  bool _hasLetter = false;
+
+  void _validatePassword(String password) {
+    setState(() {
+      _hasMinLength = password.length >= 8;
+      _hasNumber = password.contains(RegExp(r'\d'));
+      _hasLetter = password.contains(RegExp(r'[a-zA-Z]'));
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // final authBloc = context.read<AuthBloc>();
@@ -64,16 +77,17 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>
       body: BlocListener<ButtonStateCubit, ButtonStateC>(
         listener: (context, state) {
           if (state is ButtonFailureState) {
+            print("Error ${state.errorMessage.toString()}");
             var snackBar = SnackBar(
-              content: Text(state.errorMessage),
-            );
+                content: Text(
+              state.errorMessage.toString(),
+            ));
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
           }
           if (state is ButtonSuccessState) {
             Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const DashboardScreen()));
+                context, MaterialPageRoute(builder: (context) => Signin()));
+            showSuccessFlush(context, "Account created successfully");
           }
         },
         child: Form(
@@ -173,22 +187,65 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>
                     controller: occupation,
                     keyboardType: TextInputType.text,
                   ),
-                  CustomLabeledInput(
-                      label: AppString.password,
-                      title: AppString.password,
-                      prefixIcon: Icons.security,
-                      controller: passwordController,
-                      keyboardType: TextInputType.visiblePassword,
-                      validate: (value) => validatePassword(value),
-                      obscureText: obscure,
-                      suffix: Icon(
-                        obscure ? Icons.visibility_off : Icons.visibility,
-                        color: AppColors.lightButton,
-                      ).onTap(() {
-                        setState(() {
-                          obscure = !obscure; //
-                        });
-                      })),
+                  TextFormField(
+                    controller: passwordController,
+                    obscureText: obscure,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5)),
+                      focusedBorder: const OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: AppColors.discountColor)),
+                      labelText: "Password",
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                            obscure ? Icons.visibility_off : Icons.visibility),
+                        onPressed: () => setState(() => obscure = !obscure),
+                      ),
+                    ),
+                    onChanged: _validatePassword,
+                    validator: (value) {
+                      if (value == null || value.isEmpty)
+                        return "Enter a password";
+                      if (!_hasMinLength || !_hasNumber || !_hasLetter) {
+                        return "Weak password";
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 30),
+
+                  // Password Requirements
+                  Row(
+                    children: [
+                      Icon(_hasMinLength ? Icons.check_circle : Icons.cancel,
+                          color: _hasMinLength ? Colors.green : Colors.red),
+                      const SizedBox(width: 8),
+                      const Text("At least 8 Characters"),
+                      SizedBox(width: 10.w),
+                      Expanded(
+                        child: Row(
+                          children: [
+                            Icon(_hasNumber ? Icons.check_circle : Icons.cancel,
+                                color: _hasNumber ? Colors.green : Colors.red),
+                            const SizedBox(width: 8),
+                            const Text("At least 1 Number"),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  Row(
+                    children: [
+                      Icon(_hasLetter ? Icons.check_circle : Icons.cancel,
+                          color: _hasLetter ? Colors.green : Colors.red),
+                      const SizedBox(width: 8),
+                      const Text("At least 1 Letter"),
+                    ],
+                  ),
+                  SizedBox(height: 20.0.h),
+
                   const Text(
                     AppString.number,
                     style: TextStyle(
@@ -301,6 +358,23 @@ class _CreateAccountScreenState extends State<CreateAccountScreen>
         ),
       ),
     );
+  }
+
+  void showSuccessFlush(BuildContext context, String? customDescription,
+      {bool warning = false}) {
+    Flushbar(
+      forwardAnimationCurve: Curves.easeInCirc,
+      reverseAnimationCurve: Curves.bounceIn,
+      flushbarPosition: FlushbarPosition.TOP,
+      backgroundColor:
+          warning ? Colors.orange : Color(0xFF43EF6E), // Customize for warnings
+      duration: Duration(seconds: 8),
+      flushbarStyle: FlushbarStyle.GROUNDED,
+      messageText: Text(
+        customDescription.toString() ?? "Success",
+        style: TextStyle(color: Colors.white),
+      ),
+    ).show(context);
   }
 }
 
